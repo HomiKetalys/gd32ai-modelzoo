@@ -1,0 +1,11 @@
+.\objects\copyfile.o: ..\App\CopyFile\CopyFile.c
+.\objects\copyfile.o: ..\App\CopyFile\CopyFile.h
+.\objects\copyfile.o: ..\App\DataType\DataType.h
+.\objects\copyfile.o: ..\App\Terminal\Terminal.h
+.\objects\copyfile.o: ..\App\TLILCD\TLILCD.h
+.\objects\copyfile.o: ..\TPSW\FatFS\src\ff.h
+.\objects\copyfile.o: ..\TPSW\FatFS\src\integer.h
+.\objects\copyfile.o: ..\TPSW\FatFS\src\ffconf.h
+.\objects\copyfile.o: ..\TPSW\FatFS\src\diskio.h
+.\objects\copyfile.o: ..\App\Malloc\Malloc.h
+.\objects\copyfile.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

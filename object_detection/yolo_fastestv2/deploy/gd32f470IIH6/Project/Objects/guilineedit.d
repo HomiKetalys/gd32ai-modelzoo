@@ -1,0 +1,9 @@
+.\objects\guilineedit.o: ..\App\EmbGUI\Module\GUILineEdit.c
+.\objects\guilineedit.o: ..\App\EmbGUI\Module\GUILineEdit.h
+.\objects\guilineedit.o: ..\App\DataType\DataType.h
+.\objects\guilineedit.o: ..\App\TLILCD\TLILCD.h
+.\objects\guilineedit.o: ..\App\EmbGUI\Widget\LineEditWidget.h
+.\objects\guilineedit.o: ..\App\EmbGUI\Platform\GUIConf.h
+.\objects\guilineedit.o: ..\App\EmbGUI\Platform\GUIPlatform.h
+.\objects\guilineedit.o: ..\App\Picture\JPEG.h
+.\objects\guilineedit.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

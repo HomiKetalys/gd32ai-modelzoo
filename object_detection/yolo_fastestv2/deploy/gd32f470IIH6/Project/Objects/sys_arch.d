@@ -1,0 +1,14 @@
+.\objects\sys_arch.o: ..\TPSW\LWIP\arch\sys_arch.c
+.\objects\sys_arch.o: ..\TPSW\LWIP\lwip-1.4.1\src\include\lwip/debug.h
+.\objects\sys_arch.o: ..\TPSW\LWIP\lwip-1.4.1\src\include\lwip/arch.h
+.\objects\sys_arch.o: ..\TPSW\LWIP\arch/cc.h
+.\objects\sys_arch.o: ..\TPSW\LWIP\arch/cpu.h
+.\objects\sys_arch.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\sys_arch.o: ..\TPSW\LWIP\lwip-1.4.1\src\include\lwip/opt.h
+.\objects\sys_arch.o: ..\TPSW\LWIP\lwip_app\LWIPComm\lwipopts.h
+.\objects\sys_arch.o: ..\TPSW\LWIP\lwip-1.4.1\src\include\lwip/debug.h
+.\objects\sys_arch.o: ..\TPSW\LWIP\lwip-1.4.1\src\include\lwip/def.h
+.\objects\sys_arch.o: ..\TPSW\LWIP\lwip-1.4.1\src\include\lwip/lwip_sys.h
+.\objects\sys_arch.o: ..\TPSW\LWIP\lwip-1.4.1\src\include\lwip/mem.h
+.\objects\sys_arch.o: ..\HW\Timer\Timer.h
+.\objects\sys_arch.o: ..\App\DataType\DataType.h

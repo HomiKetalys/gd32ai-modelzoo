@@ -1,0 +1,14 @@
+.\objects\fatfstest.o: ..\App\FatFSTest\FatFSTest.c
+.\objects\fatfstest.o: ..\App\FatFSTest\FatFSTest.h
+.\objects\fatfstest.o: ..\App\DataType\DataType.h
+.\objects\fatfstest.o: ..\App\FatFSTest\ReadBookByte.h
+.\objects\fatfstest.o: ..\App\EmbGUI\App\GUITop.h
+.\objects\fatfstest.o: ..\App\EmbGUI\Platform\GUIPlatform.h
+.\objects\fatfstest.o: ..\App\EmbGUI\Platform\GUIConf.h
+.\objects\fatfstest.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\fatfstest.o: ..\TPSW\FatFS\src\ff.h
+.\objects\fatfstest.o: ..\TPSW\FatFS\src\integer.h
+.\objects\fatfstest.o: ..\TPSW\FatFS\src\ffconf.h
+.\objects\fatfstest.o: ..\TPSW\FatFS\src\diskio.h
+.\objects\fatfstest.o: ..\App\Malloc\Malloc.h
+.\objects\fatfstest.o: ..\App\TLILCD\TLILCD.h

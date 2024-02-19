@@ -1,0 +1,11 @@
+.\objects\guiwave.o: ..\App\EmbGUI\App\GUIWave.c
+.\objects\guiwave.o: ..\App\EmbGUI\App\GUIWave.h
+.\objects\guiwave.o: ..\App\DataType\DataType.h
+.\objects\guiwave.o: ..\App\TLILCD\TLILCD.h
+.\objects\guiwave.o: ..\App\EmbGUI\Platform\GUIPlatform.h
+.\objects\guiwave.o: ..\App\EmbGUI\Platform\GUIConf.h
+.\objects\guiwave.o: ..\App\EmbGUI\Widget\GraphWidget.h
+.\objects\guiwave.o: ..\App\Picture\BMP.h
+.\objects\guiwave.o: ..\App\Common\Common.h
+.\objects\guiwave.o: ..\HW\ADC\ADC.h
+.\objects\guiwave.o: ..\HW\DAC\DAC.h

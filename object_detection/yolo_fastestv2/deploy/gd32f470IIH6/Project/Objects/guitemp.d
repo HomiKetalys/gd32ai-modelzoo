@@ -1,0 +1,14 @@
+.\objects\guitemp.o: ..\App\EmbGUI\App\GUITemp.c
+.\objects\guitemp.o: ..\App\EmbGUI\App\GUITemp.h
+.\objects\guitemp.o: ..\App\DataType\DataType.h
+.\objects\guitemp.o: ..\App\TLILCD\TLILCD.h
+.\objects\guitemp.o: ..\App\Common\Common.h
+.\objects\guitemp.o: ..\App\Picture\BMP.h
+.\objects\guitemp.o: ..\App\EmbGUI\Platform\GUIPlatform.h
+.\objects\guitemp.o: ..\App\EmbGUI\Platform\GUIConf.h
+.\objects\guitemp.o: ..\App\EmbGUI\Widget\TextWidget.h
+.\objects\guitemp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\guitemp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\guitemp.o: ..\App\InTemp\InTemp.h
+.\objects\guitemp.o: ..\App\SHT20\SHT20.h
+.\objects\guitemp.o: ..\HW\ADC\ADC.h

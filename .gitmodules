@@ -1,0 +1,9 @@
+[submodule "common_utils/facelandmarks"]
+	path = common_utils/facelandmarks
+	url = https://github.com/midasklr/facelandmarks
+[submodule "object_detection/yolo_fastestv2/modified_files/Yolo_FastestV2"]
+	path = object_detection/yolo_fastestv2/modified_files/Yolo_FastestV2
+	url = https://github.com/dog-qiuqiu/Yolo-FastestV2
+[submodule "object_detection/yolo_fastestv2/modified_files/onnx2tflite"]
+	path = object_detection/yolo_fastestv2/modified_files/onnx2tflite
+	url = https://github.com/MPolaris/onnx2tflite

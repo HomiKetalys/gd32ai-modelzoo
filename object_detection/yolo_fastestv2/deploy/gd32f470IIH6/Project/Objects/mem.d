@@ -1,0 +1,17 @@
+.\objects\mem.o: ..\TPSW\LWIP\lwip-1.4.1\src\core\mem.c
+.\objects\mem.o: ..\TPSW\LWIP\lwip-1.4.1\src\include\lwip/opt.h
+.\objects\mem.o: ..\TPSW\LWIP\lwip_app\LWIPComm\lwipopts.h
+.\objects\mem.o: ..\TPSW\LWIP\lwip-1.4.1\src\include\lwip/debug.h
+.\objects\mem.o: ..\TPSW\LWIP\lwip-1.4.1\src\include\lwip/arch.h
+.\objects\mem.o: ..\TPSW\LWIP\arch/cc.h
+.\objects\mem.o: ..\TPSW\LWIP\arch/cpu.h
+.\objects\mem.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\mem.o: ..\TPSW\LWIP\lwip-1.4.1\src\include\lwip/opt.h
+.\objects\mem.o: ..\TPSW\LWIP\lwip-1.4.1\src\include\lwip/def.h
+.\objects\mem.o: ..\TPSW\LWIP\lwip-1.4.1\src\include\lwip/mem.h
+.\objects\mem.o: ..\TPSW\LWIP\lwip-1.4.1\src\include\lwip/lwip_sys.h
+.\objects\mem.o: ..\TPSW\LWIP\lwip-1.4.1\src\include\lwip/stats.h
+.\objects\mem.o: ..\TPSW\LWIP\lwip-1.4.1\src\include\lwip/memp.h
+.\objects\mem.o: ..\TPSW\LWIP\lwip-1.4.1\src\include\lwip/memp_std.h
+.\objects\mem.o: ..\TPSW\LWIP\lwip-1.4.1\src\include\lwip/err.h
+.\objects\mem.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

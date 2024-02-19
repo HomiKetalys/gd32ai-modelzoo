@@ -1,0 +1,13 @@
+.\objects\guioled.o: ..\App\EmbGUI\App\GUIOLED.c
+.\objects\guioled.o: ..\App\EmbGUI\App\GUIOLED.h
+.\objects\guioled.o: ..\App\DataType\DataType.h
+.\objects\guioled.o: ..\App\TLILCD\TLILCD.h
+.\objects\guioled.o: ..\App\EmbGUI\Platform\GUIPlatform.h
+.\objects\guioled.o: ..\App\EmbGUI\Platform\GUIConf.h
+.\objects\guioled.o: ..\App\EmbGUI\Widget\GraphWidget.h
+.\objects\guioled.o: ..\App\Picture\BMP.h
+.\objects\guioled.o: ..\App\Common\Common.h
+.\objects\guioled.o: ..\App\GD25QXX\GD25QXX.h
+.\objects\guioled.o: ..\App\OLED\OLED.h
+.\objects\guioled.o: ..\HW\RTC\RTC.h
+.\objects\guioled.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

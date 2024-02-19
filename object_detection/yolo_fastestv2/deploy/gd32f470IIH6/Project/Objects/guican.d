@@ -1,0 +1,13 @@
+.\objects\guican.o: ..\App\EmbGUI\App\GUICAN.c
+.\objects\guican.o: ..\App\EmbGUI\App\GUICAN.h
+.\objects\guican.o: ..\App\DataType\DataType.h
+.\objects\guican.o: ..\App\EmbGUI\Platform\GUIPlatform.h
+.\objects\guican.o: ..\App\EmbGUI\Platform\GUIConf.h
+.\objects\guican.o: ..\App\EmbGUI\Widget\ButtonWidget.h
+.\objects\guican.o: ..\App\EmbGUI\Widget\LineEditWidget.h
+.\objects\guican.o: ..\App\EmbGUI\Widget\TerminalWidget.h
+.\objects\guican.o: ..\App\Picture\BMP.h
+.\objects\guican.o: ..\App\Picture\JPEG.h
+.\objects\guican.o: ..\App\Common\Common.h
+.\objects\guican.o: ..\App\TLILCD\TLILCD.h
+.\objects\guican.o: ..\HW\CAN\CAN.h

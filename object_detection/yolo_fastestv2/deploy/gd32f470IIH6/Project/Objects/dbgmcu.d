@@ -1,0 +1,11 @@
+.\objects\dbgmcu.o: ..\App\DbgMCU\DbgMCU.c
+.\objects\dbgmcu.o: ..\App\DbgMCU\DbgMCU.h
+.\objects\dbgmcu.o: ..\App\DataType\DataType.h
+.\objects\dbgmcu.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\dbgmcu.o: ..\App\DbgMCU\CheckLineFeed.h
+.\objects\dbgmcu.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\dbgmcu.o: ..\HW\UART0\UART0.h
+.\objects\dbgmcu.o: ..\App\Picture\BMPEncoder.h
+.\objects\dbgmcu.o: ..\HW\RTC\RTC.h
+.\objects\dbgmcu.o: ..\App\InTemp\InTemp.h
+.\objects\dbgmcu.o: ..\App\SHT20\SHT20.h

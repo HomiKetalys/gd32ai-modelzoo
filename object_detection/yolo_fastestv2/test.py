@@ -1,0 +1,18 @@
+import argparse
+from common_utils.utils import LogSaver
+from modified_files import test
+
+if __name__ == '__main__':
+    # 指定训练配置文件
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--data', type=str, default='configs/ab_drive.data',
+                        help='Specify training profile *.data')
+    parser.add_argument('--model_path', type=str, default='./modelzoo/abd-240-epoch-0.551269ap-model.pth',
+                        help='The path of the .pth model to be transformed')
+    parser.add_argument('--img', type=str, default='test_imgs/8.jpg',
+                        help='The path of test image')
+    parser.add_argument('--eval_type', type=int, default=0,
+                        help='eval type')
+    opt = parser.parse_args()
+    lger=LogSaver(opt.data,"results/test")
+    lger.collect_prints(test,opt.data,opt.model_path,opt.img,lger.result_path,opt.eval_type)
