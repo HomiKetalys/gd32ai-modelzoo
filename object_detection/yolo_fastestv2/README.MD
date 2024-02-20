@@ -196,14 +196,19 @@ names=./configs/coco.names
   6. Open deploy/gd32f470IIH6/Project/GD32KeilPrj.uvprojx using Keil5. Modify the model configuration in the main. c file.Modify the following macro definitions According to the configuration .data file:
 
 `SEPERATION`:Is model separated,0 for no,>0 for yes.
+
 `SEPERATION_SCALE`:Separation Scale, Exponential of 2.
+
 `activities`:Category string corresponding to category index.
+
 `FIX_FACTOR`:Correction coefficients for separated models. In the log file results/export/coco_sp_0000/log.txt when exporting the model , you can find fix_factor, which is FIX-FACTOR
 
 If you need to modify the image resolution, modify the Camera. h file. Modify the following macro definitions:
 
 `IMAGE_WIDTH`:width of image.
+
 `IMAGE_HEIGHT`:height of image.
+
 7. After ensuring that your GD32 device is connected to the computer and powered on, click on Build, then click on Load.
 # Metrics
 ## On COCO2017 Person Dataset
