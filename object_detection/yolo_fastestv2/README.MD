@@ -1,19 +1,25 @@
-# Training and deployment of the Yolo FastV2 model
+# Training and deployment of the Yolo-FastestV2 model
 
-This will provide training for the Yolo FastV2 model and deployment on GD32 devices
+This will provide training for the Yolo-FastestV2 model and deployment on GD32 devices
 
 # Preparation
 
  1. Use git to clone the gd32ai modelzoo project and init submodules.
-> git clone https://github.com/HomiKetalys/gd32ai-modelzoo
-> git submodule update --init --recursive
+  ```
+git clone https://github.com/HomiKetalys/gd32ai-modelzoo
+git submodule update --init --recursive
+  ```
  2. Add the project root directory to PYTHONPATH and switch to yolo-fastestv2 directory.
  - on powershell.
-> \$env:PYTHONPATH=$(pwd)
-> cd gd32ai-modelzoo/object_detection/yolo_fastestv2
+  ```
+$env:PYTHONPATH=$(pwd)
+cd gd32ai-modelzoo/object_detection/yolo_fastestv2
+  ```
 - on linux
-> export PYTHONPATH=\$(pwd)
-> cd gd32ai-modelzoo/object_detection/yolo_fastestv2
+  ```
+export PYTHONPATH=$(pwd)
+cd gd32ai-modelzoo/object_detection/yolo_fastestv2
+  ```
  3. Prepare your dataset.The directory structure of the dataset should be as follows:
   ```
   dataset
@@ -197,14 +203,14 @@ If you need to modify the image resolution, modify the Camera. h file. Modify th
 # Metrics
 ## On COCO2017 Person Dataset
 When nothing is precised in the model name, training is done using transfer learning technique from a pre-trained model. Else, "tfs" stands for "training from scratch".Meanwhile, the table presents the metrics of the model in stm32ai modelzoo.
-| model | Implementation | Dataset    | Input Resolution | mAP* | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version
-|---------------------------|----------------|------------|------------------|---------------|--------------|----------------------|----------------------|-----------------------|--------
-| Yolo-FastestV2       | Pytorch     | COCO2017 val person dataset    | 192x192x3   | 40.01%                |   32.76        |   179.26            |   387.79        | 8.1.0                 
-| Yolo-FastestV2 tfs   | Pytorch     | COCO2017 val person dataset    | 192x192x3   | 41.66%                |   32.76        |   179.26            |   387.79        | 8.1.0                 
-| Yolo-FastestV2       | Pytorch     | COCO2017 val person dataset    | 256x256x3   | 49.00%                |   58.23        |   300.1             |   387.79        | 8.1.0                 
-| Yolo-FastestV2 tfs   | Pytorch     | COCO2017 val person dataset    | 256x256x3   | 46.89%                |   58.23        |   300.1             |   387.79        | 8.1.0          
-| SSD MobileNet v1 0.25   | TensorFlow     | COCO2017 val person dataset    | 192x192x3   | 33.52%                |   40.54        |   249.54             |   438.28        | 8.1.0     
-| SSD MobileNet v1 0.25   | TensorFlow     | COCO2017 val person dataset    | 256x256x3   | 47.50%                |   72.40        |   439.34             |   470.13        | 8.1.0     
-| ST Yolo LC v1 tfs   | TensorFlow     | COCO2017 val person dataset    | 192x192x3   | 39.92%                |   61.9        |   157.44             |   276.73        | 7.3.0     
-| ST Yolo LC v1 tfs   | TensorFlow     | COCO2017 val person dataset    | 256x256x3   | 45.09%                |   110.05        |   271.94             |   276.73        | 7.3.0     
+| model                   | Implementation | Dataset                        | Input Resolution | mAP* | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version
+|-------------------------|----------------|--------------------------------|-------------|-----------------------|----------------|---------------|-----------------|----------
+| Yolo-FastestV2          | Pytorch        | COCO2017 val person dataset    | 192x192x3   | 40.01%                |   32.76        |   179.26      |   387.79        | 8.1.0
+| Yolo-FastestV2 tfs      | Pytorch        | COCO2017 val person dataset    | 192x192x3   | 41.66%                |   32.76        |   179.26      |   387.79        | 8.1.0 
+| Yolo-FastestV2          | Pytorch        | COCO2017 val person dataset    | 256x256x3   | 49.00%                |   58.23        |   300.1       |   387.79        | 8.1.0 
+| Yolo-FastestV2 tfs      | Pytorch        | COCO2017 val person dataset    | 256x256x3   | 46.89%                |   58.23        |   300.1       |   387.79        | 8.1.0          
+| SSD MobileNet v1 0.25   | TensorFlow     | COCO2017 val person dataset    | 192x192x3   | 33.52%                |   40.54        |   249.54      |   438.28        | 8.1.0     
+| SSD MobileNet v1 0.25   | TensorFlow     | COCO2017 val person dataset    | 256x256x3   | 47.50%                |   72.40        |   439.34      |   470.13        | 8.1.0     
+| ST Yolo LC v1 tfs       | TensorFlow     | COCO2017 val person dataset    | 192x192x3   | 39.92%                |   61.9         |   157.44      |   276.73        | 7.3.0     
+| ST Yolo LC v1 tfs       | TensorFlow     | COCO2017 val person dataset    | 256x256x3   | 45.09%                |   110.05       |   271.94      |   276.73        | 7.3.0     
 \* EVAL_IOU = 0.4, NMS_THRESH = 0.5, SCORE_THRESH = 0.001
