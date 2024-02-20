@@ -15,6 +15,7 @@ git submodule update --init --recursive
 $env:PYTHONPATH=$(pwd)
 cd gd32ai-modelzoo/object_detection/yolo_fastestv2
   ```
+
 - on linux
   ```
 export PYTHONPATH=$(pwd)
