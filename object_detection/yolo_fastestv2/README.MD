@@ -207,8 +207,8 @@ If you need to modify the image resolution, modify the Camera. h file. Modify th
 When nothing is precised in the model name, training is done using transfer learning technique from a pre-trained model. Else, "tfs" stands for "training from scratch".Meanwhile, the table presents the metrics of the model in stm32ai modelzoo.
 | model                   | Implementation | Dataset                        | Input Resolution | mAP* | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version
 |-------------------------|----------------|--------------------------------|-------------|-----------------------|----------------|---------------|-----------------|----------
-| Yolo-FastestV2          | Pytorch        | COCO2017 val person dataset    | 192x192x3   | 40.01%                |   32.76        |   179.26      |   387.79        | 8.1.0
-| Yolo-FastestV2 tfs      | Pytorch        | COCO2017 val person dataset    | 192x192x3   | 41.66%                |   32.76        |   179.26      |   387.79        | 8.1.0 
+| Yolo-FastestV2          | Pytorch        | COCO2017 val person dataset    | 192x192x3   | 41.66%                |   32.76        |   179.26      |   387.79        | 8.1.0
+| Yolo-FastestV2 tfs      | Pytorch        | COCO2017 val person dataset    | 192x192x3   | 40.01%                |   32.76        |   179.26      |   387.79        | 8.1.0 
 | Yolo-FastestV2          | Pytorch        | COCO2017 val person dataset    | 256x256x3   | 49.00%                |   58.23        |   300.1       |   387.79        | 8.1.0 
 | Yolo-FastestV2 tfs      | Pytorch        | COCO2017 val person dataset    | 256x256x3   | 46.89%                |   58.23        |   300.1       |   387.79        | 8.1.0          
 | SSD MobileNet v1 0.25   | TensorFlow     | COCO2017 val person dataset    | 192x192x3   | 33.52%                |   40.54        |   249.54      |   438.28        | 8.1.0     
