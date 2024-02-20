@@ -215,4 +215,5 @@ When nothing is precised in the model name, training is done using transfer lear
 | SSD MobileNet v1 0.25   | TensorFlow     | COCO2017 val person dataset    | 256x256x3   | 47.50%                |   72.40        |   439.34      |   470.13        | 8.1.0     
 | ST Yolo LC v1 tfs       | TensorFlow     | COCO2017 val person dataset    | 192x192x3   | 39.92%                |   61.9         |   157.44      |   276.73        | 7.3.0     
 | ST Yolo LC v1 tfs       | TensorFlow     | COCO2017 val person dataset    | 256x256x3   | 45.09%                |   110.05       |   271.94      |   276.73        | 7.3.0     
+
 \* EVAL_IOU = 0.4, NMS_THRESH = 0.5, SCORE_THRESH = 0.001
