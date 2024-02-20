@@ -77,8 +77,10 @@ def onnx2tflite_main(export_path, val_path):
 # def consistency_verify(model_path,
 paths=[
     'modified_files/Yolo_FastestV2_main/modelzoo/coco2017-0.241078ap-model.pth',
-    'modelzoo/coco_sp_0000/coco-20-epoch-0.199881ap-model.pth',
-    "modelzoo/coco_sp_0005/coco-220-epoch-0.213236ap-model.pth",
+    'modelzoo/coco_sp_0001/coco-180-epoch-0.117769ap-model.pth',
+    "modelzoo/coco_sp_0002/coco-160-epoch-0.174393ap-model.pth",
+    "modelzoo/coco_sp_0003/coco-210-epoch-0.157492ap-model.pth",
+    "modelzoo/coco_sp_0004/coco-220-epoch-0.213236ap-model.pth",
 ]
 
 def export(opt,save_path):
@@ -96,9 +98,9 @@ def export(opt,save_path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data', type=str, default='modelzoo/coco_sp_0005/coco_sp.data',
+    parser.add_argument('--data', type=str, default='modelzoo/coco_sp_0004/coco_sp.data',
                         help='Specify training profile *.data')
-    parser.add_argument('--model_path', type=str, default=paths[2],
+    parser.add_argument('--model_path', type=str, default=paths[4],
                         help='The path of the model')
     parser.add_argument('--convert_type', type=int, default=1,
                         help='model type,0 for onnx,1 for tflite')

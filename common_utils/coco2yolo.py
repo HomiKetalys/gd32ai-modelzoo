@@ -3,10 +3,7 @@ import json
 from tqdm import tqdm
 import argparse
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--json_path', default='./instances_val2017.json', type=str, help="input: coco format(json)")
-parser.add_argument('--save_path', default='./labels', type=str, help="specify where to save the output dir of labels")
-arg = parser.parse_args()
+
 
 
 def convert(size, box):
@@ -25,13 +22,19 @@ def convert(size, box):
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--images_path', default='../../datasets/coco2017/images/val2017', type=str)
+    parser.add_argument('--json_file', default='../../datasets/coco2017/annotations/instances_val2017.json', type=str)
+    parser.add_argument('--ana_txt_save_path', default='../../datasets/coco2017/coco_80/val2017', type=str)
+    parser.add_argument('--out_txt_path', default='../../datasets/coco2017/val2017_person.txt', type=str)
+    arg = parser.parse_args()
 
-    images_path='../../datasets/coco2017/images/val2017'
-    json_file = '../../datasets/coco2017/annotations/instances_val2017.json'  # COCO Object Instance 类型的标注
-    ana_txt_save_path = '../../datasets/coco2017/coco_person/val2017'  # 保存的路径
-    out_txt_path='../../datasets/coco2017/val2017_person.txt'
-    # exports_categorys="all"
-    exports_categorys = [0]
+    images_path=arg.images_path
+    json_file = arg.json_file
+    ana_txt_save_path = arg.ana_txt_save_path
+    out_txt_path=arg.out_txt_path
+    exports_categorys="all"
+    # exports_categorys = [0]
 
     data = json.load(open(json_file, 'r'))
     if not os.path.exists(ana_txt_save_path):

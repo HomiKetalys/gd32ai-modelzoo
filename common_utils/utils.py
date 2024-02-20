@@ -29,6 +29,8 @@ class LogSaver():
         folder_name = ".".join(config_name.split(".")[:-1])
         name_index = 0
         folder_path = ""
+        if not os.path.exists(save_folder_path):
+            os.makedirs(save_folder_path)
         while name_index < 10000:
             folder_name_ = folder_name + f"_{name_index:04d}"
             folder_path = os.path.join(save_folder_path, folder_name_)

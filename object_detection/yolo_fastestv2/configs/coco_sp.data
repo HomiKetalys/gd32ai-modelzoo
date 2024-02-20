@@ -9,10 +9,10 @@ subdivisions=1
 learning_rate=0.001
 
 [model-configure]
-pre_weights=default
+pre_weights=None
 classes=80
-width=256
-height=256
+width=192
+height=192
 anchor_num=3
 separation=4
 separation_scale=2
