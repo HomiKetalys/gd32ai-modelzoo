@@ -1,3 +1,4 @@
+
 # Training and deployment of the Yolo-FastestV2 model
 
 This will provide training for the Yolo-FastestV2 model and deployment on GD32 devices
@@ -5,24 +6,24 @@ This will provide training for the Yolo-FastestV2 model and deployment on GD32 d
 # Preparation
 
  1. Use git to clone the gd32ai modelzoo project and init submodules.
-  ```
+```
 git clone https://github.com/HomiKetalys/gd32ai-modelzoo
 git submodule update --init --recursive
-  ```
+```
  2. Add the project root directory to PYTHONPATH and switch to yolo-fastestv2 directory.
  - on powershell.
-  ```
+```
 $env:PYTHONPATH=$(pwd)
 cd gd32ai-modelzoo/object_detection/yolo_fastestv2
-  ```
+```
 
 - on linux
-  ```
+```
 export PYTHONPATH=$(pwd)
 cd gd32ai-modelzoo/object_detection/yolo_fastestv2
-  ```
+```
  3. Prepare your dataset.The directory structure of the dataset should be as follows:
-  ```
+```
   dataset
   ├── images
   │   ├── title1
@@ -39,19 +40,19 @@ cd gd32ai-modelzoo/object_detection/yolo_fastestv2
   │       └──img3.txt
   │       └──img4.txt
   └── label1
-  ```
+```
 The directory path where image files and corresponding annotation files are located should have the same structure, except for the differences between images and label0 or label1.
 The annotation format in the annotation file txt is darknet yolo. it looks like:
-  ```
+```
 0 0.7117890625000001 0.05518711018711019 0.035546875 0.07432432432432433
 13 0.21646875000000004 0.25730769230769235 0.1015625 0.10280665280665281
-  ```
+```
  4. Place the image file used for training in train_label0.txt, and the image file used for validation in val_label0.txt. it looks like:
-  ```
+```
 images\train2017\000000391895.jpg
 images\train2017\000000522418.jpg
 images\train2017\000000184613.jpg
-  ```
+```
   If it is a relative path, then it is the relative path relative to the text file.
  ## Environmental preparation
  Install the environment(anaconda recommended) according to [Yolo-FastestV2](https://github.com/dog-qiuqiu/Yolo-FastestV2), [onnx2tflite](https://github.com/MPolaris/onnx2tflite), and [facelandmarks](https://github.com/midasklr/facelandmarks)(If you are using the FABD dataset)
@@ -59,7 +60,7 @@ images\train2017\000000184613.jpg
   
  - COCO2017:If you want to train on the COCO2017 dataset, you can prepare the dataset by following the steps below.
  1. Download the COCO2017 dataset from [here](https://cocodataset.org/#download).The directory structure should be as follows：
-   ```
+```
   COCO2017
   ├── images
   │   ├── train2017
@@ -73,7 +74,7 @@ images\train2017\000000184613.jpg
   └── annotations
       ├── instances_train2017.json
       └── instances_val2017.json
-  ```
+```
   2. Execute the following command to convert the COCO2017 dataset to the required format.
   
  Convert train set
@@ -102,7 +103,7 @@ python ../../common_utils/coco2yolo.py --images_path "{datasets_root}/COCO2017/i
       ├── call.json
   ...
       └── two_up_inverted.json
-  ```
+```
  2. Download the WFLW dataset from [here](https://wywu.github.io/projects/LAB/WFLW.html) .The directory structure should be as follows：
 ```
   WFLW
@@ -116,7 +117,7 @@ python ../../common_utils/coco2yolo.py --images_path "{datasets_root}/COCO2017/i
   ...
   │       └──61_Street_Battle_streetfight_61_1008.jpg
   └── list_98pt_rect_attr_train_test
-  ```
+```
   3. Download the Lapa dataset from [here](https://github.com/jd-opensource/lapa-dataset).The directory structure should be as follows：
 ```
   Lapa
@@ -126,15 +127,15 @@ python ../../common_utils/coco2yolo.py --images_path "{datasets_root}/COCO2017/i
   │   └── labels
   ├── val
   └── test
-  ```
+```
   4. Execute the following command to generate a fused FABD dataset:
-  ```
+```
   python ../../common_utils/gen_datas.py --wflw_path "{datasets_root}/WFLW" --lapa_path "{datasets_root}/Lapa" --hagrid_path=""{datasets_root}/HaGrid" --save_path "{datasets_root}/FABD"
-  ```
+```
  # Train
  ## set configuration file
  The configuration file is located in the configs folder in the current directory.Its content looks like the following:
-   ```
+```
 [name]  
 model_name=coco  
   
@@ -163,25 +164,25 @@ label_flag=coco_80
 train=../../../datasets/coco2017/train2017.txt  
 val=../../../datasets/coco2017/val2017.txt  
 names=./configs/coco.names
-  ```
+```
   1. Due to the fact that the object detection method of Yolo FastV2 belongs to anchor based, it is necessary to cluster the distribution of target boxes first.Execute the following command to collect information on the target box for the specified dataset, such as COCO2017.
-   ```
+```
   python genanchors.py --traintxt "{datasets_root}/COCO2017/train2017.txt" --output_dir "./" --label_flag "coco_80" --num_clusters 6 --input_width 256 --input_height 256
-  ```
+```
   This command will generate the file anchor6.txt in the specified directory "./".Paste the first line of content from anchor6.txt into anchors in the configuration file.
 
    2. Fill in the remaining content in the configuration file.
    ## start train
    Execute the following command to start training.
-   ```
+```
   python train.py --data configs/coco_sp.data
-  ```
+```
   The training results will be saved in results/train.Taking the configuration file coco_sp.data as an example, the first training result will be saved to results/train/coco_sp_0000.
  # Export And Evaluation
  Next, export the training results of the model as onnx or tflite.Execute the following command to export.
-   ```
+```
   python pytorch2tflite.py --data results/train/coco_sp_0000/coco_sp.data --model_path results/train/coco_sp_0000/best.pth --convert_type 1 --onnx_output results/export/onnx --tflite_output results/export/tflite --tflite_val_path "{datasets_root}/COCO2017/images/val2017"
-  ```
+```
   `convert_type` controls the conversion type,0 for onnx,1 for tflite.If the exported file is of type tflite, it is quantized.
   Meanwhile, the exported model will be evaluated.
   # Deploy
