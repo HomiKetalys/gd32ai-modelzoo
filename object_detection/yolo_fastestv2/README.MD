@@ -194,11 +194,14 @@ names=./configs/coco.names
   4. Select X-CUBE-AI in the mode interface that pops up, and click on add network in the configuration interface. If the model to be deployed is not a separate model, only one network_1 will be created. At the same time, click on the settings interface to select the first two items, allocate inputs and allocate outputs. Then exit the settings interface and modify the model format to TFlite, using STM32Cube as the framework AI runtime, then modify the model path. Then click on Analyze. If it is a separate model, create another network_2, following the same process as before.
   5. Save all files and copy the folder X-CUBE-AI from the STM32 project to the deploy/gd32f470IIH6 directory.
   6. Open deploy/gd32f470IIH6/Project/GD32KeilPrj.uvprojx using Keil5. Modify the model configuration in the main. c file.Modify the following macro definitions According to the configuration .data file:
+
 `SEPERATION`:Is model separated,0 for no,>0 for yes.
 `SEPERATION_SCALE`:Separation Scale, Exponential of 2.
 `activities`:Category string corresponding to category index.
 `FIX_FACTOR`:Correction coefficients for separated models. In the log file results/export/coco_sp_0000/log.txt when exporting the model , you can find fix_factor, which is FIX-FACTOR
+
 If you need to modify the image resolution, modify the Camera. h file. Modify the following macro definitions:
+
 `IMAGE_WIDTH`:width of image.
 `IMAGE_HEIGHT`:height of image.
 7. After ensuring that your GD32 device is connected to the computer and powered on, click on Build, then click on Load.
