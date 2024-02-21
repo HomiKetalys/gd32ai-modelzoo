@@ -1,4 +1,5 @@
 
+
 # Training and deployment of the Yolo-FastestV2 model
 
 This will provide training for the Yolo-FastestV2 model and deployment on GD32 devices
@@ -201,7 +202,9 @@ names=./configs/coco.names
 
 `activities`:Category string corresponding to category index.
 
-`FIX_FACTOR`:Correction coefficients for separated models. In the log file results/export/coco_sp_0000/log.txt when exporting the model , you can find fix_factor, which is FIX-FACTOR
+`FIX_FACTOR`:Correction coefficients for separated models. In the log file results/export/coco_sp_0000/log.txt when exporting the model , you can find fix_factor, which is FIX_FACTOR
+
+`anchors`:anchors in the. data configuration file.
 
 If you need to modify the image resolution, modify the Camera. h file. Modify the following macro definitions:
 
@@ -211,8 +214,9 @@ If you need to modify the image resolution, modify the Camera. h file. Modify th
 
 7. After ensuring that your GD32 device is connected to the computer and powered on, click on Build, then click on Load.
 # Metrics
+The metrics ultimately exported as quantization model
 ## On COCO2017 Person Dataset
-When nothing is precised in the model name, training is done using transfer learning technique from a pre-trained model. Else, "tfs" stands for "training from scratch".Meanwhile, the table presents the metrics of the model in stm32ai modelzoo.
+When nothing is precised in the model name, training is done using transfer learning technique from a pre-trained model. Else, "tfs" stands for "training from scratch".Meanwhile, the table presents the metrics of the model in [stm32ai-modelzoo](https://github.com/STMicroelectronics/stm32ai-modelzoo/blob/main/object_detection/pretrained_models/README.md).
 | model                   | Implementation | Dataset                        | Input Resolution | mAP* | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version
 |-------------------------|----------------|--------------------------------|-------------|-----------------------|----------------|---------------|-----------------|----------
 | Yolo-FastestV2          | Pytorch        | COCO2017 val person dataset    | 192x192x3   | 41.66%                |   32.76        |   179.26      |   387.79        | 8.1.0
@@ -225,3 +229,33 @@ When nothing is precised in the model name, training is done using transfer lear
 | ST Yolo LC v1 tfs       | TensorFlow     | COCO2017 val person dataset    | 256x256x3   | 45.09%                |   110.05       |   271.94      |   276.73        | 7.3.0     
 
 \* EVAL_IOU = 0.4, NMS_THRESH = 0.5, SCORE_THRESH = 0.001
+## On COCO2017 Val Dataset
+When nothing is precised in the model name, training is done using transfer learning technique from a pre-trained model. Else, "tfs" stands for "training from scratch".
+| model                   | Implementation | Dataset                        | Input Resolution | mAP* | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version
+|-------------------------|----------------|--------------------------------|-------------|-----------------------|----------------|---------------|-----------------|----------
+| Yolo-FastestV2          | Pytorch        | COCO2017 val dataset    | 192x192x3   | 17.51%                |   32.76        |   179.26      |   387.79        | 8.1.0
+| Yolo-FastestV2 tfs      | Pytorch        | COCO2017 val dataset    | 192x192x3   | 11.85%                |   32.76        |   179.26      |   387.79        | 8.1.0 
+| Yolo-FastestV2          | Pytorch        | COCO2017 val dataset    | 256x256x3   | 21.08%                |   58.23        |   300.1       |   387.79        | 8.1.0 
+| Yolo-FastestV2 tfs      | Pytorch        | COCO2017 val dataset    | 256x256x3   | 16.00%                |   58.23        |   300.1       |   387.79  
+
+\* EVAL_IOU = 0.4, NMS_THRESH = 0.5, SCORE_THRESH = 0.001
+## On Fusion of Abnormal Behavior Driving Dataset(FABD)
+When nothing is precised in the model name, training is done using transfer learning technique from a pre-trained model. Else, "tfs" stands for "training from scratch".
+| model                   | Implementation | Dataset                        | Input Resolution | mAP* | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version
+|-------------------------|----------------|--------------------------------|-------------|-----------------------|----------------|---------------|-----------------|----------
+| Yolo-FastestV2 tfs      | Pytorch        | FABD    | 256x256x3   | 54.65%                |   58.23        |   300.1       |   387.79 | 8.1.0 
+
+\* EVAL_IOU = 0.5, NMS_THRESH = 0.4, SCORE_THRESH = 0.01
+# Results On GD32 Device
+## Time
+| Model             | Format | Resolution | Board            | Execution Engine | Frequency   | Inference time (ms) | STM32Cube.AI version  |
+|-------------------|--------|------------|------------------|------------------|-------------|---------------------|-----------------------|
+| Yolo-FastestV2 | Int8   | 192x192x3    | GD32F470IIH6 | 1 CPU | 240 MHz       | 791 ms       | 8.0.1   
+| Yolo-FastestV2 | Int8   | 192x192x3    | GD32F470IIH6 | 1 CPU | 240 MHz       | 1397 ms       | 8.0.1     
+| [SSD Mobilenet v1 0.25] | Int8   | 192x192x3    | GD32F470IIH6 | 1 CPU | 240 MHz       | 808 ms       | 8.0.1                 |              |
+| [SSD Mobilenet v1 0.25] | Int8   | 256x256x3    | GD32F470IIH6 | 1 CPU | 240 MHz       | 1456 ms         | 8.0.1                 |
+## Images
+![coco2017 on gd32](https://github.com/HomiKetalys/gd32ai-modelzoo/blob/main/readme_resources/IMG20240221220127.jpg)
+
+
+
