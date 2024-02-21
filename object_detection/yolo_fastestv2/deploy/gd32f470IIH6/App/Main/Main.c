@@ -57,8 +57,10 @@ extern u8 time_start;
 ai_handle network1;
 
 //分离式模型参数配置
-#define OUT_POS_PREFIX 12
-#define SEPERATION 0
+#define OUT_POS_PREFIX 0
+//#define TEST_TIME
+
+#define SEPERATION 4
 //若分离
 #if SEPERATION>0
 
@@ -71,7 +73,7 @@ ai_handle network2;
 #define INPUT_HEIGHT SEPERATION_SCALE*AI_NETWORK_1_IN_1_HEIGHT
 #define INPUT_WIDTH SEPERATION_SCALE*AI_NETWORK_1_IN_1_WIDTH
 #define CLASS_NUM AI_NETWORK_2_OUT_1_CHANNEL-3-OUT_POS_PREFIX
-#define FIX_FACTOR 0.21075189090661883
+#define FIX_FACTOR 0.764834471285313
 #define ACTIVATION_SIZE AI_NETWORK_1_DATA_ACTIVATIONS_SIZE>AI_NETWORK_2_DATA_ACTIVATIONS_SIZE?AI_NETWORK_1_DATA_ACTIVATIONS_SIZE:AI_NETWORK_2_DATA_ACTIVATIONS_SIZE
 #define AI_NETWORK_OUT_1_HEIGHT AI_NETWORK_2_OUT_1_HEIGHT
 #define AI_NETWORK_OUT_1_CHANNEL AI_NETWORK_2_OUT_1_CHANNEL
@@ -82,13 +84,36 @@ typedef signed char ai1_out_type;
 #define SEPERATION_SCALE 1
 #define INPUT_HEIGHT SEPERATION_SCALE*AI_NETWORK_1_IN_1_HEIGHT
 #define INPUT_WIDTH SEPERATION_SCALE*AI_NETWORK_1_IN_1_WIDTH
-#define CLASS_NUM AI_NETWORK_1_OUT_1_CHANNEL-3-OUT_POS_PREFIX
+#define CLASS_NUM (AI_NETWORK_1_OUT_1_CHANNEL-3-OUT_POS_PREFIX)>0?(AI_NETWORK_1_OUT_1_CHANNEL-3-OUT_POS_PREFIX):1
 #define ACTIVATION_SIZE AI_NETWORK_1_DATA_ACTIVATIONS_SIZE
 #define AI_NETWORK_OUT_1_HEIGHT AI_NETWORK_1_OUT_1_HEIGHT
 #define AI_NETWORK_OUT_1_CHANNEL AI_NETWORK_1_OUT_1_CHANNEL
 
 typedef float ai1_out_type;
 
+#endif
+
+typedef struct
+{
+    float x_min;
+    float y_min;
+    float x_max;
+    float y_max;
+}BBox;
+
+typedef struct
+{
+    float confi;
+    BBox bbox;
+		u32 cls_index;
+}ObjectResult;
+
+//float anchors[12]={9.192727272727273, 14.101818181818182, 27.54909090909091, 37.44, 40.516363636363636, 100.58909090909091, 92.29818181818182, 56.89454545454546, 95.68727272727273, 156.03636363636363, 203.57818181818183, 188.26909090909092};
+float anchors[12]={16.33,6.18, 24.36,2.35, 30.22,104.04, 33.22,10.20, 74.09,96.71, 128.15,107.99};
+#ifndef TEST_TIME
+ObjectResult objects[AI_NETWORK_OUT_1_HEIGHT*3];
+u32 object_num;
+ObjectResult results[AI_NETWORK_OUT_1_HEIGHT*3];
 #endif
 
 //控制模型的输入输出缓存和激活值的内存的内外分配
@@ -120,14 +145,14 @@ ai_u8 activations [ACTIVATION_SIZE];
 #endif
 #define aiInData ai1InData
 
-//const char* activities[5] = {"CLOSED_EYE","OPENED_EYE","CLOSED_MOUTH","OPENDED_MOUTH","SMOKING"};
-const char* activities[80] = {"person","bicycle","car","motorbike","aeroplane","bus","train","truck","boat","traffic light","fire hydrant","stop sign",
-	"parking meter","bench","bird","cat","dog","horse","sheep","cow","elephant","bear","zebra","giraffe","backpack","umbrella","handbag","tie","suitcase",
-	"frisbee","skis","snowboard","sports ball","kite","baseball bat","baseball glove","skateboard","surfboard","tennis racket","bottle","wine glass","cup",
-	"fork","knife","spoon","bowl","banana","apple","sandwich","orange","broccoli","carrot","hot dog","pizza","donut","cake","chair","sofa","pottedplant",
-	"bed","diningtable","toilet","tvmonitor","laptop","mouse","remote","keyboard","cell phone","microwave","oven","toaster","sink","refrigerator","book",
-	"clock","vase","scissors","teddy bear","hair drier","toothbrush"
-};
+const char* activities[5] = {"CLOSED_EYE","OPENED_EYE","CLOSED_MOUTH","OPENDED_MOUTH","HAND"};
+//const char* activities[80] = {"person","bicycle","car","motorbike","aeroplane","bus","train","truck","boat","traffic light","fire hydrant","stop sign",
+//	"parking meter","bench","bird","cat","dog","horse","sheep","cow","elephant","bear","zebra","giraffe","backpack","umbrella","handbag","tie","suitcase",
+//	"frisbee","skis","snowboard","sports ball","kite","baseball bat","baseball glove","skateboard","surfboard","tennis racket","bottle","wine glass","cup",
+//	"fork","knife","spoon","bowl","banana","apple","sandwich","orange","broccoli","carrot","hot dog","pizza","donut","cake","chair","sofa","pottedplant",
+//	"bed","diningtable","toilet","tvmonitor","laptop","mouse","remote","keyboard","cell phone","microwave","oven","toaster","sink","refrigerator","book",
+//	"clock","vase","scissors","teddy bear","hair drier","toothbrush"
+//};
 
 ai_buffer * ai_input1;
 ai_buffer * ai_output1;
@@ -332,7 +357,7 @@ void run_ai1_part(u16 *frame,u32 part_index)
 {
 	u32 offh=(part_index/SEPERATION_SCALE);
 	u32 offw=(part_index%SEPERATION_SCALE);
-	u32 i,j,k;
+	u32 i,j;
 	u8 r,g,b;
 	//颜色转换
 	for(i=0;i<AI_NETWORK_1_IN_1_HEIGHT;i++)
@@ -348,6 +373,7 @@ void run_ai1_part(u16 *frame,u32 part_index)
 	//特征提取网络
 	AI1_Run(ai1InData,ai1OutData);
 #if SEPERATION>0
+	u32 k;
 	//转移特征到检测头的输入缓冲区
 	for(i=0;i<AI_NETWORK_2_IN_1_HEIGHT/SEPERATION_SCALE;i++)
 	{
@@ -398,12 +424,126 @@ void detectInit()
 }
 
 
+
+
+
+#ifndef TEST_TIME
+void handle_preds(float *preds,float conf_thr)
+{
+	u32 i,j,stage,pos_x,pos_y;
+	object_num=0;
+	for(i=0;i<AI_NETWORK_OUT_1_HEIGHT;i++)
+	{
+		if(i<(INPUT_WIDTH*INPUT_HEIGHT)/(16*16))
+		{
+			pos_x=i%(INPUT_WIDTH/16);
+			pos_y=i/(INPUT_WIDTH/16);
+			stage=0;
+			
+		}
+		else
+		{
+			pos_x=(i-(INPUT_WIDTH*INPUT_HEIGHT)/(16*16))%(INPUT_WIDTH/32)+1;
+			pos_y=(i-(INPUT_WIDTH*INPUT_HEIGHT)/(16*16))/(INPUT_WIDTH/32)+1;
+			stage=1;
+		}
+		float cls=0;
+		u32 cls_index=0;
+		for(j=15;j<AI_NETWORK_OUT_1_CHANNEL;j++)
+		{
+			if(*(preds+AI_NETWORK_OUT_1_CHANNEL*i+j)>cls)
+			{
+				cls=*(preds+AI_NETWORK_OUT_1_CHANNEL*i+j);
+				cls_index=j-15;
+			}
+		}
+		for(j=0;j<3;j++)
+		{
+			float *reg=preds+AI_NETWORK_OUT_1_CHANNEL*i+j*4;
+			float obj=*(preds+AI_NETWORK_OUT_1_CHANNEL*i+12+j);
+			if(obj*cls>conf_thr)
+			{
+				*(reg)=(*(reg)-0.5f+pos_x)*(stage+1)*16;
+				*(reg+1)=(*(reg+1)-0.5f+pos_y)*(stage+1)*16;
+				*(reg+2)=((*(reg+2)*2)*(*(reg+2)*2))*anchors[stage*6+j*2];
+				*(reg+3)=((*(reg+3)*2)*(*(reg+3)*2))*anchors[stage*6+j*2+1];
+				objects[object_num].confi=obj*cls;
+				objects[object_num].bbox.x_min=*(reg)-*(reg+2)/2;
+				objects[object_num].bbox.y_min=*(reg+1)-*(reg+3)/2;
+				objects[object_num].bbox.x_max=*(reg)+*(reg+2)/2;
+				objects[object_num].bbox.y_max=*(reg+1)+*(reg+3)/2;
+				objects[object_num].cls_index=cls_index;
+				object_num++;
+			}
+		}
+	}
+}
+
+int compare(const ObjectResult a, const ObjectResult b)
+{
+    return a.confi < b.confi ? 1 : -1;
+}
+
+float iou(ObjectResult a, ObjectResult b)
+{
+    float x1 = a.bbox.x_min > b.bbox.x_min ? a.bbox.x_min : b.bbox.x_min;  // std::max
+    float y1 = a.bbox.y_min > b.bbox.y_min ? a.bbox.y_min : b.bbox.y_min;  // std::max
+    float x2 = a.bbox.x_max > b.bbox.x_max ? b.bbox.x_max : a.bbox.x_max;  // std::min
+    float y2 = a.bbox.y_max > b.bbox.y_max ? b.bbox.y_max : a.bbox.y_max;  // std::min
+
+    if (x2 <= x1 || y2 <= y1) return 0;
+
+    float a_width  = a.bbox.x_max - a.bbox.x_min;
+    float a_height = a.bbox.y_max - a.bbox.y_min;
+    float b_width =  b.bbox.x_max - b.bbox.x_min;
+    float b_heihgt = b.bbox.y_max - b.bbox.y_min;
+
+    float inter_area = (x2 - x1) * (y2 - y1);  
+		float outer_area = ((a_width * a_height) + b_width * b_heihgt - inter_area);
+		if(outer_area==0)
+		{
+			return 0;
+		}
+    float iou = inter_area / outer_area; 
+
+    return iou;
+}
+
+
+void nms(ObjectResult object[], ObjectResult result[], uint16_t* total, float nmsThreshold)
+{
+    qsort(object, *total, sizeof(ObjectResult), compare);
+
+    for (uint16_t i = 0; i < *total; ++i)
+    {
+        uint16_t index = 1;
+        result[i] = object[i];
+        for (uint16_t j = i + 1; j < *total; ++j)
+        {
+            if (iou(result[i], object[j]) < nmsThreshold)
+            {
+                object[index] = object[j];
+                index += 1;
+            }
+        }
+
+        *total = index;
+
+        if (index == 1)
+        {
+            *total = i + 1;
+        }
+    }
+}
+#endif
+
 //检测一次
 void detect_once(void)
 {
 	while(!((0 != s_iMode)&&(1 == s_iGetFrameFlag)));
 	u32 i,j,k;
 	u32 x0, y0, x1, y1, x, y,t1,t2,t3,t4,t5;
+	char str[128];
 	x0 = s_iX0-40+160-INPUT_WIDTH/2;
 	y0 = s_iY0+160-INPUT_HEIGHT/2+48+48;
 	x1 = x0 + INPUT_WIDTH - 1;
@@ -443,66 +583,9 @@ void detect_once(void)
 	s_iCnt1000=0;
 	
 //		mySystemInit2();
-	//分析检测结果
-	time_start=1;
-	for(i=0;i<CLASS_NUM;i++)
-	{
-		state[i]=0;
-	}
-	for(i=0;i<AI_NETWORK_OUT_1_HEIGHT;i++)
-	{
-		for(j=OUT_POS_PREFIX;j<OUT_POS_PREFIX+3;j++)
-		{
-			if(aiOutData[i*AI_NETWORK_OUT_1_CHANNEL+j+OUT_POS_PREFIX]>0.5f)
-			{
-				for(k=OUT_POS_PREFIX+3;k<AI_NETWORK_OUT_1_CHANNEL;k++)
-				{
-					float conf=aiOutData[i*AI_NETWORK_OUT_1_CHANNEL+j]*aiOutData[i*AI_NETWORK_OUT_1_CHANNEL+k];
-					if(conf>0.5f)
-					{
-						if(conf>state[k-3-OUT_POS_PREFIX])
-						{
-							state[k-3-OUT_POS_PREFIX]=conf;
-						}
-					}
-				}
-			}
-		}
-	}
-	char str[128];
-	bool obj=false;
-	u8 obj_num=0;
-	LCDFillPixel(0,s_iY0-96+24,32*15,s_iY0-96+24*3,0xffff);
-	if(state[0]>state[1])
-		state[1]=0;
-	else
-		state[0]=0;
-	if(state[2]>state[3])
-		state[3]=0;
-	else
-		state[2]=0;
-	if(state[4]<0.7f)
-		state[4]=0;
-	for(i=0;i<CLASS_NUM;i++)
-	{
-		if(state[i]!=0)
-		{
 
-			printf("the class %d exist\r\n", i);
-			sprintf(str,"%s",activities[i] );
-			LCDShowString(160*obj_num,s_iY0-96+24,32*15,24,LCD_FONT_24,LCD_TEXT_NORMAL,0xf800,0xffff,str);
-			obj_num+=1;
-			obj=true;
-		}
-	}
-	if(!obj)
-	{
-		LCDShowString(0,s_iY0-96+24,32*15,24,LCD_FONT_24,LCD_TEXT_NORMAL,0,0xffff,"no class detected");
-	}
-	time_start=0;
-	t4=s_iCnt1000;
-	s_iCnt1000=0;
 	//将图像显示在屏幕
+	LCDFillPixel(0,s_iY0,32*15,s_iY0+320,0xffff);
 	time_start=1;
 	i=0;
 	for(y = y0; y <= y1; y++)
@@ -516,7 +599,80 @@ void detect_once(void)
 	time_start=0;
 	t5=s_iCnt1000;
 	s_iCnt1000=0;
+	
+	//分析检测结果
+	time_start=1;
+#ifndef TEST_TIME
+	handle_preds(aiOutData,0.5);
+	nms(objects,results,(uint16_t *) &object_num,0.2);
+	sprintf(str,"object_num:%d",object_num);
+	LCDShowString(0,s_iY0-96+24,32*15,24,LCD_FONT_24,LCD_TEXT_NORMAL,0,0xffff,str);
+	for(i=0;i<object_num;i++)
+	{
+		LCDShowString(x0+(u32)objects[i].bbox.x_min,y0+(u32)objects[i].bbox.y_min-16,32*15,16,LCD_FONT_16,LCD_TEXT_TRANS,0x07f0,0xffff,(char *) activities[objects[i].cls_index]);
+		LCDDrawRectangle(x0+(u32)objects[i].bbox.x_min,y0+(u32)objects[i].bbox.y_min,x0+(u32)objects[i].bbox.x_max,y0+(u32)objects[i].bbox.y_max,0xffff);
+	}
+#endif
+//	for(i=0;i<CLASS_NUM;i++)
+//	{
+//		state[i]=0;
+//	}
+//	for(i=0;i<AI_NETWORK_OUT_1_HEIGHT;i++)
+//	{
+//		for(j=OUT_POS_PREFIX;j<OUT_POS_PREFIX+3;j++)
+//		{
+//			if(aiOutData[i*AI_NETWORK_OUT_1_CHANNEL+j+OUT_POS_PREFIX]>0.5f)
+//			{
+//				for(k=OUT_POS_PREFIX+3;k<AI_NETWORK_OUT_1_CHANNEL;k++)
+//				{
+//					float conf=aiOutData[i*AI_NETWORK_OUT_1_CHANNEL+j]*aiOutData[i*AI_NETWORK_OUT_1_CHANNEL+k];
+//					if(conf>0.5f)
+//					{
+//						if(conf>state[k-3-OUT_POS_PREFIX])
+//						{
+//							state[k-3-OUT_POS_PREFIX]=conf;
+//						}
+//					}
+//				}
+//			}
+//		}
+//	}
+//	char str[128];
+//	bool obj=false;
+//	u8 obj_num=0;
+//	LCDFillPixel(0,s_iY0-96+24,32*15,s_iY0-96+24*3,0xffff);
+//	if(state[0]>state[1])
+//		state[1]=0;
+//	else
+//		state[0]=0;
+//	if(state[2]>state[3])
+//		state[3]=0;
+//	else
+//		state[2]=0;
+//	if(state[4]<0.7f)
+//		state[4]=0;
+//	for(i=0;i<CLASS_NUM;i++)
+//	{
+//		if(state[i]!=0)
+//		{
 
+//			printf("the class %d exist\r\n", i);
+//			sprintf(str,"%s",activities[i] );
+//			LCDShowString(160*obj_num,s_iY0-96+24,32*15,24,LCD_FONT_24,LCD_TEXT_NORMAL,0xf800,0xffff,str);
+//			obj_num+=1;
+//			obj=true;
+//		}
+//	}
+//	if(!obj)
+//	{
+//		LCDShowString(0,s_iY0-96+24,32*15,24,LCD_FONT_24,LCD_TEXT_NORMAL,0,0xffff,"no class detected");
+//	}
+	time_start=0;
+	t4=s_iCnt1000;
+	s_iCnt1000=0;
+
+  
+	LCDFillPixel(0,s_iY0-96+48,32*15,s_iY0-96+72,0xffff);
 	sprintf(str,"time/ms:%d;%d;%d;%d;%d;all:%d",t1,t2,t3,t4,t5,t1+t2+t3+t4+t5);
 	LCDShowString(0,s_iY0-96+48,32*15,24,LCD_FONT_24,LCD_TEXT_NORMAL,0,0xffff,str);
 	sprintf(str,"SYS:%dMHz",sys);

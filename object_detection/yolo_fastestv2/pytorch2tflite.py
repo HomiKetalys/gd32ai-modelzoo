@@ -84,6 +84,7 @@ paths=[
 ]
 
 def export(opt,save_path):
+    print(f"pytorch_model_path:{opt.model_path}")
     onnx_path=os.path.join(save_path,"onnx")
     tflite_path=os.path.join(save_path,"tflite")
     os.makedirs(onnx_path)
@@ -98,9 +99,9 @@ def export(opt,save_path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data', type=str, default='modelzoo/coco_sp_0004/coco_sp.data',
+    parser.add_argument('--data', type=str, default='modelzoo/ab_drive_0000/ab_drive.data',
                         help='Specify training profile *.data')
-    parser.add_argument('--model_path', type=str, default=paths[4],
+    parser.add_argument('--model_path', type=str, default="modelzoo/ab_drive_0000/best.pth",
                         help='The path of the model')
     parser.add_argument('--convert_type', type=int, default=1,
                         help='model type,0 for onnx,1 for tflite')
@@ -108,7 +109,7 @@ if __name__ == "__main__":
                         help='The path where the onnx model is saved')
     parser.add_argument('--tflite_output', type=str, default='results/export/tflite',
                         help='The path where the tflite model is saved')
-    parser.add_argument('--tflite_val_path', type=str, default='../../../datasets/coco2017/images/val2017',
+    parser.add_argument('--tflite_val_path', type=str, default='../../../datasets/abnormal_drive_0/images',
                         help='The path where the image which quantity need is saved')
     opt = parser.parse_args()
     lger = LogSaver(opt.data, "results/export")
