@@ -5,3 +5,5 @@ __pycache__
 /common_utils/facelandmarks/
 /object_detection/yolo_fastestv2/modified_files/onnx2tflite/
 /object_detection/yolo_fastestv2/modified_files/Yolo_FastestV2/
+/object_detection/yolo_fastestv2/deploy/gd32f470IIH6/Project/Listings
+/object_detection/yolo_fastestv2/deploy/gd32f470IIH6/Project/Objects

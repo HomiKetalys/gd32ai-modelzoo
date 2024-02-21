@@ -50,7 +50,7 @@ def test(cfg_path,model_path,img_path,result_path,eval_type):
     print("forward time:%fms" % ftime)
 
     # 特征图后处理
-    output = utils_sp.handel_preds(preds, cfg, device)
+    output = utils_sp.handel_preds(preds, cfg, device,one_norm)
     output_boxes = utils_sp.non_max_suppression(output, conf_thres=0.3, iou_thres=0.4)
 
     # 加载label names

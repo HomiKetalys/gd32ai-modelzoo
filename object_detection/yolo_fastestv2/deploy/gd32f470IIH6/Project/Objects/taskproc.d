@@ -1,9 +1,0 @@
-.\objects\taskproc.o: ..\App\TaskProc\TaskProc.c
-.\objects\taskproc.o: ..\App\TaskProc\TaskProc.h
-.\objects\taskproc.o: ..\App\DataType\DataType.h
-.\objects\taskproc.o: ..\App\LED\LED.h
-.\objects\taskproc.o: ..\App\KeyOne\ProcKeyOne.h
-.\objects\taskproc.o: ..\App\DbgMCU\DbgMCU.h
-.\objects\taskproc.o: ..\App\Touch\Touch.h
-.\objects\taskproc.o: ..\App\EmbGUI\App\GUITop.h
-.\objects\taskproc.o: ..\HW\DAC\DAC.h
