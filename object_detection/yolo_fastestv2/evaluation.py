@@ -1,5 +1,5 @@
 import argparse
-from modified_files import evaluation
+from submodules.Yolo_FastestV2.evaluation import evaluation
 from common_utils.utils import LogSaver
 
 paths=[

@@ -1,6 +1,6 @@
 import argparse
 from common_utils.utils import LogSaver
-from modified_files import test
+from submodules.Yolo_FastestV2.test import test
 
 if __name__ == '__main__':
     # 指定训练配置文件

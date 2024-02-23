@@ -1,7 +1,7 @@
 import os
 import argparse
 import torch
-from modified_files import train
+from submodules.Yolo_FastestV2.train import train
 from common_utils.utils import LogSaver
 
 
