@@ -1,32 +1,32 @@
 Neural Network Tools for STM32AI v1.7.0 (STM.ai v8.0.1-19451)
-Created date          : 2024-02-21 22:03:38
-Parameters            : generate --name network_2 -m F:/MyWork/PyWork/gd32ai-modelzoo/object_detection/yolo_fastestv2/results/export/ab_drive_0000/tflite/model_post.tflite --type tflite --compression none --verbosity 1 --workspace C:\Users\kyuliea\AppData\Local\Temp\mxAI_workspace1699481014500014800304443217415828 --output C:\Users\kyuliea\.stm32cubemx\network_output --allocate-inputs --series stm32h7 --allocate-outputs
+Created date          : 2024-02-22 18:08:57
+Parameters            : generate --name network_2 -m F:/MyWork/PyWork/gd32ai-modelzoo/object_detection/yolo_fastestv2/results/export/coco_sp_0007/tflite/model_post.tflite --type tflite --compression none --verbosity 1 --workspace C:\Users\kyuliea\AppData\Local\Temp\mxAI_workspace29382746524900973260276846684762 --output C:\Users\kyuliea\.stm32cubemx\network_output --allocate-inputs --series stm32h7 --allocate-outputs
 
 Exec/report summary (generate)
-------------------------------------------------------------------------------------------------------------------------------------------------
-model file         :   F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\export\ab_drive_0000\tflite\model_post.tflite   
-type               :   tflite                                                                                                                   
-c_name             :   network_2                                                                                                                
-compression        :   none                                                                                                                     
-options            :   allocate-inputs, allocate-outputs                                                                                        
-optimization       :   balanced                                                                                                                 
-target/series      :   stm32h7                                                                                                                  
-workspace dir      :   C:\Users\kyuliea\AppData\Local\Temp\mxAI_workspace1699481014500014800304443217415828                                     
-output dir         :   C:\Users\kyuliea\.stm32cubemx\network_output                                                                             
-model_fmt          :   ss/sa per-channel                                                                                                        
-model_name         :   model_post                                                                                                               
-model_hash         :   09342c007938c23f4cadd4e16b21c84c                                                                                         
-params #           :   183,832 items (189.06 KiB)                                                                                               
-------------------------------------------------------------------------------------------------------------------------------------------------
-input 1/1          :   'serving_default_input_20' (domain:activations/**default**)                                                              
-                   :   24576 items, 24.00 KiB, ai_i8, s=0.01761622, zp=-128, (1,16,16,96)                                                       
-output 1/1         :   'conversion_95' (domain:activations/**default**)                                                                         
-                   :   6400 items, 25.00 KiB, ai_float, float, (1,320,1,20)                                                                     
-macc               :   23,121,400                                                                                                               
-weights (ro)       :   190,624 B (186.16 KiB) (1 segment) / -544,704(-74.1%) vs float model                                                     
-activations (rw)   :   282,624 B (276.00 KiB) (1 segment) *                                                                                     
-ram (total)        :   282,624 B (276.00 KiB) = 282,624 + 0 + 0                                                                                 
-------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------
+model file         :   F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\export\coco_sp_0007\tflite\model_post.tflite   
+type               :   tflite                                                                                                                  
+c_name             :   network_2                                                                                                               
+compression        :   none                                                                                                                    
+options            :   allocate-inputs, allocate-outputs                                                                                       
+optimization       :   balanced                                                                                                                
+target/series      :   stm32h7                                                                                                                 
+workspace dir      :   C:\Users\kyuliea\AppData\Local\Temp\mxAI_workspace29382746524900973260276846684762                                      
+output dir         :   C:\Users\kyuliea\.stm32cubemx\network_output                                                                            
+model_fmt          :   ss/sa per-channel                                                                                                       
+model_name         :   model_post                                                                                                              
+model_hash         :   29490b55baea7e9b61e762240ff5dafd                                                                                        
+params #           :   194,782 items (200.20 KiB)                                                                                              
+-----------------------------------------------------------------------------------------------------------------------------------------------
+input 1/1          :   'serving_default_input_20' (domain:activations/**default**)                                                             
+                   :   24576 items, 24.00 KiB, ai_i8, s=0.02435603, zp=-128, (1,16,16,96)                                                      
+output 1/1         :   'conversion_95' (domain:activations/**default**)                                                                        
+                   :   30400 items, 118.75 KiB, ai_float, float, (1,320,1,95)                                                                  
+macc               :   25,353,550                                                                                                              
+weights (ro)       :   196,624 B (192.02 KiB) (1 segment) / -582,504(-74.8%) vs float model                                                    
+activations (rw)   :   282,624 B (276.00 KiB) (1 segment) *                                                                                    
+ram (total)        :   282,624 B (276.00 KiB) = 282,624 + 0 + 0                                                                                
+-----------------------------------------------------------------------------------------------------------------------------------------------
 (*) 'input'/'output' buffers can be used from the activations buffer
 
 Model name - model_post ['serving_default_input_20'] ['conversion_95']
@@ -140,37 +140,37 @@ m_id   layer (type,original)                             oshape                 
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
 43     conversion_43 (Conversion, QUANTIZE)              [b:1,h:8,w:8,c:3]                               384                      nl_42   |                   -384(-100.0%)       
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-44     conv2d_44 (Conv2D, CONV_2D)                       [b:1,h:8,w:8,c:5]       365/380              23,045                  conv2d_40   |                   +640(+2.8%)         conv2d_oi8/converter_of32[58, 59]     
+44     conv2d_44 (Conv2D, CONV_2D)                       [b:1,h:8,w:8,c:80]      5,840/6,080         368,720                  conv2d_40   |                   +10,240(+2.8%)      conv2d_oi8/converter_of32[58, 59]     
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-45     transpose_45 (Transpose, TRANSPOSE)               [b:1,h:5,w:8,c:8]                                                    conv2d_44   |                                       
+45     transpose_45 (Transpose, TRANSPOSE)               [b:1,h:80,w:8,c:8]                                                   conv2d_44   |                                       
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-46     transpose_46 (Transpose, TRANSPOSE)               [b:1,h:8,w:8,c:5]                                                 transpose_45   |                                       
+46     transpose_46 (Transpose, TRANSPOSE)               [b:1,h:8,w:8,c:80]                                                transpose_45   |                                       
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-47     transpose_47 (Transpose, TRANSPOSE)               [b:1,h:8,w:5,c:8]                                                 transpose_46   |                                       
+47     transpose_47 (Transpose, TRANSPOSE)               [b:1,h:8,w:80,c:8]                                                transpose_46   |                                       
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-48     transpose_48 (Transpose, TRANSPOSE)               [b:1,h:8,w:8,c:5]                                                 transpose_47   |                                       
+48     transpose_48 (Transpose, TRANSPOSE)               [b:1,h:8,w:8,c:80]                                                transpose_47   |                                       
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-49     nl_49 (Nonlinearity, SOFTMAX)                     [b:1,h:8,w:8,c:5]                             4,800               transpose_48   |                   +640(+13.3%)        nl_of32/converter_oi8[60, 61]         
+49     nl_49 (Nonlinearity, SOFTMAX)                     [b:1,h:8,w:8,c:80]                           76,800               transpose_48   |                   +10,240(+13.3%)     nl_of32/converter_oi8[60, 61]         
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-50     conversion_50 (Conversion, QUANTIZE)              [b:1,h:8,w:8,c:5]                               640                      nl_49   |                   -640(-100.0%)       
+50     conversion_50 (Conversion, QUANTIZE)              [b:1,h:8,w:8,c:80]                           10,240                      nl_49   |                   -10,240(-100.0%)    
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-51     transpose_51 (Transpose, TRANSPOSE)               [b:1,h:8,w:5,c:8]                                                conversion_50   |                                       
+51     transpose_51 (Transpose, TRANSPOSE)               [b:1,h:8,w:80,c:8]                                               conversion_50   |                                       
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-52     transpose_52 (Transpose, TRANSPOSE)               [b:1,h:8,w:8,c:5]                                                 transpose_51   |                                       
+52     transpose_52 (Transpose, TRANSPOSE)               [b:1,h:8,w:8,c:80]                                                transpose_51   |                                       
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-53     transpose_53 (Transpose, TRANSPOSE)               [b:1,h:5,w:8,c:8]                                                 transpose_52   |                                       
+53     transpose_53 (Transpose, TRANSPOSE)               [b:1,h:80,w:8,c:8]                                                transpose_52   |                                       
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-54     transpose_54 (Transpose, TRANSPOSE)               [b:1,h:8,w:8,c:5]                                                 transpose_53   |                                       
+54     transpose_54 (Transpose, TRANSPOSE)               [b:1,h:8,w:8,c:80]                                                transpose_53   |                                       
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-55     concat_55 (Concat, CONCATENATION)                 [b:1,h:8,w:8,c:20]                                               conversion_35   |                                       concat_oi8[68]                        
+55     concat_55 (Concat, CONCATENATION)                 [b:1,h:8,w:8,c:95]                                               conversion_35   |                                       concat_oi8[68]                        
                                                                                                                           conversion_43   | 
                                                                                                                            transpose_54   | 
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-56     transpose_56 (Transpose, TRANSPOSE)               [b:1,h:20,w:8,c:8]                                                   concat_55   |                                       transpose_oi8[69]                     
+56     transpose_56 (Transpose, TRANSPOSE)               [b:1,h:95,w:8,c:8]                                                   concat_55   |                                       transpose_oi8[69]                     
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-57     reshape_57 (Reshape, RESHAPE)                     [b:1,h:20,c:64]                                                   transpose_56   |                                       
+57     reshape_57 (Reshape, RESHAPE)                     [b:1,h:95,c:64]                                                   transpose_56   |                                       
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-58     transpose_58 (Transpose, TRANSPOSE)               [b:1,h:64,c:20]                                                     reshape_57   |                                       transpose_oi8[70]                     
+58     transpose_58 (Transpose, TRANSPOSE)               [b:1,h:64,c:95]                                                     reshape_57   |                                       transpose_oi8[70]                     
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
 59     upsample_59 (Upsample, RESIZE_NEAREST_NEIGHBOR)   [b:1,h:16,w:16,c:192]                                                concat_25   |                   +98,304(+100.0%)    upsample_of32/converter_oi8[30, 31]   
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
@@ -200,27 +200,27 @@ m_id   layer (type,original)                             oshape                 
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
 70     conversion_70 (Conversion, QUANTIZE)              [b:1,h:16,w:16,c:3]                           1,536                      nl_69   |                   -1,536(-100.0%)     
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-71     conv2d_71 (Conv2D, CONV_2D)                       [b:1,h:16,w:16,c:5]     365/380              92,165                  conv2d_67   |                   +2,560(+2.8%)       conv2d_oi8/converter_of32[44, 45]     
+71     conv2d_71 (Conv2D, CONV_2D)                       [b:1,h:16,w:16,c:80]    5,840/6,080       1,474,640                  conv2d_67   |                   +40,960(+2.8%)      conv2d_oi8/converter_of32[44, 45]     
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-72     transpose_72 (Transpose, TRANSPOSE)               [b:1,h:5,w:16,c:16]                                                  conv2d_71   |                                       
+72     transpose_72 (Transpose, TRANSPOSE)               [b:1,h:80,w:16,c:16]                                                 conv2d_71   |                                       
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-73     transpose_73 (Transpose, TRANSPOSE)               [b:1,h:16,w:16,c:5]                                               transpose_72   |                                       
+73     transpose_73 (Transpose, TRANSPOSE)               [b:1,h:16,w:16,c:80]                                              transpose_72   |                                       
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-74     transpose_74 (Transpose, TRANSPOSE)               [b:1,h:16,w:5,c:16]                                               transpose_73   |                                       
+74     transpose_74 (Transpose, TRANSPOSE)               [b:1,h:16,w:80,c:16]                                              transpose_73   |                                       
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-75     transpose_75 (Transpose, TRANSPOSE)               [b:1,h:16,w:16,c:5]                                               transpose_74   |                                       
+75     transpose_75 (Transpose, TRANSPOSE)               [b:1,h:16,w:16,c:80]                                              transpose_74   |                                       
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-76     nl_76 (Nonlinearity, SOFTMAX)                     [b:1,h:16,w:16,c:5]                          19,200               transpose_75   |                   +2,560(+13.3%)      nl_of32/converter_oi8[46, 47]         
+76     nl_76 (Nonlinearity, SOFTMAX)                     [b:1,h:16,w:16,c:80]                        307,200               transpose_75   |                   +40,960(+13.3%)     nl_of32/converter_oi8[46, 47]         
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-77     conversion_77 (Conversion, QUANTIZE)              [b:1,h:16,w:16,c:5]                           2,560                      nl_76   |                   -2,560(-100.0%)     
+77     conversion_77 (Conversion, QUANTIZE)              [b:1,h:16,w:16,c:80]                         40,960                      nl_76   |                   -40,960(-100.0%)    
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-78     transpose_78 (Transpose, TRANSPOSE)               [b:1,h:16,w:5,c:16]                                              conversion_77   |                                       
+78     transpose_78 (Transpose, TRANSPOSE)               [b:1,h:16,w:80,c:16]                                             conversion_77   |                                       
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-79     transpose_79 (Transpose, TRANSPOSE)               [b:1,h:16,w:16,c:5]                                               transpose_78   |                                       
+79     transpose_79 (Transpose, TRANSPOSE)               [b:1,h:16,w:16,c:80]                                              transpose_78   |                                       
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-80     transpose_80 (Transpose, TRANSPOSE)               [b:1,h:5,w:16,c:16]                                               transpose_79   |                                       
+80     transpose_80 (Transpose, TRANSPOSE)               [b:1,h:80,w:16,c:16]                                              transpose_79   |                                       
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-81     transpose_81 (Transpose, TRANSPOSE)               [b:1,h:16,w:16,c:5]                                               transpose_80   |                                       
+81     transpose_81 (Transpose, TRANSPOSE)               [b:1,h:16,w:16,c:80]                                              transpose_80   |                                       
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
 82     conv2d_82 (Conv2D, DEPTHWISE_CONV_2D)             [b:1,h:16,w:16,c:72]    1,872/2,088         460,872                     pad_62   |                                       conv2d_oi8[35]                        
        nl_82_nl (Nonlinearity, DEPTHWISE_CONV_2D)        [b:1,h:16,w:16,c:72]                         18,432                  conv2d_82   |                   -18,432(-100.0%)    
@@ -240,22 +240,22 @@ m_id   layer (type,original)                             oshape                 
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
 89     conversion_89 (Conversion, QUANTIZE)              [b:1,h:16,w:16,c:12]                          6,144                      nl_88   |                   -6,144(-100.0%)     
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-90     concat_90 (Concat, CONCATENATION)                 [b:1,h:16,w:16,c:20]                                             conversion_89   |                                       concat_oi8[49]                        
+90     concat_90 (Concat, CONCATENATION)                 [b:1,h:16,w:16,c:95]                                             conversion_89   |                                       concat_oi8[49]                        
                                                                                                                           conversion_70   | 
                                                                                                                            transpose_81   | 
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-91     transpose_91 (Transpose, TRANSPOSE)               [b:1,h:20,w:16,c:16]                                                 concat_90   |                                       transpose_oi8[50]                     
+91     transpose_91 (Transpose, TRANSPOSE)               [b:1,h:95,w:16,c:16]                                                 concat_90   |                                       transpose_oi8[50]                     
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-92     reshape_92 (Reshape, RESHAPE)                     [b:1,h:20,c:256]                                                  transpose_91   |                                       
+92     reshape_92 (Reshape, RESHAPE)                     [b:1,h:95,c:256]                                                  transpose_91   |                                       
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-93     transpose_93 (Transpose, TRANSPOSE)               [b:1,h:256,c:20]                                                    reshape_92   |                                       transpose_oi8[51]                     
+93     transpose_93 (Transpose, TRANSPOSE)               [b:1,h:256,c:95]                                                    reshape_92   |                                       transpose_oi8[51]                     
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-94     concat_94 (Concat, CONCATENATION)                 [b:1,h:320,c:20]                                                  transpose_93   |                                       concat_oi8[71]                        
+94     concat_94 (Concat, CONCATENATION)                 [b:1,h:320,c:95]                                                  transpose_93   |                                       concat_oi8[71]                        
                                                                                                                            transpose_58   | 
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-95     conversion_95 (Conversion, DEQUANTIZE)            [b:1,h:320,c:20]                             12,800                  concat_94   |                                       converter_of32[o][72]                 
+95     conversion_95 (Conversion, DEQUANTIZE)            [b:1,h:320,c:95]                             60,800                  concat_94   |                                       converter_of32[o][72]                 
 ------ ------------------------------------------------- ----------------------- --------------- ----------- -------------------------- --- ----------------- ------------------- ------------------------------------- 
-model/c-model: macc=23,237,048/23,121,400 -115,648(-0.5%) weights=193,600/190,624 -2,976(-1.5%) activations=--/282,624 io=--/0
+model/c-model: macc=25,421,198/25,353,550 -67,648(-0.3%) weights=205,000/196,624 -8,376(-4.1%) activations=--/282,624 io=--/0
 
 
 
@@ -266,8 +266,8 @@ c-name                : network_2
 c-node #              : 73
 c-array #             : 191
 activations size      : 282624 (1 segment)
-weights size          : 190624 (1 segment)
-macc                  : 23121400
+weights size          : 196624 (1 segment)
+macc                  : 25353550
 inputs                : ['serving_default_input_20_output']
 outputs               : ['conversion_95_output']
 
@@ -301,8 +301,8 @@ c_id   name (*_array)                    item/size      domain/mem-pool         
 23     conv2d_66_bias                    72/288         weights/weights           const int32_t   ss32/ch(72)             
 24     conv2d_67_weights                 5184/5184      weights/weights           const int8_t    ss8/ch(72)              
 25     conv2d_67_bias                    72/288         weights/weights           const int32_t   ss32/ch(72)             
-26     conv2d_71_weights                 360/360        weights/weights           const int8_t    ss8/ch(5)               
-27     conv2d_71_bias                    5/20           weights/weights           const int32_t   ss32/ch(5)              
+26     conv2d_71_weights                 5760/5760      weights/weights           const int8_t    ss8/ch(80)              
+27     conv2d_71_bias                    80/320         weights/weights           const int32_t   ss32/ch(80)             
 28     conv2d_68_weights                 216/216        weights/weights           const int8_t    ss8/ch(3)               
 29     conv2d_68_bias                    3/12           weights/weights           const int32_t   ss32/ch(3)              
 30     conv2d_26_weights                 13824/13824    weights/weights           const int8_t    ss8/ch(72)              
@@ -315,7 +315,7 @@ c_id   name (*_array)                    item/size      domain/mem-pool         
 37     conv2d_39_bias                    72/288         weights/weights           const int32_t   ss32/ch(72)             
 38     conv2d_40_weights                 5184/5184      weights/weights           const int8_t    ss8/ch(72)              
 39     conv2d_40_bias                    72/288         weights/weights           const int32_t   ss32/ch(72)             
-40     conv2d_44_bias                    5/20           weights/weights           const int32_t   ss32/ch(5)              
+40     conv2d_44_bias                    80/320         weights/weights           const int32_t   ss32/ch(80)             
 41     serving_default_input_20_output   24576/24576    activations/**default**   int8_t          sa8           /input    
 42     conv2d_3_pad_before_output        31104/31104    activations/**default**   int8_t          sa8                     
 43     conv2d_41_bias                    3/12           weights/weights           const int32_t   ss32/ch(3)              
@@ -379,53 +379,53 @@ c_id   name (*_array)                    item/size      domain/mem-pool         
 101    conv2d_64_output                  18432/18432    activations/**default**   int8_t          sa8                     
 102    conv2d_66_output                  18432/18432    activations/**default**   int8_t          sa8                     
 103    conv2d_16_scratch0                1344/1344      activations/**default**   int8_t          s8                      
-104    conv2d_67_output                  18432/18432    activations/**default**   int8_t          sa8                     
-105    conv2d_71_output                  1280/1280      activations/**default**   int8_t          sa8                     
-106    conv2d_71_0_conversion_output     1280/5120      activations/**default**   float           float32                 
+104    conv2d_67_output                  18432/18432    activations/**default**   int8_t          ss8                     
+105    conv2d_71_output                  20480/20480    activations/**default**   int8_t          sa8                     
+106    conv2d_71_0_conversion_output     20480/81920    activations/**default**   float           float32                 
 107    conv2d_17_scratch0                3553/3553      activations/**default**   int8_t          s8                      
-108    nl_76_output                      1280/5120      activations/**default**   float           float32                 
-109    nl_76_0_conversion_output         1280/1280      activations/**default**   int8_t          sa8                     
+108    nl_76_output                      20480/81920    activations/**default**   float           float32                 
+109    nl_76_0_conversion_output         20480/20480    activations/**default**   int8_t          sa8                     
 110    conv2d_18_scratch0                1344/1344      activations/**default**   int8_t          s8                      
 111    conv2d_68_output                  768/768        activations/**default**   int8_t          sa8                     
-112    concat_90_output                  5120/5120      activations/**default**   int8_t          sa8                     
-113    transpose_91_output               5120/5120      activations/**default**   int8_t          sa8                     
+112    concat_90_output                  24320/24320    activations/**default**   int8_t          sa8                     
+113    transpose_91_output               24320/24320    activations/**default**   int8_t          sa8                     
 114    conv2d_22_scratch0                1344/1344      activations/**default**   int8_t          s8                      
-115    transpose_93_output               5120/5120      activations/**default**   int8_t          sa8                     
+115    transpose_93_output               24320/24320    activations/**default**   int8_t          sa8                     
 116    conv2d_26_output                  4608/4608      activations/**default**   int8_t          sa8                     
 117    conv2d_23_scratch0                3553/3553      activations/**default**   int8_t          s8                      
 118    pad_27_output                     10368/10368    activations/**default**   int8_t          sa8                     
 119    conv2d_36_output                  4608/4608      activations/**default**   int8_t          sa8                     
-120    conv2d_37_output                  4608/4608      activations/**default**   int8_t          sa8                     
+120    conv2d_37_output                  4608/4608      activations/**default**   int8_t          ss8                     
 121    conv2d_24_scratch0                1344/1344      activations/**default**   int8_t          s8                      
 122    conv2d_39_output                  4608/4608      activations/**default**   int8_t          sa8                     
 123    conv2d_40_output                  4608/4608      activations/**default**   int8_t          sa8                     
 124    conv2d_61_scratch0                1872/1872      activations/**default**   int8_t          s8                      
-125    conv2d_44_output                  320/320        activations/**default**   int8_t          sa8                     
-126    conv2d_44_0_conversion_output     320/1280       activations/**default**   float           float32                 
-127    nl_49_output                      320/1280       activations/**default**   float           float32                 
+125    conv2d_44_output                  5120/5120      activations/**default**   int8_t          sa8                     
+126    conv2d_44_0_conversion_output     5120/20480     activations/**default**   float           float32                 
+127    nl_49_output                      5120/20480     activations/**default**   float           float32                 
 128    conv2d_82_scratch0                6121/6121      activations/**default**   int8_t          s8                      
-129    nl_49_0_conversion_output         320/320        activations/**default**   int8_t          sa8                     
+129    nl_49_0_conversion_output         5120/5120      activations/**default**   int8_t          sa8                     
 130    conv2d_41_output                  192/192        activations/**default**   int8_t          sa8                     
 131    conv2d_83_scratch0                1008/1008      activations/**default**   int8_t          s8                      
 132    conv2d_28_output                  4608/4608      activations/**default**   int8_t          sa8                     
 133    conv2d_29_output                  4608/4608      activations/**default**   int8_t          sa8                     
 134    conv2d_31_output                  4608/4608      activations/**default**   int8_t          sa8                     
 135    conv2d_85_scratch0                6121/6121      activations/**default**   int8_t          s8                      
-136    conv2d_32_output                  4608/4608      activations/**default**   int8_t          ss8                     
+136    conv2d_32_output                  4608/4608      activations/**default**   int8_t          sa8                     
 137    conv2d_33_output                  768/768        activations/**default**   int8_t          sa8                     
 138    conv2d_86_scratch0                1008/1008      activations/**default**   int8_t          s8                      
-139    concat_55_output                  1280/1280      activations/**default**   int8_t          sa8                     
-140    transpose_56_output               1280/1280      activations/**default**   int8_t          sa8                     
-141    transpose_58_output               1280/1280      activations/**default**   int8_t          sa8                     
+139    concat_55_output                  6080/6080      activations/**default**   int8_t          sa8                     
+140    transpose_56_output               6080/6080      activations/**default**   int8_t          sa8                     
+141    transpose_58_output               6080/6080      activations/**default**   int8_t          sa8                     
 142    conv2d_87_scratch0                408/408        activations/**default**   int8_t          s8                      
-143    concat_94_output                  6400/6400      activations/**default**   int8_t          sa8                     
+143    concat_94_output                  30400/30400    activations/**default**   int8_t          sa8                     
 144    conv2d_87_scratch1                3072/3072      activations/**default**   int8_t          sa8                     
-145    conversion_95_output              6400/25600     activations/**default**   float           float32       /output   
+145    conversion_95_output              30400/121600   activations/**default**   float           float32       /output   
 146    conv2d_63_scratch0                6121/6121      activations/**default**   int8_t          s8                      
 147    conv2d_64_scratch0                1008/1008      activations/**default**   int8_t          s8                      
 148    conv2d_66_scratch0                6121/6121      activations/**default**   int8_t          s8                      
 149    conv2d_67_scratch0                1008/1008      activations/**default**   int8_t          s8                      
-150    conv2d_71_scratch0                338/338        activations/**default**   int8_t          s8                      
+150    conv2d_71_scratch0                1088/1088      activations/**default**   int8_t          s8                      
 151    conv2d_68_scratch0                318/318        activations/**default**   int8_t          s8                      
 152    conv2d_68_scratch1                768/768        activations/**default**   int8_t          sa8                     
 153    conv2d_26_scratch0                1488/1488      activations/**default**   int8_t          s8                      
@@ -433,7 +433,7 @@ c_id   name (*_array)                    item/size      domain/mem-pool         
 155    conv2d_37_scratch0                1008/1008      activations/**default**   int8_t          s8                      
 156    conv2d_39_scratch0                6121/6121      activations/**default**   int8_t          s8                      
 157    conv2d_40_scratch0                1008/1008      activations/**default**   int8_t          s8                      
-158    conv2d_44_scratch0                338/338        activations/**default**   int8_t          s8                      
+158    conv2d_44_scratch0                1088/1088      activations/**default**   int8_t          s8                      
 159    conv2d_41_scratch0                318/318        activations/**default**   int8_t          s8                      
 160    conv2d_41_scratch1                192/192        activations/**default**   int8_t          sa8                     
 161    conv2d_28_scratch0                6121/6121      activations/**default**   int8_t          s8                      
@@ -688,20 +688,20 @@ c_id   name (*_layer)             id   layer_type   macc      rom     tensors   
                                                                       W: conv2d_67_bias                    (1,1,1,72) (25)      
                                                                       O: conv2d_67_output                  (1,16,16,72) (104)   
 ------ -------------------------- ---- ------------ --------- ------- ------------------------------------ -------------------- 
-44     conv2d_71                  71   conv2d       92165     380     I: conv2d_67_output                  (1,16,16,72) (104)   
+44     conv2d_71                  71   conv2d       1474640   6080    I: conv2d_67_output                  (1,16,16,72) (104)   
                                                                       S: conv2d_71_scratch0                                     
-                                                                      W: conv2d_71_weights                 (72,5,1,1) (26)      
-                                                                      W: conv2d_71_bias                    (1,1,1,5) (27)       
-                                                                      O: conv2d_71_output                  (1,16,16,5) (105)    
+                                                                      W: conv2d_71_weights                 (72,80,1,1) (26)     
+                                                                      W: conv2d_71_bias                    (1,1,1,80) (27)      
+                                                                      O: conv2d_71_output                  (1,16,16,80) (105)   
 ------ -------------------------- ---- ------------ --------- ------- ------------------------------------ -------------------- 
-45     conv2d_71_0_conversion     71   converter    2560      0       I: conv2d_71_output                  (1,16,16,5) (105)    
-                                                                      O: conv2d_71_0_conversion_output     (1,16,16,5) (106)    
+45     conv2d_71_0_conversion     71   converter    40960     0       I: conv2d_71_output                  (1,16,16,80) (105)   
+                                                                      O: conv2d_71_0_conversion_output     (1,16,16,80) (106)   
 ------ -------------------------- ---- ------------ --------- ------- ------------------------------------ -------------------- 
-46     nl_76                      76   nl           19200     0       I: conv2d_71_0_conversion_output     (1,16,16,5) (106)    
-                                                                      O: nl_76_output                      (1,16,16,5) (108)    
+46     nl_76                      76   nl           307200    0       I: conv2d_71_0_conversion_output     (1,16,16,80) (106)   
+                                                                      O: nl_76_output                      (1,16,16,80) (108)   
 ------ -------------------------- ---- ------------ --------- ------- ------------------------------------ -------------------- 
-47     nl_76_0_conversion         76   converter    2560      0       I: nl_76_output                      (1,16,16,5) (108)    
-                                                                      O: nl_76_0_conversion_output         (1,16,16,5) (109)    
+47     nl_76_0_conversion         76   converter    40960     0       I: nl_76_output                      (1,16,16,80) (108)   
+                                                                      O: nl_76_0_conversion_output         (1,16,16,80) (109)   
 ------ -------------------------- ---- ------------ --------- ------- ------------------------------------ -------------------- 
 48     conv2d_68                  69   conv2d       56067     228     I: conv2d_67_output                  (1,16,16,72) (104)   
                                                                       S: conv2d_68_scratch0                                     
@@ -712,14 +712,14 @@ c_id   name (*_layer)             id   layer_type   macc      rom     tensors   
 ------ -------------------------- ---- ------------ --------- ------- ------------------------------------ -------------------- 
 49     concat_90                  90   concat       0         0       I: conv2d_87_output                  (1,16,16,12) (98)    
                                                                       I: conv2d_68_output                  (1,16,16,3) (111)    
-                                                                      I: nl_76_0_conversion_output         (1,16,16,5) (109)    
-                                                                      O: concat_90_output                  (1,16,16,20) (112)   
+                                                                      I: nl_76_0_conversion_output         (1,16,16,80) (109)   
+                                                                      O: concat_90_output                  (1,16,16,95) (112)   
 ------ -------------------------- ---- ------------ --------- ------- ------------------------------------ -------------------- 
-50     transpose_91               91   transpose    0         0       I: concat_90_output                  (1,16,16,20) (112)   
-                                                                      O: transpose_91_output               (1,20,16,16) (113)   
+50     transpose_91               91   transpose    0         0       I: concat_90_output                  (1,16,16,95) (112)   
+                                                                      O: transpose_91_output               (1,95,16,16) (113)   
 ------ -------------------------- ---- ------------ --------- ------- ------------------------------------ -------------------- 
-51     transpose_93               93   transpose    0         0       I: transpose_91_output0              (1,20,1,256) (113)   
-                                                                      O: transpose_93_output               (1,256,1,20) (115)   
+51     transpose_93               93   transpose    0         0       I: transpose_91_output0              (1,95,1,256) (113)   
+                                                                      O: transpose_93_output               (1,256,1,95) (115)   
 ------ -------------------------- ---- ------------ --------- ------- ------------------------------------ -------------------- 
 52     conv2d_26                  26   conv2d       884808    14112   I: concat_25_output                  (1,8,8,192) (83)     
                                                                       S: conv2d_26_scratch0                                     
@@ -754,20 +754,20 @@ c_id   name (*_layer)             id   layer_type   macc      rom     tensors   
                                                                       W: conv2d_40_bias                    (1,1,1,72) (39)      
                                                                       O: conv2d_40_output                  (1,8,8,72) (123)     
 ------ -------------------------- ---- ------------ --------- ------- ------------------------------------ -------------------- 
-58     conv2d_44                  44   conv2d       23045     380     I: conv2d_40_output                  (1,8,8,72) (123)     
+58     conv2d_44                  44   conv2d       368720    6080    I: conv2d_40_output                  (1,8,8,72) (123)     
                                                                       S: conv2d_44_scratch0                                     
-                                                                      W: conv2d_71_weights                 (72,5,1,1) (26)      
-                                                                      W: conv2d_44_bias                    (1,1,1,5) (40)       
-                                                                      O: conv2d_44_output                  (1,8,8,5) (125)      
+                                                                      W: conv2d_71_weights                 (72,80,1,1) (26)     
+                                                                      W: conv2d_44_bias                    (1,1,1,80) (40)      
+                                                                      O: conv2d_44_output                  (1,8,8,80) (125)     
 ------ -------------------------- ---- ------------ --------- ------- ------------------------------------ -------------------- 
-59     conv2d_44_0_conversion     44   converter    640       0       I: conv2d_44_output                  (1,8,8,5) (125)      
-                                                                      O: conv2d_44_0_conversion_output     (1,8,8,5) (126)      
+59     conv2d_44_0_conversion     44   converter    10240     0       I: conv2d_44_output                  (1,8,8,80) (125)     
+                                                                      O: conv2d_44_0_conversion_output     (1,8,8,80) (126)     
 ------ -------------------------- ---- ------------ --------- ------- ------------------------------------ -------------------- 
-60     nl_49                      49   nl           4800      0       I: conv2d_44_0_conversion_output     (1,8,8,5) (126)      
-                                                                      O: nl_49_output                      (1,8,8,5) (127)      
+60     nl_49                      49   nl           76800     0       I: conv2d_44_0_conversion_output     (1,8,8,80) (126)     
+                                                                      O: nl_49_output                      (1,8,8,80) (127)     
 ------ -------------------------- ---- ------------ --------- ------- ------------------------------------ -------------------- 
-61     nl_49_0_conversion         49   converter    640       0       I: nl_49_output                      (1,8,8,5) (127)      
-                                                                      O: nl_49_0_conversion_output         (1,8,8,5) (129)      
+61     nl_49_0_conversion         49   converter    10240     0       I: nl_49_output                      (1,8,8,80) (127)     
+                                                                      O: nl_49_0_conversion_output         (1,8,8,80) (129)     
 ------ -------------------------- ---- ------------ --------- ------- ------------------------------------ -------------------- 
 62     conv2d_41                  42   conv2d       14019     228     I: conv2d_40_output                  (1,8,8,72) (123)     
                                                                       S: conv2d_41_scratch0                                     
@@ -809,21 +809,21 @@ c_id   name (*_layer)             id   layer_type   macc      rom     tensors   
 ------ -------------------------- ---- ------------ --------- ------- ------------------------------------ -------------------- 
 68     concat_55                  55   concat       0         0       I: conv2d_33_output                  (1,8,8,12) (137)     
                                                                       I: conv2d_41_output                  (1,8,8,3) (130)      
-                                                                      I: nl_49_0_conversion_output         (1,8,8,5) (129)      
-                                                                      O: concat_55_output                  (1,8,8,20) (139)     
+                                                                      I: nl_49_0_conversion_output         (1,8,8,80) (129)     
+                                                                      O: concat_55_output                  (1,8,8,95) (139)     
 ------ -------------------------- ---- ------------ --------- ------- ------------------------------------ -------------------- 
-69     transpose_56               56   transpose    0         0       I: concat_55_output                  (1,8,8,20) (139)     
-                                                                      O: transpose_56_output               (1,20,8,8) (140)     
+69     transpose_56               56   transpose    0         0       I: concat_55_output                  (1,8,8,95) (139)     
+                                                                      O: transpose_56_output               (1,95,8,8) (140)     
 ------ -------------------------- ---- ------------ --------- ------- ------------------------------------ -------------------- 
-70     transpose_58               58   transpose    0         0       I: transpose_56_output0              (1,20,1,64) (140)    
-                                                                      O: transpose_58_output               (1,64,1,20) (141)    
+70     transpose_58               58   transpose    0         0       I: transpose_56_output0              (1,95,1,64) (140)    
+                                                                      O: transpose_58_output               (1,64,1,95) (141)    
 ------ -------------------------- ---- ------------ --------- ------- ------------------------------------ -------------------- 
-71     concat_94                  94   concat       0         0       I: transpose_93_output               (1,256,1,20) (115)   
-                                                                      I: transpose_58_output               (1,64,1,20) (141)    
-                                                                      O: concat_94_output                  (1,320,1,20) (143)   
+71     concat_94                  94   concat       0         0       I: transpose_93_output               (1,256,1,95) (115)   
+                                                                      I: transpose_58_output               (1,64,1,95) (141)    
+                                                                      O: concat_94_output                  (1,320,1,95) (143)   
 ------ -------------------------- ---- ------------ --------- ------- ------------------------------------ -------------------- 
-72     conversion_95              95   converter    12800     0       I: concat_94_output                  (1,320,1,20) (143)   
-                                                                      O: conversion_95_output              (1,320,1,20) (145)   
+72     conversion_95              95   converter    60800     0       I: concat_94_output                  (1,320,1,95) (143)   
+                                                                      O: conversion_95_output              (1,320,1,95) (145)   
 ------ -------------------------- ---- ------------ --------- ------- ------------------------------------ -------------------- 
 
 
@@ -833,163 +833,163 @@ Number of operations per c-layer
 c_id    m_id   name (type)                                     #op           type    #param   sparsity 
 ------- ------ -------------------------------------- ------------ -------------- --------- ---------- 
 0       0      conv2d_3_pad_before (pad)                         0     smul_s8_s8           
-1       3      conv2d_3 (conv2d)                            55,392     smul_s8_s8       960     0.0031 
-2       4      conv2d_4 (conv2d)                           589,920     smul_s8_s8     9,312     0.0081 
-3       1      conv2d_1 (conv2d)                         2,359,392     smul_s8_s8     9,312     0.0090 
+1       3      conv2d_3 (conv2d)                            55,392     smul_s8_s8       960     0.0010 
+2       4      conv2d_4 (conv2d)                           589,920     smul_s8_s8     9,312     0.0101 
+3       1      conv2d_1 (conv2d)                         2,359,392     smul_s8_s8     9,312     0.0100 
 4       2      conv2d_5_pad_before (pad)                         0     smul_s8_s8           
-5       5      conv2d_5 (conv2d)                            55,392     smul_s8_s8       960     0.0052 
-6       6      conv2d_6 (conv2d)                           589,920     smul_s8_s8     9,312     0.0086 
+5       5      conv2d_5 (conv2d)                            55,392     smul_s8_s8       960     0.0000 
+6       6      conv2d_6 (conv2d)                           589,920     smul_s8_s8     9,312     0.0140 
 7       7      concat_7 (concat)                                 0       op_s8_s8           
 8       9      gather_9 (gather)                                 0    smul_s8_s32        96     0.0000 
-9       10     conv2d_10 (conv2d)                          589,920     smul_s8_s8     9,312     0.0078 
+9       10     conv2d_10 (conv2d)                          589,920     smul_s8_s8     9,312     0.0091 
 10      11     conv2d_11_pad_before (pad)                        0     smul_s8_s8           
 11      11     conv2d_11 (conv2d)                           55,392     smul_s8_s8       960     0.0042 
-12      12     conv2d_12 (conv2d)                          589,920     smul_s8_s8     9,312     0.0079 
+12      12     conv2d_12 (conv2d)                          589,920     smul_s8_s8     9,312     0.0132 
 13      8      gather_8 (gather)                                 0    smul_s8_s32        96     0.0104 
 14      13     concat_13 (concat)                                0       op_s8_s8           
 15      15     gather_15 (gather)                                0    smul_s8_s32        96     0.0000 
-16      16     conv2d_16 (conv2d)                          589,920     smul_s8_s8     9,312     0.0092 
+16      16     conv2d_16 (conv2d)                          589,920     smul_s8_s8     9,312     0.0105 
 17      17     conv2d_17_pad_before (pad)                        0     smul_s8_s8           
-18      17     conv2d_17 (conv2d)                           55,392     smul_s8_s8       960     0.0042 
-19      18     conv2d_18 (conv2d)                          589,920     smul_s8_s8     9,312     0.0093 
+18      17     conv2d_17 (conv2d)                           55,392     smul_s8_s8       960     0.0073 
+19      18     conv2d_18 (conv2d)                          589,920     smul_s8_s8     9,312     0.0128 
 20      14     gather_14 (gather)                                0    smul_s8_s32        96     0.0104 
 21      19     concat_19 (concat)                                0       op_s8_s8           
 22      21     gather_21 (gather)                                0    smul_s8_s32        96     0.0000 
-23      22     conv2d_22 (conv2d)                          589,920     smul_s8_s8     9,312     0.0089 
+23      22     conv2d_22 (conv2d)                          589,920     smul_s8_s8     9,312     0.0126 
 24      23     conv2d_23_pad_before (pad)                        0     smul_s8_s8           
-25      23     conv2d_23 (conv2d)                           55,392     smul_s8_s8       960     0.0062 
-26      24     conv2d_24 (conv2d)                          589,920     smul_s8_s8     9,312     0.0100 
+25      23     conv2d_23 (conv2d)                           55,392     smul_s8_s8       960     0.0094 
+26      24     conv2d_24 (conv2d)                          589,920     smul_s8_s8     9,312     0.0141 
 27      20     gather_20 (gather)                                0    smul_s8_s32        96     0.0104 
 28      25     concat_25 (concat)                                0       op_s8_s8           
 29      25     concat_25_0_conversion (converter)           24,576    smul_s8_f32           
 30      59     upsample_59 (upsample)                            0   smul_f32_f32           
 31      59     upsample_59_0_conversion (converter)         98,304    smul_f32_s8           
 32      60     concat_60 (concat)                                0       op_s8_s8           
-33      61     conv2d_61 (conv2d)                        5,308,488     smul_s8_s8    20,808     0.0112 
+33      61     conv2d_61 (conv2d)                        5,308,488     smul_s8_s8    20,808     0.0147 
 34      62     pad_62 (pad)                                      0     smul_s8_s8           
-35      82     conv2d_82 (conv2d)                          460,872     smul_s8_s8     1,872     0.0160 
-36      83     conv2d_83 (conv2d)                        1,327,176     smul_s8_s8     5,256     0.0173 
-37      84     conv2d_85 (conv2d)                          460,872     smul_s8_s8     1,872     0.0288 
-38      86     conv2d_86 (conv2d)                        1,327,176     smul_s8_s8     5,256     0.0105 
-39      88     conv2d_87 (conv2d)                          224,268     smul_s8_s8       876     0.0080 
-40      63     conv2d_63 (conv2d)                          460,872     smul_s8_s8     1,872     0.0075 
-41      64     conv2d_64 (conv2d)                        1,327,176     smul_s8_s8     5,256     0.0112 
-42      65     conv2d_66 (conv2d)                          460,872     smul_s8_s8     1,872     0.0085 
-43      67     conv2d_67 (conv2d)                        1,327,176     smul_s8_s8     5,256     0.0088 
-44      71     conv2d_71 (conv2d)                           92,165     smul_s8_s8       365     0.0192 
-45      71     conv2d_71_0_conversion (converter)            2,560    smul_s8_f32           
-46      76     nl_76 (nl)                                   19,200     op_f32_f32           
-47      76     nl_76_0_conversion (converter)                2,560    smul_f32_s8           
-48      69     conv2d_68 (conv2d)                           56,067     smul_s8_s8       219     0.0183 
+35      82     conv2d_82 (conv2d)                          460,872     smul_s8_s8     1,872     0.0267 
+36      83     conv2d_83 (conv2d)                        1,327,176     smul_s8_s8     5,256     0.0202 
+37      84     conv2d_85 (conv2d)                          460,872     smul_s8_s8     1,872     0.0353 
+38      86     conv2d_86 (conv2d)                        1,327,176     smul_s8_s8     5,256     0.0080 
+39      88     conv2d_87 (conv2d)                          224,268     smul_s8_s8       876     0.0160 
+40      63     conv2d_63 (conv2d)                          460,872     smul_s8_s8     1,872     0.0155 
+41      64     conv2d_64 (conv2d)                        1,327,176     smul_s8_s8     5,256     0.0120 
+42      65     conv2d_66 (conv2d)                          460,872     smul_s8_s8     1,872     0.0144 
+43      67     conv2d_67 (conv2d)                        1,327,176     smul_s8_s8     5,256     0.0133 
+44      71     conv2d_71 (conv2d)                        1,474,640     smul_s8_s8     5,840     0.0067 
+45      71     conv2d_71_0_conversion (converter)           40,960    smul_s8_f32           
+46      76     nl_76 (nl)                                  307,200     op_f32_f32           
+47      76     nl_76_0_conversion (converter)               40,960    smul_f32_s8           
+48      69     conv2d_68 (conv2d)                           56,067     smul_s8_s8       219     0.0913 
 49      90     concat_90 (concat)                                0       op_s8_s8           
 50      91     transpose_91 (transpose)                          0     smul_s8_s8           
 51      93     transpose_93 (transpose)                          0     smul_s8_s8           
-52      26     conv2d_26 (conv2d)                          884,808     smul_s8_s8    13,896     0.0135 
+52      26     conv2d_26 (conv2d)                          884,808     smul_s8_s8    13,896     0.0140 
 53      27     pad_27 (pad)                                      0     smul_s8_s8           
-54      36     conv2d_36 (conv2d)                          115,272     smul_s8_s8     1,872     0.0069 
-55      37     conv2d_37 (conv2d)                          331,848     smul_s8_s8     5,256     0.0124 
-56      38     conv2d_39 (conv2d)                          115,272     smul_s8_s8     1,872     0.0027 
-57      40     conv2d_40 (conv2d)                          331,848     smul_s8_s8     5,256     0.0080 
-58      44     conv2d_44 (conv2d)                           23,045     smul_s8_s8       365     0.0192 
-59      44     conv2d_44_0_conversion (converter)              640    smul_s8_f32           
-60      49     nl_49 (nl)                                    4,800     op_f32_f32           
-61      49     nl_49_0_conversion (converter)                  640    smul_f32_s8           
-62      42     conv2d_41 (conv2d)                           14,019     smul_s8_s8       219     0.0183 
-63      28     conv2d_28 (conv2d)                          115,272     smul_s8_s8     1,872     0.0166 
-64      29     conv2d_29 (conv2d)                          331,848     smul_s8_s8     5,256     0.0245 
-65      30     conv2d_31 (conv2d)                          115,272     smul_s8_s8     1,872     0.0406 
-66      32     conv2d_32 (conv2d)                          331,848     smul_s8_s8     5,256     0.0108 
-67      34     conv2d_33 (conv2d)                           56,076     smul_s8_s8       876     0.0080 
+54      36     conv2d_36 (conv2d)                          115,272     smul_s8_s8     1,872     0.0085 
+55      37     conv2d_37 (conv2d)                          331,848     smul_s8_s8     5,256     0.0145 
+56      38     conv2d_39 (conv2d)                          115,272     smul_s8_s8     1,872     0.0096 
+57      40     conv2d_40 (conv2d)                          331,848     smul_s8_s8     5,256     0.0137 
+58      44     conv2d_44 (conv2d)                          368,720     smul_s8_s8     5,840     0.0067 
+59      44     conv2d_44_0_conversion (converter)           10,240    smul_s8_f32           
+60      49     nl_49 (nl)                                   76,800     op_f32_f32           
+61      49     nl_49_0_conversion (converter)               10,240    smul_f32_s8           
+62      42     conv2d_41 (conv2d)                           14,019     smul_s8_s8       219     0.0913 
+63      28     conv2d_28 (conv2d)                          115,272     smul_s8_s8     1,872     0.0187 
+64      29     conv2d_29 (conv2d)                          331,848     smul_s8_s8     5,256     0.0181 
+65      30     conv2d_31 (conv2d)                          115,272     smul_s8_s8     1,872     0.0411 
+66      32     conv2d_32 (conv2d)                          331,848     smul_s8_s8     5,256     0.0059 
+67      34     conv2d_33 (conv2d)                           56,076     smul_s8_s8       876     0.0160 
 68      55     concat_55 (concat)                                0       op_s8_s8           
 69      56     transpose_56 (transpose)                          0     smul_s8_s8           
 70      58     transpose_58 (transpose)                          0     smul_s8_s8           
 71      94     concat_94 (concat)                                0       op_s8_s8           
-72      95     conversion_95 (converter)                    12,800    smul_s8_f32           
+72      95     conversion_95 (converter)                    60,800    smul_s8_f32           
 ------- ------ -------------------------------------- ------------ -------------- --------- ---------- 
-total                                                   23,121,400                  183,832     0.0109 
+total                                                   25,353,550                  194,782     0.0130 
 
 Number of operation types
 ---------------- ------------ ----------- 
 operation type              #           % 
 ---------------- ------------ ----------- 
-smul_s8_s8         22,955,320       99.3% 
+smul_s8_s8         24,683,470       97.4% 
 op_s8_s8                    0        0.0% 
 smul_s8_s32                 0        0.0% 
-smul_s8_f32            40,576        0.2% 
+smul_s8_f32           136,576        0.5% 
 smul_f32_f32                0        0.0% 
-smul_f32_s8           101,504        0.4% 
-op_f32_f32             24,000        0.1% 
+smul_f32_s8           149,504        0.6% 
+op_f32_f32            384,000        1.5% 
 
 Complexity report (model)
 ------ -------------------------- ------------------------- ------------------------- ---------- 
 m_id   name                       c_macc                    c_rom                     c_id       
 ------ -------------------------- ------------------------- ------------------------- ---------- 
 0      serving_default_input_20   |                  0.0%   |                  0.0%   [0]        
-1      conv2d_1                   |||||||           10.2%   |||||||            5.0%   [3]        
+1      conv2d_1                   |||||||            9.3%   |||||||            4.9%   [3]        
 2      pad_2                      |                  0.0%   |                  0.0%   [4]        
-3      conv2d_3                   |                  0.2%   |                  0.7%   [1]        
-4      conv2d_4                   ||                 2.6%   |||||||            5.0%   [2]        
-5      conv2d_5                   |                  0.2%   |                  0.7%   [5]        
-6      conv2d_6                   ||                 2.6%   |||||||            5.0%   [6]        
+3      conv2d_3                   |                  0.2%   |                  0.6%   [1]        
+4      conv2d_4                   ||                 2.3%   |||||||            4.9%   [2]        
+5      conv2d_5                   |                  0.2%   |                  0.6%   [5]        
+6      conv2d_6                   ||                 2.3%   |||||||            4.9%   [6]        
 7      concat_7                   |                  0.0%   |                  0.0%   [7]        
 8      gather_8                   |                  0.0%   |                  0.2%   [13]       
 9      gather_9                   |                  0.0%   |                  0.2%   [8]        
-10     conv2d_10                  ||                 2.6%   |||||||            5.0%   [9]        
-11     conv2d_11                  |                  0.2%   |                  0.7%   [10, 11]   
-12     conv2d_12                  ||                 2.6%   |||||||            5.0%   [12]       
+10     conv2d_10                  ||                 2.3%   |||||||            4.9%   [9]        
+11     conv2d_11                  |                  0.2%   |                  0.6%   [10, 11]   
+12     conv2d_12                  ||                 2.3%   |||||||            4.9%   [12]       
 13     concat_13                  |                  0.0%   |                  0.0%   [14]       
 14     gather_14                  |                  0.0%   |                  0.2%   [20]       
 15     gather_15                  |                  0.0%   |                  0.2%   [15]       
-16     conv2d_16                  ||                 2.6%   |||||||            5.0%   [16]       
-17     conv2d_17                  |                  0.2%   |                  0.7%   [17, 18]   
-18     conv2d_18                  ||                 2.6%   |||||||            5.0%   [19]       
+16     conv2d_16                  ||                 2.3%   |||||||            4.9%   [16]       
+17     conv2d_17                  |                  0.2%   |                  0.6%   [17, 18]   
+18     conv2d_18                  ||                 2.3%   |||||||            4.9%   [19]       
 19     concat_19                  |                  0.0%   |                  0.0%   [21]       
 20     gather_20                  |                  0.0%   |                  0.2%   [27]       
 21     gather_21                  |                  0.0%   |                  0.2%   [22]       
-22     conv2d_22                  ||                 2.6%   |||||||            5.0%   [23]       
-23     conv2d_23                  |                  0.2%   |                  0.7%   [24, 25]   
-24     conv2d_24                  ||                 2.6%   |||||||            5.0%   [26]       
+22     conv2d_22                  ||                 2.3%   |||||||            4.9%   [23]       
+23     conv2d_23                  |                  0.2%   |                  0.6%   [24, 25]   
+24     conv2d_24                  ||                 2.3%   |||||||            4.9%   [26]       
 25     concat_25                  |                  0.1%   |                  0.0%   [28, 29]   
-26     conv2d_26                  |||                3.8%   |||||||||||        7.4%   [52]       
+26     conv2d_26                  |||                3.5%   |||||||||||        7.2%   [52]       
 27     pad_27                     |                  0.0%   |                  0.0%   [53]       
 28     conv2d_28                  |                  0.5%   ||                 1.1%   [63]       
-29     conv2d_29                  |                  1.4%   ||||               2.9%   [64]       
+29     conv2d_29                  |                  1.3%   ||||               2.8%   [64]       
 30     pad_30                     |                  0.5%   ||                 1.1%   [65]       
-32     conv2d_32                  |                  1.4%   ||||               2.9%   [66]       
+32     conv2d_32                  |                  1.3%   ||||               2.8%   [66]       
 34     nl_34                      |                  0.2%   |                  0.5%   [67]       
 36     conv2d_36                  |                  0.5%   ||                 1.1%   [54]       
-37     conv2d_37                  |                  1.4%   ||||               2.9%   [55]       
+37     conv2d_37                  |                  1.3%   ||||               2.8%   [55]       
 38     pad_38                     |                  0.5%   ||                 1.1%   [56]       
-40     conv2d_40                  |                  1.4%   ||||               2.9%   [57]       
+40     conv2d_40                  |                  1.3%   ||||               2.8%   [57]       
 42     nl_42                      |                  0.1%   |                  0.1%   [62]       
-44     conv2d_44                  |                  0.1%   |                  0.2%   [58, 59]   
-49     nl_49                      |                  0.0%   |                  0.0%   [60, 61]   
+44     conv2d_44                  ||                 1.5%   |||||              3.1%   [58, 59]   
+49     nl_49                      |                  0.3%   |                  0.0%   [60, 61]   
 55     concat_55                  |                  0.0%   |                  0.0%   [68]       
 56     transpose_56               |                  0.0%   |                  0.0%   [69]       
 58     transpose_58               |                  0.0%   |                  0.0%   [70]       
 59     upsample_59                |                  0.4%   |                  0.0%   [30, 31]   
 60     concat_60                  |                  0.0%   |                  0.0%   [32]       
-61     conv2d_61                  ||||||||||||||||  23.0%   ||||||||||||||||  11.0%   [33]       
+61     conv2d_61                  ||||||||||||||||  20.9%   ||||||||||||||||  10.7%   [33]       
 62     pad_62                     |                  0.0%   |                  0.0%   [34]       
-63     conv2d_63                  ||                 2.0%   ||                 1.1%   [40]       
-64     conv2d_64                  ||||               5.7%   ||||               2.9%   [41]       
-65     pad_65                     ||                 2.0%   ||                 1.1%   [42]       
-67     conv2d_67                  ||||               5.7%   ||||               2.9%   [43]       
+63     conv2d_63                  ||                 1.8%   ||                 1.1%   [40]       
+64     conv2d_64                  ||||               5.2%   ||||               2.8%   [41]       
+65     pad_65                     ||                 1.8%   ||                 1.1%   [42]       
+67     conv2d_67                  ||||               5.2%   ||||               2.8%   [43]       
 69     nl_69                      |                  0.2%   |                  0.1%   [48]       
-71     conv2d_71                  |                  0.4%   |                  0.2%   [44, 45]   
-76     nl_76                      |                  0.1%   |                  0.0%   [46, 47]   
-82     conv2d_82                  ||                 2.0%   ||                 1.1%   [35]       
-83     conv2d_83                  ||||               5.7%   ||||               2.9%   [36]       
-84     pad_84                     ||                 2.0%   ||                 1.1%   [37]       
-86     conv2d_86                  ||||               5.7%   ||||               2.9%   [38]       
-88     nl_88                      |                  1.0%   |                  0.5%   [39]       
+71     conv2d_71                  |||||              6.0%   |||||              3.1%   [44, 45]   
+76     nl_76                      |                  1.4%   |                  0.0%   [46, 47]   
+82     conv2d_82                  ||                 1.8%   ||                 1.1%   [35]       
+83     conv2d_83                  ||||               5.2%   ||||               2.8%   [36]       
+84     pad_84                     ||                 1.8%   ||                 1.1%   [37]       
+86     conv2d_86                  ||||               5.2%   ||||               2.8%   [38]       
+88     nl_88                      |                  0.9%   |                  0.5%   [39]       
 90     concat_90                  |                  0.0%   |                  0.0%   [49]       
 91     transpose_91               |                  0.0%   |                  0.0%   [50]       
 93     transpose_93               |                  0.0%   |                  0.0%   [51]       
 94     concat_94                  |                  0.0%   |                  0.0%   [71]       
-95     conversion_95              |                  0.1%   |                  0.0%   [72]       
+95     conversion_95              |                  0.2%   |                  0.0%   [72]       
 ------ -------------------------- ------------------------- ------------------------- ---------- 
-macc=23,121,400 weights=190,624 act=282,624 ram_io=0
+macc=25,353,550 weights=196,624 act=282,624 ram_io=0
 
 Generated files (7)
 ---------------------------------------------------------------------- 

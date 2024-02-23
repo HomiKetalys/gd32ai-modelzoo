@@ -1,32 +1,32 @@
 Neural Network Tools for STM32AI v1.7.0 (STM.ai v8.0.1-19451)
-Created date          : 2024-02-21 22:03:21
-Parameters            : generate --name network_1 -m F:/MyWork/PyWork/gd32ai-modelzoo/object_detection/yolo_fastestv2/results/export/ab_drive_0000/tflite/model_front.tflite --type tflite --compression none --verbosity 1 --workspace C:\Users\kyuliea\AppData\Local\Temp\mxAI_workspace169824142443996514903505547951535 --output C:\Users\kyuliea\.stm32cubemx\network_output --allocate-inputs --series stm32h7 --allocate-outputs
+Created date          : 2024-02-22 18:08:40
+Parameters            : generate --name network_1 -m F:/MyWork/PyWork/gd32ai-modelzoo/object_detection/yolo_fastestv2/results/export/coco_sp_0007/tflite/model_front.tflite --type tflite --compression none --verbosity 1 --workspace C:\Users\kyuliea\AppData\Local\Temp\mxAI_workspace293705685578001448863707657733839 --output C:\Users\kyuliea\.stm32cubemx\network_output --allocate-inputs --series stm32h7 --allocate-outputs
 
 Exec/report summary (generate)
--------------------------------------------------------------------------------------------------------------------------------------------------
-model file         :   F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\export\ab_drive_0000\tflite\model_front.tflite   
-type               :   tflite                                                                                                                    
-c_name             :   network_1                                                                                                                 
-compression        :   none                                                                                                                      
-options            :   allocate-inputs, allocate-outputs                                                                                         
-optimization       :   balanced                                                                                                                  
-target/series      :   stm32h7                                                                                                                   
-workspace dir      :   C:\Users\kyuliea\AppData\Local\Temp\mxAI_workspace169824142443996514903505547951535                                       
-output dir         :   C:\Users\kyuliea\.stm32cubemx\network_output                                                                              
-model_fmt          :   ss/sa per-channel                                                                                                         
-model_name         :   model_front                                                                                                               
-model_hash         :   fb21e7b40b0141d5e37688658b9666db                                                                                          
-params #           :   52,392 items (58.27 KiB)                                                                                                  
--------------------------------------------------------------------------------------------------------------------------------------------------
-input 1/1          :   'serving_default_input_10' (domain:activations/**default**)                                                               
-                   :   49152 items, 48.00 KiB, ai_u8, s=0.00392157, zp=0, (1,128,128,3)                                                          
-output 1/1         :   'concat_80' (domain:activations/**default**)                                                                              
-                   :   6144 items, 6.00 KiB, ai_i8, s=0.01347349, zp=-128, (1,8,8,96)                                                            
-macc               :   8,219,208                                                                                                                 
-weights (ro)       :   56,976 B (55.64 KiB) (1 segment) / -152,592(-72.8%) vs float model                                                        
-activations (rw)   :   108,636 B (106.09 KiB) (1 segment) *                                                                                      
-ram (total)        :   108,636 B (106.09 KiB) = 108,636 + 0 + 0                                                                                  
--------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------
+model file         :   F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\export\coco_sp_0007\tflite\model_front.tflite   
+type               :   tflite                                                                                                                   
+c_name             :   network_1                                                                                                                
+compression        :   none                                                                                                                     
+options            :   allocate-inputs, allocate-outputs                                                                                        
+optimization       :   balanced                                                                                                                 
+target/series      :   stm32h7                                                                                                                  
+workspace dir      :   C:\Users\kyuliea\AppData\Local\Temp\mxAI_workspace293705685578001448863707657733839                                      
+output dir         :   C:\Users\kyuliea\.stm32cubemx\network_output                                                                             
+model_fmt          :   ss/sa per-channel                                                                                                        
+model_name         :   model_front                                                                                                              
+model_hash         :   9e5b0a404d73ec009e8bc0be162ba1c9                                                                                         
+params #           :   52,392 items (58.27 KiB)                                                                                                 
+------------------------------------------------------------------------------------------------------------------------------------------------
+input 1/1          :   'serving_default_input_10' (domain:activations/**default**)                                                              
+                   :   49152 items, 48.00 KiB, ai_u8, s=0.00392157, zp=0, (1,128,128,3)                                                         
+output 1/1         :   'concat_80' (domain:activations/**default**)                                                                             
+                   :   6144 items, 6.00 KiB, ai_i8, s=0.00608906, zp=-128, (1,8,8,96)                                                           
+macc               :   8,219,208                                                                                                                
+weights (ro)       :   56,976 B (55.64 KiB) (1 segment) / -152,592(-72.8%) vs float model                                                       
+activations (rw)   :   108,636 B (106.09 KiB) (1 segment) *                                                                                     
+ram (total)        :   108,636 B (106.09 KiB) = 108,636 + 0 + 0                                                                                 
+------------------------------------------------------------------------------------------------------------------------------------------------
 (*) 'input'/'output' buffers can be used from the activations buffer
 
 Model name - model_front ['serving_default_input_10'] ['concat_80']
@@ -912,97 +912,97 @@ Number of operations per c-layer
 c_id    m_id   name (type)                           #op          type   #param   sparsity 
 ------- ------ ----------------------------- ----------- ------------- -------- ---------- 
 0       0      conversion_0 (converter)           98,304    smul_u8_s8          
-1       1      conv2d_2 (optimized_conv2d)     2,654,232    smul_s8_s8      672     0.0074 
+1       1      conv2d_2 (optimized_conv2d)     2,654,232    smul_s8_s8      672     0.0923 
 2       3      pad_3 (pad)                             0    smul_s8_s8          
 3       4      pool_4 (pool)                     221,184      op_s8_s8          
 4       7      conv2d_10_pad_before (pad)              0    smul_s8_s8          
-5       10     conv2d_10 (conv2d)                 55,320    smul_s8_s8      240     0.0042 
-6       11     conv2d_11 (conv2d)                147,480    smul_s8_s8      600     0.0067 
-7       5      conv2d_5 (conv2d)                 589,848    smul_s8_s8      600     0.0200 
+5       10     conv2d_10 (conv2d)                 55,320    smul_s8_s8      240     0.0792 
+6       11     conv2d_11 (conv2d)                147,480    smul_s8_s8      600     0.1033 
+7       5      conv2d_5 (conv2d)                 589,848    smul_s8_s8      600     0.0883 
 8       6      conv2d_8_pad_before (pad)               0    smul_s8_s8          
-9       8      conv2d_8 (conv2d)                  55,320    smul_s8_s8      240     0.0083 
-10      9      conv2d_9 (conv2d)                 147,480    smul_s8_s8      600     0.0083 
+9       8      conv2d_8 (conv2d)                  55,320    smul_s8_s8      240     0.0000 
+10      9      conv2d_9 (conv2d)                 147,480    smul_s8_s8      600     0.0133 
 11      12     concat_12 (concat)                      0      op_s8_s8          
 12      17     gather_17 (gather)                      0   smul_s8_s32       24     0.0417 
 13      13     gather_13 (gather)                      0   smul_s8_s32       24     0.0000 
-14      14     conv2d_14 (conv2d)                147,480    smul_s8_s8      600     0.0067 
+14      14     conv2d_14 (conv2d)                147,480    smul_s8_s8      600     0.0133 
 15      15     conv2d_15_pad_before (pad)              0    smul_s8_s8          
-16      15     conv2d_15 (conv2d)                 55,320    smul_s8_s8      240     0.0208 
-17      16     conv2d_16 (conv2d)                147,480    smul_s8_s8      600     0.0067 
+16      15     conv2d_15 (conv2d)                 55,320    smul_s8_s8      240     0.0125 
+17      16     conv2d_16 (conv2d)                147,480    smul_s8_s8      600     0.0250 
 18      18     concat_18 (concat)                      0      op_s8_s8          
 19      20     gather_20 (gather)                      0   smul_s8_s32       24     0.0000 
-20      21     conv2d_21 (conv2d)                147,480    smul_s8_s8      600     0.0117 
+20      21     conv2d_21 (conv2d)                147,480    smul_s8_s8      600     0.0100 
 21      22     conv2d_22_pad_before (pad)              0    smul_s8_s8          
-22      22     conv2d_22 (conv2d)                 55,320    smul_s8_s8      240     0.0042 
-23      23     conv2d_23 (conv2d)                147,480    smul_s8_s8      600     0.0117 
+22      22     conv2d_22 (conv2d)                 55,320    smul_s8_s8      240     0.0208 
+23      23     conv2d_23 (conv2d)                147,480    smul_s8_s8      600     0.0133 
 24      19     gather_19 (gather)                      0   smul_s8_s32       24     0.0417 
 25      24     concat_24 (concat)                      0      op_s8_s8          
 26      26     gather_26 (gather)                      0   smul_s8_s32       24     0.0000 
-27      27     conv2d_27 (conv2d)                147,480    smul_s8_s8      600     0.0083 
+27      27     conv2d_27 (conv2d)                147,480    smul_s8_s8      600     0.0300 
 28      28     conv2d_28_pad_before (pad)              0    smul_s8_s8          
-29      28     conv2d_28 (conv2d)                 55,320    smul_s8_s8      240     0.0125 
-30      29     conv2d_29 (conv2d)                147,480    smul_s8_s8      600     0.0033 
+29      28     conv2d_28 (conv2d)                 55,320    smul_s8_s8      240     0.0083 
+30      29     conv2d_29 (conv2d)                147,480    smul_s8_s8      600     0.0133 
 31      25     gather_25 (gather)                      0   smul_s8_s32       24     0.0417 
 32      30     concat_30 (concat)                      0      op_s8_s8          
 33      35     conv2d_36_pad_before (pad)              0    smul_s8_s8          
-34      36     conv2d_36 (conv2d)                 27,696    smul_s8_s8      480     0.0083 
-35      37     conv2d_37 (conv2d)                147,504    smul_s8_s8    2,352     0.0072 
-36      31     conv2d_31 (conv2d)                589,872    smul_s8_s8    2,352     0.0064 
+34      36     conv2d_36 (conv2d)                 27,696    smul_s8_s8      480     0.0062 
+35      37     conv2d_37 (conv2d)                147,504    smul_s8_s8    2,352     0.0259 
+36      31     conv2d_31 (conv2d)                589,872    smul_s8_s8    2,352     0.0136 
 37      32     conv2d_33_pad_before (pad)              0    smul_s8_s8          
-38      33     conv2d_33 (conv2d)                 27,696    smul_s8_s8      480     0.0042 
-39      34     conv2d_34 (conv2d)                147,504    smul_s8_s8    2,352     0.0098 
+38      33     conv2d_33 (conv2d)                 27,696    smul_s8_s8      480     0.0000 
+39      34     conv2d_34 (conv2d)                147,504    smul_s8_s8    2,352     0.0162 
 40      38     concat_38 (concat)                      0      op_s8_s8          
 41      40     gather_40 (gather)                      0   smul_s8_s32       48     0.0000 
-42      41     conv2d_41 (conv2d)                147,504    smul_s8_s8    2,352     0.0064 
+42      41     conv2d_41 (conv2d)                147,504    smul_s8_s8    2,352     0.0085 
 43      42     conv2d_42_pad_before (pad)              0    smul_s8_s8          
-44      42     conv2d_42 (conv2d)                 27,696    smul_s8_s8      480     0.0104 
-45      43     conv2d_43 (conv2d)                147,504    smul_s8_s8    2,352     0.0081 
+44      42     conv2d_42 (conv2d)                 27,696    smul_s8_s8      480     0.0125 
+45      43     conv2d_43 (conv2d)                147,504    smul_s8_s8    2,352     0.0208 
 46      39     gather_39 (gather)                      0   smul_s8_s32       48     0.0208 
 47      44     concat_44 (concat)                      0      op_s8_s8          
 48      46     gather_46 (gather)                      0   smul_s8_s32       48     0.0000 
-49      47     conv2d_47 (conv2d)                147,504    smul_s8_s8    2,352     0.0060 
+49      47     conv2d_47 (conv2d)                147,504    smul_s8_s8    2,352     0.0149 
 50      48     conv2d_48_pad_before (pad)              0    smul_s8_s8          
-51      48     conv2d_48 (conv2d)                 27,696    smul_s8_s8      480     0.0062 
-52      49     conv2d_49 (conv2d)                147,504    smul_s8_s8    2,352     0.0047 
+51      48     conv2d_48 (conv2d)                 27,696    smul_s8_s8      480     0.0083 
+52      49     conv2d_49 (conv2d)                147,504    smul_s8_s8    2,352     0.0200 
 53      45     gather_45 (gather)                      0   smul_s8_s32       48     0.0208 
 54      50     concat_50 (concat)                      0      op_s8_s8          
 55      52     gather_52 (gather)                      0   smul_s8_s32       48     0.0000 
-56      53     conv2d_53 (conv2d)                147,504    smul_s8_s8    2,352     0.0098 
+56      53     conv2d_53 (conv2d)                147,504    smul_s8_s8    2,352     0.0179 
 57      54     conv2d_54_pad_before (pad)              0    smul_s8_s8          
-58      54     conv2d_54 (conv2d)                 27,696    smul_s8_s8      480     0.0042 
-59      55     conv2d_55 (conv2d)                147,504    smul_s8_s8    2,352     0.0085 
+58      54     conv2d_54 (conv2d)                 27,696    smul_s8_s8      480     0.0083 
+59      55     conv2d_55 (conv2d)                147,504    smul_s8_s8    2,352     0.0106 
 60      51     gather_51 (gather)                      0   smul_s8_s32       48     0.0208 
 61      56     concat_56 (concat)                      0      op_s8_s8          
 62      58     gather_58 (gather)                      0   smul_s8_s32       48     0.0000 
-63      59     conv2d_59 (conv2d)                147,504    smul_s8_s8    2,352     0.0098 
+63      59     conv2d_59 (conv2d)                147,504    smul_s8_s8    2,352     0.0094 
 64      60     conv2d_60_pad_before (pad)              0    smul_s8_s8          
-65      60     conv2d_60 (conv2d)                 27,696    smul_s8_s8      480     0.0083 
-66      61     conv2d_61 (conv2d)                147,504    smul_s8_s8    2,352     0.0077 
+65      60     conv2d_60 (conv2d)                 27,696    smul_s8_s8      480     0.0167 
+66      61     conv2d_61 (conv2d)                147,504    smul_s8_s8    2,352     0.0119 
 67      57     gather_57 (gather)                      0   smul_s8_s32       48     0.0208 
 68      62     concat_62 (concat)                      0      op_s8_s8          
 69      64     gather_64 (gather)                      0   smul_s8_s32       48     0.0000 
-70      65     conv2d_65 (conv2d)                147,504    smul_s8_s8    2,352     0.0111 
+70      65     conv2d_65 (conv2d)                147,504    smul_s8_s8    2,352     0.0136 
 71      66     conv2d_66_pad_before (pad)              0    smul_s8_s8          
-72      66     conv2d_66 (conv2d)                 27,696    smul_s8_s8      480     0.0062 
-73      67     conv2d_67 (conv2d)                147,504    smul_s8_s8    2,352     0.0055 
+72      66     conv2d_66 (conv2d)                 27,696    smul_s8_s8      480     0.0104 
+73      67     conv2d_67 (conv2d)                147,504    smul_s8_s8    2,352     0.0145 
 74      63     gather_63 (gather)                      0   smul_s8_s32       48     0.0208 
 75      68     concat_68 (concat)                      0      op_s8_s8          
 76      70     gather_70 (gather)                      0   smul_s8_s32       48     0.0000 
-77      71     conv2d_71 (conv2d)                147,504    smul_s8_s8    2,352     0.0089 
+77      71     conv2d_71 (conv2d)                147,504    smul_s8_s8    2,352     0.0115 
 78      72     conv2d_72_pad_before (pad)              0    smul_s8_s8          
-79      72     conv2d_72 (conv2d)                 27,696    smul_s8_s8      480     0.0083 
-80      73     conv2d_73 (conv2d)                147,504    smul_s8_s8    2,352     0.0102 
+79      72     conv2d_72 (conv2d)                 27,696    smul_s8_s8      480     0.0104 
+80      73     conv2d_73 (conv2d)                147,504    smul_s8_s8    2,352     0.0111 
 81      69     gather_69 (gather)                      0   smul_s8_s32       48     0.0208 
 82      74     concat_74 (concat)                      0      op_s8_s8          
 83      76     gather_76 (gather)                      0   smul_s8_s32       48     0.0000 
-84      77     conv2d_77 (conv2d)                147,504    smul_s8_s8    2,352     0.0081 
+84      77     conv2d_77 (conv2d)                147,504    smul_s8_s8    2,352     0.0128 
 85      78     conv2d_78_pad_before (pad)              0    smul_s8_s8          
 86      78     conv2d_78 (conv2d)                 27,696    smul_s8_s8      480     0.0042 
-87      79     conv2d_79 (conv2d)                147,504    smul_s8_s8    2,352     0.0102 
+87      79     conv2d_79 (conv2d)                147,504    smul_s8_s8    2,352     0.0140 
 88      75     gather_75 (gather)                      0   smul_s8_s32       48     0.0208 
 89      80     concat_80 (concat)                      0      op_s8_s8          
 ------- ------ ----------------------------- ----------- ------------- -------- ---------- 
-total                                          8,219,208                 52,392     0.0082 
+total                                          8,219,208                 52,392     0.0173 
 
 Number of operation types
 ---------------- ----------- ----------- 

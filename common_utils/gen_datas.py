@@ -1,3 +1,4 @@
+import argparse
 import copy
 import json
 import random
@@ -484,7 +485,13 @@ def category_sum(train_path):
 
 
 if __name__ == '__main__':
-    gen_datas(wflw_path="../datasets/WFLW", lapa_path="../datasets/LaPa", hagrid_path="../datasets/HaGrid",save_path="../datasets/abnormal_drive_0")
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--wflw_path', type=str,required=True)
+    parser.add_argument('--lapa_path', type=str, required=True)
+    parser.add_argument('--hagrid_path', type=str, required=True)
+    parser.add_argument('--save_path', type=str, required=True)
+    args=parser.parse_args()
+    gen_datas(wflw_path=args.wflw_path, lapa_path=args.lapa_path, hagrid_path=args.hagrid_path,save_path=args.save_path)
     # gen_datas(wflw_path=None, lapa_path=None, hagrid_path="../datasets/HaGrid",
     #           save_path="../datasets/abnormal_drive_0")
     # gen_train_val_datas("../datasets/abnormal_drive_0/img_paths.txt")

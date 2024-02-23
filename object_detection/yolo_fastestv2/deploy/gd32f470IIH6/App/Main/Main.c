@@ -73,7 +73,7 @@ ai_handle network2;
 #define INPUT_HEIGHT SEPERATION_SCALE*AI_NETWORK_1_IN_1_HEIGHT
 #define INPUT_WIDTH SEPERATION_SCALE*AI_NETWORK_1_IN_1_WIDTH
 #define CLASS_NUM AI_NETWORK_2_OUT_1_CHANNEL-3-OUT_POS_PREFIX
-#define FIX_FACTOR 0.764834471285313
+#define FIX_FACTOR 0.2500020457257562
 #define ACTIVATION_SIZE AI_NETWORK_1_DATA_ACTIVATIONS_SIZE>AI_NETWORK_2_DATA_ACTIVATIONS_SIZE?AI_NETWORK_1_DATA_ACTIVATIONS_SIZE:AI_NETWORK_2_DATA_ACTIVATIONS_SIZE
 #define AI_NETWORK_OUT_1_HEIGHT AI_NETWORK_2_OUT_1_HEIGHT
 #define AI_NETWORK_OUT_1_CHANNEL AI_NETWORK_2_OUT_1_CHANNEL
@@ -108,8 +108,8 @@ typedef struct
 		u32 cls_index;
 }ObjectResult;
 
-//float anchors[12]={9.192727272727273, 14.101818181818182, 27.54909090909091, 37.44, 40.516363636363636, 100.58909090909091, 92.29818181818182, 56.89454545454546, 95.68727272727273, 156.03636363636363, 203.57818181818183, 188.26909090909092};
-float anchors[12]={16.33,6.18, 24.36,2.35, 30.22,104.04, 33.22,10.20, 74.09,96.71, 128.15,107.99};
+float anchors[12]={9.192727272727273, 14.101818181818182, 27.54909090909091, 37.44, 40.516363636363636, 100.58909090909091, 92.29818181818182, 56.89454545454546, 95.68727272727273, 156.03636363636363, 203.57818181818183, 188.26909090909092};
+//float anchors[12]={16.33,6.18, 24.36,2.35, 30.22,104.04, 33.22,10.20, 74.09,96.71, 128.15,107.99};
 #ifndef TEST_TIME
 ObjectResult objects[AI_NETWORK_OUT_1_HEIGHT*3];
 u32 object_num;
@@ -145,14 +145,14 @@ ai_u8 activations [ACTIVATION_SIZE];
 #endif
 #define aiInData ai1InData
 
-const char* activities[5] = {"CLOSED_EYE","OPENED_EYE","CLOSED_MOUTH","OPENDED_MOUTH","HAND"};
-//const char* activities[80] = {"person","bicycle","car","motorbike","aeroplane","bus","train","truck","boat","traffic light","fire hydrant","stop sign",
-//	"parking meter","bench","bird","cat","dog","horse","sheep","cow","elephant","bear","zebra","giraffe","backpack","umbrella","handbag","tie","suitcase",
-//	"frisbee","skis","snowboard","sports ball","kite","baseball bat","baseball glove","skateboard","surfboard","tennis racket","bottle","wine glass","cup",
-//	"fork","knife","spoon","bowl","banana","apple","sandwich","orange","broccoli","carrot","hot dog","pizza","donut","cake","chair","sofa","pottedplant",
-//	"bed","diningtable","toilet","tvmonitor","laptop","mouse","remote","keyboard","cell phone","microwave","oven","toaster","sink","refrigerator","book",
-//	"clock","vase","scissors","teddy bear","hair drier","toothbrush"
-//};
+//const char* activities[5] = {"CLOSED_EYE","OPENED_EYE","CLOSED_MOUTH","OPENDED_MOUTH","HAND"};
+const char* activities[80] = {"person","bicycle","car","motorbike","aeroplane","bus","train","truck","boat","traffic light","fire hydrant","stop sign",
+	"parking meter","bench","bird","cat","dog","horse","sheep","cow","elephant","bear","zebra","giraffe","backpack","umbrella","handbag","tie","suitcase",
+	"frisbee","skis","snowboard","sports ball","kite","baseball bat","baseball glove","skateboard","surfboard","tennis racket","bottle","wine glass","cup",
+	"fork","knife","spoon","bowl","banana","apple","sandwich","orange","broccoli","carrot","hot dog","pizza","donut","cake","chair","sofa","pottedplant",
+	"bed","diningtable","toilet","tvmonitor","laptop","mouse","remote","keyboard","cell phone","microwave","oven","toaster","sink","refrigerator","book",
+	"clock","vase","scissors","teddy bear","hair drier","toothbrush"
+};
 
 ai_buffer * ai_input1;
 ai_buffer * ai_output1;
@@ -443,8 +443,8 @@ void handle_preds(float *preds,float conf_thr)
 		}
 		else
 		{
-			pos_x=(i-(INPUT_WIDTH*INPUT_HEIGHT)/(16*16))%(INPUT_WIDTH/32)+1;
-			pos_y=(i-(INPUT_WIDTH*INPUT_HEIGHT)/(16*16))/(INPUT_WIDTH/32)+1;
+			pos_x=(i-(INPUT_WIDTH*INPUT_HEIGHT)/(16*16))%(INPUT_WIDTH/32);
+			pos_y=(i-(INPUT_WIDTH*INPUT_HEIGHT)/(16*16))/(INPUT_WIDTH/32);
 			stage=1;
 		}
 		float cls=0;
@@ -463,8 +463,8 @@ void handle_preds(float *preds,float conf_thr)
 			float obj=*(preds+AI_NETWORK_OUT_1_CHANNEL*i+12+j);
 			if(obj*cls>conf_thr)
 			{
-				*(reg)=(*(reg)-0.5f+pos_x)*(stage+1)*16;
-				*(reg+1)=(*(reg+1)-0.5f+pos_y)*(stage+1)*16;
+				*(reg)=(*(reg)*2-0.5f+pos_x)*(stage+1)*16;
+				*(reg+1)=(*(reg+1)*2-0.5f+pos_y)*(stage+1)*16;
 				*(reg+2)=((*(reg+2)*2)*(*(reg+2)*2))*anchors[stage*6+j*2];
 				*(reg+3)=((*(reg+3)*2)*(*(reg+3)*2))*anchors[stage*6+j*2+1];
 				objects[object_num].confi=obj*cls;
@@ -609,8 +609,8 @@ void detect_once(void)
 	LCDShowString(0,s_iY0-96+24,32*15,24,LCD_FONT_24,LCD_TEXT_NORMAL,0,0xffff,str);
 	for(i=0;i<object_num;i++)
 	{
-		LCDShowString(x0+(u32)objects[i].bbox.x_min,y0+(u32)objects[i].bbox.y_min-16,32*15,16,LCD_FONT_16,LCD_TEXT_TRANS,0x07f0,0xffff,(char *) activities[objects[i].cls_index]);
-		LCDDrawRectangle(x0+(u32)objects[i].bbox.x_min,y0+(u32)objects[i].bbox.y_min,x0+(u32)objects[i].bbox.x_max,y0+(u32)objects[i].bbox.y_max,0xffff);
+		LCDShowString(x0+(u32)results[i].bbox.x_min,y0+(u32)results[i].bbox.y_min-16,32*15,16,LCD_FONT_16,LCD_TEXT_TRANS,0x07f0,0xffff,(char *) activities[results[i].cls_index]);
+		LCDDrawRectangle(x0+(u32)results[i].bbox.x_min,y0+(u32)results[i].bbox.y_min,x0+(u32)results[i].bbox.x_max,y0+(u32)results[i].bbox.y_max,0xffff);
 	}
 #endif
 //	for(i=0;i<CLASS_NUM;i++)

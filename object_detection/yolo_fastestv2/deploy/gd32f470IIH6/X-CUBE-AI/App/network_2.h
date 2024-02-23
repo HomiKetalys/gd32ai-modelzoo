@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    network_2.h
   * @author  AST Embedded Analytics Research Platform
-  * @date    Wed Feb 21 22:03:37 2024
+  * @date    Thu Feb 22 18:08:56 2024
   * @brief   AI Tool Automatic Code Generator for Embedded NN computing
   ******************************************************************************
   * @attention
@@ -65,9 +65,9 @@ AI_DEPRECATED
   AI_NETWORK_2_OUT_1_SIZE_BYTES, \
 }
 #define AI_NETWORK_2_OUT_1_HEIGHT      (320)
-#define AI_NETWORK_2_OUT_1_CHANNEL     (20)
-#define AI_NETWORK_2_OUT_1_SIZE        (320 * 20)
-#define AI_NETWORK_2_OUT_1_SIZE_BYTES  (25600)
+#define AI_NETWORK_2_OUT_1_CHANNEL     (95)
+#define AI_NETWORK_2_OUT_1_SIZE        (320 * 95)
+#define AI_NETWORK_2_OUT_1_SIZE_BYTES  (121600)
 
 /******************************************************************************/
 #define AI_NETWORK_2_N_NODES (73)
