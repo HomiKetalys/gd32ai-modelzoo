@@ -251,7 +251,7 @@ When nothing is precised in the model name, training is done using transfer lear
 | Model             | Format | Resolution | Board            | Execution Engine | Frequency   | Inference time (ms) | STM32Cube.AI version  |
 |-------------------|--------|------------|------------------|------------------|-------------|---------------------|-----------------------|
 | Yolo-FastestV2 | Int8   | 192x192x3    | GD32F470IIH6 | 1 CPU | 240 MHz       | 791 ms       | 8.0.1   
-| Yolo-FastestV2 | Int8   | 192x192x3    | GD32F470IIH6 | 1 CPU | 240 MHz       | 1397 ms       | 8.0.1     
+| Yolo-FastestV2 | Int8   | 256x256x3    | GD32F470IIH6 | 1 CPU | 240 MHz       | 1397 ms       | 8.0.1     
 | [SSD Mobilenet v1 0.25] | Int8   | 192x192x3    | GD32F470IIH6 | 1 CPU | 240 MHz       | 808 ms       | 8.0.1                 |              |
 | [SSD Mobilenet v1 0.25] | Int8   | 256x256x3    | GD32F470IIH6 | 1 CPU | 240 MHz       | 1456 ms         | 8.0.1                 |
 ## Images
