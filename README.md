@@ -4,6 +4,9 @@ Here will provide some deep learning models that can be deployed on GD32 devices
 
  - The peak memory usage of the model is adjustable
  - The provided model can be retrained
+# Main features: Spatial separation model
+![Spatial separation model](https://github.com/HomiKetalys/gd32ai-modelzoo/blob/main/readme_resources/M%25V1R00%60N8WSR%289R%7D4%7B%5DYUC.png)
+
 
 # Available models
 
