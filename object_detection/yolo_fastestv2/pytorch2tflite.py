@@ -1,9 +1,10 @@
 import argparse
+import sys
 from common_utils.utils import LogSaver
+from common_utils.onnx2tflite.converter import onnx_converter
 from submodules.Yolo_FastestV2.pytorch2onnx import pytorch2onnx_main
 from submodules.Yolo_FastestV2.evaluation import evaluation
 import os
-from common_utils.onnx2tflite.converter import onnx_converter
 from submodules.Yolo_FastestV2.utils.utils import load_datafile
 
 

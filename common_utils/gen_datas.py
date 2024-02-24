@@ -8,7 +8,7 @@ import torch
 from torchvision import transforms
 import cv2
 import os
-from facelandmarks.faceland import FaceLanndInference
+from common_utils.facelandmarks.faceland import FaceLanndInference
 from hdface.hdface import hdface_detector
 
 
