@@ -2,6 +2,6 @@
 .idea
 __pycache__
 /object_detection/yolo_fastestv2/test_imgs/
-/object_detection/yolo_fastestv2/deploy/gd32f470IIH6/Project/Listings/
-/object_detection/yolo_fastestv2/deploy/gd32f470IIH6/Project/Objects/*
-!/object_detection/yolo_fastestv2/deploy/gd32f470IIH6/Project/Objects/GD32KeilPrj.sct
+/object_detection/yolo_fastestv2/deployment/gd32f470IIH6/Project/Listings/
+/object_detection/yolo_fastestv2/deployment/gd32f470IIH6/Project/Objects/*
+!/object_detection/yolo_fastestv2/deployment/gd32f470IIH6/Project/Objects/GD32KeilPrj.sct

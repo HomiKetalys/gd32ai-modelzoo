@@ -92,10 +92,12 @@ def export(opt,save_path):
     os.makedirs(tflite_path)
     pytorch2onnx_main(opt.data, opt.model_path, onnx_path)
     if opt.convert_type==0:
-        evaluation( opt.data, onnx_path, 1)
+        if opt.eval:
+            evaluation( opt.data, onnx_path, 1)
     elif opt.convert_type==1:
         onnx2tflite_main( save_path,opt.tflite_val_path)
-        evaluation( opt.data, tflite_path, 1)
+        if opt.eval:
+            evaluation( opt.data, tflite_path, 1)
 
 
 if __name__ == "__main__":
@@ -106,12 +108,10 @@ if __name__ == "__main__":
                         help='The path of the model')
     parser.add_argument('--convert_type', type=int, default=1,
                         help='model type,0 for onnx,1 for tflite')
-    parser.add_argument('--onnx_output', type=str, default='results/export/onnx',
-                        help='The path where the onnx model is saved')
-    parser.add_argument('--tflite_output', type=str, default='results/export/tflite',
-                        help='The path where the tflite model is saved')
     parser.add_argument('--tflite_val_path', type=str, default='../../../datasets/abnormal_drive_0/images',
                         help='The path where the image which quantity need is saved')
+    parser.add_argument('--eval', type=bool, default=True,
+                        help='eval exported model')
     opt = parser.parse_args()
     lger = LogSaver(opt.data, "results/export")
     lger.collect_prints(export,opt,lger.result_path)

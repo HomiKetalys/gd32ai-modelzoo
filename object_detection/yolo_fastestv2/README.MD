@@ -196,9 +196,9 @@ names=./configs/coco.names
   5. Save all files and copy the folder X-CUBE-AI from the STM32 project to the deploy/gd32f470IIH6 directory.
   6. Open deploy/gd32f470IIH6/Project/GD32KeilPrj.uvprojx using Keil5. Modify the model configuration in the main. c file.Modify the following macro definitions According to the configuration .data file:
 
-`SEPERATION`:Is model separated,0 for no,>0 for yes.
+`SEPARATION`:Is model separated,0 for no,>0 for yes.
 
-`SEPERATION_SCALE`:Separation Scale, Exponential of 2.
+`SEPARATION_SCALE`:Separation Scale, Exponential of 2.
 
 `activities`:Category string corresponding to category index.
 
