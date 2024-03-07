@@ -40,8 +40,8 @@ def onnx2tflite_main(export_path, val_path):
             target_formats=['tflite'],  # or ['keras'], ['keras', 'tflite']
             weight_quant=True,
             int8_model=True,
-            int8_mean=None,
-            int8_std=None,
+            int8_mean=0,
+            int8_std=255,
             image_root=val_path,
             separation=cfg["separation"],
             separation_scale=cfg["separation_scale"]
@@ -54,8 +54,8 @@ def onnx2tflite_main(export_path, val_path):
             target_formats=['tflite'],  # or ['keras'], ['keras', 'tflite']
             weight_quant=True,
             int8_model=True,
-            int8_mean=None,
-            int8_std=None,
+            int8_mean=0,
+            int8_std=255,
             image_root=val_path,
             separation=-cfg["separation"],
             separation_scale=cfg["separation_scale"]
@@ -98,17 +98,19 @@ def export(opt,save_path):
         onnx2tflite_main( save_path,opt.tflite_val_path)
         if opt.eval:
             evaluation( opt.data, tflite_path, 1)
-
+val_paths=[
+    '../../../datasets/abnormal_drive_0/images',
+    '../../../datasets/coco2017/images/val2017']
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data', type=str, default='modelzoo/ab_drive_0000/ab_drive.data',
+    parser.add_argument('--data', type=str, default='modelzoo/coco_sp_0004/coco_sp.data',
                         help='Specify training profile *.data')
-    parser.add_argument('--model_path', type=str, default="modelzoo/ab_drive_0000/best.pth",
+    parser.add_argument('--model_path', type=str, default="modelzoo/coco_sp_0004/best.pth",
                         help='The path of the model')
     parser.add_argument('--convert_type', type=int, default=1,
                         help='model type,0 for onnx,1 for tflite')
-    parser.add_argument('--tflite_val_path', type=str, default='../../../datasets/abnormal_drive_0/images',
+    parser.add_argument('--tflite_val_path', type=str, default=val_paths[1],
                         help='The path where the image which quantity need is saved')
     parser.add_argument('--eval', type=bool, default=True,
                         help='eval exported model')

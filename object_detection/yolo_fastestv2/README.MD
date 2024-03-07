@@ -56,11 +56,11 @@ images\train2017\000000184613.jpg
 ```
   If it is a relative path, then it is the relative path relative to the text file.
  ## Environmental preparation
- Install the environment(anaconda recommended) according to [Yolo-FastestV2](https://github.com/dog-qiuqiu/Yolo-FastestV2), [onnx2tflite](https://github.com/MPolaris/onnx2tflite), and [facelandmarks](https://github.com/midasklr/facelandmarks)(If you are using the FABD dataset)
+ Install the environment(anaconda recommended) according to [Yolo-FastestV2](https://github.com/dog-qiuqiu/Yolo-FastestV2), [onnx2tflite](https://github.com/MPolaris/onnx2tflite), and [facelandmarks](https://github.com/midasklr/facelandmarks) (If you are using the FABD dataset)
   ## Supported Datasets
   
  - COCO2017:If you want to train on the COCO2017 dataset, you can prepare the dataset by following the steps below.
- 1. Download the COCO2017 dataset from [here](https://cocodataset.org/#download).The directory structure should be as follows：
+ 1. Download the COCO2017 dataset from [here](https://cocodataset.org/#download) .The directory structure should be as follows：
 ```
   COCO2017
   ├── images
@@ -88,7 +88,7 @@ Convert val set
 python ../../common_utils/coco2yolo.py --images_path "{datasets_root}/COCO2017/images/val2017" --json_file "{datasets_root}/COCO2017/annotations/instances_val2017.json" --ana_txt_save_path "{datasets_root}/COCO2017/coco_80/val2017" --out_txt_path "{datasets_root}/COCO2017/val2017.txt"
 ```
 - Fusion of Abnormal Behavior Driving Dataset(FABD):
-1. Download the HaGrid Test dataset from [here](https://github.com/hukenovs/hagrid/tree/Hagrid_v1).The directory structure should be as follows：
+1. Download the HaGrid Test dataset from [here](https://github.com/hukenovs/hagrid/tree/Hagrid_v1) .The directory structure should be as follows：
 ```
   HaGrid
   ├── images
@@ -119,7 +119,7 @@ python ../../common_utils/coco2yolo.py --images_path "{datasets_root}/COCO2017/i
   │       └──61_Street_Battle_streetfight_61_1008.jpg
   └── list_98pt_rect_attr_train_test
 ```
-  3. Download the Lapa dataset from [here](https://github.com/jd-opensource/lapa-dataset).The directory structure should be as follows：
+  3. Download the Lapa dataset from [here](https://github.com/jd-opensource/lapa-dataset) .The directory structure should be as follows：
 ```
   Lapa
   ├── train
@@ -188,74 +188,67 @@ names=./configs/coco.names
   Meanwhile, the exported model will be evaluated.
   # Deploy
   Next, deploy the exported model to GD32 device
-  1. install STM32CUBE-AI
-  The deployment tool used in this project is STM32CUBE-AI. It is based on STM32CUBEMX. STM32CUBEMX can be downloaded and from [here](https://www.st.com/zh/development-tools/stm32cubemx.html).Then install STM32CUBE-AI 8.1.0 in STM32CUBEMX.
-  2. Create any STM32 project, such as STM32H743. Under sufficient FLASH and RAM, model deployment is independent of device model.
-  3. Open the. ioc file in the STM32 project file, click on Middleware And Software Pack in the pop-up interface, and then click X-CUBE-AI.
-  4. Select X-CUBE-AI in the mode interface that pops up, and click on add network in the configuration interface. If the model to be deployed is not a separate model, only one network_1 will be created. At the same time, click on the settings interface to select the first two items, allocate inputs and allocate outputs. Then exit the settings interface and modify the model format to TFlite, using STM32Cube as the framework AI runtime, then modify the model path. Then click on Analyze. If it is a separate model, create another network_2, following the same process as before.
-  5. Save all files and copy the folder X-CUBE-AI from the STM32 project to the deploy/gd32f470IIH6 directory.
-  6. Open deploy/gd32f470IIH6/Project/GD32KeilPrj.uvprojx using Keil5. Modify the model configuration in the main. c file.Modify the following macro definitions According to the configuration .data file:
-
-`SEPARATION`:Is model separated,0 for no,>0 for yes.
-
-`SEPARATION_SCALE`:Separation Scale, Exponential of 2.
-
-`activities`:Category string corresponding to category index.
-
-`FIX_FACTOR`:Correction coefficients for separated models. In the log file results/export/coco_sp_0000/log.txt when exporting the model , you can find fix_factor, which is FIX_FACTOR
-
-`anchors`:anchors in the. data configuration file.
-
-If you need to modify the image resolution, modify the Camera. h file. Modify the following macro definitions:
-
-`IMAGE_WIDTH`:width of image.
-
-`IMAGE_HEIGHT`:height of image.
-
-7. After ensuring that your GD32 device is connected to the computer and powered on, click on Build, then click on Load.
+  1. Install STM32CUBE-AI
+  The deployment tool used in this project is STM32CUBE-AI. It is based on STM32CUBEMX. STM32CUBEMX can be downloaded and from [here](https://www.st.com/zh/development-tools/stm32cubemx.html).Then install STM32CUBE-AI 8.0.1 in STM32CUBEMX.
+  2. Install keil5 5.29,you can download it from [here](https://www.keil.com/update/rvmdk.asp)
+  3. Download gcc-arm-none-eabi 10.3-2021.10 from [here](https://developer.arm.com/downloads/-/gnu-rm) 
+  4.  Download GD32H7xx AddOn from [here](https://www.gd32mcu.com/cn/download?kw=GD32H7) and install pack.
+  5. Execute the following command to generate codes.
+```
+  python deploy.py --data results/train/coco_sp_0000/coco_sp.data --model_path results/train/coco_sp_0000/best.pth --convert_type 1 --tflite_val_path "{datasets_root}/COCO2017/images/val2017" --gd32_project_path deployment/gd32h759IMK6_GCC --series h7 --compiler 1
+```
+5.  Open "deployment/gd32h759IMK6_GCC/MDK-ARM/GD32H759I_EVAL.uvprojx" with keil5 and configure gcc path in Keil5
+6.  Compile and download code to flash memory。
 # Metrics
 The metrics ultimately exported as quantization model
 ## On COCO2017 Person Dataset
 When nothing is precised in the model name, training is done using transfer learning technique from a pre-trained model. Else, "tfs" stands for "training from scratch".Meanwhile, the table presents the metrics of the model in [stm32ai-modelzoo](https://github.com/STMicroelectronics/stm32ai-modelzoo/blob/main/object_detection/pretrained_models/README.md).
-| model                   | Implementation | Dataset                        | Input Resolution | mAP* | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version
-|-------------------------|----------------|--------------------------------|-------------|-----------------------|----------------|---------------|-----------------|----------
-| Yolo-FastestV2          | Pytorch        | COCO2017 val person dataset    | 192x192x3   | 41.66%                |   32.76        |   179.26      |   387.79        | 8.1.0
-| Yolo-FastestV2 tfs      | Pytorch        | COCO2017 val person dataset    | 192x192x3   | 40.01%                |   32.76        |   179.26      |   387.79        | 8.1.0 
-| Yolo-FastestV2          | Pytorch        | COCO2017 val person dataset    | 256x256x3   | 49.00%                |   58.23        |   300.1       |   387.79        | 8.1.0 
-| Yolo-FastestV2 tfs      | Pytorch        | COCO2017 val person dataset    | 256x256x3   | 46.89%                |   58.23        |   300.1       |   387.79        | 8.1.0          
-| SSD MobileNet v1 0.25   | TensorFlow     | COCO2017 val person dataset    | 192x192x3   | 33.52%                |   40.54        |   249.54      |   438.28        | 8.1.0     
-| SSD MobileNet v1 0.25   | TensorFlow     | COCO2017 val person dataset    | 256x256x3   | 47.50%                |   72.40        |   439.34      |   470.13        | 8.1.0     
-| ST Yolo LC v1 tfs       | TensorFlow     | COCO2017 val person dataset    | 192x192x3   | 39.92%                |   61.9         |   157.44      |   276.73        | 7.3.0     
-| ST Yolo LC v1 tfs       | TensorFlow     | COCO2017 val person dataset    | 256x256x3   | 45.09%                |   110.05       |   271.94      |   276.73        | 7.3.0     
+
+| model                 | Implementation | Dataset                     | Input Resolution | mAP*   | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version |
+|-----------------------|----------------|-----------------------------|------------------|--------|-----------|----------------------|---------------------|----------------------|
+| Yolo-FastestV2        | Pytorch        | COCO2017 val person dataset | 192x192x3        | 41.54% | 32.47     | 116.18               | 385.79              | 8.0.1                |
+| Yolo-FastestV2 tfs    | Pytorch        | COCO2017 val person dataset | 192x192x3        | 40.06% | 32.47     | 116.18               | 385.79              | 8.0.1                |
+| Yolo-FastestV2        | Pytorch        | COCO2017 val person dataset | 256x256x3        | 48.99% | 57.71     | 214.99               | 385.79              | 8.0.1                |
+| Yolo-FastestV2 tfs    | Pytorch        | COCO2017 val person dataset | 256x256x3        | 46.88% | 57.71     | 214.99               | 385.79              | 8.0.1                |
+| SSD MobileNet v1 0.25 | TensorFlow     | COCO2017 val person dataset | 192x192x3        | 33.52% | 40.54     | 249.54               | 438.28              | 8.1.0                |
+| SSD MobileNet v1 0.25 | TensorFlow     | COCO2017 val person dataset | 256x256x3        | 47.50% | 72.40     | 439.34               | 470.13              | 8.1.0                |
+| ST Yolo LC v1 tfs     | TensorFlow     | COCO2017 val person dataset | 192x192x3        | 39.92% | 61.9      | 157.44               | 276.73              | 7.3.0                |
+| ST Yolo LC v1 tfs     | TensorFlow     | COCO2017 val person dataset | 256x256x3        | 45.09% | 110.05    | 271.94               | 276.73              | 7.3.0                |
 
 \* EVAL_IOU = 0.4, NMS_THRESH = 0.5, SCORE_THRESH = 0.001
 ## On COCO2017 Val Dataset
 When nothing is precised in the model name, training is done using transfer learning technique from a pre-trained model. Else, "tfs" stands for "training from scratch".
-| model                   | Implementation | Dataset                        | Input Resolution | mAP* | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version
-|-------------------------|----------------|--------------------------------|-------------|-----------------------|----------------|---------------|-----------------|----------
-| Yolo-FastestV2          | Pytorch        | COCO2017 val dataset    | 192x192x3   | 17.51%                |   32.76        |   179.26      |   387.79        | 8.1.0
-| Yolo-FastestV2 tfs      | Pytorch        | COCO2017 val dataset    | 192x192x3   | 11.85%                |   32.76        |   179.26      |   387.79        | 8.1.0 
-| Yolo-FastestV2          | Pytorch        | COCO2017 val dataset    | 256x256x3   | 21.08%                |   58.23        |   300.1       |   387.79        | 8.1.0 
-| Yolo-FastestV2 tfs      | Pytorch        | COCO2017 val dataset    | 256x256x3   | 16.00%                |   58.23        |   300.1       |   387.79  
+
+| model              | Implementation | Dataset              | Input Resolution | mAP*   | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version |
+|--------------------|----------------|----------------------|------------------|--------|-----------|----------------------|---------------------|----------------------|
+| Yolo-FastestV2     | Pytorch        | COCO2017 val dataset | 192x192x3        | 17.45% | 32.47     | 116.18               | 385.79              | 8.0.1                |
+| Yolo-FastestV2 tfs | Pytorch        | COCO2017 val dataset | 192x192x3        | 11.78% | 32.47     | 116.18               | 385.79              | 8.0.1                |
+| Yolo-FastestV2     | Pytorch        | COCO2017 val dataset | 256x256x3        | 21.23% | 57.71     | 214.99               | 385.79              | 8.0.1                |
+| Yolo-FastestV2 tfs | Pytorch        | COCO2017 val dataset | 256x256x3        | 16.06% | 57.71     | 214.99               | 385.79              | 8.0.1                |
 
 \* EVAL_IOU = 0.4, NMS_THRESH = 0.5, SCORE_THRESH = 0.001
 ## On Fusion of Abnormal Behavior Driving Dataset(FABD)
 When nothing is precised in the model name, training is done using transfer learning technique from a pre-trained model. Else, "tfs" stands for "training from scratch".
-| model                   | Implementation | Dataset                        | Input Resolution | mAP* | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version
-|-------------------------|----------------|--------------------------------|-------------|-----------------------|----------------|---------------|-----------------|----------
-| Yolo-FastestV2 tfs      | Pytorch        | FABD    | 256x256x3   | 54.65%                |   58.23        |   300.1       |   387.79 | 8.1.0 
+
+| model              | Implementation | Dataset | Input Resolution | mAP*   | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version |
+|--------------------|----------------|---------|------------------|--------|-----------|----------------------|---------------------|----------------------|
+| Yolo-FastestV2 tfs | Pytorch        | FABD    | 256x256x3        | 54.62% | 57.71     | 214.99               | 385.79              | 8.0.1                |
 
 \* EVAL_IOU = 0.5, NMS_THRESH = 0.4, SCORE_THRESH = 0.01
 # Results On GD32 Device
 ## Time
-| Model             | Format | Resolution | Board            | Execution Engine | Frequency   | Inference time (ms) | STM32Cube.AI version  |
-|-------------------|--------|------------|------------------|------------------|-------------|---------------------|-----------------------|
-| Yolo-FastestV2 | Int8   | 192x192x3    | GD32F470IIH6 | 1 CPU | 240 MHz       | 791 ms       | 8.0.1   
-| Yolo-FastestV2 | Int8   | 256x256x3    | GD32F470IIH6 | 1 CPU | 240 MHz       | 1397 ms       | 8.0.1     
-| [SSD Mobilenet v1 0.25] | Int8   | 192x192x3    | GD32F470IIH6 | 1 CPU | 240 MHz       | 808 ms       | 8.0.1                 |              |
-| [SSD Mobilenet v1 0.25] | Int8   | 256x256x3    | GD32F470IIH6 | 1 CPU | 240 MHz       | 1456 ms         | 8.0.1                 |
+| Model                   | Format | Resolution | Board        | Execution Engine | Frequency | Inference time (ms) | STM32Cube.AI version |
+|-------------------------|--------|------------|--------------|------------------|-----------|---------------------|----------------------|
+| Yolo-FastestV2          | Int8   | 192x192x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 748 ms              | 8.0.1                |
+| Yolo-FastestV2          | Int8   | 256x256x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 1304 ms             | 8.0.1                |
+| [SSD Mobilenet v1 0.25] | Int8   | 192x192x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 808 ms              | 8.0.1                |
+| [SSD Mobilenet v1 0.25] | Int8   | 256x256x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 1456 ms             | 8.0.1                |
+| Yolo-FastestV2          | Int8   | 192x192x3  | GD32F759IMK6 | 1 CPU            | 600 MHz   | 145 ms              | 8.0.1                |
+| Yolo-FastestV2          | Int8   | 256x256x3  | GD32F759IMK6 | 1 CPU            | 600 MHz   | 238 ms              | 8.0.1                |
+| [SSD Mobilenet v1 0.25] | Int8   | 192x192x3  | STM32H747I   | 1 CPU            | 400 MHz   | 241 ms              | 8.1.0                |
+| [SSD Mobilenet v1 0.25] | Int8   | 256x256x3  | STM32H747I   | 1 CPU            | 400 MHz   | 295 ms              | 8.1.0                |
 ## Images
-![coco2017 on gd32](https://github.com/HomiKetalys/gd32ai-modelzoo/blob/main/readme_resources/IMG20240221220127.jpg)
+![coco2017 on gd32](../../readme_resources/IMG20240221220127.jpg)
 
 
 

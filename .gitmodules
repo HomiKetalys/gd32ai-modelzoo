@@ -7,3 +7,6 @@
 [submodule "common_utils/onnx2tflite"]
 	path = common_utils/onnx2tflite
 	url = https://github.com/HomiKetalys/onnx2tflite
+[submodule "image_classification/ml_fastvit/submodules/ml_fastvit"]
+	path = image_classification/ml_fastvit/submodules/ml_fastvit
+	url = https://github.com/HomiKetalys/ml-fastvit

@@ -1,0 +1,19 @@
+{'data': 'modelzoo/ab_drive_0000/ab_drive.data', 'model_path': 'modelzoo/ab_drive_0000/best.pth', 'convert_type': 1, 'tflite_val_path': '../../../datasets/abnormal_drive_0/images', 'gd32_project_path': '', 'stm32cubeai_path': 'D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1', 'series': 'h7', 'conf_thr': 0.5, 'nms_thr': 0.5, 'eval': True, 'compiler': 1}
+pytorch_model_path:modelzoo/ab_drive_0000/best.pth
+load param...
+export onnx ...
+Checking 0/1...
+Checking 0/1...
+评估配置:
+model_name:abd
+width:256 height:256
+val:../../../datasets/abnormal_drive_0/val0.txt
+model_path:results/deploy\ab_drive_0000\tflite
+eval_type:onnx or tflite
+computer mAP...
+computer PR...
+Precision:[0.31090174966352624, 0.8379314075516607, 0.6452633728052266, 0.33223684210526316, 0.9411177058235882]
+Recall:[0.24972972972972973, 0.9126259353090203, 0.7242208982584785, 0.27671232876712326, 0.9049556421992428]
+AP:[0.13050118618770676, 0.8971370997361559, 0.6277315070948774, 0.14663879654240747, 0.9288185206483803]
+F1:[0.276978417266187, 0.873685101102682, 0.6824659900669401, 0.30194319880418524, 0.9226824912139194]
+Precision:0.613490 Recall:0.613649 AP:0.546165 F1:0.611551
