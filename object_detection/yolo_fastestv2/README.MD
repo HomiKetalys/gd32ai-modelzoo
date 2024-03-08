@@ -243,8 +243,8 @@ When nothing is precised in the model name, training is done using transfer lear
 | Yolo-FastestV2          | Int8   | 256x256x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 1304 ms             | 8.0.1                |
 | [SSD Mobilenet v1 0.25] | Int8   | 192x192x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 808 ms              | 8.0.1                |
 | [SSD Mobilenet v1 0.25] | Int8   | 256x256x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 1456 ms             | 8.0.1                |
-| Yolo-FastestV2          | Int8   | 192x192x3  | GD32F759IMK6 | 1 CPU            | 600 MHz   | 145 ms              | 8.0.1                |
-| Yolo-FastestV2          | Int8   | 256x256x3  | GD32F759IMK6 | 1 CPU            | 600 MHz   | 238 ms              | 8.0.1                |
+| Yolo-FastestV2          | Int8   | 192x192x3  | GD32H759IMK6 | 1 CPU            | 600 MHz   | 145 ms              | 8.0.1                |
+| Yolo-FastestV2          | Int8   | 256x256x3  | GD32H759IMK6 | 1 CPU            | 600 MHz   | 238 ms              | 8.0.1                |
 | [SSD Mobilenet v1 0.25] | Int8   | 192x192x3  | STM32H747I   | 1 CPU            | 400 MHz   | 241 ms              | 8.1.0                |
 | [SSD Mobilenet v1 0.25] | Int8   | 256x256x3  | STM32H747I   | 1 CPU            | 400 MHz   | 295 ms              | 8.1.0                |
 ## Images
