@@ -5,7 +5,7 @@ Here will provide some deep learning models that can be deployed on GD32 devices
  - The peak memory usage of the model is adjustable
  - The provided model can be retrained
 # Main features: Spatial separation model
-![Spatial separation model](https://github.com/HomiKetalys/gd32ai-modelzoo/blob/main/readme_resources/M%25V1R00%60N8WSR%289R%7D4%7B%5DYUC.png)
+![Spatial separation model](./readme_resources/model.png)
 
 
 # Available models
@@ -16,4 +16,10 @@ Here will provide some deep learning models that can be deployed on GD32 devices
 			 - COCO2017
 			 - Fusion of Abnormal Behavior Driving Dataset
 		 - Now available for deployment on the following devices
-			 - GD32F470IIH6
+             - GD32F470IIH6
+             - GD32H759IMK6
+ 
+# reference
+ - [onnx2tflite](https://github.com/MPolaris/onnx2tflite)
+ - [Yolo-FastestV2](https://github.com/dog-qiuqiu/Yolo-FastestV2)
+ - [facelandmarks](https://github.com/midasklr/facelandmarks)
