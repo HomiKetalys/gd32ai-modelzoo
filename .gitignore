@@ -4,4 +4,5 @@ __pycache__
 /object_detection/yolo_fastestv2/test_imgs/
 Listings
 Objects
-/image_classification
+/image_classification/ml_fastvit/test_imgs/
+/image_classification/ml_fastvit/results/
