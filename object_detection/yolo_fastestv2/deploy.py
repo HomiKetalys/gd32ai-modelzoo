@@ -99,8 +99,9 @@ def code_replace(line,cfg,tfmodel):
     spc = cfg["separation_scale"]
     conf_thr = opt.conf_thr
     nms_thr = opt.nms_thr
-    fix_factor0 = tfmodel.fix0
-    fix_factor1=tfmodel.fix1
+    if sp>0:
+        fix_factor0 = tfmodel.fix0
+        fix_factor1=tfmodel.fix1
 
     w,b=tfmodel.weight,tfmodel.bias
 
@@ -114,9 +115,15 @@ def code_replace(line,cfg,tfmodel):
     elif "NMS_THR_CODE" in line:
         line = f"#define NMS_THR {nms_thr}\n"
     elif "FIX_FACTOR0_CODE" in line:
-        line = f"#define FIX_FACTOR0 {fix_factor0}f\n"
+        if sp>0:
+            line = f"#define FIX_FACTOR0 {fix_factor0}f\n"
+        else:
+            line=""
     elif "FIX_FACTOR1_CODE" in line:
-        line = f"#define FIX_FACTOR1 {fix_factor1}f\n"
+        if sp>0:
+            line = f"#define FIX_FACTOR1 {fix_factor1}f\n"
+        else:
+            line=""
     elif "IMG_NORM_CODE" in line:
         line = f"#define IMG_NORM_BIAS_ONLY\n#define bias {int(b):d}"
     return line

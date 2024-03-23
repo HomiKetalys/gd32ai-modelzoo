@@ -5,7 +5,7 @@
 #ifdef GD32F470
 #include "gd32f470x_conf.h"
 #include "RCU.h"
-#elif GD32H7XX
+#elif defined(GD32H7XX)
 #include "gd32h7xx.h"
 #include "gd32h7xx_rcu.h"
 #endif
@@ -22,7 +22,7 @@
 #ifdef TO_EXT
 #ifdef GD32F470
 #define EXT_RAM_ADDR 0xD0E00000
-#elif GD32H7XX
+#elif defined(GD32H7XX)
 #define EXT_RAM_ADDR 0xC0080000
 #endif
 #endif
@@ -74,7 +74,7 @@ typedef struct
 {
     float confi;
     BBox bbox;
-	u32 cls_index;
+    u32 cls_index;
 }ObjectResult;
 
 void AI_Run(u8 *);

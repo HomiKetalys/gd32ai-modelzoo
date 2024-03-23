@@ -159,10 +159,12 @@ __inline void pixel_trans(u16 *rgb565, u8* r, u8* g, u8* b)
 	*r=*r+bias;
 	*g=*g+bias;
 	*b=*b+bias;
-#elif IMG_NORM
+#else
+#ifdef IMG_NORM
 	*r=clip((((float)*r)*weight_r+bias_r,0.f,255.f);
 	*g=clip((((float)*g)*weight_g+bias_g,0.f,255.f);
 	*b=clip((((float)*b)*weight_b+bias_b,0.f,255.f);
+#endif
 #endif
 
 }

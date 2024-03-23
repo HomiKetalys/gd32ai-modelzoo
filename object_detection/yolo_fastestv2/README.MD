@@ -18,11 +18,6 @@ $env:PYTHONPATH=$(pwd)
 cd gd32ai-modelzoo/object_detection/yolo_fastestv2
 ```
 
-- on linux
-```
-export PYTHONPATH=$(pwd)
-cd gd32ai-modelzoo/object_detection/yolo_fastestv2
-```
  3. Prepare your dataset.The directory structure of the dataset should be as follows:
 ```
   dataset
@@ -31,8 +26,8 @@ cd gd32ai-modelzoo/object_detection/yolo_fastestv2
   │   │   ├──img1.jpg
   │   │   └──img2.jpg
   │   └── title2
-  │   │   └──img3.jpg
-  │   │   └──img4.jpg
+  │       └──img3.jpg
+  │       └──img4.jpg
   ├── label0
   │   ├── title1
   │   │   ├──img1.txt
@@ -182,17 +177,17 @@ names=./configs/coco.names
  # Export And Evaluation
  Next, export the training results of the model as onnx or tflite.Execute the following command to export.
 ```
-  python pytorch2tflite.py --data results/train/coco_sp_0000/coco_sp.data --model_path results/train/coco_sp_0000/best.pth --convert_type 1 --onnx_output results/export/onnx --tflite_output results/export/tflite --tflite_val_path "{datasets_root}/COCO2017/images/val2017"
+  python pytorch2tflite.py --data results/train/coco_sp_0000/coco_sp.data --model_path results/train/coco_sp_0000/best.pth --convert_type 1 --tflite_val_path "{datasets_root}/COCO2017/images/val2017"
 ```
   `convert_type` controls the conversion type,0 for onnx,1 for tflite.If the exported file is of type tflite, it is quantized.
   Meanwhile, the exported model will be evaluated.
   # Deploy
   Next, deploy the exported model to GD32 device
   1. Install STM32CUBE-AI
-  The deployment tool used in this project is STM32CUBE-AI. It is based on STM32CUBEMX. STM32CUBEMX can be downloaded and from [here](https://www.st.com/zh/development-tools/stm32cubemx.html).Then install STM32CUBE-AI 8.0.1 in STM32CUBEMX.
+  The deployment tool used in this project is STM32CUBE-AI. It is based on STM32CUBEIDE. STM32CUBEIDE can be downloaded from [here](https://www.st.com/content/st_com/zh/stm32cubeide.html) .Then install STM32CUBE-AI 8.0.1 in STM32CUBEIDE.
   2. Install keil5 5.29,you can download it from [here](https://www.keil.com/update/rvmdk.asp)
   3. Download gcc-arm-none-eabi 10.3-2021.10 from [here](https://developer.arm.com/downloads/-/gnu-rm) 
-  4.  Download GD32H7xx AddOn from [here](https://www.gd32mcu.com/cn/download?kw=GD32H7) and install pack.
+  4. Download GD32H7xx AddOn from [here](https://www.gd32mcu.com/cn/download?kw=GD32H7) and install pack.
   5. Execute the following command to generate codes.
 ```
   python deploy.py --data results/train/coco_sp_0000/coco_sp.data --model_path results/train/coco_sp_0000/best.pth --convert_type 1 --tflite_val_path "{datasets_root}/COCO2017/images/val2017" --gd32_project_path deployment/gd32h759IMK6_GCC --series h7 --compiler 1
@@ -237,19 +232,19 @@ When nothing is precised in the model name, training is done using transfer lear
 \* EVAL_IOU = 0.5, NMS_THRESH = 0.4, SCORE_THRESH = 0.01
 # Results On GD32 Device
 ## Time
-| Model                   | Format | Resolution | Board        | Execution Engine | Frequency | Inference time (ms) | STM32Cube.AI version |
-|-------------------------|--------|------------|--------------|------------------|-----------|---------------------|----------------------|
-| Yolo-FastestV2          | Int8   | 192x192x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 748 ms              | 8.0.1                |
-| Yolo-FastestV2          | Int8   | 256x256x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 1304 ms             | 8.0.1                |
-| [SSD Mobilenet v1 0.25] | Int8   | 192x192x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 808 ms              | 8.0.1                |
-| [SSD Mobilenet v1 0.25] | Int8   | 256x256x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 1456 ms             | 8.0.1                |
-| Yolo-FastestV2          | Int8   | 192x192x3  | GD32H759IMK6 | 1 CPU            | 600 MHz   | 145 ms              | 8.0.1                |
-| Yolo-FastestV2          | Int8   | 256x256x3  | GD32H759IMK6 | 1 CPU            | 600 MHz   | 238 ms              | 8.0.1                |
-| [SSD Mobilenet v1 0.25] | Int8   | 192x192x3  | STM32H747I   | 1 CPU            | 400 MHz   | 241 ms              | 8.1.0                |
-| [SSD Mobilenet v1 0.25] | Int8   | 256x256x3  | STM32H747I   | 1 CPU            | 400 MHz   | 295 ms              | 8.1.0                |
+| Model                 | Format | Resolution | Board        | Execution Engine | Frequency | Inference time (ms) | STM32Cube.AI version |
+|-----------------------|--------|------------|--------------|------------------|-----------|---------------------|----------------------|
+| Yolo-FastestV2        | Int8   | 192x192x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 748 ms              | 8.0.1                |
+| Yolo-FastestV2        | Int8   | 256x256x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 1304 ms             | 8.0.1                |
+| SSD Mobilenet v1 0.25 | Int8   | 192x192x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 808 ms              | 8.0.1                |
+| SSD Mobilenet v1 0.25 | Int8   | 256x256x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 1456 ms             | 8.0.1                |
+| Yolo-FastestV2        | Int8   | 192x192x3  | GD32H759IMK6 | 1 CPU            | 600 MHz   | 145 ms              | 8.0.1                |
+| Yolo-FastestV2        | Int8   | 256x256x3  | GD32H759IMK6 | 1 CPU            | 600 MHz   | 238 ms              | 8.0.1                |
+| SSD Mobilenet v1 0.25 | Int8   | 192x192x3  | STM32H747I   | 1 CPU            | 400 MHz   | 241 ms              | 8.1.0                |
+| SSD Mobilenet v1 0.25 | Int8   | 256x256x3  | STM32H747I   | 1 CPU            | 400 MHz   | 295 ms              | 8.1.0                |
 ## Images
-![coco2017 on gd32](../../readme_resources/img1.png)
-![coco2017 on gd32](../../readme_resources/img2.png)
+![coco2017 on gd32](../../assets/img1.png)
+![coco2017 on gd32](../../assets/img2.png)
 
 
 
