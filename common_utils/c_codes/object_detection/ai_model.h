@@ -12,12 +12,9 @@
 
 #include "DataType.h"
 #include "stdio.h"
-//network1 import
-#include "network_1.h"
-#include "network_1_data.h"
 
 //#define TEST_TIME
-//to external ram
+//Put the buffer of the model into external memory.Ensure that your external memory is initialized before the model runs
 //#define TO_EXT
 #ifdef TO_EXT
 #ifdef GD32F470
@@ -30,17 +27,18 @@
 CONF_THR_CODE
 NMS_THR_CODE
 
-//seperation pos
+//network1 import
+#include "network_1.h"
+#include "network_1_data.h"
+//Location of spatial separation
 SEPARATION_CODE
 #if SEPARATION>0
 //network2 import
 #include "network_2.h"
 #include "network_2_data.h"
-
 SEPARATION_SCALE_CODE
 #define INPUT_HEIGHT SEPARATION_SCALE*AI_NETWORK_1_IN_1_HEIGHT
 #define INPUT_WIDTH SEPARATION_SCALE*AI_NETWORK_1_IN_1_WIDTH
-#define CLASS_NUM AI_NETWORK_2_OUT_1_CHANNEL-3
 FIX_FACTOR0_CODE
 FIX_FACTOR1_CODE
 #define ACTIVATION_SIZE AI_NETWORK_1_DATA_ACTIVATIONS_SIZE>AI_NETWORK_2_DATA_ACTIVATIONS_SIZE?AI_NETWORK_1_DATA_ACTIVATIONS_SIZE:AI_NETWORK_2_DATA_ACTIVATIONS_SIZE

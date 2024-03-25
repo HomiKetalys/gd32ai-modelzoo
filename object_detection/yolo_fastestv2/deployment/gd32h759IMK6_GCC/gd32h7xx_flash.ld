@@ -2,7 +2,7 @@
 MEMORY
 {
   FLASH (rx)      : ORIGIN = 0x08000000, LENGTH = 3840K
-  RAM (xrw)       : ORIGIN = 0x24000000, LENGTH = 576K
+  RAM (xrw)       : ORIGIN = 0x24000000, LENGTH = 512K
   ARM.__at_0xC1000000(xrw) : ORIGIN = 0xC1000000, LENGTH = 512K
   ARM.__at_0xC1080000(xrw) : ORIGIN = 0xC1080000, LENGTH = 512K
   DTCM(xrw) : ORIGIN = 0x20000000, LENGTH = 128K
@@ -127,20 +127,20 @@ SECTIONS
   
   .ARM.__at_0xC1000000 (NOLOAD) : ALIGN(4)
 {
-	. = ALIGN(4);
-	*(.ARM.__at_0xC1000000)
-	*(.ARM.__at_0xC1000000.*)
-	. = ALIGN(4);
-	__ARM.__at_0xC1000000_free__ = .;
+    . = ALIGN(4);
+    *(.ARM.__at_0xC1000000)
+    *(.ARM.__at_0xC1000000.*)
+    . = ALIGN(4);
+    __ARM.__at_0xC1000000_free__ = .;
 } > ARM.__at_0xC1000000
 
   .ARM.__at_0xC1080000 (NOLOAD) : ALIGN(4)
 {
-	. = ALIGN(4);
-	*(.ARM.__at_0xC1080000)
-	*(.ARM.__at_0xC1080000.*)
-	. = ALIGN(4);
-	__ARM.__at_0xC1080000_free__ = .;
+    . = ALIGN(4);
+    *(.ARM.__at_0xC1080000)
+    *(.ARM.__at_0xC1080000.*)
+    . = ALIGN(4);
+    __ARM.__at_0xC1080000_free__ = .;
 } > ARM.__at_0xC1080000
 
 

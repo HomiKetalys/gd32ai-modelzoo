@@ -196,15 +196,18 @@ names=./configs/coco.names
 6.  Compile and download code to flash memory。
 # Metrics
 The metrics ultimately exported as quantization model
+When nothing is precised in the model name, training is done using transfer learning technique from a pre-trained model. 
+Else, "tfs" stands for "training from scratch"."sp" represents the use of spatially separated model deployment
+Meanwhile, the table presents the metrics of the model in [stm32ai-modelzoo](https://github.com/STMicroelectronics/stm32ai-modelzoo/blob/main/object_detection/pretrained_models/README.md) .
+The metric of the model with an asterisk in its name comes from stm32ai model zoo
 ## On COCO2017 Person Dataset
-When nothing is precised in the model name, training is done using transfer learning technique from a pre-trained model. Else, "tfs" stands for "training from scratch".Meanwhile, the table presents the metrics of the model in [stm32ai-modelzoo](https://github.com/STMicroelectronics/stm32ai-modelzoo/blob/main/object_detection/pretrained_models/README.md).
 
 | model                 | Implementation | Dataset                     | Input Resolution | mAP*   | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version |
 |-----------------------|----------------|-----------------------------|------------------|--------|-----------|----------------------|---------------------|----------------------|
-| Yolo-FastestV2        | Pytorch        | COCO2017 val person dataset | 192x192x3        | 41.54% | 32.47     | 116.18               | 385.79              | 8.0.1                |
-| Yolo-FastestV2 tfs    | Pytorch        | COCO2017 val person dataset | 192x192x3        | 40.06% | 32.47     | 116.18               | 385.79              | 8.0.1                |
-| Yolo-FastestV2        | Pytorch        | COCO2017 val person dataset | 256x256x3        | 48.99% | 57.71     | 214.99               | 385.79              | 8.0.1                |
-| Yolo-FastestV2 tfs    | Pytorch        | COCO2017 val person dataset | 256x256x3        | 46.88% | 57.71     | 214.99               | 385.79              | 8.0.1                |
+| Yolo-FastestV2 sp     | Pytorch        | COCO2017 val person dataset | 192x192x3        | 41.54% | 32.47     | 116.18               | 385.79              | 8.0.1                |
+| Yolo-FastestV2 sp tfs | Pytorch        | COCO2017 val person dataset | 192x192x3        | 40.06% | 32.47     | 116.18               | 385.79              | 8.0.1                |
+| Yolo-FastestV2 sp     | Pytorch        | COCO2017 val person dataset | 256x256x3        | 48.99% | 57.71     | 214.99               | 385.79              | 8.0.1                |
+| Yolo-FastestV2 sp tfs | Pytorch        | COCO2017 val person dataset | 256x256x3        | 46.88% | 57.71     | 214.99               | 385.79              | 8.0.1                |
 | SSD MobileNet v1 0.25 | TensorFlow     | COCO2017 val person dataset | 192x192x3        | 33.52% | 40.54     | 249.54               | 438.28              | 8.1.0                |
 | SSD MobileNet v1 0.25 | TensorFlow     | COCO2017 val person dataset | 256x256x3        | 47.50% | 72.40     | 439.34               | 470.13              | 8.1.0                |
 | ST Yolo LC v1 tfs     | TensorFlow     | COCO2017 val person dataset | 192x192x3        | 39.92% | 61.9      | 157.44               | 276.73              | 7.3.0                |
@@ -214,32 +217,32 @@ When nothing is precised in the model name, training is done using transfer lear
 ## On COCO2017 Val Dataset
 When nothing is precised in the model name, training is done using transfer learning technique from a pre-trained model. Else, "tfs" stands for "training from scratch".
 
-| model              | Implementation | Dataset              | Input Resolution | mAP*   | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version |
-|--------------------|----------------|----------------------|------------------|--------|-----------|----------------------|---------------------|----------------------|
-| Yolo-FastestV2     | Pytorch        | COCO2017 val dataset | 192x192x3        | 17.45% | 32.47     | 116.18               | 385.79              | 8.0.1                |
-| Yolo-FastestV2 tfs | Pytorch        | COCO2017 val dataset | 192x192x3        | 11.78% | 32.47     | 116.18               | 385.79              | 8.0.1                |
-| Yolo-FastestV2     | Pytorch        | COCO2017 val dataset | 256x256x3        | 21.23% | 57.71     | 214.99               | 385.79              | 8.0.1                |
-| Yolo-FastestV2 tfs | Pytorch        | COCO2017 val dataset | 256x256x3        | 16.06% | 57.71     | 214.99               | 385.79              | 8.0.1                |
+| model                 | Implementation | Dataset              | Input Resolution | mAP*   | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version |
+|-----------------------|----------------|----------------------|------------------|--------|-----------|----------------------|---------------------|----------------------|
+| Yolo-FastestV2 sp     | Pytorch        | COCO2017 val dataset | 192x192x3        | 17.45% | 32.47     | 116.18               | 385.79              | 8.0.1                |
+| Yolo-FastestV2 sp tfs | Pytorch        | COCO2017 val dataset | 192x192x3        | 11.78% | 32.47     | 116.18               | 385.79              | 8.0.1                |
+| Yolo-FastestV2 sp     | Pytorch        | COCO2017 val dataset | 256x256x3        | 21.23% | 57.71     | 214.99               | 385.79              | 8.0.1                |
+| Yolo-FastestV2 sp tfs | Pytorch        | COCO2017 val dataset | 256x256x3        | 16.06% | 57.71     | 214.99               | 385.79              | 8.0.1                |
 
 \* EVAL_IOU = 0.4, NMS_THRESH = 0.5, SCORE_THRESH = 0.001
 ## On Fusion of Abnormal Behavior Driving Dataset(FABD)
 When nothing is precised in the model name, training is done using transfer learning technique from a pre-trained model. Else, "tfs" stands for "training from scratch".
 
-| model              | Implementation | Dataset | Input Resolution | mAP*   | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version |
-|--------------------|----------------|---------|------------------|--------|-----------|----------------------|---------------------|----------------------|
-| Yolo-FastestV2 tfs | Pytorch        | FABD    | 256x256x3        | 54.62% | 57.71     | 214.99               | 385.79              | 8.0.1                |
+| model                 | Implementation | Dataset | Input Resolution | mAP*   | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version |
+|-----------------------|----------------|---------|------------------|--------|-----------|----------------------|---------------------|----------------------|
+| Yolo-FastestV2 sp tfs | Pytorch        | FABD    | 256x256x3        | 54.62% | 57.71     | 214.99               | 385.79              | 8.0.1                |
 
 \* EVAL_IOU = 0.5, NMS_THRESH = 0.4, SCORE_THRESH = 0.01
 # Results On GD32 Device
 ## Time
 | Model                 | Format | Resolution | Board        | Execution Engine | Frequency | Inference time (ms) | STM32Cube.AI version |
 |-----------------------|--------|------------|--------------|------------------|-----------|---------------------|----------------------|
-| Yolo-FastestV2        | Int8   | 192x192x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 748 ms              | 8.0.1                |
-| Yolo-FastestV2        | Int8   | 256x256x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 1304 ms             | 8.0.1                |
+| Yolo-FastestV2 sp     | Int8   | 192x192x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 748 ms              | 8.0.1                |
+| Yolo-FastestV2 sp     | Int8   | 256x256x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 1304 ms             | 8.0.1                |
 | SSD Mobilenet v1 0.25 | Int8   | 192x192x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 808 ms              | 8.0.1                |
 | SSD Mobilenet v1 0.25 | Int8   | 256x256x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 1456 ms             | 8.0.1                |
-| Yolo-FastestV2        | Int8   | 192x192x3  | GD32H759IMK6 | 1 CPU            | 600 MHz   | 145 ms              | 8.0.1                |
-| Yolo-FastestV2        | Int8   | 256x256x3  | GD32H759IMK6 | 1 CPU            | 600 MHz   | 238 ms              | 8.0.1                |
+| Yolo-FastestV2 sp     | Int8   | 192x192x3  | GD32H759IMK6 | 1 CPU            | 600 MHz   | 145 ms              | 8.0.1                |
+| Yolo-FastestV2 sp     | Int8   | 256x256x3  | GD32H759IMK6 | 1 CPU            | 600 MHz   | 238 ms              | 8.0.1                |
 | SSD Mobilenet v1 0.25 | Int8   | 192x192x3  | STM32H747I   | 1 CPU            | 400 MHz   | 241 ms              | 8.1.0                |
 | SSD Mobilenet v1 0.25 | Int8   | 256x256x3  | STM32H747I   | 1 CPU            | 400 MHz   | 295 ms              | 8.1.0                |
 ## Images

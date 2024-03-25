@@ -3,17 +3,17 @@ data_dir: ../../../datasets/food-101
 global_act: ReLU6
 batch_size: 512
 lr: 0.004
-separation: 0
+separation: 3
 separation_scale: 2
 imagenet_trainset_size: '75750'
 input_size:
 - 3
-- 224
-- 224
+- 128
+- 128
 epochs: 200
 num_classes: 101
 model: fastvit_t4
-model_ema: true
+model_ema: false
 aa: rand-m9-mstd0.5-inc1
 amp: false
 apex_amp: false

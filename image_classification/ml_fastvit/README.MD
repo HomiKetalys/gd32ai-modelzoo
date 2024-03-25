@@ -89,26 +89,39 @@ Taking the training model fastvit-t4 on the food-101 dataset as an example, Exec
 6.  Compile and download code to flash memory。
 # Metrics
 The metrics ultimately exported as quantization model
+When nothing is precised in the model name, training is done using transfer learning technique from a pre-trained model. 
+Else, "tfs" stands for "training from scratch"."sp" represents the use of spatially separated model deployment
+Meanwhile, the table presents the metrics of the model in [stm32ai-modelzoo](https://github.com/STMicroelectronics/stm32ai-modelzoo/blob/main/object_detection/pretrained_models/README.md) .
+The metric of the model with an asterisk in its name comes from stm32ai model zoo
 ## On Food-101 Dataset
-When nothing is precised in the model name, training is done using transfer learning technique from a pre-trained model. Else, "tfs" stands for "training from scratch".Meanwhile, the table presents the metrics of the model in [stm32ai-modelzoo](https://github.com/STMicroelectronics/stm32ai-modelzoo/blob/main/object_detection/pretrained_models/README.md) .The metric of the model with an asterisk in its name comes from stm32ai model zoo
 
 | model                  | Implementation | Dataset  | Input Resolution | Top 1 Accuracy (%) | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version |
 |------------------------|----------------|----------|------------------|--------------------|-----------|----------------------|---------------------|----------------------|
-| FastVit tfs            | Pytorch        | food-101 | 192x192x3        | 71.88%             | 39.89     | 255.32               | 371.82              | 8.0.1                |
-| MobileNet v1 0.25 tfs* | TensorFlow     | food-101 | 224x224x3        | 71.33%             | 41.10     | 202.33               | 223.32              | 8.1.0                |
-| MobileNet v2 0.35 tfs* | TensorFlow     | food-101 | 224x224x3        | 72.05%             | 58.59     | 686.50               | 527.24              | 8.1.0                |
+| FastVit tfs            | Pytorch        | food-101 | 192x192x3        | 72.05              | 39.89     | 255.32               | 371.82              | 8.0.1                |
+| FastVit tfs sp         | Pytorch        | food-101 | 192x192x3        | 71.53              | 39.89     | 73.38                | 397.54              | 8.0.1                |
+| FastVit tfs            | Pytorch        | food-101 | 224x224x3        | 75.08              | 54.27     | 335.38               | 371.82              | 8.0.1                |
+| FastVit tfs sp         | Pytorch        | food-101 | 224x224x3        | 74.59              | 54.27     | 91.62                | 397.54              | 8.0.1                |
+| FastVit tfs sp         | Pytorch        | food-101 | 128x128x3        | 67.58              | 17.76     | 51.96                | 397.54              | 8.0.1                |
+| MobileNet v1 0.25 tfs* | TensorFlow     | food-101 | 224x224x3        | 71.33              | 41.10     | 202.33               | 223.32              | 8.1.0                |
+| MobileNet v1 0.5 tfs*  | TensorFlow     | food-101 | 224x224x3        | 76.37              | 149.37    | 404.66               | 860.99              | 8.1.0                |
+| MobileNet v2 0.35 tfs* | TensorFlow     | food-101 | 224x224x3        | 72.05              | 58.59     | 686.50               | 527.24              | 8.1.0                |
+| MobileNet v2 0.35 tfs* | TensorFlow     | food-101 | 128x128x3        | 61.31              | 19.224    | 225.17               | 527.24              | 8.1.0                |
 
 # Results On GD32 Device
-The metric of the model with an asterisk in its name comes from stm32ai model zoo
 ## Time
-| Model             | Format | Resolution | Board            | Execution Engine | Frequency | Inference time (ms) | STM32Cube.AI version |
-|-------------------|--------|------------|------------------|------------------|-----------|---------------------|----------------------|
-| FastVit           | Int8   | 192x192x3  | GD32H759IMK6     | 1 CPU            | 600 MHz   | 176 ms              | 8.0.1                |
-| MobileNet v1 0.25 | Int8   | 224x224x3  | STM32H747I-DISCO | 1 CPU            | 400 MHz   | 181 ms              | 8.1.0                |
-| MobileNet v2 0.35 | Int8   | 224x224x3  | STM32H747I-DISCO | 1 CPU            | 400 MHz   | 363 ms              | 8.1.0                |
+| Model                 | Format | Resolution | Board            | Execution Engine | Frequency | Inference time (ms) | STM32Cube.AI version |
+|-----------------------|--------|------------|------------------|------------------|-----------|---------------------|----------------------|
+| FastVit               | Int8   | 192x192x3  | GD32H759IMK6     | 1 CPU            | 600 MHz   | 177 ms              | 8.0.1                |
+| FastVit sp            | Int8   | 192x192x3  | GD32H759IMK6     | 1 CPU            | 600 MHz   | 186 ms              | 8.0.1                |
+| FastVit               | Int8   | 224x224x3  | GD32H759IMK6     | 1 CPU            | 600 MHz   | 236 ms              | 8.0.1                |
+| FastVit sp            | Int8   | 224x224x3  | GD32H759IMK6     | 1 CPU            | 600 MHz   | 245 ms              | 8.0.1                |
+| MobileNet v1 0.25*    | Int8   | 224x224x3  | STM32H747I-DISCO | 1 CPU            | 400 MHz   | 181 ms              | 8.1.0                |
+| MobileNet v2 0.35*    | Int8   | 224x224x3  | STM32H747I-DISCO | 1 CPU            | 400 MHz   | 363 ms              | 8.1.0                |
+| MobileNet v1 0.5 fft* | Int8   | 224x224x3  | STM32H747I-DISCO | 1 CPU            | 400 MHz   | 525 ms              | 8.1.0                |
 
 ## Images
-![fastvit on gd32](../../assets/img3.jpg)
+![fastvit on gd32](../../assets/img4.png)
+![fastvit on gd32](../../assets/img5.png)
 
 
 

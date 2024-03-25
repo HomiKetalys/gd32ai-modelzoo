@@ -12,7 +12,7 @@ import os
 
 from submodules.ml_fastvit.validate import ClassifierTfOrt
 from pytorch2tflite import export
-
+from common_utils.utils import img2rgb565code
 
 
 
@@ -82,7 +82,7 @@ def copy_stlib(opt, stm32ai_path, stlib_path):
 
 
 
-def code_replace(line,cfg,tfmodel):
+def code_replace(line,cfg,tfmodel,opt):
     sp = cfg["separation"]
     spc = cfg["separation_scale"]
     if sp>0:
@@ -119,6 +119,18 @@ def code_replace(line,cfg,tfmodel):
                f"#define weight_r {1/std[0]/w}f\n" \
                f"#define weight_g {1/std[1]/w}f\n" \
                f"#define weight_b {1/std[2]/w}f\n"
+    elif "EXAMPLE_IMG_CODE" in line:
+        if opt.example_img_path is None:
+            line=""
+        else:
+            assert os.path.exists(opt.example_img_path),"example img does not exist"
+            img_code=img2rgb565code(opt.example_img_path,opt.img_size)
+            line=f"{img_code}\n"
+    elif "USE_EXAMPLE_CODE" in line:
+        if opt.example_img_path is None:
+            line=""
+        else:
+            line=f"#define USE_EXAMPLE\n"
 
     return line
 
@@ -132,7 +144,7 @@ def gen_ai_model_codes(opt, ai_model_path, tflite_path):
         lines = f.readlines()
     with open(os.path.join(ai_model_path, "ai_model.h"), "w", encoding="utf-8") as f:
         for line in lines:
-            line=code_replace(line,cfg,tfmodel)
+            line=code_replace(line,cfg,tfmodel,opt)
             if len(line)>0:
                 f.write(line)
 
@@ -140,7 +152,7 @@ def gen_ai_model_codes(opt, ai_model_path, tflite_path):
         lines = f.readlines()
     with open(os.path.join(ai_model_path, "ai_model.c"), "w", encoding="utf-8") as f:
         for line in lines:
-            line = code_replace(line,cfg,tfmodel)
+            line = code_replace(line,cfg,tfmodel,opt)
             if len(line)>0:
                 f.write(line)
 
@@ -196,7 +208,8 @@ def deploy_main(opt, save_path, gd32_path):
 
 
 paths = [
-
+    "results/train/20240323-183131-fastvit_t4-224/",
+    "modelzoo/20240318-110647-fastvit_t4-224/"
 ]
 val_paths=[
 
@@ -206,9 +219,9 @@ val_paths=[
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config', type=str, default='modelzoo/20240318-110647-fastvit_t4-224/food-101.yaml',
+    parser.add_argument('--config', type=str, default='modelzoo/food-101-sp-128/food-101.yaml',
                         help='Specify training profile *.data')
-    parser.add_argument('--model_path', type=str, default="modelzoo/20240318-110647-fastvit_t4-224/model_best.pth.tar",
+    parser.add_argument('--model_path', type=str, default="modelzoo/food-101-sp-128/model_best.pth.tar",
                         help='The path of the model')
     parser.add_argument('--convert_type', type=int, default=1,
                         help='only 1,for tflite')
@@ -225,8 +238,10 @@ if __name__ == "__main__":
                         help='eval exported model')
     parser.add_argument('--compiler', type=int, default=1,
                         help='compiler type,0 for armcc,1 fro gcc')
-    parser.add_argument('--img_size', type=int,nargs='+' ,default=(192,192),
+    parser.add_argument('--img_size', type=int,nargs='+' ,default=(128,128),
                         help='Specify the image size of the input for the exported model.the img size in config is default')
+    parser.add_argument('--example_img_path', type=str, default=None,
+                        help='The path to the sample image, if you want to test the sample image on the device')
     opt = parser.parse_args()
     lger = LogSaver(opt.config, "results/deploy")
     lger.collect_prints(deploy_main, opt, lger.result_path, lger.result_path)

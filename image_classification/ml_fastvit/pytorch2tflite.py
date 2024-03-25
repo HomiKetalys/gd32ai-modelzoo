@@ -171,9 +171,9 @@ def export(opt,save_path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config', type=str, default="modelzoo/20240318-110647-fastvit_t4-224/food-101.yaml",
+    parser.add_argument('--config', type=str, default="results/train/20240323-183131-fastvit_t4-224/food-101.yaml",
                         help='Specify training profile *.data')
-    parser.add_argument('--model_path', type=str, default="modelzoo/20240318-110647-fastvit_t4-224/model_best.pth.tar",
+    parser.add_argument('--model_path', type=str, default="results/train/20240323-183131-fastvit_t4-224/model_best.pth.tar",
                         help='The path of the model')
     parser.add_argument('--convert_type', type=int, default=1,
                         help='model type,0 for onnx,1 for tflite')

@@ -1,5 +1,4 @@
 #include "ai_model.h"
-#include <stdio.h>
 ai_handle network1;
 #if SEPARATION>0
 ai_handle network2;
@@ -36,6 +35,7 @@ ai_u8 activations[ACTIVATION_SIZE];
 
 IMG_NORM_CODE
 
+EXAMPLE_IMG_CODE
 
 ai_buffer * ai_input1;
 ai_buffer * ai_output1;
@@ -98,11 +98,11 @@ void AI_Init(u32 img_width_,u32 img_height_,u32 img_type_)
     img_height=img_height_;
     img_type=img_type_;
 
-  /* Create a local array with the addresses of the activations buffers */
-//  const ai_handle act_addr[] = { activations0,activations1 };
+    /* Create a local array with the addresses of the activations buffers */
+//    const ai_handle act_addr[] = { activations0,activations1 };
     const ai_handle act_addr[] = { activations };
 
-  /* Create an instance of the model */
+    /* Create an instance of the model */
     err1 = ai_network_1_create_and_init(&network1, act_addr, NULL);
     if (err1.type != AI_ERROR_NONE) {
         printf("ai_network_create error - type=%d code=%d\r\n", err1.type, err1.code);
@@ -127,15 +127,20 @@ void AI_Init(u32 img_width_,u32 img_height_,u32 img_type_)
 }
 
 
-void RGB565ToRGB888C(u16 *rgb565, u8*, u8*, u8*);
+__inline void RGB565ToRGB888C(u16 *rgb565, u8* r, u8* g, u8* b)
+{
+    *r = ((0xF800 & *rgb565) >> 8) ;
+    *g = ((0x07E0 & *rgb565) >> 3 ) ;
+    *b = ((0x001F & *rgb565) << 3 ) ;
+}
 
-float clip(float x,float low,float high)
+__inline float clip(float x,float low,float high)
 {
     x=x>low?x:low;
     return x<high?x:high;
 }
 
-void pixel_trans(u16 *rgb565, u8* r, u8* g, u8* b)
+__inline void pixel_trans(u16 *rgb565, u8* r, u8* g, u8* b)
 {
     RGB565ToRGB888C(rgb565,r,g,b);
 #ifdef IMG_NORM_BIAS_ONLY

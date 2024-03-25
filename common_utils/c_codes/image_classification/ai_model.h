@@ -12,12 +12,10 @@
 
 #include "DataType.h"
 #include "stdio.h"
-//network1 import
-#include "network_1.h"
-#include "network_1_data.h"
+
 
 //#define TEST_TIME
-//to external ram
+//Put the buffer of the model into external memory.Ensure that your external memory is initialized before the model runs
 //#define TO_EXT
 #ifdef TO_EXT
 #ifdef GD32F470
@@ -27,8 +25,10 @@
 #endif
 #endif
 
-
-//seperation pos
+//network1 import
+#include "network_1.h"
+#include "network_1_data.h"
+//Location of spatial separation
 SEPARATION_CODE
 #if SEPARATION>0
 //network2 import
@@ -59,6 +59,8 @@ typedef signed char ai1_out_type;
 typedef float ai1_out_type;
 
 #endif
+
+USE_EXAMPLE_CODE
 
 void AI_Run(u8 *);
 void AI_Init(u32,u32,u32);

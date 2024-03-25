@@ -278,37 +278,34 @@ def gmm_main():
     plt.show()
     input()
 
-def img2rgb565code(img_path):
+def img2rgb565code(img_path,img_size=(192,192)):
     img = Image.open(img_path)
     tfs = transforms.Compose(
         [
-            transforms.Resize(220),
-            transforms.CenterCrop((192,192)),
+            transforms.Resize(int(img_size[0]/0.875)),
+            transforms.CenterCrop(img_size),
             ToNumpy(),
         ]
     )
     img = tfs(img)
     img=np.transpose(img,(1,2,0)).astype("int")
-    # img[:,:,0]=0
-    # img[:, :, 1] = 255
-    # img[:, :, 2] = 0
     img_rgb565=(img[:,:,0]//2**3)*2**11+(img[:,:,1]//2**2)*2**5+img[:,:,2]//2**3
     img_rgb565=img_rgb565.astype("uint16")
     img_rgb565=np.rot90(img_rgb565,2)
     img_rgb565_=img_rgb565.tobytes()
-    code="const u8 test_img[192*192*2]={"
-    for i in range(0,192*192*2):
+    code=f"const u8 example_img[{img_size[0]}*{img_size[1]}*2]="+"{"
+    for i in range(0,img_size[0]*img_size[1]*2):
         a="0x"+img_rgb565_[i:i+1].hex()
-        if i!=192*192*2-1:
+        if i!=img_size[0]*img_size[1]*2-1:
             a+=","
         else:
             a+="};"
         code+=a
-    print(code)
+    return code
 
 
 
 
 
 if __name__ == "__main__":
-    img2rgb565code("../image_classification/ml_fastvit/test_imgs/1005066.jpg")
+    print(img2rgb565code("../image_classification/ml_fastvit/test_imgs/840315.jpg",(192,192)))

@@ -80,17 +80,17 @@ static void Proc2msTask(void);        //2ms处理任务
 *********************************************************************************************************/
 static  void  InitSoftware(void)
 {
-  InitLED();             //初始化LED模块
-  InitLCD();             //初始化LCD模块
-  InitMemory(SRAMIN);    //初始化内部内存池
-  InitMemory(SDRAMEX);   //初始化外部内存池
-//  InitFatFs();           //挂载文件系统
-  InitFontLib();         //初始化字库管理模块
-//  InitJPEG();            //初始化绘制JPEG模块
-//  InitBMP();             //初始化位图绘制模块
-  InitTouch();           //初始化触摸屏模块
-  InitCamera();          //初始化摄像头模块
-	InitBeep();            //初始化蜂鸣器模块
+    InitLED();             //初始化LED模块
+    InitLCD();             //初始化LCD模块
+    InitMemory(SRAMIN);    //初始化内部内存池
+    InitMemory(SDRAMEX);   //初始化外部内存池
+//    InitFatFs();           //挂载文件系统
+    InitFontLib();         //初始化字库管理模块
+//    InitJPEG();            //初始化绘制JPEG模块
+//    InitBMP();             //初始化位图绘制模块
+    InitTouch();           //初始化触摸屏模块
+    InitCamera();          //初始化摄像头模块
+      InitBeep();            //初始化蜂鸣器模块
 }
 
 /*********************************************************************************************************
@@ -105,14 +105,14 @@ static  void  InitSoftware(void)
 static  void  InitHardware(void)
 {  
 
-  SystemInit();        //系统初始化
-  InitRCU();           //初始化RCC模块
-  InitNVIC();          //初始化NVIC模块
-  InitUART0(115200);   //初始化UART模块
-	InitUART2(115200);
-  InitTimer();         //初始化Timer模块
-  InitSysTick();       //初始化SysTick模块
-	
+    SystemInit();        //系统初始化
+    InitRCU();           //初始化RCC模块
+    InitNVIC();          //初始化NVIC模块
+    InitUART0(115200);   //初始化UART模块
+    InitUART2(115200);
+    InitTimer();         //初始化Timer模块
+    InitSysTick();       //初始化SysTick模块
+    
 }
 /*********************************************************************************************************
 * 函数名称：Proc1msTask
@@ -125,15 +125,15 @@ static  void  InitHardware(void)
 *********************************************************************************************************/
 static  void  Proc1msTask(void)
 {
-  static u8 s_iCnt = 0;
-  if(Get1msFlag())
-  {
-    s_iCnt++;
-    if(s_iCnt >= 20)
+    static u8 s_iCnt = 0;
+    if(Get1msFlag())
     {
-      ScanTouch();  //触摸屏扫描
-      s_iCnt = 0;
-    }
+        s_iCnt++;
+        if(s_iCnt >= 20)
+        {
+            ScanTouch();  //触摸屏扫描
+            s_iCnt = 0;
+        }
     Clr1msFlag();
   }
 }
@@ -148,12 +148,12 @@ static  void  Proc1msTask(void)
 *********************************************************************************************************/
 static  void  Proc2msTask(void)
 { 
-//	static u8 s_iCnt = 0;
+//    static u8 s_iCnt = 0;
   if(Get2msFlag())  //判断2ms标志状态
   { 
     //调用闪烁函数
     LEDFlicker(250);
-		
+        
 //    s_iCnt++;
 //    if(s_iCnt >= 20)
 //    {
@@ -187,74 +187,74 @@ extern ObjectResult results[];
 extern u32 object_num;
 
 const char* activities[80] = {"person","bicycle","car","motorbike","aeroplane","bus","train","truck","boat","traffic light","fire hydrant","stop sign",
-	"parking meter","bench","bird","cat","dog","horse","sheep","cow","elephant","bear","zebra","giraffe","backpack","umbrella","handbag","tie","suitcase",
-	"frisbee","skis","snowboard","sports ball","kite","baseball bat","baseball glove","skateboard","surfboard","tennis racket","bottle","wine glass","cup",
-	"fork","knife","spoon","bowl","banana","apple","sandwich","orange","broccoli","carrot","hot dog","pizza","donut","cake","chair","sofa","pottedplant",
-	"bed","diningtable","toilet","tvmonitor","laptop","mouse","remote","keyboard","cell phone","microwave","oven","toaster","sink","refrigerator","book",
-	"clock","vase","scissors","teddy bear","hair drier","toothbrush"
+    "parking meter","bench","bird","cat","dog","horse","sheep","cow","elephant","bear","zebra","giraffe","backpack","umbrella","handbag","tie","suitcase",
+    "frisbee","skis","snowboard","sports ball","kite","baseball bat","baseball glove","skateboard","surfboard","tennis racket","bottle","wine glass","cup",
+    "fork","knife","spoon","bowl","banana","apple","sandwich","orange","broccoli","carrot","hot dog","pizza","donut","cake","chair","sofa","pottedplant",
+    "bed","diningtable","toilet","tvmonitor","laptop","mouse","remote","keyboard","cell phone","microwave","oven","toaster","sink","refrigerator","book",
+    "clock","vase","scissors","teddy bear","hair drier","toothbrush"
 };
 
 //检测一次
 void detect_once(void)
 {
-	while(!((1 == get_frame_flag())));
-	u32 i,x, y,t0,t1,t2;
-	char str[128];
-	u16 *frame=(u16 *) frame_addr;
-	
-	time_start();
-	
-	t0=get_time_stamp();
-	AI_Run((u8 *)frame);
-	t1=get_time_stamp();
-	t0=t1-t0;
+    while(!((1 == get_frame_flag())));
+    u32 i,x, y,t0,t1,t2;
+    char str[128];
+    u16 *frame=(u16 *) frame_addr;
+    
+    time_start();
+    
+    t0=get_time_stamp();
+    AI_Run((u8 *)frame);
+    t1=get_time_stamp();
+    t0=t1-t0;
 
 
-	//将结果显示在屏幕
-	t1=get_time_stamp();
-	for(y = 24; y <= LCD_Y-1; y++)
-	{
-		for(x = 0; x <= LCD_X-1; x++)
-		{
-			if((x>=SHOW_X0)&&(x<=SHOW_X1)&&(y>=SHOW_Y0)&&(y<=SHOW_Y1))
-				LCDDrawPoint(x, y, frame[IMAGE_HEIGHT*IMAGE_WIDTH-1-(y-SHOW_Y0)*IMAGE_WIDTH-(x-SHOW_X0)]);
-			else
-				LCDDrawPoint(x, y, 0xffff);
-		}
-	}
+    //将结果显示在屏幕
+    t1=get_time_stamp();
+    for(y = 24; y <= LCD_Y-1; y++)
+    {
+        for(x = 0; x <= LCD_X-1; x++)
+        {
+            if((x>=SHOW_X0)&&(x<=SHOW_X1)&&(y>=SHOW_Y0)&&(y<=SHOW_Y1))
+                LCDDrawPoint(x, y, frame[IMAGE_HEIGHT*IMAGE_WIDTH-1-(y-SHOW_Y0)*IMAGE_WIDTH-(x-SHOW_X0)]);
+            else
+                LCDDrawPoint(x, y, 0xffff);
+        }
+    }
 #ifndef TEST_TIME
-	
-	for(i=0;i<object_num;i++)
-	{
-		LCDShowString(SHOW_X0+(u32)results[i].bbox.x_min,SHOW_Y0+(u32)results[i].bbox.y_min-16,480-1,16,LCD_FONT_16,LCD_TEXT_TRANS,0x07f0,0xffff,(char *) activities[results[i].cls_index]);
-		LCDDrawRectangle(SHOW_X0+(u32)results[i].bbox.x_min,SHOW_Y0+(u32)results[i].bbox.y_min,SHOW_X0+(u32)results[i].bbox.x_max,SHOW_Y0+(u32)results[i].bbox.y_max,0xfff0);
-	}
+    
+    for(i=0;i<object_num;i++)
+    {
+        LCDShowString(SHOW_X0+(u32)results[i].bbox.x_min,SHOW_Y0+(u32)results[i].bbox.y_min-16,480-1,16,LCD_FONT_16,LCD_TEXT_TRANS,0x07f0,0xffff,(char *) activities[results[i].cls_index]);
+        LCDDrawRectangle(SHOW_X0+(u32)results[i].bbox.x_min,SHOW_Y0+(u32)results[i].bbox.y_min,SHOW_X0+(u32)results[i].bbox.x_max,SHOW_Y0+(u32)results[i].bbox.y_max,0xfff0);
+    }
 #endif
-	t2=get_time_stamp();
-	t1=t2-t1;
-	
-	u32 sys=rcu_clock_freq_get(CK_SYS)/1000000;
-	u32 ahb=rcu_clock_freq_get(CK_AHB)/1000000;
-	u32 apb1=rcu_clock_freq_get(CK_APB1)/1000000;
-	u32 apb2=rcu_clock_freq_get(CK_APB2)/1000000;
+    t2=get_time_stamp();
+    t1=t2-t1;
+    
+    u32 sys=rcu_clock_freq_get(CK_SYS)/1000000;
+    u32 ahb=rcu_clock_freq_get(CK_AHB)/1000000;
+    u32 apb1=rcu_clock_freq_get(CK_APB1)/1000000;
+    u32 apb2=rcu_clock_freq_get(CK_APB2)/1000000;
 
  
-	sprintf(str,"infer_time:%dms",t0);
-	LCDShowString(0,24*1,24*20-1,24,LCD_FONT_24,LCD_TEXT_NORMAL,0,0xffff,str);
-	sprintf(str,"display_time:%dms",t1);
-	LCDShowString(0,24*2,24*20-1,24,LCD_FONT_24,LCD_TEXT_NORMAL,0,0xffff,str);
-	sprintf(str,"SYS:%dMHz",sys);
-	LCDShowString(0,24*3,24*10-1,24,LCD_FONT_24,LCD_TEXT_NORMAL,0,0xffff,str);
-	sprintf(str,"AHB:%dMHz",ahb);
-	LCDShowString(0,24*4,24*10-1,24,LCD_FONT_24,LCD_TEXT_NORMAL,0,0xffff,str);
-	sprintf(str,"APB1:%dMHz",apb1);
-	LCDShowString(0,24*5,24*10-1,24,LCD_FONT_24,LCD_TEXT_NORMAL,0,0xffff,str);
-	sprintf(str,"APB2:%dMHz",apb2);
-	LCDShowString(0,24*6,24*10-1,24,LCD_FONT_24,LCD_TEXT_NORMAL,0,0xffff,str);
-	
-	//开启下一帧传输
-	clear_frame_flag();
-	ConfigDCI();
+    sprintf(str,"infer_time:%dms",t0);
+    LCDShowString(0,24*1,24*20-1,24,LCD_FONT_24,LCD_TEXT_NORMAL,0,0xffff,str);
+    sprintf(str,"display_time:%dms",t1);
+    LCDShowString(0,24*2,24*20-1,24,LCD_FONT_24,LCD_TEXT_NORMAL,0,0xffff,str);
+    sprintf(str,"SYS:%dMHz",sys);
+    LCDShowString(0,24*3,24*10-1,24,LCD_FONT_24,LCD_TEXT_NORMAL,0,0xffff,str);
+    sprintf(str,"AHB:%dMHz",ahb);
+    LCDShowString(0,24*4,24*10-1,24,LCD_FONT_24,LCD_TEXT_NORMAL,0,0xffff,str);
+    sprintf(str,"APB1:%dMHz",apb1);
+    LCDShowString(0,24*5,24*10-1,24,LCD_FONT_24,LCD_TEXT_NORMAL,0,0xffff,str);
+    sprintf(str,"APB2:%dMHz",apb2);
+    LCDShowString(0,24*6,24*10-1,24,LCD_FONT_24,LCD_TEXT_NORMAL,0,0xffff,str);
+    
+    //开启下一帧传输
+    clear_frame_flag();
+    ConfigDCI();
 }
 
 
@@ -270,18 +270,18 @@ void detect_once(void)
 *********************************************************************************************************/
 int main(void)
 {  
-  InitHardware(); //初始化硬件相关函数
-  InitSoftware(); //初始化软件相关函数
-	
-	AI_Init(IMAGE_WIDTH,IMAGE_HEIGHT,0);
-	LCDClear(0xffff);
-	LCDShowString(0,0,24*20-1,24,LCD_FONT_24,LCD_TEXT_NORMAL,0,0xffff,"results:");
+    InitHardware(); //初始化硬件相关函数
+    InitSoftware(); //初始化软件相关函数
+    
+    AI_Init(IMAGE_WIDTH,IMAGE_HEIGHT,0);
+    LCDClear(0xffff);
+    LCDShowString(0,0,24*20-1,24,LCD_FONT_24,LCD_TEXT_NORMAL,0,0xffff,"results:");
 
-  while(1)
-  {
-		Proc1msTask();
-		Proc2msTask();
-//		check_msg();
-		detect_once();
-  }
+    while(1)
+    {
+        Proc1msTask();
+        Proc2msTask();
+//        check_msg();
+        detect_once();
+    }
 }

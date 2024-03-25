@@ -29,6 +29,7 @@ float *ai2OutData;
 #endif
 ai_u8 activations[ACTIVATION_SIZE];
 #endif
+
 #if SEPARATION>0
 #define aiOutData ai2OutData
 #else
@@ -37,16 +38,6 @@ ai_u8 activations[ACTIVATION_SIZE];
 #define aiInData ai1InData
 
 IMG_NORM_CODE
-
-
-//const char* activities[5] = {"CLOSED_EYE","OPENED_EYE","CLOSED_MOUTH","OPENDED_MOUTH","HAND"};
-//const char* activities[80] = {"person","bicycle","car","motorbike","aeroplane","bus","train","truck","boat","traffic light","fire hydrant","stop sign",
-//    "parking meter","bench","bird","cat","dog","horse","sheep","cow","elephant","bear","zebra","giraffe","backpack","umbrella","handbag","tie","suitcase",
-//    "frisbee","skis","snowboard","sports ball","kite","baseball bat","baseball glove","skateboard","surfboard","tennis racket","bottle","wine glass","cup",
-//    "fork","knife","spoon","bowl","banana","apple","sandwich","orange","broccoli","carrot","hot dog","pizza","donut","cake","chair","sofa","pottedplant",
-//    "bed","diningtable","toilet","tvmonitor","laptop","mouse","remote","keyboard","cell phone","microwave","oven","toaster","sink","refrigerator","book",
-//    "clock","vase","scissors","teddy bear","hair drier","toothbrush"
-//};
 
 
 ai_buffer * ai_input1;
@@ -110,11 +101,11 @@ void AI_Init(u32 img_width_,u32 img_height_,u32 img_type_)
     img_height=img_height_;
     img_type=img_type_;
 
-  /* Create a local array with the addresses of the activations buffers */
-//  const ai_handle act_addr[] = { activations0,activations1 };
+    /* Create a local array with the addresses of the activations buffers */
+//    const ai_handle act_addr[] = { activations0,activations1 };
     const ai_handle act_addr[] = { activations };
 
-  /* Create an instance of the model */
+    /* Create an instance of the model */
     err1 = ai_network_1_create_and_init(&network1, act_addr, NULL);
     if (err1.type != AI_ERROR_NONE) {
         printf("ai_network_create error - type=%d code=%d\r\n", err1.type, err1.code);

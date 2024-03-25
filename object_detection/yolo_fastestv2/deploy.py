@@ -224,13 +224,13 @@ val_paths=[
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data', type=str, default='modelzoo/ab_drive_0000/ab_drive.data',
+    parser.add_argument('--data', type=str, default='modelzoo/coco_sp_0004/coco_sp.data',
                         help='Specify training profile *.data')
-    parser.add_argument('--model_path', type=str, default="modelzoo/ab_drive_0000/best.pth",
+    parser.add_argument('--model_path', type=str, default="modelzoo/coco_sp_0004/best.pth",
                         help='The path of the model')
     parser.add_argument('--convert_type', type=int, default=1,
                         help='only 1,for tflite')
-    parser.add_argument('--tflite_val_path', type=str, default=val_paths[0],
+    parser.add_argument('--tflite_val_path', type=str, default=val_paths[1],
                         help='The path where the image which quantity need is saved')
     parser.add_argument('--gd32_project_path', type=str, default="",
                         help='The path of gd32 project')
