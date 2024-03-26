@@ -30,3 +30,4 @@ Here will provide some deep learning models that can be deployed on GD32 devices
  - [Yolo-FastestV2](https://github.com/dog-qiuqiu/Yolo-FastestV2)
  - [facelandmarks](https://github.com/midasklr/facelandmarks)
  - [stm32ai-modelzoo](https://github.com/STMicroelectronics/stm32ai-modelzoo/tree/main)
+ - [fastvit](https://github.com/apple/ml-fastvit)
