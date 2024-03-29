@@ -1,24 +1,9 @@
-workers: 8
-data_dir: ../../../datasets/food-101
-global_act: ReLU6
-batch_size: 512
-lr: 0.004
-separation: 3
-separation_scale: 2
-imagenet_trainset_size: '75750'
-input_size:
-- 3
-- 192
-- 192
-epochs: 200
-num_classes: 101
-model: fastvit_t4
-model_ema: false
 aa: rand-m9-mstd0.5-inc1
 amp: false
 apex_amp: false
 aug_repeats: 0
 aug_splits: 0
+batch_size: 512
 bce_loss: false
 bce_target_thresh: null
 bn_eps: null
@@ -34,6 +19,7 @@ cooldown_epochs: 10
 crop_pct: null
 cutmix: 1.0
 cutmix_minmax: null
+data_dir: ../../../datasets/food-101
 dataset: ''
 dataset_download: false
 decay_epochs: 50.0
@@ -47,19 +33,26 @@ drop_block: null
 drop_connect: null
 drop_path: null
 epoch_repeats: 0.0
-
+epochs: 200
 eval_metric: top1
 experiment: ''
 finetune: false
+global_act: ReLU6
 gp: null
 hflip: 0.5
+imagenet_trainset_size: '75750'
 img_size: null
 initial_checkpoint: ''
+input_size:
+- 3
+- 192
+- 192
 interpolation: ''
 jsd_loss: false
 local_rank: 0
 log_interval: 50
 log_wandb: false
+lr: 0.004
 lr_cycle_decay: 0.5
 lr_cycle_limit: 1
 lr_cycle_mul: 1.0
@@ -74,6 +67,8 @@ mixup_mode: batch
 mixup_off_epoch: 160
 mixup_prob: 1.0
 mixup_switch_prob: 0.5
+model: fastvit_t4
+model_ema: false
 model_ema_decay: 0.9995
 model_ema_force_cpu: false
 momentum: 0.9
@@ -82,6 +77,7 @@ no_aug: false
 no_ddp_bb: false
 no_prefetcher: false
 no_resume_opt: false
+num_classes: 101
 opt: adamw
 opt_betas: null
 opt_eps: null
@@ -104,6 +100,8 @@ scale:
 - 1.0
 sched: cosine
 seed: 42
+separation: 3
+separation_scale: 2
 smoothing: 0.1
 split_bn: false
 start_epoch: null
@@ -124,5 +122,4 @@ warmup_lr: 1.0e-06
 wd_schedule: none
 weight_decay: 0.05
 worker_seeding: all
-
-
+workers: 8

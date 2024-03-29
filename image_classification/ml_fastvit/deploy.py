@@ -219,9 +219,9 @@ val_paths=[
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config', type=str, default='modelzoo/food-101-sp-128/food-101.yaml',
+    parser.add_argument('--config', type=str, default='modelzoo/food-101-192/food-101.yaml',
                         help='Specify training profile *.data')
-    parser.add_argument('--model_path', type=str, default="modelzoo/food-101-sp-128/model_best.pth.tar",
+    parser.add_argument('--model_path', type=str, default="modelzoo/food-101-192/model_best.pth.tar",
                         help='The path of the model')
     parser.add_argument('--convert_type', type=int, default=1,
                         help='only 1,for tflite')
@@ -238,7 +238,7 @@ if __name__ == "__main__":
                         help='eval exported model')
     parser.add_argument('--compiler', type=int, default=1,
                         help='compiler type,0 for armcc,1 fro gcc')
-    parser.add_argument('--img_size', type=int,nargs='+' ,default=(128,128),
+    parser.add_argument('--img_size', type=int,nargs='+' ,default=(192,192),
                         help='Specify the image size of the input for the exported model.the img size in config is default')
     parser.add_argument('--example_img_path', type=str, default=None,
                         help='The path to the sample image, if you want to test the sample image on the device')

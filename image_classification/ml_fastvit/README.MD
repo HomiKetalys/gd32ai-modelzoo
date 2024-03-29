@@ -98,7 +98,7 @@ The metric of the model with an asterisk in its name comes from stm32ai model zo
 | model                  | Implementation | Dataset  | Input Resolution | Top 1 Accuracy (%) | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version |
 |------------------------|----------------|----------|------------------|--------------------|-----------|----------------------|---------------------|----------------------|
 | FastVit tfs            | Pytorch        | food-101 | 192x192x3        | 72.05              | 39.89     | 255.32               | 371.82              | 8.0.1                |
-| FastVit tfs sp         | Pytorch        | food-101 | 192x192x3        | 71.53              | 39.89     | 73.38                | 397.54              | 8.0.1                |
+| FastVit tfs sp         | Pytorch        | food-101 | 192x192x3        | 73.20              | 39.89     | 73.38                | 397.54              | 8.0.1                |
 | FastVit tfs            | Pytorch        | food-101 | 224x224x3        | 75.08              | 54.27     | 335.38               | 371.82              | 8.0.1                |
 | FastVit tfs sp         | Pytorch        | food-101 | 224x224x3        | 74.59              | 54.27     | 91.62                | 397.54              | 8.0.1                |
 | FastVit tfs sp         | Pytorch        | food-101 | 128x128x3        | 67.58              | 17.76     | 51.96                | 397.54              | 8.0.1                |
