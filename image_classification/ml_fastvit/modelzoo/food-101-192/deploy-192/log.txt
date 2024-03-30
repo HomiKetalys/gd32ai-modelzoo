@@ -1,0 +1,9 @@
+{'config': 'modelzoo/food-101-192/food-101.yaml', 'model_path': 'modelzoo/food-101-192/model_best.pth.tar', 'convert_type': 1, 'tflite_val_path': '../../../datasets/food-101/validation', 'gd32_project_path': '', 'stm32cubeai_path': 'D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1', 'series': 'h7', 'eval': True, 'compiler': 1, 'img_size': (192, 192), 'example_img_path': None}
+pytorch_model_path:modelzoo/food-101-192/model_best.pth.tar
+Checking 0/1...
+Test: [   0/50]  Time: 52.313s (52.313s,    9.79/s)  Loss:  1.7341 (1.7341)  Acc@1:  54.883 ( 54.883)  Acc@5:  84.570 ( 84.570)
+Test: [  10/50]  Time: 6.757s (10.898s,   46.98/s)  Loss:  1.3258 (1.3310)  Acc@1:  68.750 ( 68.910)  Acc@5:  94.141 ( 90.075)
+Test: [  20/50]  Time: 6.776s (8.929s,   57.34/s)  Loss:  1.0782 (1.1956)  Acc@1:  76.367 ( 73.214)  Acc@5:  94.336 ( 91.899)
+Test: [  30/50]  Time: 6.735s (8.230s,   62.21/s)  Loss:  0.8786 (1.2051)  Acc@1:  81.055 ( 72.555)  Acc@5:  95.703 ( 91.891)
+Test: [  40/50]  Time: 6.739s (7.865s,   65.10/s)  Loss:  1.3236 (1.1770)  Acc@1:  67.188 ( 73.380)  Acc@5:  90.820 ( 92.154)
+ * Acc@1 73.291 (26.709) Acc@5 92.075 (7.925)

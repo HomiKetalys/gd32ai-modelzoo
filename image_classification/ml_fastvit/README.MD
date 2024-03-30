@@ -97,7 +97,7 @@ The metric of the model with an asterisk in its name comes from stm32ai model zo
 
 | model                  | Implementation | Dataset  | Input Resolution | Top 1 Accuracy (%) | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version |
 |------------------------|----------------|----------|------------------|--------------------|-----------|----------------------|---------------------|----------------------|
-| FastVit tfs            | Pytorch        | food-101 | 192x192x3        | 72.05              | 39.89     | 255.32               | 371.82              | 8.0.1                |
+| FastVit tfs            | Pytorch        | food-101 | 192x192x3        | 73.29              | 39.89     | 255.32               | 371.82              | 8.0.1                |
 | FastVit tfs sp         | Pytorch        | food-101 | 192x192x3        | 73.20              | 39.89     | 73.38                | 397.54              | 8.0.1                |
 | FastVit tfs            | Pytorch        | food-101 | 224x224x3        | 75.08              | 54.27     | 335.38               | 371.82              | 8.0.1                |
 | FastVit tfs sp         | Pytorch        | food-101 | 224x224x3        | 74.59              | 54.27     | 91.62                | 397.54              | 8.0.1                |
@@ -109,15 +109,15 @@ The metric of the model with an asterisk in its name comes from stm32ai model zo
 
 # Results On GD32 Device
 ## Time
-| Model                 | Format | Resolution | Board            | Execution Engine | Frequency | Inference time (ms) | STM32Cube.AI version |
-|-----------------------|--------|------------|------------------|------------------|-----------|---------------------|----------------------|
-| FastVit               | Int8   | 192x192x3  | GD32H759IMK6     | 1 CPU            | 600 MHz   | 177 ms              | 8.0.1                |
-| FastVit sp            | Int8   | 192x192x3  | GD32H759IMK6     | 1 CPU            | 600 MHz   | 186 ms              | 8.0.1                |
-| FastVit               | Int8   | 224x224x3  | GD32H759IMK6     | 1 CPU            | 600 MHz   | 236 ms              | 8.0.1                |
-| FastVit sp            | Int8   | 224x224x3  | GD32H759IMK6     | 1 CPU            | 600 MHz   | 245 ms              | 8.0.1                |
-| MobileNet v1 0.25*    | Int8   | 224x224x3  | STM32H747I-DISCO | 1 CPU            | 400 MHz   | 181 ms              | 8.1.0                |
-| MobileNet v2 0.35*    | Int8   | 224x224x3  | STM32H747I-DISCO | 1 CPU            | 400 MHz   | 363 ms              | 8.1.0                |
-| MobileNet v1 0.5 fft* | Int8   | 224x224x3  | STM32H747I-DISCO | 1 CPU            | 400 MHz   | 525 ms              | 8.1.0                |
+| Model              | Format | Resolution | Board            | Execution Engine | Frequency | Inference time (ms) | STM32Cube.AI version |
+|--------------------|--------|------------|------------------|------------------|-----------|---------------------|----------------------|
+| FastVit            | Int8   | 192x192x3  | GD32H759IMK6     | 1 CPU            | 600 MHz   | 177 ms              | 8.0.1                |
+| FastVit sp         | Int8   | 192x192x3  | GD32H759IMK6     | 1 CPU            | 600 MHz   | 186 ms              | 8.0.1                |
+| FastVit            | Int8   | 224x224x3  | GD32H759IMK6     | 1 CPU            | 600 MHz   | 236 ms              | 8.0.1                |
+| FastVit sp         | Int8   | 224x224x3  | GD32H759IMK6     | 1 CPU            | 600 MHz   | 245 ms              | 8.0.1                |
+| MobileNet v1 0.25* | Int8   | 224x224x3  | STM32H747I-DISCO | 1 CPU            | 400 MHz   | 181 ms              | 8.1.0                |
+| MobileNet v2 0.35* | Int8   | 224x224x3  | STM32H747I-DISCO | 1 CPU            | 400 MHz   | 363 ms              | 8.1.0                |
+| MobileNet v1 0.5 * | Int8   | 224x224x3  | STM32H747I-DISCO | 1 CPU            | 400 MHz   | 525 ms              | 8.1.0                |
 
 ## Images
 ![fastvit on gd32](../../assets/img4.png)
