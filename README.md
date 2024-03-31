@@ -31,3 +31,11 @@ Here will provide some deep learning models that can be deployed on GD32 devices
  - [facelandmarks](https://github.com/midasklr/facelandmarks)
  - [stm32ai-modelzoo](https://github.com/STMicroelectronics/stm32ai-modelzoo/tree/main)
  - [fastvit](https://github.com/apple/ml-fastvit)
+
+# Disclaimers
+**Please carefully read and understand all the rights and limitations stipulated in this Disclaimer**
+
+GD32AI ModelZoo (hereinafter referred to as "the Software") is developed by HomiKetalys (contact information: homiketalys@gmail.com A research project on an ultra lightweight deep learning model conducted by the author of this software, with only academic testing conducted on GD32. The following are all rights and restrictions stipulated in this software:
+1. This software is strictly prohibited from being used for any infringement, infringement of the interests of others, illegal or other improper behavior. The software and its authors shall not be liable for any direct or indirect liability arising therefrom.
+2. The implementation of the functions of this software relies on various third-party software. For any infringement, infringement on the interests of others, illegal or other improper behavior caused by the failure to comply with the rights and restrictions provided by the third-party software, this software and its author shall not be liable for any direct or indirect liability arising from this.
+
