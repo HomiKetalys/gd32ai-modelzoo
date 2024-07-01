@@ -5,48 +5,44 @@ ai_handle network1;
 ai_handle network2;
 #endif
 
-#ifndef TEST_TIME
-ObjectResult objects[AI_NETWORK_OUT_1_HEIGHT*3];
+#if !defined(TEST_TIME_ONLY)
+ObjectResult objects[MAX_OBJ_NUM];
+ObjectResult results[MAX_OBJ_NUM];
 u32 object_num;
-ObjectResult results[AI_NETWORK_OUT_1_HEIGHT*3];
 #endif
 
 
-#ifdef TO_EXT
+#if defined(TO_EXT)
 signed char *ai1InData;
 ai1_out_type *ai1OutData;
+ai_u8 *activations=EXT_RAM_ADDR;
 #if SEPARATION>0
 signed char *ai2InData=EXT_RAM_ADDR+ACTIVATION_SIZE;
 float *ai2OutData;
 #endif
-ai_u8 *activations=EXT_RAM_ADDR;
 #else
 signed char *ai1InData;
 ai1_out_type *ai1OutData;
+AI_ALIGNED(32)
+ai_u8 activations[ACTIVATION_SIZE];
 #if SEPARATION>0
+AI_ALIGNED(32)
 signed char ai2InData[AI_NETWORK_2_IN_1_SIZE];
 float *ai2OutData;
 #endif
-ai_u8 activations[ACTIVATION_SIZE];
 #endif
+
+#if defined(ENABLE_SPARSE_PATCH)
+AI_ALIGNED(32)
+u8 background[INPUT_HEIGHT*INPUT_WIDTH*3];
+#endif
+
 #if SEPARATION>0
 #define aiOutData ai2OutData
 #else
 #define aiOutData ai1OutData
 #endif
 #define aiInData ai1InData
-
-#define IMG_NORM_BIAS_ONLY
-#define bias -128
-
-//const char* activities[5] = {"CLOSED_EYE","OPENED_EYE","CLOSED_MOUTH","OPENDED_MOUTH","HAND"};
-//const char* activities[80] = {"person","bicycle","car","motorbike","aeroplane","bus","train","truck","boat","traffic light","fire hydrant","stop sign",
-//	"parking meter","bench","bird","cat","dog","horse","sheep","cow","elephant","bear","zebra","giraffe","backpack","umbrella","handbag","tie","suitcase",
-//	"frisbee","skis","snowboard","sports ball","kite","baseball bat","baseball glove","skateboard","surfboard","tennis racket","bottle","wine glass","cup",
-//	"fork","knife","spoon","bowl","banana","apple","sandwich","orange","broccoli","carrot","hot dog","pizza","donut","cake","chair","sofa","pottedplant",
-//	"bed","diningtable","toilet","tvmonitor","laptop","mouse","remote","keyboard","cell phone","microwave","oven","toaster","sink","refrigerator","book",
-//	"clock","vase","scissors","teddy bear","hair drier","toothbrush"
-//};
 
 
 ai_buffer * ai_input1;
@@ -56,186 +52,211 @@ ai_buffer * ai_input2;
 ai_buffer * ai_output2;
 #endif
 
-static u32 img_width;
-static u32 img_height;
-static u32 img_type;
+const char *activities[]={"CE","OE","CM","OM","HD"};
 
-void Error_Handler()
+void AI_Error_Handler()
 {
-  while(1);
+    while(1);
 }
 
-void AI1_Run(signed char *pIn,ai1_out_type *pOut)
-{
-  ai_i32 batch;
-  ai_error err;
-
-  /* Update IO handlers with the data payload */
-  ai_input1[0].data = AI_HANDLE_PTR(pIn);
-  ai_output1[0].data = AI_HANDLE_PTR(pOut);
-
-  batch = ai_network_1_run(network1, ai_input1, ai_output1);
-  if (batch != 1) {
-    err = ai_network_1_get_error(network1);
-    printf("AI ai_network1_run error - type=%d code=%d\r\n", err.type, err.code);
-    Error_Handler();
-  }
-}
-
-#if SEPARATION>0
-void AI2_Run(signed char *pIn, float *pOut)
-{
-  ai_i32 batch;
-  ai_error err;
-
-  /* Update IO handlers with the data payload */
-  ai_input2[0].data = AI_HANDLE_PTR(pIn);
-  ai_output2[0].data = AI_HANDLE_PTR(pOut);
-
-  batch = ai_network_2_run(network2, ai_input2, ai_output2);
-  if (batch != 1) {
-    err = ai_network_2_get_error(network2);
-    printf("AI ai_network2_run error - type=%d code=%d\r\n", err.type, err.code);
-    Error_Handler();
-  }
-}
-#endif
-
-
-void AI_Init(u32 img_width_,u32 img_height_,u32 img_type_)
+void AI_Init()
 {
     ai_error err1,err2;
     rcu_periph_clock_enable(RCU_CRC);
-	img_width=img_width_;
-	img_height=img_height_;
-	img_type=img_type_;
 
-  /* Create a local array with the addresses of the activations buffers */
-//  const ai_handle act_addr[] = { activations0,activations1 };
+    /* Create a local array with the addresses of the activations buffers */
+//    const ai_handle act_addr[] = { activations0,activations1 };
     const ai_handle act_addr[] = { activations };
 
-  /* Create an instance of the model */
+    /* Create an instance of the model */
     err1 = ai_network_1_create_and_init(&network1, act_addr, NULL);
+    if (err1.type != AI_ERROR_NONE) {
+        AI_Error_Handler();
+    }
 #if SEPARATION>0
     err2 = ai_network_2_create_and_init(&network2, act_addr, NULL);
-#endif
-    if (err1.type != AI_ERROR_NONE) {
-        printf("ai_network_create error - type=%d code=%d\r\n", err.type, err.code);
-        Error_Handler();
-    }
     if (err2.type != AI_ERROR_NONE) {
-        printf("ai_network_create error - type=%d code=%d\r\n", err.type, err.code);
-        Error_Handler();
+        AI_Error_Handler();
     }
+#endif
     ai_input1 = ai_network_1_inputs_get(network1, NULL);
     ai_output1 = ai_network_1_outputs_get(network1, NULL);
     ai1InData=ai_input1[0].data;
     ai1OutData=ai_output1[0].data;
 #if SEPARATION>0
-	ai_input2 = ai_network_2_inputs_get(network2, NULL);
+    ai_input2 = ai_network_2_inputs_get(network2, NULL);
     ai_output2 = ai_network_2_outputs_get(network2, NULL);
     ai2OutData=ai_output2[0].data;
 #endif
 }
 
-
-__inline void RGB565ToRGB888C(u16 *rgb565, u8* r, u8* g, u8* b)
+void AI1_Run(signed char *pIn,ai1_out_type *pOut)
 {
-    *r = ((0xF800 & *rgb565) >> 8) ;
-    *g = ((0x07E0 & *rgb565) >> 3 ) ;
-    *b = ((0x001F & *rgb565) << 3 ) ;
+    ai_i32 batch;
+
+    /* Update IO handlers with the data payload */
+    ai_input1[0].data = AI_HANDLE_PTR(pIn);
+    ai_output1[0].data = AI_HANDLE_PTR(pOut);
+
+    batch = ai_network_1_run(network1, ai_input1, ai_output1);
+    if (batch != 1) {
+        AI_Error_Handler();
+    }
 }
 
-__inline float clip(float x,float low,float high)
+#if SEPARATION>0
+void AI2_Run(signed char *pIn, float *pOut)
 {
-	x=x>low?x:low;
-	return x<high?x:high;
+    ai_i32 batch;
+
+    /* Update IO handlers with the data payload */
+    ai_input2[0].data = AI_HANDLE_PTR(pIn);
+    ai_output2[0].data = AI_HANDLE_PTR(pOut);
+
+    batch = ai_network_2_run(network2, ai_input2, ai_output2);
+    if (batch != 1) {
+        AI_Error_Handler();
+    }
 }
 
-__inline void pixel_trans(u16 *rgb565, u8* r, u8* g, u8* b)
+void int_fix(signed char *data)
 {
-	RGB565ToRGB888C(rgb565,r,g,b);
-#ifdef IMG_NORM_BIAS_ONLY
-	*r=*r+bias;
-	*g=*g+bias;
-	*b=*b+bias;
+    for(int i=0;i<AI_NETWORK_2_IN_1_SIZE;i++)
+    {
+        clip((*(data+i))*FIX_FACTOR0+FIX_FACTOR1,-128.f,127.f,data+i);
+    }
+}
+
+#endif
+
+
+
+#if defined(ENABLE_SPARSE_PATCH)
+
+bool point_in_results(u32 i,u32 j)
+{
+    int k;
+    for(k=0;k<object_num;k++)
+    {
+        if(j>=(u32)results[k].bbox.x_min&&j<(u32)results[k].bbox.x_max&&i>=(u32)results[k].bbox.y_min&&i<(u32)results[k].bbox.y_max)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+void update_background()
+{
+    u32 i,j,idx=0;
+    u8 r,g,b;
+    for(i=0;i<INPUT_HEIGHT;i++)
+    {
+        for(j=0;j<INPUT_WIDTH;j++)
+        {
+            if(point_in_results(i,j))
+            {
+                idx+=3;
+                continue;
+            }
+            img_pixel_read(i,j,&r,&g,&b);
+            background[idx]=background[idx]/4*3+r/4;
+            idx++;
+            background[idx]=background[idx]/4*3+g/4;
+            idx++;
+            background[idx]=background[idx]/4*3+b/4;
+            idx++;
+        }
+    }
+}
+#endif
+
+void run_ai1_patch(u32 patch_idx)
+{
+    u32 patch_idx_h=(patch_idx/SEPARATION_SCALE);
+    u32 patch_idx_w=(patch_idx%SEPARATION_SCALE);
+    u32 i,j,patch_i,patch_j,idx=0;
+    u8 r,g,b;
+#if defined(ENABLE_SPARSE_PATCH)
+    u32 idxb;
+    u32 diff_count=0;
+    u32 diff_val;
+#endif
+    for(patch_i=0;patch_i<AI_NETWORK_1_IN_1_HEIGHT;patch_i++)
+    {
+#if defined(ENABLE_SPARSE_PATCH)
+        idxb=(patch_i+AI_NETWORK_1_IN_1_HEIGHT*patch_idx_h)*INPUT_WIDTH*3+3*AI_NETWORK_1_IN_1_WIDTH*patch_idx_w;
+#endif
+        for(patch_j=0;patch_j<AI_NETWORK_1_IN_1_WIDTH;patch_j++)
+        {
+            i=patch_i+AI_NETWORK_1_IN_1_HEIGHT*patch_idx_h;
+            j=patch_j+AI_NETWORK_1_IN_1_WIDTH*patch_idx_w;
+            img_pixel_read(i,j,&r,&g,&b);
+#if defined(ENABLE_SPARSE_PATCH)
+            diff_val=0;
+            diff_val+=abs_diff(r,background[idxb]);
+            idxb++;
+            diff_val+=abs_diff(g,background[idxb]);
+            idxb++;
+            diff_val+=abs_diff(b,background[idxb]);
+            idxb++;
+            diff_count+=diff_val>MAX_DIFF_VAL;
+#endif
+            pixel_norm(&r,&g,&b);
+            aiInData[idx++]=r;
+            aiInData[idx++]=g;
+            aiInData[idx++]=b;
+        }
+    }
+#if SEPARATION>0
+
+#if defined(ENABLE_SPARSE_PATCH)
+    if(diff_count>MAX_DIFF_COUNT)
+    {
+#endif
+        AI1_Run(ai1InData,ai1OutData);
+        for(patch_i=0;patch_i<AI_NETWORK_1_OUT_1_HEIGHT;patch_i++)
+        {
+            idx=(patch_i+AI_NETWORK_1_OUT_1_HEIGHT*patch_idx_h)*AI_NETWORK_2_IN_1_CHANNEL*AI_NETWORK_2_IN_1_WIDTH+AI_NETWORK_1_OUT_1_WIDTH*patch_idx_w*AI_NETWORK_2_IN_1_CHANNEL;
+            memcpy(ai2InData+idx,ai1OutData+patch_i*AI_NETWORK_2_IN_1_CHANNEL*AI_NETWORK_1_OUT_1_WIDTH,AI_NETWORK_2_IN_1_CHANNEL*AI_NETWORK_1_OUT_1_WIDTH);
+        }
+#if defined(ENABLE_SPARSE_PATCH)
+    }
+    else
+    {
+        for(patch_i=0;patch_i<AI_NETWORK_1_OUT_1_HEIGHT;patch_i++)
+        {
+            idx=(patch_i+AI_NETWORK_1_OUT_1_HEIGHT*patch_idx_h)*AI_NETWORK_2_IN_1_CHANNEL*AI_NETWORK_2_IN_1_WIDTH+AI_NETWORK_1_OUT_1_WIDTH*patch_idx_w*AI_NETWORK_2_IN_1_CHANNEL;
+            memset(ai2InData+idx,128,AI_NETWORK_2_IN_1_CHANNEL*AI_NETWORK_1_OUT_1_WIDTH);
+        }
+    }
+#endif
 #else
-#ifdef IMG_NORM
-	*r=clip((((float)*r)*weight_r+bias_r,0.f,255.f);
-	*g=clip((((float)*g)*weight_g+bias_g,0.f,255.f);
-	*b=clip((((float)*b)*weight_b+bias_b,0.f,255.f);
+    AI1_Run(ai1InData,ai1OutData);
 #endif
-#endif
-
 }
 
-void run_ai1_patch(u8 *img,u32 patch_index)
+void run_ai1()
 {
-	u32 offh=(patch_index/SEPARATION_SCALE);
-	u32 offw=(patch_index%SEPARATION_SCALE);
-	u32 step=0;
-	if(img_type==0)
-		step=2;
-	u32 i,j,index;
-	u8 r,g,b;
+    for(u32 i=0;i<SEPARATION_SCALE*SEPARATION_SCALE;i++)
+    {
+        run_ai1_patch(i);
+    }
+}
 
-	for(i=0;i<AI_NETWORK_1_IN_1_HEIGHT;i++)
-	{
-		for(j=0;j<AI_NETWORK_1_IN_1_WIDTH;j++)
-		{
-			index=(img_height*img_width-1-(i+AI_NETWORK_1_IN_1_HEIGHT*offh)*img_width-(j+AI_NETWORK_1_IN_1_WIDTH*offw))*step;
-			pixel_trans((u16*) (img+index),&r,&g,&b);
-			aiInData[i*AI_NETWORK_1_IN_1_WIDTH*3+j*3]=b;
-			aiInData[i*AI_NETWORK_1_IN_1_WIDTH*3+j*3+1]=g;
-			aiInData[i*AI_NETWORK_1_IN_1_WIDTH*3+j*3+2]=r;
-		}
-	}
 
-	AI1_Run(ai1InData,ai1OutData);
+void AI_Run()
+{
+    run_ai1();
 #if SEPARATION>0
-	u32 k;
-
-	for(i=0;i<AI_NETWORK_2_IN_1_HEIGHT/SEPARATION_SCALE;i++)
-	{
-		for(j=0;j<AI_NETWORK_2_IN_1_WIDTH/SEPARATION_SCALE;j++)
-		{
-			for(k=0;k<AI_NETWORK_2_IN_1_CHANNEL;k++)
-			{
-				u32 index1=(i+AI_NETWORK_1_OUT_1_HEIGHT*offh)*AI_NETWORK_2_IN_1_CHANNEL*AI_NETWORK_2_IN_1_WIDTH+(j+AI_NETWORK_1_OUT_1_WIDTH*offw)*AI_NETWORK_2_IN_1_CHANNEL+k;
-				u32 index2=i*AI_NETWORK_2_IN_1_CHANNEL*AI_NETWORK_1_OUT_1_WIDTH+j*AI_NETWORK_2_IN_1_CHANNEL+k;
-				ai2InData[index1]=ai1OutData[index2];
-			}
-		}
-	}
+    int_fix(ai2InData);
+    AI2_Run(ai2InData,ai2OutData);
 #endif
-}
-
-void run_ai1(u8 *img)
-{
-	for(u32 i=0;i<SEPARATION_SCALE*SEPARATION_SCALE;i++)
-	{
-		run_ai1_patch(img,i);
-	}
-}
-#if SEPARATION>0
-void int_fix(signed char *data,u32 n)
-{
-	for(int i=0;i<n;i++)
-	{
-		*(data+i)=clip((*(data+i))*FIX_FACTOR0+FIX_FACTOR1,-128.f,127.f);
-	}
-}
+#if !defined(TEST_TIME_ONLY)
+    handle_preds(aiOutData,CONF_THR);
+    nms(objects,results,&object_num,NMS_THR);
+#if defined(ENABLE_SPARSE_PATCH)
+    update_background();
 #endif
-
-void AI_Run(u8 *img)
-{
-	run_ai1(img);
-#if SEPARATION>0
-	int_fix(ai2InData,AI_NETWORK_2_IN_1_SIZE);
-	AI2_Run(ai2InData,ai2OutData);
-#endif
-#ifndef TEST_TIME
-	handle_preds(aiOutData,CONF_THR);
-	nms(objects,results,(uint16_t *) &object_num,NMS_THR);
 #endif
 }

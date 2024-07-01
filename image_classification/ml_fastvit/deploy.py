@@ -1,93 +1,16 @@
 import argparse
-import json
 import shutil
 import subprocess
-import sys
-
-import numpy as np
 import yaml
-
-from common_utils.utils import LogSaver
 import os
-
+from common_utils.utils import LogSaver,copy_stlib,gen_net_codes
 from submodules.ml_fastvit.validate import ClassifierTfOrt
 from pytorch2tflite import export
-from common_utils.utils import img2rgb565code
-
-
-
-# D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1/Utilities/windows/stm32ai.exe
-# generate
-# --name network_1
-# -m model_path
-# --type tflite
-# --compression none
-# --verbosity 1
-# --workspace
-# --ouput
-# --allocate-inputs
-# --series stm32h7
-# --allocate-outputs
-
-def gen_net_codes(stm32ai_exe_path, model_path, name, work_space_path, output_path):
-    cmd = (f"{stm32ai_exe_path} "
-           f"generate "
-           f"--name {name} "
-           f"-m {model_path} "
-           f"--type tflite "
-           f"--compression none "
-           f"--verbosity 1 "
-           f"--workspace {work_space_path} "
-           f"--output {output_path} "
-           f"--allocate-inputs "
-           f"--series stm32h7 "
-           f"--allocate-outputs")
-    subprocess.run(['powershell', '-Command', cmd], stdout=subprocess.PIPE)
-
-
-def copy_stlib(opt, stm32ai_path, stlib_path):
-    stlib_src_path = os.path.join(stm32ai_path, "Middlewares", "ST", "AI")
-    if opt.series == "f4":
-        lib_type = "ARMCortexM4"
-    elif opt.series == "h7":
-        lib_type = "ARMCortexM4"
-    else:
-        raise ValueError("Unsupported series")
-    if opt.compiler==0:
-        prefix="MDK"
-        lib_name = "NetworkRuntime801_CM4_Keil.lib"
-    elif opt.compiler==1:
-        prefix="GCC"
-        lib_name = "NetworkRuntime801_CM4_GCC.a"
-    else:
-        raise ValueError("unsupported compiler")
-    lib_src_path = os.path.join(stlib_src_path, "Lib", prefix, lib_type)
-    assert os.path.exists(lib_src_path), "stlib do not exist"
-    lib_src_path = os.path.join(lib_src_path, lib_name)
-    if opt.compiler==1:
-        prefix="lib"
-    else:
-        prefix=""
-    lib_dst_path = os.path.join(stlib_path, "Lib", prefix+lib_name)
-    os.makedirs(os.path.join(stlib_path, "Lib"), exist_ok=True)
-    shutil.copy(lib_src_path, lib_dst_path)
-    inc_dst_path = os.path.join(stlib_path, "Inc")
-    if os.path.exists(inc_dst_path):
-        shutil.rmtree(inc_dst_path)
-    inc_src_path = os.path.join(stlib_src_path, "Inc")
-    shutil.copytree(inc_src_path, inc_dst_path)
-    license_src_path = os.path.join(stlib_src_path, "LICENSE.txt")
-    license_dst_path = os.path.join(stlib_path, "LICENSE.txt")
-    shutil.copy(license_src_path, license_dst_path)
-
 
 
 def code_replace(line,cfg,tfmodel,opt):
     sp = cfg["separation"]
     spc = cfg["separation_scale"]
-    if sp>0:
-        fix_factor0 = tfmodel.fix0
-        fix_factor1=tfmodel.fix1
 
     w,b=tfmodel.weight,tfmodel.bias
     mean=[123.675, 116.28, 103.53]
@@ -97,18 +20,14 @@ def code_replace(line,cfg,tfmodel,opt):
         line = f"#define SEPARATION {sp}\n"
     elif "SEPARATION_SCALE_CODE" in line:
         line = f"#define SEPARATION_SCALE {spc}\n"
-    elif "CONF_THR_CODE" in line:
-        line = f""
-    elif "NMS_THR_CODE" in line:
-        line = f""
     elif "FIX_FACTOR0_CODE" in line:
         if sp > 0:
-            line = f"#define FIX_FACTOR0 {fix_factor0}f\n"
+            line = f"#define FIX_FACTOR0 {tfmodel.fix0}f\n"
         else:
             line = ""
     elif "FIX_FACTOR1_CODE" in line:
         if sp > 0:
-            line = f"#define FIX_FACTOR1 {fix_factor1}f\n"
+            line = f"#define FIX_FACTOR1 {tfmodel.fix1}f\n"
         else:
             line = ""
     elif "IMG_NORM_CODE" in line:
@@ -119,19 +38,14 @@ def code_replace(line,cfg,tfmodel,opt):
                f"#define weight_r {1/std[0]/w}f\n" \
                f"#define weight_g {1/std[1]/w}f\n" \
                f"#define weight_b {1/std[2]/w}f\n"
-    elif "EXAMPLE_IMG_CODE" in line:
-        if opt.example_img_path is None:
-            line=""
-        else:
-            assert os.path.exists(opt.example_img_path),"example img does not exist"
-            img_code=img2rgb565code(opt.example_img_path,opt.img_size)
-            line=f"{img_code}\n"
-    elif "USE_EXAMPLE_CODE" in line:
-        if opt.example_img_path is None:
-            line=""
-        else:
-            line=f"#define USE_EXAMPLE\n"
-
+    elif "ACTIVITIES_CODE" in line:
+        names_path=os.path.join(cfg["data_dir"],"validation")
+        names_=os.listdir(names_path)
+        names=[]
+        for name in names_:
+            names.append('"'+name.strip()+'"')
+        names=",".join(names)
+        line="const char *activities[]={"+names+"};\n"
     return line
 
 def gen_ai_model_codes(opt, ai_model_path, tflite_path):
@@ -155,7 +69,6 @@ def gen_ai_model_codes(opt, ai_model_path, tflite_path):
             line = code_replace(line,cfg,tfmodel,opt)
             if len(line)>0:
                 f.write(line)
-
 
 
 def deploy(opt, save_path, tflite_path, gd32_path):
@@ -200,11 +113,13 @@ def deploy(opt, save_path, tflite_path, gd32_path):
 
 
 
-def deploy_main(opt, save_path, gd32_path):
+def deploy_main(opt, save_path, c_project_path):
     print(opt.__dict__)
     export(opt, save_path)
     tflite_path = os.path.join(save_path, "tflite")
-    deploy(opt, save_path, tflite_path, gd32_path)
+    if c_project_path is None:
+        c_project_path=save_path
+    deploy(opt, save_path, tflite_path, c_project_path)
 
 
 paths = [
@@ -219,29 +134,27 @@ val_paths=[
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config', type=str, default='modelzoo/food-101-192/food-101.yaml',
+    parser.add_argument('--config', type=str, default='modelzoo/food-101-sp-128/food-101.yaml',
                         help='Specify training profile *.data')
-    parser.add_argument('--model_path', type=str, default="modelzoo/food-101-192/model_best.pth.tar",
+    parser.add_argument('--model_path', type=str, default='modelzoo/food-101-sp-128/model_best.pth.tar',
                         help='The path of the model')
     parser.add_argument('--convert_type', type=int, default=1,
                         help='only 1,for tflite')
     parser.add_argument('--tflite_val_path', type=str, default='../../../datasets/food-101/validation',
                         help='The path where the image which quantity need is saved')
-    parser.add_argument('--gd32_project_path', type=str, default="",
-                        help='The path of gd32 project')
+    parser.add_argument('--c_project_path', type=str, default=None,
+                        help='The path of c project,None= results/deploy/xxxx_00xx')
     parser.add_argument('--stm32cubeai_path', type=str,
                         default="D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1",
                         help='The path of stm32cubeai')
     parser.add_argument('--series', type=str, default="h7",
                         help='The series of gd32,f4 or h7')
-    parser.add_argument('--eval', type=bool, default=True,
+    parser.add_argument('--eval', type=bool, default=False,
                         help='eval exported model')
     parser.add_argument('--compiler', type=int, default=1,
                         help='compiler type,0 for armcc,1 fro gcc')
-    parser.add_argument('--img_size', type=int,nargs='+' ,default=(192,192),
+    parser.add_argument('--img_size', type=int,nargs='+' ,default=None,
                         help='Specify the image size of the input for the exported model.the img size in config is default')
-    parser.add_argument('--example_img_path', type=str, default=None,
-                        help='The path to the sample image, if you want to test the sample image on the device')
     opt = parser.parse_args()
     lger = LogSaver(opt.config, "results/deploy")
-    lger.collect_prints(deploy_main, opt, lger.result_path, lger.result_path)
+    lger.collect_prints(deploy_main, opt, lger.result_path, opt.c_project_path)

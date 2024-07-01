@@ -1,10 +1,11 @@
 #include "ai_model.h"
-#ifndef TEST_TIME
+#if !defined(TEST_TIME_ONLY)
 ANCHOR_CODE
 extern u32 object_num;
 extern ObjectResult objects[];
 extern ObjectResult results[];
 
+#if defined(yolofastestv2)
 void handle_preds(float *preds,float conf_thr)
 {
     u32 i,j,stage,pos_x,pos_y;
@@ -24,14 +25,19 @@ void handle_preds(float *preds,float conf_thr)
             pos_y=(i-(INPUT_WIDTH*INPUT_HEIGHT)/(16*16))/(INPUT_WIDTH/32);
             stage=1;
         }
-        float cls=0;
         u32 cls_index=0;
-        for(j=15;j<AI_NETWORK_OUT_1_CHANNEL;j++)
+        float cls=0;
+        if(AI_NETWORK_OUT_1_CHANNEL==15||AI_NETWORK_OUT_1_CHANNEL==16)
+            cls=1;
+        else
         {
-            if(*(preds+AI_NETWORK_OUT_1_CHANNEL*i+j)>cls)
+            for(j=15;j<AI_NETWORK_OUT_1_CHANNEL;j++)
             {
-                cls=*(preds+AI_NETWORK_OUT_1_CHANNEL*i+j);
-                cls_index=j-15;
+                if(*(preds+AI_NETWORK_OUT_1_CHANNEL*i+j)>cls)
+                {
+                    cls=*(preds+AI_NETWORK_OUT_1_CHANNEL*i+j);
+                    cls_index=j-15;
+                }
             }
         }
         for(j=0;j<3;j++)
@@ -55,6 +61,48 @@ void handle_preds(float *preds,float conf_thr)
         }
     }
 }
+#elif defined(yolov10)
+void handle_preds(float *preds,float conf_thr)
+{
+    u32 i,j,k;
+    object_num=0;
+    for(i=0;i<AI_NETWORK_OUT_1_HEIGHT;i++)
+    {
+
+        float xyxy_offset[4];
+        for(j=0;j<4;j++)
+        {
+            xyxy_offset[j]=0;
+            for(k=0;k<16;k++)
+            {
+                xyxy_offset[j]+=k*preds[i*AI_NETWORK_OUT_1_CHANNEL+j*16+k];
+            }
+        }
+        u32 cls_index=0;
+        float cls=0;
+        for(j=64;j<AI_NETWORK_OUT_1_CHANNEL;j++)
+        {
+            if(preds[i*AI_NETWORK_OUT_1_CHANNEL+j]>cls)
+            {
+                cls=preds[i*AI_NETWORK_OUT_1_CHANNEL+j];
+                cls_index=j-64;
+            }
+        }
+        if(cls>conf_thr)
+        {
+            objects[object_num].bbox.x_min=(0.5+i%12-xyxy_offset[0])*16;
+            objects[object_num].bbox.y_min=(0.5+i/12-xyxy_offset[1])*16;
+            objects[object_num].bbox.x_max=(0.5+i%12+xyxy_offset[2])*16;
+            objects[object_num].bbox.y_max=(0.5+i/12+xyxy_offset[3])*16;
+            objects[object_num].confi=cls;
+            objects[object_num].cls_index=cls_index;
+            object_num++;
+        }
+    }
+}
+#else
+#error "The expected model name is undefined"
+#endif
 
 int compare(const ObjectResult a, const ObjectResult b)
 {
@@ -76,18 +124,18 @@ float iou(ObjectResult a, ObjectResult b)
     float b_heihgt = b.bbox.y_max - b.bbox.y_min;
 
     float inter_area = (x2 - x1) * (y2 - y1);
-        float outer_area = ((a_width * a_height) + b_width * b_heihgt - inter_area);
-        if(outer_area==0)
-        {
-            return 0;
-        }
+    float outer_area = ((a_width * a_height) + b_width * b_heihgt - inter_area);
+    if(outer_area==0)
+    {
+        return 0;
+    }
     float iou = inter_area / outer_area;
 
     return iou;
 }
 
 
-void nms(ObjectResult object[], ObjectResult result[], uint16_t* total, float nmsThreshold)
+void nms(ObjectResult object[], ObjectResult result[], u32* total, float nmsThreshold)
 {
     qsort(object, *total, sizeof(ObjectResult), compare);
 

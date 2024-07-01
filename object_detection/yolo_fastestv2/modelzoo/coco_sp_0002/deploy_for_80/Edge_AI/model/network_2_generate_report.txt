@@ -1,18 +1,18 @@
 Neural Network Tools for STM32AI v1.7.0 (STM.ai v8.0.1-19451)
-Created date          : 2024-03-07 16:40:00
-Parameters            : generate --name network_2 -m results/deploy\coco_sp_0000\tflite\model_post.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\coco_sp_0000\temp --output results/deploy\coco_sp_0000\Edge_AI\model --allocate-inputs --series stm32h7 --allocate-outputs
+Created date          : 2024-07-01 14:57:24
+Parameters            : generate --name network_2 -m results/deploy\coco_sp_0004\tflite\model_post.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\coco_sp_0004\temp --output results/deploy\coco_sp_0004\Edge_AI\model --allocate-inputs --series stm32h7 --allocate-outputs
 
 Exec/report summary (generate)
 -----------------------------------------------------------------------------------------------------------------------------------------------
-model file         :   F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\coco_sp_0000\tflite\model_post.tflite   
+model file         :   F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\coco_sp_0004\tflite\model_post.tflite   
 type               :   tflite                                                                                                                  
 c_name             :   network_2                                                                                                               
 compression        :   none                                                                                                                    
 options            :   allocate-inputs, allocate-outputs                                                                                       
 optimization       :   balanced                                                                                                                
 target/series      :   stm32h7                                                                                                                 
-workspace dir      :   F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\coco_sp_0000\temp                       
-output dir         :   F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\coco_sp_0000\Edge_AI\model              
+workspace dir      :   F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\coco_sp_0004\temp                       
+output dir         :   F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\coco_sp_0004\Edge_AI\model              
 model_fmt          :   ss/sa per-channel                                                                                                       
 model_name         :   model_post                                                                                                              
 model_hash         :   7ab622a15b5ca38cd7fad6e445117cf2                                                                                        
@@ -996,10 +996,10 @@ macc=14,193,490 weights=196,624 act=94,464 ram_io=0
 
 Generated files (7)
 ------------------------------------------------------------------------------------------------------------------------------------ 
-F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\coco_sp_0000\Edge_AI\model\network_2_config.h        
-F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\coco_sp_0000\Edge_AI\model\network_2.h               
-F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\coco_sp_0000\Edge_AI\model\network_2.c               
-F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\coco_sp_0000\Edge_AI\model\network_2_data_params.h   
-F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\coco_sp_0000\Edge_AI\model\network_2_data_params.c   
-F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\coco_sp_0000\Edge_AI\model\network_2_data.h          
-F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\coco_sp_0000\Edge_AI\model\network_2_data.c          
+F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\coco_sp_0004\Edge_AI\model\network_2_config.h        
+F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\coco_sp_0004\Edge_AI\model\network_2.h               
+F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\coco_sp_0004\Edge_AI\model\network_2.c               
+F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\coco_sp_0004\Edge_AI\model\network_2_data_params.h   
+F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\coco_sp_0004\Edge_AI\model\network_2_data_params.c   
+F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\coco_sp_0004\Edge_AI\model\network_2_data.h          
+F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\coco_sp_0004\Edge_AI\model\network_2_data.c          

@@ -111,10 +111,11 @@ The metric of the model with an asterisk in its name comes from stm32ai model zo
 ## Time
 | Model              | Format | Resolution | Board            | Execution Engine | Frequency | Inference time (ms) | STM32Cube.AI version |
 |--------------------|--------|------------|------------------|------------------|-----------|---------------------|----------------------|
-| FastVit            | Int8   | 192x192x3  | GD32H759IMK6     | 1 CPU            | 600 MHz   | 177 ms              | 8.0.1                |
-| FastVit sp         | Int8   | 192x192x3  | GD32H759IMK6     | 1 CPU            | 600 MHz   | 186 ms              | 8.0.1                |
-| FastVit            | Int8   | 224x224x3  | GD32H759IMK6     | 1 CPU            | 600 MHz   | 236 ms              | 8.0.1                |
-| FastVit sp         | Int8   | 224x224x3  | GD32H759IMK6     | 1 CPU            | 600 MHz   | 245 ms              | 8.0.1                |
+| FastVit sp         | Int8   | 128x28x3   | GD32H759IMK6     | 1 CPU            | 600 MHz   | 95 ms               | 8.0.1                |
+| FastVit            | Int8   | 192x192x3  | GD32H759IMK6     | 1 CPU            | 600 MHz   | 180 ms              | 8.0.1                |
+| FastVit sp         | Int8   | 192x192x3  | GD32H759IMK6     | 1 CPU            | 600 MHz   | 188 ms              | 8.0.1                |
+| FastVit            | Int8   | 224x224x3  | GD32H759IMK6     | 1 CPU            | 600 MHz   | 239 ms              | 8.0.1                |
+| FastVit sp         | Int8   | 224x224x3  | GD32H759IMK6     | 1 CPU            | 600 MHz   | 248 ms              | 8.0.1                |
 | MobileNet v1 0.25* | Int8   | 224x224x3  | STM32H747I-DISCO | 1 CPU            | 400 MHz   | 181 ms              | 8.1.0                |
 | MobileNet v2 0.35* | Int8   | 224x224x3  | STM32H747I-DISCO | 1 CPU            | 400 MHz   | 363 ms              | 8.1.0                |
 | MobileNet v1 0.5 * | Int8   | 224x224x3  | STM32H747I-DISCO | 1 CPU            | 400 MHz   | 525 ms              | 8.1.0                |

@@ -3,7 +3,7 @@
   ******************************************************************************
   * @file    network_2_config.h
   * @author  AST Embedded Analytics Research Platform
-  * @date    Thu Mar  7 15:57:11 2024
+  * @date    Mon Jul  1 14:55:34 2024
   * @brief   AI Tool Automatic Code Generator for Custom Layers Implementation
   ******************************************************************************
   * @attention

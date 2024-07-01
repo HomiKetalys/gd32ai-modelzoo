@@ -1,31 +1,35 @@
 #include "ai_model.h"
+
 ai_handle network1;
 #if SEPARATION>0
 ai_handle network2;
 #endif
 
-#ifndef TEST_TIME
+#if !defined(TEST_TIME_ONLY)
 u32 result=-1;
 #endif
 
 
-#ifdef TO_EXT
+#if defined(TO_EXT)
 signed char *ai1InData;
 ai1_out_type *ai1OutData;
+ai_u8 *activations=EXT_RAM_ADDR;
 #if SEPARATION>0
 signed char *ai2InData=EXT_RAM_ADDR+ACTIVATION_SIZE;
 float *ai2OutData;
 #endif
-ai_u8 *activations=EXT_RAM_ADDR;
 #else
 signed char *ai1InData;
 ai1_out_type *ai1OutData;
+AI_ALIGNED(32)
+ai_u8 activations[ACTIVATION_SIZE];
 #if SEPARATION>0
+AI_ALIGNED(32)
 signed char ai2InData[AI_NETWORK_2_IN_1_SIZE];
 float *ai2OutData;
 #endif
-ai_u8 activations[ACTIVATION_SIZE];
 #endif
+
 #if SEPARATION>0
 #define aiOutData ai2OutData
 #else
@@ -35,7 +39,6 @@ ai_u8 activations[ACTIVATION_SIZE];
 
 IMG_NORM_CODE
 
-EXAMPLE_IMG_CODE
 
 ai_buffer * ai_input1;
 ai_buffer * ai_output1;
@@ -44,59 +47,17 @@ ai_buffer * ai_input2;
 ai_buffer * ai_output2;
 #endif
 
-static u32 img_width;
-static u32 img_height;
-static u32 img_type;
+ACTIVITIES_CODE
 
-void Error_Handler()
+void AI_Error_Handler()
 {
     while(1);
 }
 
-void AI1_Run(signed char *pIn,ai1_out_type *pOut)
-{
-    ai_i32 batch;
-    ai_error err;
-
-    /* Update IO handlers with the data payload */
-    ai_input1[0].data = AI_HANDLE_PTR(pIn);
-    ai_output1[0].data = AI_HANDLE_PTR(pOut);
-
-    batch = ai_network_1_run(network1, ai_input1, ai_output1);
-    if (batch != 1) {
-        err = ai_network_1_get_error(network1);
-        printf("AI ai_network1_run error - type=%d code=%d\r\n", err.type, err.code);
-        Error_Handler();
-    }
-}
-
-#if SEPARATION>0
-void AI2_Run(signed char *pIn, float *pOut)
-{
-    ai_i32 batch;
-    ai_error err;
-
-    /* Update IO handlers with the data payload */
-    ai_input2[0].data = AI_HANDLE_PTR(pIn);
-    ai_output2[0].data = AI_HANDLE_PTR(pOut);
-
-    batch = ai_network_2_run(network2, ai_input2, ai_output2);
-    if (batch != 1) {
-        err = ai_network_2_get_error(network2);
-        printf("AI ai_network2_run error - type=%d code=%d\r\n", err.type, err.code);
-        Error_Handler();
-    }
-}
-#endif
-
-
-void AI_Init(u32 img_width_,u32 img_height_,u32 img_type_)
+void AI_Init()
 {
     ai_error err1,err2;
     rcu_periph_clock_enable(RCU_CRC);
-    img_width=img_width_;
-    img_height=img_height_;
-    img_type=img_type_;
 
     /* Create a local array with the addresses of the activations buffers */
 //    const ai_handle act_addr[] = { activations0,activations1 };
@@ -105,14 +66,12 @@ void AI_Init(u32 img_width_,u32 img_height_,u32 img_type_)
     /* Create an instance of the model */
     err1 = ai_network_1_create_and_init(&network1, act_addr, NULL);
     if (err1.type != AI_ERROR_NONE) {
-        printf("ai_network_create error - type=%d code=%d\r\n", err1.type, err1.code);
-        Error_Handler();
+        AI_Error_Handler();
     }
 #if SEPARATION>0
     err2 = ai_network_2_create_and_init(&network2, act_addr, NULL);
-        if (err2.type != AI_ERROR_NONE) {
-        printf("ai_network_create error - type=%d code=%d\r\n", err2.type, err2.code);
-        Error_Handler();
+    if (err2.type != AI_ERROR_NONE) {
+        AI_Error_Handler();
     }
 #endif
     ai_input1 = ai_network_1_inputs_get(network1, NULL);
@@ -126,108 +85,105 @@ void AI_Init(u32 img_width_,u32 img_height_,u32 img_type_)
 #endif
 }
 
-
-__inline void RGB565ToRGB888C(u16 *rgb565, u8* r, u8* g, u8* b)
+void AI1_Run(signed char *pIn,ai1_out_type *pOut)
 {
-    *r = ((0xF800 & *rgb565) >> 8) ;
-    *g = ((0x07E0 & *rgb565) >> 3 ) ;
-    *b = ((0x001F & *rgb565) << 3 ) ;
-}
+    ai_i32 batch;
 
-__inline float clip(float x,float low,float high)
-{
-    x=x>low?x:low;
-    return x<high?x:high;
-}
+    /* Update IO handlers with the data payload */
+    ai_input1[0].data = AI_HANDLE_PTR(pIn);
+    ai_output1[0].data = AI_HANDLE_PTR(pOut);
 
-__inline void pixel_trans(u16 *rgb565, u8* r, u8* g, u8* b)
-{
-    RGB565ToRGB888C(rgb565,r,g,b);
-#ifdef IMG_NORM_BIAS_ONLY
-    *r=*r+bias;
-    *g=*g+bias;
-    *b=*b+bias;
-#elif defined(IMG_NORM)
-    *r=clip(((float)*r)*weight_r+bias_r,-128.f,127.f);
-    *g=clip(((float)*g)*weight_g+bias_g,-128.f,127.f);
-    *b=clip(((float)*b)*weight_b+bias_b,-128.f,127.f);
-#endif
-
-}
-
-void run_ai1_patch(u8 *img,u32 patch_index)
-{
-    u32 offh=(patch_index/SEPARATION_SCALE);
-    u32 offw=(patch_index%SEPARATION_SCALE);
-    u32 step=0;
-    if(img_type==0)
-        step=2;
-    u32 i,j,index;
-    u8 r,g,b;
-    char str[128];
-    for(i=0;i<AI_NETWORK_1_IN_1_HEIGHT;i++)
-    {
-        for(j=0;j<AI_NETWORK_1_IN_1_WIDTH;j++)
-        {
-            index=(img_height*img_width-1-(i+AI_NETWORK_1_IN_1_HEIGHT*offh)*img_width-(j+AI_NETWORK_1_IN_1_WIDTH*offw))*step;
-            pixel_trans((u16*) (img+index),&r,&g,&b);
-            aiInData[i*AI_NETWORK_1_IN_1_WIDTH*3+j*3]=r;
-            aiInData[i*AI_NETWORK_1_IN_1_WIDTH*3+j*3+1]=g;
-            aiInData[i*AI_NETWORK_1_IN_1_WIDTH*3+j*3+2]=b;
-        }
+    batch = ai_network_1_run(network1, ai_input1, ai_output1);
+    if (batch != 1) {
+        AI_Error_Handler();
     }
-    AI1_Run(ai1InData,ai1OutData);
+}
+
 #if SEPARATION>0
-    u32 k;
-    for(i=0;i<AI_NETWORK_2_IN_1_HEIGHT/SEPARATION_SCALE;i++)
+void AI2_Run(signed char *pIn, float *pOut)
+{
+    ai_i32 batch;
+
+    /* Update IO handlers with the data payload */
+    ai_input2[0].data = AI_HANDLE_PTR(pIn);
+    ai_output2[0].data = AI_HANDLE_PTR(pOut);
+
+    batch = ai_network_2_run(network2, ai_input2, ai_output2);
+    if (batch != 1) {
+        AI_Error_Handler();
+    }
+}
+
+void int_fix(signed char *data)
+{
+    for(int i=0;i<AI_NETWORK_2_IN_1_SIZE;i++)
     {
-        for(j=0;j<AI_NETWORK_2_IN_1_WIDTH/SEPARATION_SCALE;j++)
+        clip((*(data+i))*FIX_FACTOR0+FIX_FACTOR1,-128.f,127.f,data+i);
+    }
+}
+#endif
+
+
+
+void run_ai1_patch(u32 patch_idx)
+{
+    u32 patch_idx_h=(patch_idx/SEPARATION_SCALE);
+    u32 patch_idx_w=(patch_idx%SEPARATION_SCALE);
+    u32 i,j,patch_i,patch_j,idx=0;
+    u8 r,g,b;
+
+    for(patch_i=0;patch_i<AI_NETWORK_1_IN_1_HEIGHT;patch_i++)
+    {
+        for(patch_j=0;patch_j<AI_NETWORK_1_IN_1_WIDTH;patch_j++)
         {
-            for(k=0;k<AI_NETWORK_2_IN_1_CHANNEL;k++)
-            {
-                u32 index1=(i+AI_NETWORK_1_OUT_1_HEIGHT*offh)*AI_NETWORK_2_IN_1_CHANNEL*AI_NETWORK_2_IN_1_WIDTH+(j+AI_NETWORK_1_OUT_1_WIDTH*offw)*AI_NETWORK_2_IN_1_CHANNEL+k;
-                u32 index2=i*AI_NETWORK_2_IN_1_CHANNEL*AI_NETWORK_1_OUT_1_WIDTH+j*AI_NETWORK_2_IN_1_CHANNEL+k;
-                ai2InData[index1]=ai1OutData[index2];
-            }
+            i=patch_i+AI_NETWORK_1_IN_1_HEIGHT*patch_idx_h;
+            j=patch_j+AI_NETWORK_1_IN_1_WIDTH*patch_idx_w;
+            img_pixel_read(i,j,&r,&g,&b);
+            pixel_norm(&r,&g,&b);
+            aiInData[idx++]=r;
+            aiInData[idx++]=g;
+            aiInData[idx++]=b;
         }
     }
+#if SEPARATION>0
+    AI1_Run(ai1InData,ai1OutData);
+    for(patch_i=0;patch_i<AI_NETWORK_1_OUT_1_HEIGHT;patch_i++)
+    {
+        idx=(patch_i+AI_NETWORK_1_OUT_1_HEIGHT*patch_idx_h)*AI_NETWORK_2_IN_1_CHANNEL*AI_NETWORK_2_IN_1_WIDTH+AI_NETWORK_1_OUT_1_WIDTH*patch_idx_w*AI_NETWORK_2_IN_1_CHANNEL;
+        memcpy(ai2InData+idx,ai1OutData+patch_i*AI_NETWORK_2_IN_1_CHANNEL*AI_NETWORK_1_OUT_1_WIDTH,AI_NETWORK_2_IN_1_CHANNEL*AI_NETWORK_1_OUT_1_WIDTH);
+    }
+#else
+    AI1_Run(ai1InData,ai1OutData);
 #endif
 }
 
-void run_ai1(u8 *img)
+void run_ai1()
 {
     for(u32 i=0;i<SEPARATION_SCALE*SEPARATION_SCALE;i++)
     {
-        run_ai1_patch(img,i);
+        run_ai1_patch(i);
     }
 }
-#if SEPARATION>0
-void int_fix(signed char *data,u32 n)
-{
-    for(int i=0;i<n;i++)
-    {
-        *(data+i)=clip((*(data+i))*FIX_FACTOR0+FIX_FACTOR1,-128.f,127.f);
-    }
-}
-#endif
 
-void AI_Run(u8 *img)
+
+void AI_Run()
 {
-    run_ai1(img);
+    run_ai1();
 #if SEPARATION>0
-    int_fix(ai2InData,AI_NETWORK_2_IN_1_SIZE);
+    int_fix(ai2InData);
     AI2_Run(ai2InData,ai2OutData);
 #endif
-    u32 i;
-    float max=aiOutData[0];
-    u32 index=0;
+#if !defined(TEST_TIME_ONLY)
+    u32 i,index=0;;
+    float max_conf=aiOutData[0];
     for(i=1;i<CLASS_NUM;i++)
     {
-        if(aiOutData[i]>max)
+        if(aiOutData[i]>max_conf)
         {
-            max=aiOutData[i];
+            max_conf=aiOutData[i];
             index=i;
         }
     }
     result=index;
+#endif
 }

@@ -114,8 +114,9 @@ def pytorch2onnx_main(config_path, weight_path, onnx_save_path,img_size=None):
     separation=cfg["separation"]
     separation_scale=cfg["separation_scale"]
     model = getattr(models, cfg["model"])(separation=separation,separation_scale=separation_scale,act_layer=activations[cfg["global_act"]],num_classes=cfg["num_classes"])
-    chkpt = torch.load(weight_path)
-    model.load_state_dict(chkpt["state_dict"])
+    if weight_path is not None:
+        chkpt = torch.load(weight_path)
+        model.load_state_dict(chkpt["state_dict"])
     model.eval()
     model = reparameterize_model(model)
     if img_size is None:

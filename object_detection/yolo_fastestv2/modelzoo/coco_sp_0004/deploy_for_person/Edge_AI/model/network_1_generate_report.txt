@@ -1,5 +1,5 @@
 Neural Network Tools for STM32AI v1.7.0 (STM.ai v8.0.1-19451)
-Created date          : 2024-03-07 16:16:57
+Created date          : 2024-07-01 14:49:11
 Parameters            : generate --name network_1 -m results/deploy\coco_sp_0000\tflite\model_front.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\coco_sp_0000\temp --output results/deploy\coco_sp_0000\Edge_AI\model --allocate-inputs --series stm32h7 --allocate-outputs
 
 Exec/report summary (generate)

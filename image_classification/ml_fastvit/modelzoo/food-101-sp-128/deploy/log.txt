@@ -1,0 +1,12 @@
+{'config': 'modelzoo/food-101-sp-128/food-101.yaml', 'model_path': 'modelzoo/food-101-sp-128/model_best.pth.tar', 'convert_type': 1, 'tflite_val_path': '../../../datasets/food-101/validation', 'c_project_path': None, 'stm32cubeai_path': 'D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1', 'series': 'h7', 'eval': False, 'compiler': 1, 'img_size': None}
+pytorch_model_path:modelzoo/food-101-sp-128/model_best.pth.tar
+Checking 0/1...
+Checking 0/1...
+Command:
+D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1\Utilities\windows\stm32ai.exe generate --name network_1 -m results/deploy\food-101_0005\tflite\model_front.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\food-101_0005\temp --output results/deploy\food-101_0005\Edge_AI\model --allocate-inputs --series stm32h7 --allocate-outputs
+will be excuted to generate net codes
+Net codes generation successful
+Command:
+D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1\Utilities\windows\stm32ai.exe generate --name network_2 -m results/deploy\food-101_0005\tflite\model_post.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\food-101_0005\temp --output results/deploy\food-101_0005\Edge_AI\model --allocate-inputs --series stm32h7 --allocate-outputs
+will be excuted to generate net codes
+Net codes generation successful

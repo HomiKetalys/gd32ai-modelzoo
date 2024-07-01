@@ -1,14 +1,12 @@
 import os
 import shutil
 import sys
-from io import StringIO
-from typing import Union, Callable
-
-import cv2
+import subprocess
 import matplotlib.pyplot as plt
 import numpy as np
 import onnxruntime as ort
 import tensorflow as tf
+from typing import Union, Callable
 from PIL import Image
 from timm.data import ToNumpy
 from torchvision import transforms
@@ -95,6 +93,76 @@ class tfOrtModelRuner():
             else:
                 return out_list
 
+def copy_stlib(opt, stm32ai_path, stlib_path):
+    version = os.path.split(stm32ai_path)[1]
+
+    stlib_src_path = os.path.join(stm32ai_path, "Middlewares", "ST", "AI")
+    if opt.series == "f4":
+        lib_type = "ARMCortexM4"
+    elif opt.series == "h7":
+        if version < "9.0.0":
+            lib_type = "ARMCortexM4"
+        else:
+            lib_type = "ARMCortexM7"
+    else:
+        assert False, f"Unsupported series {opt.series}"
+
+
+    prefix = "MDK"
+    lib_src_path = os.path.join(stlib_src_path, "Lib", prefix, lib_type)
+    assert os.path.exists(lib_src_path), f"Stlib path:{lib_src_path}\ndo not exist "
+    lib_name = os.listdir(lib_src_path)[0]
+    lib_src_path = os.path.join(lib_src_path, lib_name)
+    lib_dst_path = os.path.join(stlib_path, "Lib", lib_name)
+    os.makedirs(os.path.join(stlib_path, "Lib"), exist_ok=True)
+    shutil.copy(lib_src_path, lib_dst_path)
+
+    prefix = "GCC"
+    lib_src_path = os.path.join(stlib_src_path, "Lib", prefix, lib_type)
+    assert os.path.exists(lib_src_path), f"Stlib path:{lib_src_path}\ndo not exist "
+    lib_names = os.listdir(lib_src_path)
+    lib_name = None
+    for name in lib_names:
+        if "PIC" not in name:
+            lib_name = name
+            break
+    assert lib_name is not None, f"Library file not found in folder path :{lib_src_path}"
+    lib_src_path = os.path.join(lib_src_path, lib_name)
+    prefix = "lib"
+    lib_dst_path = os.path.join(stlib_path, "Lib", prefix + lib_name)
+    os.makedirs(os.path.join(stlib_path, "Lib"), exist_ok=True)
+    shutil.copy(lib_src_path, lib_dst_path)
+
+
+    inc_dst_path = os.path.join(stlib_path, "Inc")
+    if os.path.exists(inc_dst_path):
+        shutil.rmtree(inc_dst_path)
+    inc_src_path = os.path.join(stlib_src_path, "Inc")
+    shutil.copytree(inc_src_path, inc_dst_path)
+    license_src_path = os.path.join(stlib_src_path, "LICENSE.txt")
+    license_dst_path = os.path.join(stlib_path, "LICENSE.txt")
+    shutil.copy(license_src_path, license_dst_path)
+
+def gen_net_codes(stm32ai_exe_path, model_path, name, work_space_path, output_path):
+    cmd = (f"{stm32ai_exe_path} "
+           f"generate "
+           f"--name {name} "
+           f"-m {model_path} "
+           f"--type tflite "
+           f"--compression none "
+           f"--verbosity 1 "
+           f"--workspace {work_space_path} "
+           f"--output {output_path} "
+           f"--allocate-inputs "
+           f"--series stm32h7 "
+           f"--allocate-outputs")
+    print(f"Command:\n{cmd}\nwill be excuted to generate net codes")
+    result = subprocess.run(cmd, stdout=subprocess.PIPE)
+    # result = subprocess.run(['powershell', '-Command', cmd], stdout=subprocess.PIPE)
+    if result.returncode != 0:
+        print("Net codes generation failed")
+        exit(-1)
+    print("Net codes generation successful")
 
 def l2(x, y):
     return np.sqrt(np.sum((x - y) ** 2, 1))

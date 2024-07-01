@@ -8,8 +8,8 @@ separation_scale: 2
 imagenet_trainset_size: '75750'
 input_size:
 - 3
-- 192
-- 192
+- 224
+- 224
 epochs: 200
 num_classes: 101
 model: fastvit_t4

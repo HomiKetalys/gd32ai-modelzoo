@@ -112,7 +112,7 @@ if __name__ == "__main__":
                         help='model type,0 for onnx,1 for tflite')
     parser.add_argument('--tflite_val_path', type=str, default=val_paths[1],
                         help='The path where the image which quantity need is saved')
-    parser.add_argument('--eval', type=bool, default=True,
+    parser.add_argument('--eval', type=bool, default=False,
                         help='eval exported model')
     opt = parser.parse_args()
     lger = LogSaver(opt.data, "results/export")
