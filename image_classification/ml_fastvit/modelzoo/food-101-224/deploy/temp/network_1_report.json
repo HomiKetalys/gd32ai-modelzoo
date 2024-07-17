@@ -1,7 +1,7 @@
 {
     "_allocate_inputs": 4,
     "_allocate_outputs": 4,
-    "cli_parameters": "generate --name network_1 -m results/deploy\\food-101_0004\\tflite\\model.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\\food-101_0004\\temp --output results/deploy\\food-101_0004\\Edge_AI\\model --allocate-inputs --series stm32h7 --allocate-outputs",
+    "cli_parameters": "generate --name network_1 -m results/deploy\\food-101_0009\\tflite\\model.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\\food-101_0009\\temp --output results/deploy\\food-101_0009\\Edge_AI\\model --allocate-inputs --series stm32h7 --allocate-outputs",
     "cli_version": {
         "major": 1,
         "micro": 0,
@@ -12,12 +12,12 @@
         "factor": null,
         "layers": {}
     },
-    "date_time": "Mon Jul  1 20:25:49 2024",
+    "date_time": "Tue Jul 16 16:39:06 2024",
     "error": 0,
     "error_str": [],
     "exec_cmd": "generate",
     "exec_duration": 0.0,
-    "hash": "e46a539bab22aec15f387904ce83fb6c",
+    "hash": "60508224ba7f69d6f978e8a50d56925a",
     "inputs": [
         "serving_default_input_10"
     ],
@@ -2205,7 +2205,9 @@
             "type": "Pool"
         },
         {
-            "c_id": [],
+            "c_id": [
+                63
+            ],
             "extras": {
                 "n_macc": 9240,
                 "n_params": 9240,
@@ -2222,7 +2224,7 @@
                         1
                     ]
                 },
-                "rom_size": 0
+                "rom_size": 9312
             },
             "id": 74,
             "inputs": [
@@ -2250,24 +2252,6 @@
         },
         {
             "c_id": [
-                63
-            ],
-            "extras": {
-                "n_macc": 24,
-                "n_params": 0,
-                "psize": 0,
-                "rom_size": 9312
-            },
-            "id": 75,
-            "inputs": [
-                "nl_74_nl"
-            ],
-            "name": "nl_75",
-            "original": "RELU6",
-            "type": "Nonlinearity"
-        },
-        {
-            "c_id": [
                 64
             ],
             "extras": {
@@ -2288,11 +2272,11 @@
                 },
                 "rom_size": 10752
             },
-            "id": 76,
+            "id": 75,
             "inputs": [
-                "nl_75"
+                "nl_74_nl"
             ],
-            "name": "conv2d_76",
+            "name": "conv2d_75",
             "original": "CONV_2D",
             "type": "Conv2D"
         },
@@ -2306,7 +2290,7 @@
                 "psize": 1,
                 "rom_size": 4
             },
-            "id": 77,
+            "id": 76,
             "inputs": [],
             "name": "model_tf_clip_by_value_clip_by_value_Minimum_y",
             "original": "",
@@ -2332,12 +2316,12 @@
                 },
                 "rom_size": 0
             },
-            "id": 77,
+            "id": 76,
             "inputs": [
-                "conv2d_76",
+                "conv2d_75",
                 "model_tf_clip_by_value_clip_by_value_Minimum_y"
             ],
-            "name": "eltwise_77",
+            "name": "eltwise_76",
             "original": "MINIMUM",
             "type": "Eltwise"
         },
@@ -2363,11 +2347,11 @@
                 },
                 "rom_size": 0
             },
-            "id": 78,
+            "id": 77,
             "inputs": [
-                "eltwise_77"
+                "eltwise_76"
             ],
-            "name": "nl_78",
+            "name": "nl_77",
             "original": "RELU",
             "type": "Nonlinearity"
         },
@@ -2393,12 +2377,12 @@
                 },
                 "rom_size": 0
             },
-            "id": 79,
+            "id": 78,
             "inputs": [
                 "transpose_72",
-                "nl_78"
+                "nl_77"
             ],
-            "name": "eltwise_79",
+            "name": "eltwise_78",
             "original": "MUL",
             "type": "Eltwise"
         },
@@ -2410,11 +2394,11 @@
                 "psize": 0,
                 "rom_size": 0
             },
-            "id": 79,
+            "id": 78,
             "inputs": [
-                "eltwise_79"
+                "eltwise_78"
             ],
-            "name": "nl_79_nl",
+            "name": "nl_78_nl",
             "original": "MUL",
             "type": "Nonlinearity"
         },
@@ -2440,11 +2424,11 @@
                 },
                 "rom_size": 0
             },
-            "id": 80,
+            "id": 79,
             "inputs": [
-                "nl_79_nl"
+                "nl_78_nl"
             ],
-            "name": "pool_80",
+            "name": "pool_79",
             "original": "MEAN",
             "type": "Pool"
         },
@@ -2458,11 +2442,11 @@
                 "psize": 0,
                 "rom_size": 39188
             },
-            "id": 81,
+            "id": 80,
             "inputs": [
-                "pool_80"
+                "pool_79"
             ],
-            "name": "reshape_81",
+            "name": "reshape_80",
             "original": "FULLY_CONNECTED",
             "type": "Reshape"
         },
@@ -2486,11 +2470,11 @@
                 },
                 "rom_size": 0
             },
-            "id": 81,
+            "id": 80,
             "inputs": [
-                "reshape_81"
+                "reshape_80"
             ],
-            "name": "dense_81_dense",
+            "name": "dense_80_dense",
             "original": "FULLY_CONNECTED",
             "type": "Dense"
         },
@@ -2516,17 +2500,17 @@
                 },
                 "rom_size": 0
             },
-            "id": 82,
+            "id": 81,
             "inputs": [
-                "dense_81_dense"
+                "dense_80_dense"
             ],
-            "name": "conversion_82",
+            "name": "conversion_81",
             "original": "DEQUANTIZE",
             "type": "Conversion"
         }
     ],
     "model_files": [
-        "F:\\MyWork\\PyWork\\gd32ai-modelzoo\\image_classification\\ml_fastvit\\results\\deploy\\food-101_0004\\tflite\\model.tflite"
+        "F:\\MyWork\\PyWork\\gd32ai-modelzoo\\image_classification\\ml_fastvit\\results\\deploy\\food-101_0009\\tflite\\model.tflite"
     ],
     "model_n_params": 279054,
     "model_name": "model",
@@ -2534,7 +2518,7 @@
     "model_type": "tflite",
     "name": "network_1",
     "outputs": [
-        "conversion_82"
+        "conversion_81"
     ],
     "ram_io_size": [
         150529,
@@ -2554,12 +2538,12 @@
             "name": "serving_default_input_10"
         }
     ],
-    "rom_n_macc": 54270639,
+    "rom_n_macc": 54270615,
     "rom_outputs": [
         {
             "c_size": 404,
             "c_type": "float",
-            "name": "conversion_82"
+            "name": "conversion_81"
         }
     ],
     "rom_size": 289656,

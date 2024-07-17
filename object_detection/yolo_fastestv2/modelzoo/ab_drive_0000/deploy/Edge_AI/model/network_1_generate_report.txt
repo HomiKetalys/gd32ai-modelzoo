@@ -1,27 +1,27 @@
 Neural Network Tools for STM32AI v1.7.0 (STM.ai v8.0.1-19451)
-Created date          : 2024-07-01 15:13:55
-Parameters            : generate --name network_1 -m results/deploy\ab_drive_0000\tflite\model_front.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\ab_drive_0000\temp --output results/deploy\ab_drive_0000\Edge_AI\model --allocate-inputs --series stm32h7 --allocate-outputs
+Created date          : 2024-07-16 20:28:06
+Parameters            : generate --name network_1 -m results/deploy\ab_drive_0001\tflite\model_front.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\ab_drive_0001\temp --output results/deploy\ab_drive_0001\Edge_AI\model --allocate-inputs --series stm32h7 --allocate-outputs
 
 Exec/report summary (generate)
 -------------------------------------------------------------------------------------------------------------------------------------------------
-model file         :   F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\ab_drive_0000\tflite\model_front.tflite   
+model file         :   F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\ab_drive_0001\tflite\model_front.tflite   
 type               :   tflite                                                                                                                    
 c_name             :   network_1                                                                                                                 
 compression        :   none                                                                                                                      
 options            :   allocate-inputs, allocate-outputs                                                                                         
 optimization       :   balanced                                                                                                                  
 target/series      :   stm32h7                                                                                                                   
-workspace dir      :   F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\ab_drive_0000\temp                        
-output dir         :   F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\ab_drive_0000\Edge_AI\model               
+workspace dir      :   F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\ab_drive_0001\temp                        
+output dir         :   F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\ab_drive_0001\Edge_AI\model               
 model_fmt          :   ss/sa per-channel                                                                                                         
 model_name         :   model_front                                                                                                               
-model_hash         :   e24e74cd1b1cf943dfe8dd00fe8a079d                                                                                          
+model_hash         :   93c30a4c9be09fe181b561161343f365                                                                                          
 params #           :   52,392 items (58.27 KiB)                                                                                                  
 -------------------------------------------------------------------------------------------------------------------------------------------------
 input 1/1          :   'serving_default_input_10' (domain:activations/**default**)                                                               
                    :   49152 items, 48.00 KiB, ai_i8, s=0.00392157, zp=-128, (1,128,128,3)                                                       
 output 1/1         :   'concat_79' (domain:activations/**default**)                                                                              
-                   :   6144 items, 6.00 KiB, ai_i8, s=0.01639725, zp=-128, (1,8,8,96)                                                            
+                   :   6144 items, 6.00 KiB, ai_i8, s=0.01623222, zp=-128, (1,8,8,96)                                                            
 macc               :   8,120,904                                                                                                                 
 weights (ro)       :   56,976 B (55.64 KiB) (1 segment) / -152,592(-72.8%) vs float model                                                        
 activations (rw)   :   108,636 B (106.09 KiB) (1 segment) *                                                                                      
@@ -325,7 +325,7 @@ c_id   name (*_array)                    item/size       domain/mem-pool        
 69     conv2d_13_output                  6144/6144       activations/**default**   int8_t          sa8                     
 70     conv2d_14_pad_before_output       7776/7776       activations/**default**   int8_t          sa8                     
 71     conv2d_53_weights                 432/432         weights/weights           const int8_t    ss8/ch(48)              
-72     conv2d_14_output                  6144/6144       activations/**default**   int8_t          sa8                     
+72     conv2d_14_output                  6144/6144       activations/**default**   int8_t          ss8                     
 73     conv2d_15_output                  6144/6144       activations/**default**   int8_t          sa8                     
 74     conv2d_53_bias                    48/192          weights/weights           const int32_t   ss32/ch(48)             
 75     concat_17_output                  12288/12288     activations/**default**   int8_t          sa8                     
@@ -350,7 +350,7 @@ c_id   name (*_array)                    item/size       domain/mem-pool        
 94     concat_29_output                  12288/12288     activations/**default**   int8_t          sa8                     
 95     conv2d_35_pad_before_output       15552/15552     activations/**default**   int8_t          sa8                     
 96     conv2d_59_bias                    48/192          weights/weights           const int32_t   ss32/ch(48)             
-97     conv2d_35_output                  3072/3072       activations/**default**   int8_t          sa8                     
+97     conv2d_35_output                  3072/3072       activations/**default**   int8_t          ss8                     
 98     conv2d_36_output                  3072/3072       activations/**default**   int8_t          sa8                     
 99     conv2d_60_weights                 2304/2304       weights/weights           const int8_t    ss8/ch(48)              
 100    conv2d_30_output                  12288/12288     activations/**default**   int8_t          sa8                     
@@ -1093,10 +1093,10 @@ macc=8,120,904 weights=56,976 act=108,636 ram_io=0
 
 Generated files (7)
 ------------------------------------------------------------------------------------------------------------------------------------- 
-F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\ab_drive_0000\Edge_AI\model\network_1_config.h        
-F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\ab_drive_0000\Edge_AI\model\network_1.h               
-F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\ab_drive_0000\Edge_AI\model\network_1.c               
-F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\ab_drive_0000\Edge_AI\model\network_1_data_params.h   
-F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\ab_drive_0000\Edge_AI\model\network_1_data_params.c   
-F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\ab_drive_0000\Edge_AI\model\network_1_data.h          
-F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\ab_drive_0000\Edge_AI\model\network_1_data.c          
+F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\ab_drive_0001\Edge_AI\model\network_1_config.h        
+F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\ab_drive_0001\Edge_AI\model\network_1.h               
+F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\ab_drive_0001\Edge_AI\model\network_1.c               
+F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\ab_drive_0001\Edge_AI\model\network_1_data_params.h   
+F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\ab_drive_0001\Edge_AI\model\network_1_data_params.c   
+F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\ab_drive_0001\Edge_AI\model\network_1_data.h          
+F:\MyWork\PyWork\gd32ai-modelzoo\object_detection\yolo_fastestv2\results\deploy\ab_drive_0001\Edge_AI\model\network_1_data.c          

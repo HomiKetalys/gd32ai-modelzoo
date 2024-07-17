@@ -8,7 +8,7 @@ ai_handle network2;
 #if !defined(TEST_TIME_ONLY)
 ObjectResult objects[MAX_OBJ_NUM];
 ObjectResult results[MAX_OBJ_NUM];
-u32 object_num;
+u32 object_num=0;
 #endif
 
 
@@ -59,11 +59,16 @@ void AI_Error_Handler()
     while(1);
 }
 
+bool init=false;
+
 void AI_Init()
 {
+    if(init)
+        return;
     ai_error err1,err2;
-    rcu_periph_clock_enable(RCU_CRC);
-
+#if defined(NEED_RCU)
+    rcu_enable();
+#endif
     /* Create a local array with the addresses of the activations buffers */
 //    const ai_handle act_addr[] = { activations0,activations1 };
     const ai_handle act_addr[] = { activations };
@@ -88,6 +93,7 @@ void AI_Init()
     ai_output2 = ai_network_2_outputs_get(network2, NULL);
     ai2OutData=ai_output2[0].data;
 #endif
+    init=true;
 }
 
 void AI1_Run(signed char *pIn,ai1_out_type *pOut)
@@ -247,6 +253,7 @@ void run_ai1()
 
 void AI_Run()
 {
+    AI_Init();
     run_ai1();
 #if SEPARATION>0
     int_fix(ai2InData);

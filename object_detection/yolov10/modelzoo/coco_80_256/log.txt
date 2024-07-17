@@ -1,0 +1,1087 @@
+Load yaml sucess...
+<submodules.FastestDet.utils.tool.LoadYaml object at 0x000001AF561D5780>
+params:206257
+[INFO] Register count_convNd() for <class 'torch.nn.modules.conv.Conv2d'>.
+[INFO] Register count_normalization() for <class 'torch.nn.modules.batchnorm.BatchNorm2d'>.
+[INFO] Register zero_ops() for <class 'torch.nn.modules.activation.ReLU6'>.
+[INFO] Register zero_ops() for <class 'torch.nn.modules.container.Sequential'>.
+[INFO] Register zero_ops() for <class 'torch.nn.modules.pooling.MaxPool2d'>.
+[INFO] Register count_upsample() for <class 'torch.nn.modules.upsampling.Upsample'>.
+flops:0.130617344GFLOPs
+use SGD optimizer
+Starting training for 300 epochs...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=33.78s).
+Accumulating evaluation results...
+DONE (t=14.24s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.001
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.003
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.004
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.001
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.015
+
+IOU:0.4 MAP:0.000 Recall:0.017
+[['person', '0.001', '0.030'], ['bicycle', '0.000', '0.000'], ['car', '0.000', '0.021'], ['motorbike', '0.000', '0.000'], ['aeroplane', '0.000', '0.000'], ['bus', '0.001', '0.337'], ['train', '0.000', '0.000'], ['truck', '0.000', '0.000'], ['boat', '0.000', '0.002'], ['traffic light', '0.000', '0.000'], ['fire hydrant', '0.000', '0.000'], ['stop sign', '0.000', '0.000'], ['parking meter', '0.000', '0.000'], ['bench', '0.000', '0.002'], ['bird', '0.000', '0.000'], ['cat', '0.001', '0.292'], ['dog', '0.001', '0.372'], ['horse', '0.001', '0.004'], ['sheep', '0.000', '0.000'], ['cow', '0.000', '0.018'], ['elephant', '0.000', '0.000'], ['bear', '0.000', '0.000'], ['zebra', '0.000', '0.000'], ['giraffe', '0.000', '0.000'], ['backpack', '0.000', '0.000'], ['umbrella', '0.000', '0.000'], ['handbag', '0.000', '0.024'], ['tie', '0.000', '0.000'], ['suitcase', '0.000', '0.000'], ['frisbee', '0.000', '0.000'], ['skis', '0.000', '0.000'], ['snowboard', '0.000', '0.000'], ['sports ball', '0.000', '0.000'], ['kite', '0.000', '0.009'], ['baseball bat', '0.000', '0.000'], ['baseball glove', '0.000', '0.000'], ['skateboard', '0.000', '0.006'], ['surfboard', '0.000', '0.000'], ['tennis racket', '0.000', '0.000'], ['bottle', '0.000', '0.000'], ['wine glass', '0.000', '0.000'], ['cup', '0.000', '0.000'], ['fork', '0.000', '0.000'], ['knife', '0.000', '0.000'], ['spoon', '0.000', '0.000'], ['bowl', '0.000', '0.000'], ['banana', '0.000', '0.000'], ['apple', '0.000', '0.000'], ['sandwich', '0.000', '0.000'], ['orange', '0.000', '0.000'], ['broccoli', '0.000', '0.000'], ['carrot', '0.000', '0.000'], ['hot dog', '0.000', '0.000'], ['pizza', '0.000', '0.000'], ['donut', '0.000', '0.000'], ['cake', '0.000', '0.000'], ['chair', '0.000', '0.000'], ['sofa', '0.000', '0.218'], ['pottedplant', '0.000', '0.000'], ['bed', '0.000', '0.000'], ['diningtable', '0.000', '0.000'], ['toilet', '0.000', '0.000'], ['tvmonitor', '0.000', '0.000'], ['laptop', '0.000', '0.004'], ['mouse', '0.000', '0.000'], ['remote', '0.000', '0.000'], ['keyboard', '0.000', '0.000'], ['cell phone', '0.000', '0.000'], ['microwave', '0.000', '0.000'], ['oven', '0.000', '0.000'], ['toaster', '0.000', '0.000'], ['sink', '0.000', '0.000'], ['refrigerator', '0.000', '0.000'], ['book', '0.000', '0.000'], ['clock', '0.000', '0.000'], ['vase', '0.000', '0.000'], ['scissors', '0.000', '0.000'], ['teddy bear', '0.000', '0.000'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.000', '0.000']]
+Epoch:0 LR:0.000000 IOU:0.677171 Obj:0.097511 Cls:4.329544 Dfl:0.000000 Total:11.307090
+Epoch:1 LR:0.000010 IOU:0.671262 Obj:0.043509 Cls:4.149808 Dfl:0.000000 Total:10.216045
+Epoch:2 LR:0.000067 IOU:0.655456 Obj:0.014476 Cls:3.655748 Dfl:0.000000 Total:9.131001
+Epoch:3 LR:0.000250 IOU:0.614825 Obj:0.015713 Cls:3.433452 Dfl:0.000000 Total:8.603450
+Epoch:4 LR:0.000672 IOU:0.571169 Obj:0.017249 Cls:3.166657 Dfl:0.000000 Total:8.011993
+Epoch:5 LR:0.001000 IOU:0.536984 Obj:0.018408 Cls:2.848786 Dfl:0.000000 Total:7.439184
+Epoch:6 LR:0.001000 IOU:0.514643 Obj:0.019145 Cls:2.584059 Dfl:0.000000 Total:7.007523
+Epoch:7 LR:0.001000 IOU:0.498768 Obj:0.019580 Cls:2.419092 Dfl:0.000000 Total:6.722515
+Epoch:8 LR:0.001000 IOU:0.485930 Obj:0.019854 Cls:2.306854 Dfl:0.000000 Total:6.511948
+Epoch:9 LR:0.001000 IOU:0.476946 Obj:0.020006 Cls:2.219673 Dfl:0.000000 Total:6.355330
+Epoch:10 LR:0.001000 IOU:0.469521 Obj:0.020094 Cls:2.149961 Dfl:0.000000 Total:6.227639
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=55.79s).
+Accumulating evaluation results...
+DONE (t=13.85s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.014
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.028
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.004
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.001
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.011
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.032
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.032
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.057
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.061
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.004
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.066
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.124
+
+IOU:0.4 MAP:0.037 Recall:0.154
+[['person', '0.204', '0.471'], ['bicycle', '0.009', '0.111'], ['car', '0.020', '0.154'], ['motorbike', '0.095', '0.280'], ['aeroplane', '0.104', '0.455'], ['bus', '0.127', '0.404'], ['train', '0.148', '0.563'], ['truck', '0.016', '0.067'], ['boat', '0.013', '0.114'], ['traffic light', '0.010', '0.020'], ['fire hydrant', '0.005', '0.010'], ['stop sign', '0.180', '0.360'], ['parking meter', '0.000', '0.000'], ['bench', '0.007', '0.094'], ['bird', '0.006', '0.016'], ['cat', '0.067', '0.292'], ['dog', '0.047', '0.161'], ['horse', '0.078', '0.190'], ['sheep', '0.029', '0.266'], ['cow', '0.070', '0.208'], ['elephant', '0.167', '0.365'], ['bear', '0.034', '0.085'], ['zebra', '0.321', '0.701'], ['giraffe', '0.220', '0.565'], ['backpack', '0.000', '0.000'], ['umbrella', '0.005', '0.128'], ['handbag', '0.000', '0.000'], ['tie', '0.006', '0.047'], ['suitcase', '0.002', '0.030'], ['frisbee', '0.000', '0.000'], ['skis', '0.010', '0.203'], ['snowboard', '0.000', '0.000'], ['sports ball', '0.000', '0.000'], ['kite', '0.047', '0.220'], ['baseball bat', '0.000', '0.000'], ['baseball glove', '0.000', '0.000'], ['skateboard', '0.009', '0.218'], ['surfboard', '0.004', '0.108'], ['tennis racket', '0.000', '0.013'], ['bottle', '0.004', '0.025'], ['wine glass', '0.000', '0.000'], ['cup', '0.004', '0.112'], ['fork', '0.003', '0.121'], ['knife', '0.000', '0.000'], ['spoon', '0.000', '0.000'], ['bowl', '0.010', '0.144'], ['banana', '0.009', '0.140'], ['apple', '0.006', '0.017'], ['sandwich', '0.043', '0.339'], ['orange', '0.050', '0.209'], ['broccoli', '0.041', '0.310'], ['carrot', '0.004', '0.075'], ['hot dog', '0.000', '0.000'], ['pizza', '0.122', '0.425'], ['donut', '0.003', '0.038'], ['cake', '0.000', '0.006'], ['chair', '0.019', '0.143'], ['sofa', '0.060', '0.253'], ['pottedplant', '0.007', '0.125'], ['bed', '0.075', '0.436'], ['diningtable', '0.128', '0.429'], ['toilet', '0.081', '0.553'], ['tvmonitor', '0.126', '0.462'], ['laptop', '0.044', '0.234'], ['mouse', '0.000', '0.000'], ['remote', '0.000', '0.000'], ['keyboard', '0.020', '0.105'], ['cell phone', '0.002', '0.004'], ['microwave', '0.000', '0.000'], ['oven', '0.015', '0.189'], ['toaster', '0.000', '0.000'], ['sink', '0.015', '0.156'], ['refrigerator', '0.016', '0.286'], ['book', '0.000', '0.005'], ['clock', '0.001', '0.007'], ['vase', '0.013', '0.043'], ['scissors', '0.000', '0.000'], ['teddy bear', '0.010', '0.005'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.000', '0.000']]
+Epoch:11 LR:0.001000 IOU:0.463497 Obj:0.020059 Cls:2.090126 Dfl:0.000000 Total:6.119040
+Epoch:12 LR:0.001000 IOU:0.457355 Obj:0.020112 Cls:2.036877 Dfl:0.000000 Total:6.017505
+Epoch:13 LR:0.001000 IOU:0.452535 Obj:0.020136 Cls:1.988960 Dfl:0.000000 Total:5.931416
+Epoch:14 LR:0.001000 IOU:0.448720 Obj:0.020123 Cls:1.950714 Dfl:0.000000 Total:5.862435
+Epoch:15 LR:0.001000 IOU:0.444394 Obj:0.020113 Cls:1.914250 Dfl:0.000000 Total:5.791204
+Epoch:16 LR:0.001000 IOU:0.440753 Obj:0.020134 Cls:1.882203 Dfl:0.000000 Total:5.730362
+Epoch:17 LR:0.001000 IOU:0.436835 Obj:0.020197 Cls:1.849146 Dfl:0.000000 Total:5.666982
+Epoch:18 LR:0.001000 IOU:0.434213 Obj:0.020148 Cls:1.822708 Dfl:0.000000 Total:5.618776
+Epoch:19 LR:0.001000 IOU:0.431051 Obj:0.020164 Cls:1.794864 Dfl:0.000000 Total:5.565896
+Epoch:20 LR:0.001000 IOU:0.428162 Obj:0.020206 Cls:1.772760 Dfl:0.000000 Total:5.521352
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=57.39s).
+Accumulating evaluation results...
+DONE (t=14.57s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.032
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.063
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.013
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.004
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.030
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.070
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.055
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.089
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.094
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.011
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.112
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.179
+
+IOU:0.4 MAP:0.076 Recall:0.214
+[['person', '0.280', '0.523'], ['bicycle', '0.012', '0.095'], ['car', '0.058', '0.229'], ['motorbike', '0.163', '0.296'], ['aeroplane', '0.273', '0.497'], ['bus', '0.230', '0.432'], ['train', '0.312', '0.663'], ['truck', '0.041', '0.118'], ['boat', '0.030', '0.163'], ['traffic light', '0.022', '0.107'], ['fire hydrant', '0.058', '0.168'], ['stop sign', '0.283', '0.413'], ['parking meter', '0.048', '0.067'], ['bench', '0.039', '0.203'], ['bird', '0.004', '0.045'], ['cat', '0.158', '0.460'], ['dog', '0.059', '0.161'], ['horse', '0.156', '0.275'], ['sheep', '0.074', '0.349'], ['cow', '0.102', '0.229'], ['elephant', '0.294', '0.569'], ['bear', '0.304', '0.479'], ['zebra', '0.423', '0.672'], ['giraffe', '0.405', '0.672'], ['backpack', '0.001', '0.008'], ['umbrella', '0.038', '0.305'], ['handbag', '0.000', '0.000'], ['tie', '0.015', '0.094'], ['suitcase', '0.004', '0.069'], ['frisbee', '0.027', '0.113'], ['skis', '0.035', '0.249'], ['snowboard', '0.000', '0.000'], ['sports ball', '0.017', '0.046'], ['kite', '0.093', '0.286'], ['baseball bat', '0.012', '0.048'], ['baseball glove', '0.014', '0.047'], ['skateboard', '0.054', '0.313'], ['surfboard', '0.032', '0.204'], ['tennis racket', '0.050', '0.276'], ['bottle', '0.013', '0.062'], ['wine glass', '0.000', '0.003'], ['cup', '0.017', '0.118'], ['fork', '0.005', '0.107'], ['knife', '0.002', '0.040'], ['spoon', '0.000', '0.000'], ['bowl', '0.041', '0.179'], ['banana', '0.021', '0.177'], ['apple', '0.013', '0.059'], ['sandwich', '0.098', '0.356'], ['orange', '0.083', '0.247'], ['broccoli', '0.069', '0.380'], ['carrot', '0.021', '0.151'], ['hot dog', '0.008', '0.055'], ['pizza', '0.216', '0.389'], ['donut', '0.013', '0.118'], ['cake', '0.016', '0.123'], ['chair', '0.027', '0.190'], ['sofa', '0.083', '0.341'], ['pottedplant', '0.022', '0.210'], ['bed', '0.119', '0.356'], ['diningtable', '0.143', '0.451'], ['toilet', '0.193', '0.615'], ['tvmonitor', '0.209', '0.517'], ['laptop', '0.098', '0.355'], ['mouse', '0.000', '0.000'], ['remote', '0.000', '0.000'], ['keyboard', '0.032', '0.170'], ['cell phone', '0.012', '0.042'], ['microwave', '0.025', '0.127'], ['oven', '0.078', '0.308'], ['toaster', '0.000', '0.000'], ['sink', '0.020', '0.182'], ['refrigerator', '0.102', '0.452'], ['book', '0.002', '0.031'], ['clock', '0.029', '0.161'], ['vase', '0.013', '0.047'], ['scissors', '0.000', '0.000'], ['teddy bear', '0.018', '0.094'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.000', '0.000']]
+Epoch:21 LR:0.001000 IOU:0.425332 Obj:0.020241 Cls:1.749337 Dfl:0.000000 Total:5.475846
+Epoch:22 LR:0.001000 IOU:0.422753 Obj:0.020234 Cls:1.727599 Dfl:0.000000 Total:5.433360
+Epoch:23 LR:0.001000 IOU:0.419995 Obj:0.020260 Cls:1.707135 Dfl:0.000000 Total:5.391251
+Epoch:24 LR:0.001000 IOU:0.418197 Obj:0.020267 Cls:1.690103 Dfl:0.000000 Total:5.359959
+Epoch:25 LR:0.001000 IOU:0.415809 Obj:0.020286 Cls:1.670765 Dfl:0.000000 Total:5.321822
+Epoch:26 LR:0.001000 IOU:0.413831 Obj:0.020267 Cls:1.650173 Dfl:0.000000 Total:5.285089
+Epoch:27 LR:0.001000 IOU:0.411630 Obj:0.020288 Cls:1.637241 Dfl:0.000000 Total:5.254896
+Epoch:28 LR:0.001000 IOU:0.409481 Obj:0.020293 Cls:1.622021 Dfl:0.000000 Total:5.222557
+Epoch:29 LR:0.001000 IOU:0.407364 Obj:0.020321 Cls:1.604954 Dfl:0.000000 Total:5.189000
+Epoch:30 LR:0.001000 IOU:0.405801 Obj:0.020328 Cls:1.591651 Dfl:0.000000 Total:5.163300
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=56.84s).
+Accumulating evaluation results...
+DONE (t=13.94s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.045
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.086
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.022
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.007
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.049
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.091
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.069
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.110
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.116
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.018
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.146
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.218
+
+IOU:0.4 MAP:0.102 Recall:0.257
+[['person', '0.319', '0.526'], ['bicycle', '0.049', '0.199'], ['car', '0.091', '0.260'], ['motorbike', '0.227', '0.442'], ['aeroplane', '0.322', '0.580'], ['bus', '0.268', '0.418'], ['train', '0.346', '0.647'], ['truck', '0.046', '0.130'], ['boat', '0.044', '0.207'], ['traffic light', '0.034', '0.118'], ['fire hydrant', '0.189', '0.327'], ['stop sign', '0.305', '0.413'], ['parking meter', '0.066', '0.100'], ['bench', '0.050', '0.184'], ['bird', '0.020', '0.084'], ['cat', '0.195', '0.554'], ['dog', '0.105', '0.239'], ['horse', '0.227', '0.374'], ['sheep', '0.097', '0.335'], ['cow', '0.115', '0.258'], ['elephant', '0.329', '0.541'], ['bear', '0.288', '0.493'], ['zebra', '0.511', '0.713'], ['giraffe', '0.454', '0.668'], ['backpack', '0.004', '0.035'], ['umbrella', '0.054', '0.308'], ['handbag', '0.001', '0.002'], ['tie', '0.015', '0.114'], ['suitcase', '0.020', '0.112'], ['frisbee', '0.060', '0.191'], ['skis', '0.060', '0.303'], ['snowboard', '0.009', '0.043'], ['sports ball', '0.032', '0.065'], ['kite', '0.133', '0.348'], ['baseball bat', '0.007', '0.096'], ['baseball glove', '0.049', '0.095'], ['skateboard', '0.054', '0.324'], ['surfboard', '0.042', '0.245'], ['tennis racket', '0.096', '0.316'], ['bottle', '0.020', '0.111'], ['wine glass', '0.003', '0.017'], ['cup', '0.021', '0.145'], ['fork', '0.010', '0.195'], ['knife', '0.010', '0.028'], ['spoon', '0.011', '0.016'], ['bowl', '0.082', '0.283'], ['banana', '0.022', '0.253'], ['apple', '0.005', '0.046'], ['sandwich', '0.092', '0.379'], ['orange', '0.122', '0.373'], ['broccoli', '0.096', '0.421'], ['carrot', '0.029', '0.197'], ['hot dog', '0.041', '0.102'], ['pizza', '0.241', '0.379'], ['donut', '0.036', '0.151'], ['cake', '0.016', '0.120'], ['chair', '0.038', '0.236'], ['sofa', '0.090', '0.352'], ['pottedplant', '0.043', '0.283'], ['bed', '0.183', '0.528'], ['diningtable', '0.167', '0.486'], ['toilet', '0.283', '0.682'], ['tvmonitor', '0.245', '0.566'], ['laptop', '0.166', '0.455'], ['mouse', '0.022', '0.047'], ['remote', '0.001', '0.014'], ['keyboard', '0.068', '0.294'], ['cell phone', '0.043', '0.103'], ['microwave', '0.113', '0.236'], ['oven', '0.119', '0.364'], ['toaster', '0.000', '0.000'], ['sink', '0.053', '0.276'], ['refrigerator', '0.118', '0.437'], ['book', '0.008', '0.059'], ['clock', '0.079', '0.213'], ['vase', '0.031', '0.094'], ['scissors', '0.007', '0.056'], ['teddy bear', '0.052', '0.178'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.000', '0.000']]
+Epoch:31 LR:0.001000 IOU:0.403744 Obj:0.020361 Cls:1.580483 Dfl:0.000000 Total:5.136213
+Epoch:32 LR:0.001000 IOU:0.402284 Obj:0.020346 Cls:1.564605 Dfl:0.000000 Total:5.108409
+Epoch:33 LR:0.001000 IOU:0.400258 Obj:0.020372 Cls:1.557456 Dfl:0.000000 Total:5.085469
+Epoch:34 LR:0.001000 IOU:0.398670 Obj:0.020416 Cls:1.543837 Dfl:0.000000 Total:5.059857
+Epoch:35 LR:0.001000 IOU:0.397400 Obj:0.020386 Cls:1.531659 Dfl:0.000000 Total:5.037035
+Epoch:36 LR:0.001000 IOU:0.396164 Obj:0.020354 Cls:1.517065 Dfl:0.000000 Total:5.012040
+Epoch:37 LR:0.001000 IOU:0.395049 Obj:0.020396 Cls:1.512683 Dfl:0.000000 Total:4.999408
+Epoch:38 LR:0.001000 IOU:0.393868 Obj:0.020405 Cls:1.504903 Dfl:0.000000 Total:4.982328
+Epoch:39 LR:0.001000 IOU:0.392143 Obj:0.020397 Cls:1.495211 Dfl:0.000000 Total:4.958710
+Epoch:40 LR:0.001000 IOU:0.391718 Obj:0.020405 Cls:1.487176 Dfl:0.000000 Total:4.947403
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=57.36s).
+Accumulating evaluation results...
+DONE (t=13.87s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.054
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.098
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.032
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.009
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.058
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.109
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.080
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.126
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.131
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.022
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.168
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.241
+
+IOU:0.4 MAP:0.115 Recall:0.276
+[['person', '0.331', '0.542'], ['bicycle', '0.060', '0.247'], ['car', '0.101', '0.252'], ['motorbike', '0.236', '0.450'], ['aeroplane', '0.322', '0.531'], ['bus', '0.306', '0.477'], ['train', '0.423', '0.721'], ['truck', '0.055', '0.171'], ['boat', '0.051', '0.235'], ['traffic light', '0.041', '0.137'], ['fire hydrant', '0.204', '0.297'], ['stop sign', '0.397', '0.480'], ['parking meter', '0.069', '0.133'], ['bench', '0.056', '0.208'], ['bird', '0.030', '0.114'], ['cat', '0.255', '0.589'], ['dog', '0.148', '0.317'], ['horse', '0.255', '0.473'], ['sheep', '0.158', '0.429'], ['cow', '0.120', '0.247'], ['elephant', '0.342', '0.588'], ['bear', '0.343', '0.507'], ['zebra', '0.549', '0.769'], ['giraffe', '0.434', '0.685'], ['backpack', '0.005', '0.049'], ['umbrella', '0.066', '0.327'], ['handbag', '0.001', '0.007'], ['tie', '0.022', '0.114'], ['suitcase', '0.035', '0.198'], ['frisbee', '0.075', '0.209'], ['skis', '0.066', '0.373'], ['snowboard', '0.000', '0.000'], ['sports ball', '0.039', '0.084'], ['kite', '0.142', '0.333'], ['baseball bat', '0.023', '0.130'], ['baseball glove', '0.065', '0.115'], ['skateboard', '0.067', '0.391'], ['surfboard', '0.063', '0.290'], ['tennis racket', '0.114', '0.302'], ['bottle', '0.014', '0.089'], ['wine glass', '0.005', '0.032'], ['cup', '0.030', '0.132'], ['fork', '0.016', '0.181'], ['knife', '0.004', '0.058'], ['spoon', '0.001', '0.008'], ['bowl', '0.070', '0.225'], ['banana', '0.037', '0.266'], ['apple', '0.011', '0.067'], ['sandwich', '0.158', '0.514'], ['orange', '0.108', '0.279'], ['broccoli', '0.096', '0.446'], ['carrot', '0.045', '0.189'], ['hot dog', '0.029', '0.102'], ['pizza', '0.269', '0.488'], ['donut', '0.045', '0.186'], ['cake', '0.037', '0.168'], ['chair', '0.041', '0.210'], ['sofa', '0.113', '0.402'], ['pottedplant', '0.051', '0.297'], ['bed', '0.199', '0.564'], ['diningtable', '0.174', '0.473'], ['toilet', '0.287', '0.587'], ['tvmonitor', '0.275', '0.542'], ['laptop', '0.143', '0.420'], ['mouse', '0.065', '0.160'], ['remote', '0.001', '0.014'], ['keyboard', '0.118', '0.386'], ['cell phone', '0.044', '0.088'], ['microwave', '0.142', '0.182'], ['oven', '0.106', '0.371'], ['toaster', '0.000', '0.000'], ['sink', '0.037', '0.182'], ['refrigerator', '0.156', '0.460'], ['book', '0.005', '0.061'], ['clock', '0.096', '0.251'], ['vase', '0.030', '0.108'], ['scissors', '0.005', '0.083'], ['teddy bear', '0.098', '0.288'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.000', '0.000']]
+Epoch:41 LR:0.001000 IOU:0.390527 Obj:0.020410 Cls:1.479915 Dfl:0.000000 Total:4.930695
+Epoch:42 LR:0.001000 IOU:0.389480 Obj:0.020386 Cls:1.469609 Dfl:0.000000 Total:4.911632
+Epoch:43 LR:0.001000 IOU:0.388236 Obj:0.020430 Cls:1.464067 Dfl:0.000000 Total:4.896835
+Epoch:44 LR:0.001000 IOU:0.387368 Obj:0.020453 Cls:1.455480 Dfl:0.000000 Total:4.881668
+Epoch:45 LR:0.001000 IOU:0.386240 Obj:0.020453 Cls:1.449909 Dfl:0.000000 Total:4.867080
+Epoch:46 LR:0.001000 IOU:0.385558 Obj:0.020453 Cls:1.442701 Dfl:0.000000 Total:4.854418
+Epoch:47 LR:0.001000 IOU:0.384266 Obj:0.020463 Cls:1.435055 Dfl:0.000000 Total:4.836592
+Epoch:48 LR:0.001000 IOU:0.383195 Obj:0.020493 Cls:1.427415 Dfl:0.000000 Total:4.820865
+Epoch:49 LR:0.001000 IOU:0.383109 Obj:0.020444 Cls:1.424806 Dfl:0.000000 Total:4.816785
+Epoch:50 LR:0.001000 IOU:0.382235 Obj:0.020501 Cls:1.421765 Dfl:0.000000 Total:4.807653
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=57.87s).
+Accumulating evaluation results...
+DONE (t=13.99s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.064
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.113
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.040
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.011
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.074
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.127
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.090
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.141
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.148
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.028
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.195
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.265
+
+IOU:0.4 MAP:0.133 Recall:0.305
+[['person', '0.364', '0.562'], ['bicycle', '0.059', '0.180'], ['car', '0.115', '0.258'], ['motorbike', '0.244', '0.458'], ['aeroplane', '0.418', '0.594'], ['bus', '0.319', '0.491'], ['train', '0.444', '0.674'], ['truck', '0.080', '0.222'], ['boat', '0.070', '0.237'], ['traffic light', '0.055', '0.159'], ['fire hydrant', '0.245', '0.416'], ['stop sign', '0.424', '0.520'], ['parking meter', '0.102', '0.217'], ['bench', '0.066', '0.271'], ['bird', '0.046', '0.177'], ['cat', '0.285', '0.554'], ['dog', '0.177', '0.390'], ['horse', '0.236', '0.366'], ['sheep', '0.168', '0.468'], ['cow', '0.154', '0.339'], ['elephant', '0.373', '0.588'], ['bear', '0.425', '0.620'], ['zebra', '0.564', '0.761'], ['giraffe', '0.485', '0.763'], ['backpack', '0.008', '0.032'], ['umbrella', '0.078', '0.329'], ['handbag', '0.001', '0.011'], ['tie', '0.031', '0.114'], ['suitcase', '0.026', '0.182'], ['frisbee', '0.080', '0.217'], ['skis', '0.081', '0.328'], ['snowboard', '0.009', '0.058'], ['sports ball', '0.045', '0.110'], ['kite', '0.173', '0.396'], ['baseball bat', '0.029', '0.158'], ['baseball glove', '0.086', '0.162'], ['skateboard', '0.092', '0.391'], ['surfboard', '0.078', '0.283'], ['tennis racket', '0.144', '0.364'], ['bottle', '0.020', '0.129'], ['wine glass', '0.001', '0.020'], ['cup', '0.033', '0.207'], ['fork', '0.008', '0.191'], ['knife', '0.003', '0.052'], ['spoon', '0.007', '0.032'], ['bowl', '0.057', '0.254'], ['banana', '0.051', '0.269'], ['apple', '0.031', '0.205'], ['sandwich', '0.118', '0.390'], ['orange', '0.139', '0.359'], ['broccoli', '0.108', '0.535'], ['carrot', '0.069', '0.248'], ['hot dog', '0.038', '0.079'], ['pizza', '0.315', '0.537'], ['donut', '0.068', '0.257'], ['cake', '0.045', '0.225'], ['chair', '0.046', '0.260'], ['sofa', '0.134', '0.372'], ['pottedplant', '0.041', '0.297'], ['bed', '0.220', '0.528'], ['diningtable', '0.178', '0.489'], ['toilet', '0.330', '0.693'], ['tvmonitor', '0.322', '0.552'], ['laptop', '0.161', '0.459'], ['mouse', '0.078', '0.217'], ['remote', '0.002', '0.032'], ['keyboard', '0.180', '0.438'], ['cell phone', '0.053', '0.095'], ['microwave', '0.226', '0.327'], ['oven', '0.109', '0.392'], ['toaster', '0.000', '0.000'], ['sink', '0.084', '0.258'], ['refrigerator', '0.184', '0.532'], ['book', '0.009', '0.069'], ['clock', '0.141', '0.326'], ['vase', '0.036', '0.159'], ['scissors', '0.025', '0.139'], ['teddy bear', '0.095', '0.356'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.000', '0.000']]
+Epoch:51 LR:0.001000 IOU:0.380871 Obj:0.020512 Cls:1.408974 Dfl:0.000000 Total:4.784137
+Epoch:52 LR:0.001000 IOU:0.380120 Obj:0.020479 Cls:1.407602 Dfl:0.000000 Total:4.776233
+Epoch:53 LR:0.001000 IOU:0.379753 Obj:0.020496 Cls:1.400223 Dfl:0.000000 Total:4.766173
+Epoch:54 LR:0.001000 IOU:0.379303 Obj:0.020477 Cls:1.399174 Dfl:0.000000 Total:4.761230
+Epoch:55 LR:0.001000 IOU:0.377714 Obj:0.020531 Cls:1.391393 Dfl:0.000000 Total:4.741606
+Epoch:56 LR:0.001000 IOU:0.377820 Obj:0.020480 Cls:1.387944 Dfl:0.000000 Total:4.738181
+Epoch:57 LR:0.001000 IOU:0.377189 Obj:0.020486 Cls:1.385096 Dfl:0.000000 Total:4.730382
+Epoch:58 LR:0.001000 IOU:0.376056 Obj:0.020512 Cls:1.379200 Dfl:0.000000 Total:4.715843
+Epoch:59 LR:0.001000 IOU:0.375887 Obj:0.020484 Cls:1.374471 Dfl:0.000000 Total:4.709313
+Epoch:60 LR:0.001000 IOU:0.375111 Obj:0.020485 Cls:1.368558 Dfl:0.000000 Total:4.697205
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=57.17s).
+Accumulating evaluation results...
+DONE (t=14.25s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.070
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.124
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.046
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.012
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.081
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.137
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.095
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.150
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.158
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.034
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.207
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.279
+
+IOU:0.4 MAP:0.144 Recall:0.322
+[['person', '0.377', '0.555'], ['bicycle', '0.075', '0.215'], ['car', '0.117', '0.293'], ['motorbike', '0.260', '0.466'], ['aeroplane', '0.414', '0.657'], ['bus', '0.330', '0.502'], ['train', '0.449', '0.705'], ['truck', '0.086', '0.198'], ['boat', '0.083', '0.295'], ['traffic light', '0.059', '0.198'], ['fire hydrant', '0.305', '0.465'], ['stop sign', '0.414', '0.507'], ['parking meter', '0.098', '0.217'], ['bench', '0.065', '0.237'], ['bird', '0.051', '0.166'], ['cat', '0.335', '0.703'], ['dog', '0.163', '0.317'], ['horse', '0.230', '0.344'], ['sheep', '0.158', '0.410'], ['cow', '0.199', '0.384'], ['elephant', '0.382', '0.596'], ['bear', '0.379', '0.535'], ['zebra', '0.592', '0.780'], ['giraffe', '0.492', '0.681'], ['backpack', '0.009', '0.065'], ['umbrella', '0.088', '0.387'], ['handbag', '0.002', '0.020'], ['tie', '0.055', '0.138'], ['suitcase', '0.029', '0.211'], ['frisbee', '0.085', '0.226'], ['skis', '0.093', '0.315'], ['snowboard', '0.024', '0.116'], ['sports ball', '0.052', '0.129'], ['kite', '0.196', '0.405'], ['baseball bat', '0.021', '0.116'], ['baseball glove', '0.110', '0.203'], ['skateboard', '0.109', '0.425'], ['surfboard', '0.081', '0.283'], ['tennis racket', '0.181', '0.382'], ['bottle', '0.028', '0.142'], ['wine glass', '0.001', '0.029'], ['cup', '0.047', '0.199'], ['fork', '0.014', '0.205'], ['knife', '0.001', '0.037'], ['spoon', '0.001', '0.020'], ['bowl', '0.101', '0.308'], ['banana', '0.074', '0.288'], ['apple', '0.029', '0.180'], ['sandwich', '0.093', '0.311'], ['orange', '0.159', '0.390'], ['broccoli', '0.106', '0.532'], ['carrot', '0.062', '0.235'], ['hot dog', '0.059', '0.110'], ['pizza', '0.355', '0.519'], ['donut', '0.064', '0.166'], ['cake', '0.050', '0.256'], ['chair', '0.054', '0.294'], ['sofa', '0.159', '0.429'], ['pottedplant', '0.052', '0.385'], ['bed', '0.254', '0.595'], ['diningtable', '0.188', '0.471'], ['toilet', '0.392', '0.782'], ['tvmonitor', '0.336', '0.635'], ['laptop', '0.197', '0.455'], ['mouse', '0.098', '0.311'], ['remote', '0.005', '0.046'], ['keyboard', '0.205', '0.490'], ['cell phone', '0.061', '0.156'], ['microwave', '0.213', '0.473'], ['oven', '0.163', '0.483'], ['toaster', '0.000', '0.000'], ['sink', '0.092', '0.276'], ['refrigerator', '0.193', '0.548'], ['book', '0.006', '0.081'], ['clock', '0.193', '0.397'], ['vase', '0.048', '0.184'], ['scissors', '0.005', '0.111'], ['teddy bear', '0.125', '0.346'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.000', '0.000']]
+Epoch:61 LR:0.001000 IOU:0.374334 Obj:0.020502 Cls:1.368699 Dfl:0.000000 Total:4.691397
+Epoch:62 LR:0.001000 IOU:0.374036 Obj:0.020477 Cls:1.364410 Dfl:0.000000 Total:4.684334
+Epoch:63 LR:0.001000 IOU:0.373882 Obj:0.020474 Cls:1.358358 Dfl:0.000000 Total:4.676999
+Epoch:64 LR:0.001000 IOU:0.373134 Obj:0.020489 Cls:1.355123 Dfl:0.000000 Total:4.668013
+Epoch:65 LR:0.001000 IOU:0.372897 Obj:0.020434 Cls:1.353441 Dfl:0.000000 Total:4.663551
+Epoch:66 LR:0.001000 IOU:0.372323 Obj:0.020494 Cls:1.347670 Dfl:0.000000 Total:4.654165
+Epoch:67 LR:0.001000 IOU:0.371761 Obj:0.020472 Cls:1.344282 Dfl:0.000000 Total:4.645917
+Epoch:68 LR:0.001000 IOU:0.371123 Obj:0.020481 Cls:1.340618 Dfl:0.000000 Total:4.637302
+Epoch:69 LR:0.001000 IOU:0.370719 Obj:0.020457 Cls:1.335808 Dfl:0.000000 Total:4.628878
+Epoch:70 LR:0.001000 IOU:0.370822 Obj:0.020458 Cls:1.334841 Dfl:0.000000 Total:4.628750
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=57.68s).
+Accumulating evaluation results...
+DONE (t=14.15s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.071
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.124
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.047
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.011
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.081
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.141
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.096
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.149
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.155
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.031
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.201
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.278
+
+IOU:0.4 MAP:0.143 Recall:0.312
+[['person', '0.369', '0.552'], ['bicycle', '0.078', '0.263'], ['car', '0.130', '0.283'], ['motorbike', '0.259', '0.464'], ['aeroplane', '0.402', '0.622'], ['bus', '0.332', '0.474'], ['train', '0.452', '0.674'], ['truck', '0.102', '0.280'], ['boat', '0.078', '0.284'], ['traffic light', '0.049', '0.138'], ['fire hydrant', '0.257', '0.386'], ['stop sign', '0.398', '0.507'], ['parking meter', '0.106', '0.133'], ['bench', '0.068', '0.249'], ['bird', '0.049', '0.182'], ['cat', '0.293', '0.609'], ['dog', '0.184', '0.344'], ['horse', '0.256', '0.399'], ['sheep', '0.150', '0.388'], ['cow', '0.177', '0.437'], ['elephant', '0.288', '0.412'], ['bear', '0.370', '0.465'], ['zebra', '0.614', '0.825'], ['giraffe', '0.495', '0.685'], ['backpack', '0.012', '0.046'], ['umbrella', '0.081', '0.349'], ['handbag', '0.002', '0.013'], ['tie', '0.043', '0.114'], ['suitcase', '0.019', '0.132'], ['frisbee', '0.087', '0.209'], ['skis', '0.107', '0.295'], ['snowboard', '0.016', '0.116'], ['sports ball', '0.063', '0.122'], ['kite', '0.207', '0.405'], ['baseball bat', '0.015', '0.158'], ['baseball glove', '0.088', '0.176'], ['skateboard', '0.097', '0.385'], ['surfboard', '0.094', '0.242'], ['tennis racket', '0.178', '0.338'], ['bottle', '0.029', '0.150'], ['wine glass', '0.002', '0.041'], ['cup', '0.046', '0.189'], ['fork', '0.008', '0.233'], ['knife', '0.001', '0.034'], ['spoon', '0.012', '0.016'], ['bowl', '0.117', '0.327'], ['banana', '0.061', '0.272'], ['apple', '0.025', '0.142'], ['sandwich', '0.123', '0.435'], ['orange', '0.145', '0.366'], ['broccoli', '0.127', '0.516'], ['carrot', '0.072', '0.294'], ['hot dog', '0.082', '0.157'], ['pizza', '0.334', '0.516'], ['donut', '0.062', '0.183'], ['cake', '0.036', '0.136'], ['chair', '0.047', '0.294'], ['sofa', '0.167', '0.441'], ['pottedplant', '0.041', '0.309'], ['bed', '0.238', '0.620'], ['diningtable', '0.180', '0.475'], ['toilet', '0.391', '0.670'], ['tvmonitor', '0.345', '0.604'], ['laptop', '0.229', '0.489'], ['mouse', '0.101', '0.321'], ['remote', '0.012', '0.042'], ['keyboard', '0.189', '0.458'], ['cell phone', '0.058', '0.141'], ['microwave', '0.289', '0.473'], ['oven', '0.148', '0.420'], ['toaster', '0.000', '0.000'], ['sink', '0.097', '0.271'], ['refrigerator', '0.169', '0.540'], ['book', '0.005', '0.101'], ['clock', '0.206', '0.382'], ['vase', '0.054', '0.166'], ['scissors', '0.044', '0.222'], ['teddy bear', '0.093', '0.330'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.000', '0.000']]
+Epoch:71 LR:0.001000 IOU:0.369379 Obj:0.020448 Cls:1.328915 Dfl:0.000000 Total:4.611118
+Epoch:72 LR:0.001000 IOU:0.369906 Obj:0.020443 Cls:1.322326 Dfl:0.000000 Total:4.608661
+Epoch:73 LR:0.001000 IOU:0.368807 Obj:0.020455 Cls:1.323348 Dfl:0.000000 Total:4.601093
+Epoch:74 LR:0.001000 IOU:0.368558 Obj:0.020482 Cls:1.323179 Dfl:0.000000 Total:4.599357
+Epoch:75 LR:0.001000 IOU:0.368166 Obj:0.020434 Cls:1.319457 Dfl:0.000000 Total:4.591730
+Epoch:76 LR:0.001000 IOU:0.367678 Obj:0.020437 Cls:1.317099 Dfl:0.000000 Total:4.585510
+Epoch:77 LR:0.001000 IOU:0.367773 Obj:0.020428 Cls:1.313925 Dfl:0.000000 Total:4.582964
+Epoch:78 LR:0.001000 IOU:0.367140 Obj:0.020442 Cls:1.311240 Dfl:0.000000 Total:4.575427
+Epoch:79 LR:0.001000 IOU:0.366988 Obj:0.020444 Cls:1.310378 Dfl:0.000000 Total:4.573384
+Epoch:80 LR:0.001000 IOU:0.367006 Obj:0.020417 Cls:1.307664 Dfl:0.000000 Total:4.570380
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=58.55s).
+Accumulating evaluation results...
+DONE (t=14.01s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.077
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.133
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.051
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.015
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.090
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.150
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.102
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.158
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.165
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.039
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.217
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.285
+
+IOU:0.4 MAP:0.154 Recall:0.333
+[['person', '0.392', '0.582'], ['bicycle', '0.086', '0.282'], ['car', '0.147', '0.323'], ['motorbike', '0.274', '0.480'], ['aeroplane', '0.355', '0.538'], ['bus', '0.365', '0.523'], ['train', '0.482', '0.711'], ['truck', '0.085', '0.195'], ['boat', '0.102', '0.307'], ['traffic light', '0.066', '0.256'], ['fire hydrant', '0.306', '0.475'], ['stop sign', '0.430', '0.547'], ['parking meter', '0.127', '0.267'], ['bench', '0.073', '0.283'], ['bird', '0.053', '0.182'], ['cat', '0.312', '0.668'], ['dog', '0.173', '0.335'], ['horse', '0.228', '0.366'], ['sheep', '0.166', '0.416'], ['cow', '0.192', '0.389'], ['elephant', '0.436', '0.686'], ['bear', '0.437', '0.535'], ['zebra', '0.624', '0.806'], ['giraffe', '0.520', '0.737'], ['backpack', '0.015', '0.075'], ['umbrella', '0.083', '0.368'], ['handbag', '0.006', '0.022'], ['tie', '0.049', '0.134'], ['suitcase', '0.028', '0.205'], ['frisbee', '0.126', '0.261'], ['skis', '0.115', '0.361'], ['snowboard', '0.046', '0.101'], ['sports ball', '0.073', '0.137'], ['kite', '0.210', '0.396'], ['baseball bat', '0.044', '0.178'], ['baseball glove', '0.094', '0.189'], ['skateboard', '0.116', '0.458'], ['surfboard', '0.116', '0.297'], ['tennis racket', '0.178', '0.338'], ['bottle', '0.037', '0.162'], ['wine glass', '0.005', '0.012'], ['cup', '0.053', '0.196'], ['fork', '0.017', '0.251'], ['knife', '0.004', '0.061'], ['spoon', '0.006', '0.028'], ['bowl', '0.118', '0.318'], ['banana', '0.089', '0.348'], ['apple', '0.035', '0.188'], ['sandwich', '0.161', '0.497'], ['orange', '0.175', '0.425'], ['broccoli', '0.139', '0.554'], ['carrot', '0.076', '0.213'], ['hot dog', '0.068', '0.157'], ['pizza', '0.313', '0.533'], ['donut', '0.078', '0.219'], ['cake', '0.061', '0.231'], ['chair', '0.052', '0.293'], ['sofa', '0.162', '0.441'], ['pottedplant', '0.051', '0.362'], ['bed', '0.229', '0.503'], ['diningtable', '0.169', '0.482'], ['toilet', '0.416', '0.698'], ['tvmonitor', '0.337', '0.618'], ['laptop', '0.235', '0.433'], ['mouse', '0.140', '0.349'], ['remote', '0.010', '0.049'], ['keyboard', '0.205', '0.438'], ['cell phone', '0.064', '0.183'], ['microwave', '0.194', '0.436'], ['oven', '0.151', '0.497'], ['toaster', '0.000', '0.000'], ['sink', '0.116', '0.316'], ['refrigerator', '0.170', '0.540'], ['book', '0.007', '0.082'], ['clock', '0.232', '0.416'], ['vase', '0.066', '0.184'], ['scissors', '0.023', '0.194'], ['teddy bear', '0.114', '0.319'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.001', '0.018']]
+Epoch:81 LR:0.001000 IOU:0.366430 Obj:0.020419 Cls:1.307881 Dfl:0.000000 Total:4.566029
+Epoch:82 LR:0.001000 IOU:0.366295 Obj:0.020465 Cls:1.304877 Dfl:0.000000 Total:4.562676
+Epoch:83 LR:0.001000 IOU:0.365493 Obj:0.020397 Cls:1.302297 Dfl:0.000000 Total:4.552601
+Epoch:84 LR:0.001000 IOU:0.365177 Obj:0.020486 Cls:1.298911 Dfl:0.000000 Total:4.548095
+Epoch:85 LR:0.001000 IOU:0.364589 Obj:0.020442 Cls:1.294947 Dfl:0.000000 Total:4.538731
+Epoch:86 LR:0.001000 IOU:0.364381 Obj:0.020414 Cls:1.291985 Dfl:0.000000 Total:4.533666
+Epoch:87 LR:0.001000 IOU:0.364831 Obj:0.020411 Cls:1.290549 Dfl:0.000000 Total:4.535771
+Epoch:88 LR:0.001000 IOU:0.364104 Obj:0.020420 Cls:1.288168 Dfl:0.000000 Total:4.527722
+Epoch:89 LR:0.001000 IOU:0.363970 Obj:0.020435 Cls:1.288465 Dfl:0.000000 Total:4.527192
+Epoch:90 LR:0.001000 IOU:0.363248 Obj:0.020459 Cls:1.285352 Dfl:0.000000 Total:4.518684
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=58.80s).
+Accumulating evaluation results...
+DONE (t=13.97s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.079
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.136
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.053
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.015
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.095
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.149
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.102
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.161
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.168
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.042
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.219
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.295
+
+IOU:0.4 MAP:0.158 Recall:0.336
+[['person', '0.399', '0.577'], ['bicycle', '0.101', '0.332'], ['car', '0.152', '0.319'], ['motorbike', '0.281', '0.491'], ['aeroplane', '0.392', '0.601'], ['bus', '0.369', '0.491'], ['train', '0.484', '0.742'], ['truck', '0.095', '0.198'], ['boat', '0.105', '0.323'], ['traffic light', '0.067', '0.218'], ['fire hydrant', '0.318', '0.436'], ['stop sign', '0.418', '0.507'], ['parking meter', '0.125', '0.233'], ['bench', '0.072', '0.259'], ['bird', '0.049', '0.200'], ['cat', '0.353', '0.658'], ['dog', '0.181', '0.326'], ['horse', '0.264', '0.392'], ['sheep', '0.196', '0.418'], ['cow', '0.201', '0.382'], ['elephant', '0.452', '0.702'], ['bear', '0.465', '0.718'], ['zebra', '0.625', '0.791'], ['giraffe', '0.509', '0.698'], ['backpack', '0.005', '0.062'], ['umbrella', '0.102', '0.380'], ['handbag', '0.001', '0.020'], ['tie', '0.043', '0.134'], ['suitcase', '0.026', '0.178'], ['frisbee', '0.112', '0.278'], ['skis', '0.101', '0.369'], ['snowboard', '0.028', '0.101'], ['sports ball', '0.075', '0.152'], ['kite', '0.225', '0.387'], ['baseball bat', '0.040', '0.219'], ['baseball glove', '0.095', '0.203'], ['skateboard', '0.116', '0.531'], ['surfboard', '0.113', '0.316'], ['tennis racket', '0.195', '0.378'], ['bottle', '0.038', '0.162'], ['wine glass', '0.006', '0.023'], ['cup', '0.051', '0.176'], ['fork', '0.010', '0.219'], ['knife', '0.004', '0.083'], ['spoon', '0.007', '0.016'], ['bowl', '0.116', '0.326'], ['banana', '0.075', '0.309'], ['apple', '0.030', '0.167'], ['sandwich', '0.167', '0.452'], ['orange', '0.177', '0.401'], ['broccoli', '0.112', '0.554'], ['carrot', '0.076', '0.267'], ['hot dog', '0.069', '0.126'], ['pizza', '0.332', '0.558'], ['donut', '0.086', '0.225'], ['cake', '0.059', '0.158'], ['chair', '0.054', '0.265'], ['sofa', '0.153', '0.429'], ['pottedplant', '0.056', '0.423'], ['bed', '0.231', '0.571'], ['diningtable', '0.182', '0.494'], ['toilet', '0.372', '0.709'], ['tvmonitor', '0.376', '0.611'], ['laptop', '0.252', '0.489'], ['mouse', '0.133', '0.292'], ['remote', '0.006', '0.057'], ['keyboard', '0.256', '0.484'], ['cell phone', '0.057', '0.134'], ['microwave', '0.270', '0.473'], ['oven', '0.143', '0.469'], ['toaster', '0.000', '0.000'], ['sink', '0.088', '0.293'], ['refrigerator', '0.169', '0.516'], ['book', '0.006', '0.097'], ['clock', '0.259', '0.468'], ['vase', '0.072', '0.206'], ['scissors', '0.016', '0.139'], ['teddy bear', '0.144', '0.325'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.001', '0.018']]
+Epoch:91 LR:0.001000 IOU:0.363270 Obj:0.020402 Cls:1.283168 Dfl:0.000000 Total:4.515757
+Epoch:92 LR:0.001000 IOU:0.362607 Obj:0.020444 Cls:1.281836 Dfl:0.000000 Total:4.509805
+Epoch:93 LR:0.001000 IOU:0.362850 Obj:0.020417 Cls:1.278847 Dfl:0.000000 Total:4.508317
+Epoch:94 LR:0.001000 IOU:0.362805 Obj:0.020406 Cls:1.279609 Dfl:0.000000 Total:4.508547
+Epoch:95 LR:0.001000 IOU:0.362319 Obj:0.020430 Cls:1.278690 Dfl:0.000000 Total:4.504126
+Epoch:96 LR:0.001000 IOU:0.361659 Obj:0.020439 Cls:1.274293 Dfl:0.000000 Total:4.494591
+Epoch:97 LR:0.001000 IOU:0.361554 Obj:0.020421 Cls:1.273402 Dfl:0.000000 Total:4.492580
+Epoch:98 LR:0.001000 IOU:0.361290 Obj:0.020450 Cls:1.269989 Dfl:0.000000 Total:4.487509
+Epoch:99 LR:0.001000 IOU:0.361190 Obj:0.020415 Cls:1.269623 Dfl:0.000000 Total:4.485781
+Epoch:100 LR:0.000100 IOU:0.354268 Obj:0.020358 Cls:1.203260 Dfl:0.000000 Total:4.363125
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=57.82s).
+Accumulating evaluation results...
+DONE (t=13.65s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.092
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.156
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.066
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.017
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.109
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.177
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.113
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.176
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.183
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.046
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.241
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.319
+
+IOU:0.4 MAP:0.177 Recall:0.355
+[['person', '0.416', '0.588'], ['bicycle', '0.114', '0.294'], ['car', '0.159', '0.321'], ['motorbike', '0.312', '0.474'], ['aeroplane', '0.438', '0.636'], ['bus', '0.388', '0.533'], ['train', '0.522', '0.753'], ['truck', '0.106', '0.236'], ['boat', '0.120', '0.342'], ['traffic light', '0.074', '0.234'], ['fire hydrant', '0.366', '0.485'], ['stop sign', '0.434', '0.560'], ['parking meter', '0.125', '0.217'], ['bench', '0.084', '0.281'], ['bird', '0.074', '0.230'], ['cat', '0.404', '0.693'], ['dog', '0.219', '0.399'], ['horse', '0.291', '0.443'], ['sheep', '0.200', '0.476'], ['cow', '0.211', '0.421'], ['elephant', '0.475', '0.706'], ['bear', '0.497', '0.620'], ['zebra', '0.637', '0.787'], ['giraffe', '0.553', '0.746'], ['backpack', '0.007', '0.062'], ['umbrella', '0.109', '0.402'], ['handbag', '0.002', '0.022'], ['tie', '0.051', '0.130'], ['suitcase', '0.045', '0.205'], ['frisbee', '0.134', '0.252'], ['skis', '0.103', '0.336'], ['snowboard', '0.036', '0.087'], ['sports ball', '0.081', '0.167'], ['kite', '0.239', '0.429'], ['baseball bat', '0.044', '0.212'], ['baseball glove', '0.097', '0.196'], ['skateboard', '0.149', '0.480'], ['surfboard', '0.139', '0.338'], ['tennis racket', '0.212', '0.364'], ['bottle', '0.046', '0.187'], ['wine glass', '0.003', '0.029'], ['cup', '0.066', '0.227'], ['fork', '0.014', '0.223'], ['knife', '0.012', '0.067'], ['spoon', '0.011', '0.028'], ['bowl', '0.135', '0.361'], ['banana', '0.086', '0.348'], ['apple', '0.054', '0.226'], ['sandwich', '0.168', '0.452'], ['orange', '0.197', '0.411'], ['broccoli', '0.139', '0.554'], ['carrot', '0.088', '0.272'], ['hot dog', '0.078', '0.126'], ['pizza', '0.372', '0.530'], ['donut', '0.104', '0.272'], ['cake', '0.069', '0.244'], ['chair', '0.055', '0.301'], ['sofa', '0.218', '0.533'], ['pottedplant', '0.062', '0.388'], ['bed', '0.287', '0.552'], ['diningtable', '0.209', '0.511'], ['toilet', '0.453', '0.754'], ['tvmonitor', '0.389', '0.628'], ['laptop', '0.289', '0.515'], ['mouse', '0.170', '0.358'], ['remote', '0.016', '0.071'], ['keyboard', '0.242', '0.464'], ['cell phone', '0.078', '0.176'], ['microwave', '0.297', '0.582'], ['oven', '0.161', '0.483'], ['toaster', '0.000', '0.000'], ['sink', '0.130', '0.356'], ['refrigerator', '0.238', '0.619'], ['book', '0.008', '0.094'], ['clock', '0.285', '0.502'], ['vase', '0.084', '0.181'], ['scissors', '0.035', '0.194'], ['teddy bear', '0.169', '0.414'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.001', '0.018']]
+Epoch:101 LR:0.000100 IOU:0.352787 Obj:0.020327 Cls:1.184227 Dfl:0.000000 Total:4.331746
+Epoch:102 LR:0.000100 IOU:0.351901 Obj:0.020307 Cls:1.177801 Dfl:0.000000 Total:4.317927
+Epoch:103 LR:0.000100 IOU:0.351852 Obj:0.020303 Cls:1.173870 Dfl:0.000000 Total:4.313543
+Epoch:104 LR:0.000100 IOU:0.351470 Obj:0.020289 Cls:1.169086 Dfl:0.000000 Total:4.305471
+Epoch:105 LR:0.000100 IOU:0.351141 Obj:0.020301 Cls:1.167615 Dfl:0.000000 Total:4.301569
+Epoch:106 LR:0.000100 IOU:0.350652 Obj:0.020302 Cls:1.164155 Dfl:0.000000 Total:4.294206
+Epoch:107 LR:0.000100 IOU:0.350388 Obj:0.020310 Cls:1.164119 Dfl:0.000000 Total:4.292192
+Epoch:108 LR:0.000100 IOU:0.350559 Obj:0.020260 Cls:1.162515 Dfl:0.000000 Total:4.291151
+Epoch:109 LR:0.000100 IOU:0.350390 Obj:0.020273 Cls:1.161006 Dfl:0.000000 Total:4.288504
+Epoch:110 LR:0.000100 IOU:0.350448 Obj:0.020273 Cls:1.163377 Dfl:0.000000 Total:4.291322
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=57.58s).
+Accumulating evaluation results...
+DONE (t=13.74s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.095
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.161
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.068
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.019
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.112
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.184
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.116
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.179
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.186
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.050
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.244
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.325
+
+IOU:0.4 MAP:0.184 Recall:0.364
+[['person', '0.420', '0.588'], ['bicycle', '0.115', '0.272'], ['car', '0.164', '0.323'], ['motorbike', '0.321', '0.499'], ['aeroplane', '0.458', '0.678'], ['bus', '0.398', '0.565'], ['train', '0.546', '0.742'], ['truck', '0.118', '0.280'], ['boat', '0.123', '0.335'], ['traffic light', '0.067', '0.218'], ['fire hydrant', '0.350', '0.485'], ['stop sign', '0.417', '0.520'], ['parking meter', '0.143', '0.250'], ['bench', '0.093', '0.274'], ['bird', '0.072', '0.232'], ['cat', '0.399', '0.683'], ['dog', '0.255', '0.459'], ['horse', '0.301', '0.458'], ['sheep', '0.199', '0.443'], ['cow', '0.218', '0.455'], ['elephant', '0.488', '0.714'], ['bear', '0.527', '0.648'], ['zebra', '0.648', '0.787'], ['giraffe', '0.563', '0.741'], ['backpack', '0.013', '0.092'], ['umbrella', '0.122', '0.395'], ['handbag', '0.003', '0.030'], ['tie', '0.057', '0.142'], ['suitcase', '0.046', '0.224'], ['frisbee', '0.134', '0.261'], ['skis', '0.112', '0.328'], ['snowboard', '0.046', '0.203'], ['sports ball', '0.085', '0.152'], ['kite', '0.234', '0.429'], ['baseball bat', '0.045', '0.233'], ['baseball glove', '0.102', '0.216'], ['skateboard', '0.173', '0.503'], ['surfboard', '0.148', '0.349'], ['tennis racket', '0.228', '0.400'], ['bottle', '0.045', '0.180'], ['wine glass', '0.009', '0.052'], ['cup', '0.070', '0.226'], ['fork', '0.017', '0.233'], ['knife', '0.015', '0.077'], ['spoon', '0.008', '0.043'], ['bowl', '0.138', '0.369'], ['banana', '0.089', '0.348'], ['apple', '0.053', '0.226'], ['sandwich', '0.157', '0.452'], ['orange', '0.193', '0.387'], ['broccoli', '0.162', '0.563'], ['carrot', '0.106', '0.294'], ['hot dog', '0.087', '0.150'], ['pizza', '0.362', '0.512'], ['donut', '0.108', '0.284'], ['cake', '0.094', '0.297'], ['chair', '0.060', '0.322'], ['sofa', '0.204', '0.494'], ['pottedplant', '0.068', '0.394'], ['bed', '0.318', '0.577'], ['diningtable', '0.211', '0.506'], ['toilet', '0.471', '0.754'], ['tvmonitor', '0.400', '0.635'], ['laptop', '0.295', '0.494'], ['mouse', '0.166', '0.340'], ['remote', '0.007', '0.064'], ['keyboard', '0.266', '0.516'], ['cell phone', '0.082', '0.218'], ['microwave', '0.300', '0.618'], ['oven', '0.194', '0.524'], ['toaster', '0.000', '0.000'], ['sink', '0.139', '0.382'], ['refrigerator', '0.246', '0.643'], ['book', '0.017', '0.109'], ['clock', '0.302', '0.494'], ['vase', '0.080', '0.170'], ['scissors', '0.032', '0.167'], ['teddy bear', '0.184', '0.387'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.004', '0.035']]
+Epoch:111 LR:0.000100 IOU:0.350096 Obj:0.020254 Cls:1.160130 Dfl:0.000000 Total:4.284960
+Epoch:112 LR:0.000100 IOU:0.350128 Obj:0.020244 Cls:1.158764 Dfl:0.000000 Total:4.283698
+Epoch:113 LR:0.000100 IOU:0.349771 Obj:0.020303 Cls:1.156900 Dfl:0.000000 Total:4.279922
+Epoch:114 LR:0.000100 IOU:0.349635 Obj:0.020247 Cls:1.154626 Dfl:0.000000 Total:4.275666
+Epoch:115 LR:0.000100 IOU:0.349912 Obj:0.020233 Cls:1.153541 Dfl:0.000000 Total:4.276557
+Epoch:116 LR:0.000100 IOU:0.349707 Obj:0.020229 Cls:1.154831 Dfl:0.000000 Total:4.276146
+Epoch:117 LR:0.000100 IOU:0.349726 Obj:0.020254 Cls:1.154104 Dfl:0.000000 Total:4.275972
+Epoch:118 LR:0.000100 IOU:0.349532 Obj:0.020249 Cls:1.153919 Dfl:0.000000 Total:4.274155
+Epoch:119 LR:0.000100 IOU:0.349102 Obj:0.020267 Cls:1.152489 Dfl:0.000000 Total:4.269571
+Epoch:120 LR:0.000100 IOU:0.349283 Obj:0.020255 Cls:1.154992 Dfl:0.000000 Total:4.273329
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=58.48s).
+Accumulating evaluation results...
+DONE (t=13.84s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.095
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.161
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.068
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.018
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.114
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.183
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.116
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.180
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.187
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.049
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.247
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.325
+
+IOU:0.4 MAP:0.184 Recall:0.365
+[['person', '0.423', '0.591'], ['bicycle', '0.115', '0.253'], ['car', '0.168', '0.331'], ['motorbike', '0.308', '0.480'], ['aeroplane', '0.453', '0.657'], ['bus', '0.394', '0.544'], ['train', '0.538', '0.732'], ['truck', '0.113', '0.263'], ['boat', '0.121', '0.323'], ['traffic light', '0.077', '0.240'], ['fire hydrant', '0.359', '0.505'], ['stop sign', '0.425', '0.533'], ['parking meter', '0.132', '0.233'], ['bench', '0.089', '0.283'], ['bird', '0.079', '0.248'], ['cat', '0.405', '0.663'], ['dog', '0.239', '0.427'], ['horse', '0.296', '0.429'], ['sheep', '0.191', '0.443'], ['cow', '0.222', '0.439'], ['elephant', '0.493', '0.718'], ['bear', '0.499', '0.634'], ['zebra', '0.651', '0.795'], ['giraffe', '0.577', '0.759'], ['backpack', '0.014', '0.078'], ['umbrella', '0.120', '0.421'], ['handbag', '0.004', '0.039'], ['tie', '0.074', '0.161'], ['suitcase', '0.051', '0.218'], ['frisbee', '0.150', '0.270'], ['skis', '0.104', '0.353'], ['snowboard', '0.041', '0.159'], ['sports ball', '0.086', '0.175'], ['kite', '0.246', '0.432'], ['baseball bat', '0.044', '0.253'], ['baseball glove', '0.101', '0.209'], ['skateboard', '0.142', '0.508'], ['surfboard', '0.148', '0.364'], ['tennis racket', '0.221', '0.382'], ['bottle', '0.045', '0.180'], ['wine glass', '0.009', '0.058'], ['cup', '0.070', '0.238'], ['fork', '0.014', '0.237'], ['knife', '0.008', '0.089'], ['spoon', '0.016', '0.047'], ['bowl', '0.140', '0.371'], ['banana', '0.095', '0.354'], ['apple', '0.054', '0.222'], ['sandwich', '0.179', '0.480'], ['orange', '0.191', '0.390'], ['broccoli', '0.148', '0.566'], ['carrot', '0.105', '0.294'], ['hot dog', '0.095', '0.134'], ['pizza', '0.363', '0.533'], ['donut', '0.109', '0.254'], ['cake', '0.094', '0.294'], ['chair', '0.060', '0.315'], ['sofa', '0.212', '0.540'], ['pottedplant', '0.073', '0.397'], ['bed', '0.292', '0.552'], ['diningtable', '0.208', '0.506'], ['toilet', '0.471', '0.782'], ['tvmonitor', '0.406', '0.639'], ['laptop', '0.311', '0.524'], ['mouse', '0.181', '0.377'], ['remote', '0.007', '0.060'], ['keyboard', '0.270', '0.516'], ['cell phone', '0.078', '0.202'], ['microwave', '0.295', '0.600'], ['oven', '0.172', '0.503'], ['toaster', '0.000', '0.000'], ['sink', '0.155', '0.382'], ['refrigerator', '0.233', '0.563'], ['book', '0.013', '0.105'], ['clock', '0.308', '0.517'], ['vase', '0.082', '0.191'], ['scissors', '0.023', '0.167'], ['teddy bear', '0.182', '0.403'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.002', '0.035']]
+Epoch:121 LR:0.000100 IOU:0.349699 Obj:0.020209 Cls:1.154123 Dfl:0.000000 Total:4.275053
+Epoch:122 LR:0.000100 IOU:0.348985 Obj:0.020273 Cls:1.151636 Dfl:0.000000 Total:4.267884
+Epoch:123 LR:0.000100 IOU:0.348765 Obj:0.020264 Cls:1.150474 Dfl:0.000000 Total:4.264813
+Epoch:124 LR:0.000100 IOU:0.349265 Obj:0.020243 Cls:1.147298 Dfl:0.000000 Total:4.265303
+Epoch:125 LR:0.000100 IOU:0.349080 Obj:0.020260 Cls:1.146486 Dfl:0.000000 Total:4.263283
+Epoch:126 LR:0.000100 IOU:0.348691 Obj:0.020272 Cls:1.149413 Dfl:0.000000 Total:4.263293
+Epoch:127 LR:0.000100 IOU:0.348590 Obj:0.020268 Cls:1.147760 Dfl:0.000000 Total:4.260774
+Epoch:128 LR:0.000100 IOU:0.348918 Obj:0.020230 Cls:1.146661 Dfl:0.000000 Total:4.261682
+Epoch:129 LR:0.000100 IOU:0.348623 Obj:0.020258 Cls:1.147605 Dfl:0.000000 Total:4.260715
+Epoch:130 LR:0.000100 IOU:0.348835 Obj:0.020212 Cls:1.146302 Dfl:0.000000 Total:4.260372
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=58.21s).
+Accumulating evaluation results...
+DONE (t=13.78s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.096
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.162
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.069
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.019
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.116
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.182
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.118
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.182
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.189
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.048
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.252
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.323
+
+IOU:0.4 MAP:0.185 Recall:0.365
+[['person', '0.422', '0.587'], ['bicycle', '0.114', '0.259'], ['car', '0.161', '0.315'], ['motorbike', '0.314', '0.474'], ['aeroplane', '0.454', '0.643'], ['bus', '0.387', '0.519'], ['train', '0.554', '0.753'], ['truck', '0.122', '0.299'], ['boat', '0.130', '0.349'], ['traffic light', '0.076', '0.232'], ['fire hydrant', '0.361', '0.515'], ['stop sign', '0.427', '0.533'], ['parking meter', '0.141', '0.250'], ['bench', '0.090', '0.274'], ['bird', '0.087', '0.255'], ['cat', '0.406', '0.673'], ['dog', '0.258', '0.459'], ['horse', '0.318', '0.469'], ['sheep', '0.194', '0.449'], ['cow', '0.222', '0.437'], ['elephant', '0.509', '0.725'], ['bear', '0.499', '0.620'], ['zebra', '0.650', '0.780'], ['giraffe', '0.574', '0.763'], ['backpack', '0.013', '0.081'], ['umbrella', '0.127', '0.402'], ['handbag', '0.005', '0.039'], ['tie', '0.066', '0.146'], ['suitcase', '0.051', '0.224'], ['frisbee', '0.145', '0.270'], ['skis', '0.098', '0.336'], ['snowboard', '0.037', '0.145'], ['sports ball', '0.087', '0.156'], ['kite', '0.249', '0.443'], ['baseball bat', '0.046', '0.233'], ['baseball glove', '0.108', '0.216'], ['skateboard', '0.156', '0.480'], ['surfboard', '0.140', '0.361'], ['tennis racket', '0.216', '0.387'], ['bottle', '0.045', '0.179'], ['wine glass', '0.009', '0.061'], ['cup', '0.075', '0.238'], ['fork', '0.016', '0.247'], ['knife', '0.009', '0.064'], ['spoon', '0.007', '0.036'], ['bowl', '0.145', '0.382'], ['banana', '0.096', '0.348'], ['apple', '0.047', '0.176'], ['sandwich', '0.174', '0.508'], ['orange', '0.194', '0.383'], ['broccoli', '0.163', '0.570'], ['carrot', '0.106', '0.288'], ['hot dog', '0.077', '0.142'], ['pizza', '0.357', '0.533'], ['donut', '0.121', '0.299'], ['cake', '0.092', '0.326'], ['chair', '0.061', '0.307'], ['sofa', '0.204', '0.525'], ['pottedplant', '0.071', '0.420'], ['bed', '0.298', '0.546'], ['diningtable', '0.211', '0.511'], ['toilet', '0.467', '0.771'], ['tvmonitor', '0.397', '0.653'], ['laptop', '0.304', '0.481'], ['mouse', '0.181', '0.340'], ['remote', '0.014', '0.071'], ['keyboard', '0.249', '0.497'], ['cell phone', '0.087', '0.202'], ['microwave', '0.316', '0.618'], ['oven', '0.180', '0.497'], ['toaster', '0.000', '0.000'], ['sink', '0.145', '0.404'], ['refrigerator', '0.261', '0.635'], ['book', '0.012', '0.105'], ['clock', '0.296', '0.483'], ['vase', '0.089', '0.195'], ['scissors', '0.022', '0.167'], ['teddy bear', '0.163', '0.403'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.002', '0.035']]
+Epoch:131 LR:0.000100 IOU:0.348405 Obj:0.020219 Cls:1.144482 Dfl:0.000000 Total:4.255228
+Epoch:132 LR:0.000100 IOU:0.348469 Obj:0.020249 Cls:1.145321 Dfl:0.000000 Total:4.257054
+Epoch:133 LR:0.000100 IOU:0.348097 Obj:0.020250 Cls:1.148027 Dfl:0.000000 Total:4.256809
+Epoch:134 LR:0.000100 IOU:0.348231 Obj:0.020253 Cls:1.144879 Dfl:0.000000 Total:4.254777
+Epoch:135 LR:0.000100 IOU:0.348425 Obj:0.020248 Cls:1.144812 Dfl:0.000000 Total:4.256188
+Epoch:136 LR:0.000100 IOU:0.348736 Obj:0.020248 Cls:1.141619 Dfl:0.000000 Total:4.255473
+Epoch:137 LR:0.000100 IOU:0.348503 Obj:0.020241 Cls:1.142688 Dfl:0.000000 Total:4.254572
+Epoch:138 LR:0.000100 IOU:0.348181 Obj:0.020258 Cls:1.141641 Dfl:0.000000 Total:4.251211
+Epoch:139 LR:0.000100 IOU:0.348128 Obj:0.020226 Cls:1.141083 Dfl:0.000000 Total:4.249725
+Epoch:140 LR:0.000100 IOU:0.348000 Obj:0.020244 Cls:1.139490 Dfl:0.000000 Total:4.247392
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=58.38s).
+Accumulating evaluation results...
+DONE (t=13.82s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.096
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.161
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.068
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.020
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.114
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.184
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.117
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.180
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.188
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.051
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.244
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.328
+
+IOU:0.4 MAP:0.184 Recall:0.363
+[['person', '0.425', '0.590'], ['bicycle', '0.120', '0.275'], ['car', '0.163', '0.323'], ['motorbike', '0.311', '0.477'], ['aeroplane', '0.470', '0.685'], ['bus', '0.403', '0.530'], ['train', '0.546', '0.747'], ['truck', '0.125', '0.282'], ['boat', '0.124', '0.363'], ['traffic light', '0.073', '0.237'], ['fire hydrant', '0.363', '0.485'], ['stop sign', '0.416', '0.533'], ['parking meter', '0.131', '0.250'], ['bench', '0.103', '0.303'], ['bird', '0.089', '0.264'], ['cat', '0.405', '0.683'], ['dog', '0.224', '0.427'], ['horse', '0.304', '0.476'], ['sheep', '0.210', '0.479'], ['cow', '0.225', '0.442'], ['elephant', '0.499', '0.733'], ['bear', '0.488', '0.606'], ['zebra', '0.651', '0.780'], ['giraffe', '0.580', '0.776'], ['backpack', '0.008', '0.057'], ['umbrella', '0.117', '0.419'], ['handbag', '0.007', '0.039'], ['tie', '0.074', '0.142'], ['suitcase', '0.050', '0.182'], ['frisbee', '0.150', '0.243'], ['skis', '0.098', '0.324'], ['snowboard', '0.029', '0.130'], ['sports ball', '0.080', '0.160'], ['kite', '0.254', '0.449'], ['baseball bat', '0.052', '0.260'], ['baseball glove', '0.106', '0.230'], ['skateboard', '0.128', '0.492'], ['surfboard', '0.149', '0.349'], ['tennis racket', '0.218', '0.382'], ['bottle', '0.048', '0.187'], ['wine glass', '0.012', '0.052'], ['cup', '0.075', '0.240'], ['fork', '0.016', '0.233'], ['knife', '0.007', '0.071'], ['spoon', '0.007', '0.036'], ['bowl', '0.144', '0.364'], ['banana', '0.093', '0.343'], ['apple', '0.053', '0.184'], ['sandwich', '0.183', '0.559'], ['orange', '0.190', '0.397'], ['broccoli', '0.159', '0.570'], ['carrot', '0.100', '0.318'], ['hot dog', '0.088', '0.142'], ['pizza', '0.357', '0.519'], ['donut', '0.105', '0.257'], ['cake', '0.098', '0.326'], ['chair', '0.064', '0.314'], ['sofa', '0.203', '0.529'], ['pottedplant', '0.067', '0.382'], ['bed', '0.307', '0.571'], ['diningtable', '0.204', '0.502'], ['toilet', '0.472', '0.749'], ['tvmonitor', '0.406', '0.646'], ['laptop', '0.297', '0.502'], ['mouse', '0.161', '0.292'], ['remote', '0.012', '0.060'], ['keyboard', '0.281', '0.497'], ['cell phone', '0.079', '0.191'], ['microwave', '0.300', '0.600'], ['oven', '0.182', '0.503'], ['toaster', '0.000', '0.000'], ['sink', '0.147', '0.360'], ['refrigerator', '0.266', '0.619'], ['book', '0.018', '0.098'], ['clock', '0.299', '0.491'], ['vase', '0.091', '0.199'], ['scissors', '0.017', '0.139'], ['teddy bear', '0.159', '0.361'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.002', '0.035']]
+Epoch:141 LR:0.000100 IOU:0.347986 Obj:0.020238 Cls:1.139596 Dfl:0.000000 Total:4.247296
+Epoch:142 LR:0.000100 IOU:0.347940 Obj:0.020205 Cls:1.137624 Dfl:0.000000 Total:4.244429
+Epoch:143 LR:0.000100 IOU:0.347816 Obj:0.020266 Cls:1.137420 Dfl:0.000000 Total:4.244200
+Epoch:144 LR:0.000100 IOU:0.347628 Obj:0.020249 Cls:1.139277 Dfl:0.000000 Total:4.244288
+Epoch:145 LR:0.000100 IOU:0.347957 Obj:0.020234 Cls:1.139444 Dfl:0.000000 Total:4.246841
+Epoch:146 LR:0.000100 IOU:0.348035 Obj:0.020288 Cls:1.140789 Dfl:0.000000 Total:4.249679
+Epoch:147 LR:0.000100 IOU:0.347992 Obj:0.020211 Cls:1.138940 Dfl:0.000000 Total:4.246258
+Epoch:148 LR:0.000100 IOU:0.348078 Obj:0.020222 Cls:1.138449 Dfl:0.000000 Total:4.246622
+Epoch:149 LR:0.000100 IOU:0.348086 Obj:0.020265 Cls:1.139349 Dfl:0.000000 Total:4.248274
+Epoch:150 LR:0.000100 IOU:0.347731 Obj:0.020261 Cls:1.137426 Dfl:0.000000 Total:4.243451
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=59.25s).
+Accumulating evaluation results...
+DONE (t=14.21s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.096
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.162
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.068
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.019
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.115
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.185
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.117
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.181
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.188
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.050
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.246
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.332
+
+IOU:0.4 MAP:0.184 Recall:0.363
+[['person', '0.424', '0.593'], ['bicycle', '0.120', '0.272'], ['car', '0.165', '0.330'], ['motorbike', '0.318', '0.456'], ['aeroplane', '0.464', '0.678'], ['bus', '0.404', '0.554'], ['train', '0.538', '0.732'], ['truck', '0.120', '0.280'], ['boat', '0.134', '0.365'], ['traffic light', '0.074', '0.229'], ['fire hydrant', '0.374', '0.495'], ['stop sign', '0.417', '0.533'], ['parking meter', '0.133', '0.267'], ['bench', '0.093', '0.298'], ['bird', '0.083', '0.255'], ['cat', '0.399', '0.703'], ['dog', '0.253', '0.436'], ['horse', '0.298', '0.465'], ['sheep', '0.194', '0.443'], ['cow', '0.223', '0.437'], ['elephant', '0.499', '0.737'], ['bear', '0.520', '0.634'], ['zebra', '0.637', '0.772'], ['giraffe', '0.583', '0.776'], ['backpack', '0.011', '0.070'], ['umbrella', '0.106', '0.366'], ['handbag', '0.004', '0.033'], ['tie', '0.061', '0.154'], ['suitcase', '0.059', '0.211'], ['frisbee', '0.139', '0.243'], ['skis', '0.106', '0.336'], ['snowboard', '0.057', '0.174'], ['sports ball', '0.086', '0.167'], ['kite', '0.258', '0.449'], ['baseball bat', '0.053', '0.233'], ['baseball glove', '0.107', '0.209'], ['skateboard', '0.138', '0.508'], ['surfboard', '0.131', '0.353'], ['tennis racket', '0.210', '0.364'], ['bottle', '0.044', '0.186'], ['wine glass', '0.016', '0.064'], ['cup', '0.071', '0.222'], ['fork', '0.017', '0.251'], ['knife', '0.008', '0.071'], ['spoon', '0.001', '0.028'], ['bowl', '0.143', '0.369'], ['banana', '0.100', '0.335'], ['apple', '0.042', '0.197'], ['sandwich', '0.171', '0.497'], ['orange', '0.192', '0.401'], ['broccoli', '0.154', '0.551'], ['carrot', '0.093', '0.283'], ['hot dog', '0.093', '0.150'], ['pizza', '0.362', '0.537'], ['donut', '0.113', '0.254'], ['cake', '0.093', '0.282'], ['chair', '0.062', '0.302'], ['sofa', '0.204', '0.517'], ['pottedplant', '0.068', '0.394'], ['bed', '0.297', '0.546'], ['diningtable', '0.210', '0.518'], ['toilet', '0.475', '0.749'], ['tvmonitor', '0.403', '0.622'], ['laptop', '0.307', '0.502'], ['mouse', '0.157', '0.311'], ['remote', '0.011', '0.064'], ['keyboard', '0.272', '0.490'], ['cell phone', '0.084', '0.206'], ['microwave', '0.299', '0.582'], ['oven', '0.180', '0.524'], ['toaster', '0.000', '0.000'], ['sink', '0.150', '0.364'], ['refrigerator', '0.251', '0.651'], ['book', '0.018', '0.115'], ['clock', '0.306', '0.498'], ['vase', '0.092', '0.195'], ['scissors', '0.025', '0.167'], ['teddy bear', '0.176', '0.382'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.001', '0.018']]
+Epoch:151 LR:0.000100 IOU:0.347790 Obj:0.020240 Cls:1.136398 Dfl:0.000000 Total:4.242557
+Epoch:152 LR:0.000100 IOU:0.347486 Obj:0.020248 Cls:1.137753 Dfl:0.000000 Total:4.241603
+Epoch:153 LR:0.000100 IOU:0.347523 Obj:0.020248 Cls:1.134318 Dfl:0.000000 Total:4.238467
+Epoch:154 LR:0.000100 IOU:0.347504 Obj:0.020268 Cls:1.134676 Dfl:0.000000 Total:4.239001
+Epoch:155 LR:0.000100 IOU:0.347369 Obj:0.020213 Cls:1.134680 Dfl:0.000000 Total:4.237040
+Epoch:156 LR:0.000100 IOU:0.347424 Obj:0.020233 Cls:1.133339 Dfl:0.000000 Total:4.236456
+Epoch:157 LR:0.000100 IOU:0.347182 Obj:0.020229 Cls:1.130666 Dfl:0.000000 Total:4.231790
+Epoch:158 LR:0.000100 IOU:0.347382 Obj:0.020207 Cls:1.131768 Dfl:0.000000 Total:4.234130
+Epoch:159 LR:0.000100 IOU:0.347453 Obj:0.020240 Cls:1.134497 Dfl:0.000000 Total:4.237962
+Epoch:160 LR:0.000100 IOU:0.347272 Obj:0.020258 Cls:1.131134 Dfl:0.000000 Total:4.233435
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=57.52s).
+Accumulating evaluation results...
+DONE (t=13.65s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.097
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.164
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.070
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.020
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.116
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.186
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.119
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.182
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.190
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.049
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.251
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.329
+
+IOU:0.4 MAP:0.187 Recall:0.369
+[['person', '0.420', '0.583'], ['bicycle', '0.129', '0.294'], ['car', '0.165', '0.330'], ['motorbike', '0.317', '0.491'], ['aeroplane', '0.469', '0.671'], ['bus', '0.379', '0.505'], ['train', '0.540', '0.726'], ['truck', '0.132', '0.299'], ['boat', '0.121', '0.344'], ['traffic light', '0.069', '0.231'], ['fire hydrant', '0.360', '0.495'], ['stop sign', '0.430', '0.533'], ['parking meter', '0.155', '0.283'], ['bench', '0.094', '0.286'], ['bird', '0.092', '0.261'], ['cat', '0.388', '0.708'], ['dog', '0.255', '0.450'], ['horse', '0.302', '0.458'], ['sheep', '0.228', '0.504'], ['cow', '0.240', '0.453'], ['elephant', '0.506', '0.722'], ['bear', '0.506', '0.648'], ['zebra', '0.643', '0.765'], ['giraffe', '0.581', '0.780'], ['backpack', '0.012', '0.078'], ['umbrella', '0.124', '0.392'], ['handbag', '0.005', '0.039'], ['tie', '0.071', '0.146'], ['suitcase', '0.045', '0.198'], ['frisbee', '0.139', '0.270'], ['skis', '0.107', '0.349'], ['snowboard', '0.039', '0.159'], ['sports ball', '0.086', '0.163'], ['kite', '0.257', '0.470'], ['baseball bat', '0.047', '0.253'], ['baseball glove', '0.107', '0.216'], ['skateboard', '0.133', '0.464'], ['surfboard', '0.137', '0.342'], ['tennis racket', '0.219', '0.373'], ['bottle', '0.042', '0.165'], ['wine glass', '0.011', '0.050'], ['cup', '0.072', '0.224'], ['fork', '0.014', '0.228'], ['knife', '0.005', '0.067'], ['spoon', '0.016', '0.040'], ['bowl', '0.143', '0.383'], ['banana', '0.092', '0.330'], ['apple', '0.056', '0.209'], ['sandwich', '0.172', '0.480'], ['orange', '0.191', '0.401'], ['broccoli', '0.171', '0.554'], ['carrot', '0.104', '0.294'], ['hot dog', '0.094', '0.189'], ['pizza', '0.368', '0.544'], ['donut', '0.109', '0.305'], ['cake', '0.081', '0.250'], ['chair', '0.063', '0.311'], ['sofa', '0.226', '0.571'], ['pottedplant', '0.066', '0.402'], ['bed', '0.311', '0.626'], ['diningtable', '0.211', '0.512'], ['toilet', '0.461', '0.782'], ['tvmonitor', '0.422', '0.660'], ['laptop', '0.316', '0.528'], ['mouse', '0.178', '0.349'], ['remote', '0.012', '0.081'], ['keyboard', '0.258', '0.510'], ['cell phone', '0.077', '0.210'], ['microwave', '0.306', '0.655'], ['oven', '0.185', '0.510'], ['toaster', '0.000', '0.000'], ['sink', '0.162', '0.400'], ['refrigerator', '0.257', '0.595'], ['book', '0.012', '0.115'], ['clock', '0.304', '0.476'], ['vase', '0.098', '0.209'], ['scissors', '0.034', '0.167'], ['teddy bear', '0.184', '0.403'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.003', '0.035']]
+Epoch:161 LR:0.000100 IOU:0.347098 Obj:0.020248 Cls:1.132507 Dfl:0.000000 Total:4.233255
+Epoch:162 LR:0.000100 IOU:0.347465 Obj:0.020199 Cls:1.131707 Dfl:0.000000 Total:4.234616
+Epoch:163 LR:0.000100 IOU:0.347970 Obj:0.020224 Cls:1.133149 Dfl:0.000000 Total:4.240494
+Epoch:164 LR:0.000100 IOU:0.347160 Obj:0.020254 Cls:1.130433 Dfl:0.000000 Total:4.231778
+Epoch:165 LR:0.000100 IOU:0.346952 Obj:0.020255 Cls:1.132631 Dfl:0.000000 Total:4.232322
+Epoch:166 LR:0.000100 IOU:0.346967 Obj:0.020265 Cls:1.132769 Dfl:0.000000 Total:4.232751
+Epoch:167 LR:0.000100 IOU:0.347142 Obj:0.020217 Cls:1.128170 Dfl:0.000000 Total:4.228781
+Epoch:168 LR:0.000100 IOU:0.347265 Obj:0.020219 Cls:1.131304 Dfl:0.000000 Total:4.232925
+Epoch:169 LR:0.000100 IOU:0.347008 Obj:0.020210 Cls:1.133143 Dfl:0.000000 Total:4.232568
+Epoch:170 LR:0.000100 IOU:0.347257 Obj:0.020228 Cls:1.130381 Dfl:0.000000 Total:4.232089
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=58.28s).
+Accumulating evaluation results...
+DONE (t=13.83s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.097
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.163
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.069
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.019
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.115
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.185
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.118
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.182
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.190
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.050
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.248
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.327
+
+IOU:0.4 MAP:0.188 Recall:0.370
+[['person', '0.427', '0.594'], ['bicycle', '0.122', '0.272'], ['car', '0.166', '0.335'], ['motorbike', '0.320', '0.461'], ['aeroplane', '0.469', '0.671'], ['bus', '0.383', '0.526'], ['train', '0.542', '0.768'], ['truck', '0.121', '0.282'], ['boat', '0.126', '0.377'], ['traffic light', '0.070', '0.235'], ['fire hydrant', '0.378', '0.505'], ['stop sign', '0.422', '0.560'], ['parking meter', '0.154', '0.283'], ['bench', '0.087', '0.291'], ['bird', '0.093', '0.268'], ['cat', '0.425', '0.693'], ['dog', '0.221', '0.376'], ['horse', '0.304', '0.462'], ['sheep', '0.213', '0.460'], ['cow', '0.224', '0.434'], ['elephant', '0.513', '0.733'], ['bear', '0.519', '0.648'], ['zebra', '0.646', '0.802'], ['giraffe', '0.596', '0.789'], ['backpack', '0.016', '0.081'], ['umbrella', '0.116', '0.402'], ['handbag', '0.004', '0.031'], ['tie', '0.063', '0.146'], ['suitcase', '0.061', '0.228'], ['frisbee', '0.139', '0.252'], ['skis', '0.110', '0.344'], ['snowboard', '0.047', '0.130'], ['sports ball', '0.085', '0.148'], ['kite', '0.264', '0.461'], ['baseball bat', '0.047', '0.260'], ['baseball glove', '0.108', '0.216'], ['skateboard', '0.144', '0.508'], ['surfboard', '0.142', '0.357'], ['tennis racket', '0.229', '0.404'], ['bottle', '0.042', '0.180'], ['wine glass', '0.015', '0.047'], ['cup', '0.072', '0.230'], ['fork', '0.019', '0.251'], ['knife', '0.008', '0.064'], ['spoon', '0.015', '0.040'], ['bowl', '0.151', '0.383'], ['banana', '0.102', '0.343'], ['apple', '0.049', '0.201'], ['sandwich', '0.195', '0.520'], ['orange', '0.186', '0.408'], ['broccoli', '0.173', '0.557'], ['carrot', '0.099', '0.302'], ['hot dog', '0.090', '0.150'], ['pizza', '0.368', '0.568'], ['donut', '0.124', '0.275'], ['cake', '0.087', '0.310'], ['chair', '0.064', '0.319'], ['sofa', '0.206', '0.510'], ['pottedplant', '0.073', '0.417'], ['bed', '0.302', '0.583'], ['diningtable', '0.206', '0.518'], ['toilet', '0.455', '0.754'], ['tvmonitor', '0.398', '0.642'], ['laptop', '0.316', '0.524'], ['mouse', '0.189', '0.387'], ['remote', '0.015', '0.067'], ['keyboard', '0.299', '0.542'], ['cell phone', '0.081', '0.198'], ['microwave', '0.310', '0.618'], ['oven', '0.171', '0.517'], ['toaster', '0.000', '0.000'], ['sink', '0.163', '0.404'], ['refrigerator', '0.242', '0.571'], ['book', '0.020', '0.122'], ['clock', '0.299', '0.509'], ['vase', '0.089', '0.195'], ['scissors', '0.019', '0.167'], ['teddy bear', '0.180', '0.403'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.005', '0.035']]
+Epoch:171 LR:0.000100 IOU:0.347210 Obj:0.020212 Cls:1.131087 Dfl:0.000000 Total:4.232164
+Epoch:172 LR:0.000100 IOU:0.346878 Obj:0.020225 Cls:1.128261 Dfl:0.000000 Total:4.226881
+Epoch:173 LR:0.000100 IOU:0.346794 Obj:0.020224 Cls:1.129603 Dfl:0.000000 Total:4.227540
+Epoch:174 LR:0.000100 IOU:0.346699 Obj:0.020223 Cls:1.129108 Dfl:0.000000 Total:4.226273
+Epoch:175 LR:0.000100 IOU:0.347025 Obj:0.020223 Cls:1.127424 Dfl:0.000000 Total:4.227193
+Epoch:176 LR:0.000100 IOU:0.346499 Obj:0.020256 Cls:1.128253 Dfl:0.000000 Total:4.224338
+Epoch:177 LR:0.000100 IOU:0.346730 Obj:0.020229 Cls:1.125555 Dfl:0.000000 Total:4.223056
+Epoch:178 LR:0.000100 IOU:0.346481 Obj:0.020241 Cls:1.128564 Dfl:0.000000 Total:4.224268
+Epoch:179 LR:0.000100 IOU:0.346379 Obj:0.020218 Cls:1.126934 Dfl:0.000000 Total:4.221457
+Epoch:180 LR:0.000100 IOU:0.346266 Obj:0.020220 Cls:1.124913 Dfl:0.000000 Total:4.218559
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=58.60s).
+Accumulating evaluation results...
+DONE (t=14.06s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.097
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.162
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.071
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.019
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.116
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.185
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.118
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.182
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.189
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.052
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.248
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.328
+
+IOU:0.4 MAP:0.187 Recall:0.367
+[['person', '0.428', '0.598'], ['bicycle', '0.123', '0.288'], ['car', '0.164', '0.326'], ['motorbike', '0.310', '0.461'], ['aeroplane', '0.459', '0.678'], ['bus', '0.398', '0.558'], ['train', '0.566', '0.753'], ['truck', '0.122', '0.284'], ['boat', '0.131', '0.344'], ['traffic light', '0.077', '0.235'], ['fire hydrant', '0.373', '0.495'], ['stop sign', '0.416', '0.533'], ['parking meter', '0.136', '0.250'], ['bench', '0.097', '0.288'], ['bird', '0.100', '0.250'], ['cat', '0.409', '0.688'], ['dog', '0.219', '0.390'], ['horse', '0.303', '0.465'], ['sheep', '0.212', '0.485'], ['cow', '0.228', '0.426'], ['elephant', '0.518', '0.753'], ['bear', '0.528', '0.690'], ['zebra', '0.642', '0.784'], ['giraffe', '0.574', '0.772'], ['backpack', '0.013', '0.070'], ['umbrella', '0.108', '0.397'], ['handbag', '0.003', '0.028'], ['tie', '0.084', '0.154'], ['suitcase', '0.060', '0.208'], ['frisbee', '0.136', '0.261'], ['skis', '0.108', '0.357'], ['snowboard', '0.045', '0.130'], ['sports ball', '0.088', '0.160'], ['kite', '0.251', '0.449'], ['baseball bat', '0.048', '0.240'], ['baseball glove', '0.114', '0.209'], ['skateboard', '0.140', '0.531'], ['surfboard', '0.125', '0.338'], ['tennis racket', '0.225', '0.382'], ['bottle', '0.046', '0.188'], ['wine glass', '0.014', '0.052'], ['cup', '0.074', '0.227'], ['fork', '0.016', '0.237'], ['knife', '0.008', '0.071'], ['spoon', '0.015', '0.036'], ['bowl', '0.142', '0.363'], ['banana', '0.110', '0.367'], ['apple', '0.048', '0.201'], ['sandwich', '0.192', '0.497'], ['orange', '0.182', '0.411'], ['broccoli', '0.151', '0.576'], ['carrot', '0.108', '0.315'], ['hot dog', '0.089', '0.142'], ['pizza', '0.365', '0.526'], ['donut', '0.114', '0.254'], ['cake', '0.094', '0.278'], ['chair', '0.062', '0.304'], ['sofa', '0.202', '0.483'], ['pottedplant', '0.076', '0.420'], ['bed', '0.290', '0.552'], ['diningtable', '0.203', '0.508'], ['toilet', '0.482', '0.771'], ['tvmonitor', '0.400', '0.625'], ['laptop', '0.296', '0.489'], ['mouse', '0.185', '0.406'], ['remote', '0.009', '0.064'], ['keyboard', '0.289', '0.516'], ['cell phone', '0.085', '0.195'], ['microwave', '0.324', '0.600'], ['oven', '0.175', '0.538'], ['toaster', '0.000', '0.000'], ['sink', '0.156', '0.382'], ['refrigerator', '0.249', '0.619'], ['book', '0.017', '0.099'], ['clock', '0.297', '0.509'], ['vase', '0.089', '0.213'], ['scissors', '0.014', '0.167'], ['teddy bear', '0.175', '0.387'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.003', '0.035']]
+Epoch:181 LR:0.000100 IOU:0.346398 Obj:0.020230 Cls:1.126084 Dfl:0.000000 Total:4.220946
+Epoch:182 LR:0.000100 IOU:0.346449 Obj:0.020218 Cls:1.124300 Dfl:0.000000 Total:4.219386
+Epoch:183 LR:0.000100 IOU:0.346224 Obj:0.020250 Cls:1.126200 Dfl:0.000000 Total:4.219982
+Epoch:184 LR:0.000100 IOU:0.346472 Obj:0.020220 Cls:1.125417 Dfl:0.000000 Total:4.220714
+Epoch:185 LR:0.000100 IOU:0.346125 Obj:0.020231 Cls:1.124821 Dfl:0.000000 Total:4.217509
+Epoch:186 LR:0.000100 IOU:0.346248 Obj:0.020223 Cls:1.125578 Dfl:0.000000 Total:4.219140
+Epoch:187 LR:0.000100 IOU:0.346548 Obj:0.020191 Cls:1.124181 Dfl:0.000000 Total:4.219626
+Epoch:188 LR:0.000100 IOU:0.346296 Obj:0.020199 Cls:1.123339 Dfl:0.000000 Total:4.216893
+Epoch:189 LR:0.000100 IOU:0.346358 Obj:0.020204 Cls:1.126401 Dfl:0.000000 Total:4.220524
+Epoch:190 LR:0.000100 IOU:0.346573 Obj:0.020219 Cls:1.124635 Dfl:0.000000 Total:4.220723
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=58.33s).
+Accumulating evaluation results...
+DONE (t=13.77s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.098
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.163
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.071
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.020
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.116
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.188
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.119
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.184
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.191
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.050
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.250
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.334
+
+IOU:0.4 MAP:0.187 Recall:0.369
+[['person', '0.425', '0.592'], ['bicycle', '0.120', '0.263'], ['car', '0.166', '0.326'], ['motorbike', '0.313', '0.472'], ['aeroplane', '0.487', '0.713'], ['bus', '0.401', '0.551'], ['train', '0.549', '0.747'], ['truck', '0.131', '0.308'], ['boat', '0.125', '0.358'], ['traffic light', '0.072', '0.239'], ['fire hydrant', '0.355', '0.485'], ['stop sign', '0.412', '0.520'], ['parking meter', '0.146', '0.250'], ['bench', '0.094', '0.274'], ['bird', '0.091', '0.257'], ['cat', '0.428', '0.693'], ['dog', '0.215', '0.399'], ['horse', '0.321', '0.505'], ['sheep', '0.196', '0.435'], ['cow', '0.211', '0.418'], ['elephant', '0.521', '0.753'], ['bear', '0.497', '0.634'], ['zebra', '0.637', '0.776'], ['giraffe', '0.589', '0.806'], ['backpack', '0.011', '0.075'], ['umbrella', '0.117', '0.400'], ['handbag', '0.004', '0.035'], ['tie', '0.071', '0.161'], ['suitcase', '0.047', '0.182'], ['frisbee', '0.120', '0.252'], ['skis', '0.115', '0.349'], ['snowboard', '0.036', '0.130'], ['sports ball', '0.082', '0.163'], ['kite', '0.260', '0.458'], ['baseball bat', '0.054', '0.260'], ['baseball glove', '0.117', '0.230'], ['skateboard', '0.131', '0.475'], ['surfboard', '0.140', '0.361'], ['tennis racket', '0.225', '0.409'], ['bottle', '0.046', '0.184'], ['wine glass', '0.015', '0.061'], ['cup', '0.076', '0.232'], ['fork', '0.019', '0.256'], ['knife', '0.014', '0.077'], ['spoon', '0.010', '0.032'], ['bowl', '0.139', '0.380'], ['banana', '0.097', '0.327'], ['apple', '0.049', '0.197'], ['sandwich', '0.203', '0.486'], ['orange', '0.183', '0.390'], ['broccoli', '0.167', '0.566'], ['carrot', '0.104', '0.286'], ['hot dog', '0.098', '0.189'], ['pizza', '0.372', '0.537'], ['donut', '0.126', '0.302'], ['cake', '0.097', '0.304'], ['chair', '0.062', '0.314'], ['sofa', '0.216', '0.525'], ['pottedplant', '0.072', '0.414'], ['bed', '0.282', '0.528'], ['diningtable', '0.210', '0.509'], ['toilet', '0.470', '0.754'], ['tvmonitor', '0.408', '0.663'], ['laptop', '0.312', '0.494'], ['mouse', '0.173', '0.358'], ['remote', '0.012', '0.074'], ['keyboard', '0.283', '0.542'], ['cell phone', '0.080', '0.198'], ['microwave', '0.328', '0.618'], ['oven', '0.189', '0.545'], ['toaster', '0.000', '0.000'], ['sink', '0.152', '0.378'], ['refrigerator', '0.254', '0.603'], ['book', '0.012', '0.104'], ['clock', '0.301', '0.509'], ['vase', '0.091', '0.217'], ['scissors', '0.031', '0.222'], ['teddy bear', '0.190', '0.366'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.002', '0.035']]
+Epoch:191 LR:0.000100 IOU:0.346136 Obj:0.020220 Cls:1.122814 Dfl:0.000000 Total:4.215425
+Epoch:192 LR:0.000100 IOU:0.346173 Obj:0.020217 Cls:1.124230 Dfl:0.000000 Total:4.217081
+Epoch:193 LR:0.000100 IOU:0.346146 Obj:0.020245 Cls:1.124654 Dfl:0.000000 Total:4.217742
+Epoch:194 LR:0.000100 IOU:0.346351 Obj:0.020212 Cls:1.124367 Dfl:0.000000 Total:4.218574
+Epoch:195 LR:0.000100 IOU:0.346446 Obj:0.020213 Cls:1.124628 Dfl:0.000000 Total:4.219610
+Epoch:196 LR:0.000100 IOU:0.346242 Obj:0.020198 Cls:1.126001 Dfl:0.000000 Total:4.219105
+Epoch:197 LR:0.000100 IOU:0.346204 Obj:0.020227 Cls:1.123765 Dfl:0.000000 Total:4.217031
+Epoch:198 LR:0.000100 IOU:0.345951 Obj:0.020219 Cls:1.122469 Dfl:0.000000 Total:4.213577
+Epoch:199 LR:0.000100 IOU:0.346136 Obj:0.020208 Cls:1.123990 Dfl:0.000000 Total:4.216398
+Epoch:200 LR:0.000010 IOU:0.344856 Obj:0.020192 Cls:1.108602 Dfl:0.000000 Total:4.190527
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=57.97s).
+Accumulating evaluation results...
+DONE (t=13.86s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.100
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.167
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.072
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.020
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.119
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.194
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.121
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.186
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.193
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.053
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.254
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.335
+
+IOU:0.4 MAP:0.191 Recall:0.373
+[['person', '0.429', '0.593'], ['bicycle', '0.127', '0.278'], ['car', '0.169', '0.332'], ['motorbike', '0.324', '0.491'], ['aeroplane', '0.467', '0.664'], ['bus', '0.396', '0.554'], ['train', '0.560', '0.753'], ['truck', '0.130', '0.299'], ['boat', '0.133', '0.372'], ['traffic light', '0.070', '0.240'], ['fire hydrant', '0.381', '0.505'], ['stop sign', '0.422', '0.547'], ['parking meter', '0.170', '0.317'], ['bench', '0.093', '0.266'], ['bird', '0.094', '0.245'], ['cat', '0.428', '0.698'], ['dog', '0.245', '0.413'], ['horse', '0.316', '0.491'], ['sheep', '0.220', '0.452'], ['cow', '0.237', '0.442'], ['elephant', '0.523', '0.733'], ['bear', '0.489', '0.648'], ['zebra', '0.653', '0.791'], ['giraffe', '0.601', '0.793'], ['backpack', '0.018', '0.100'], ['umbrella', '0.131', '0.433'], ['handbag', '0.004', '0.031'], ['tie', '0.074', '0.165'], ['suitcase', '0.049', '0.228'], ['frisbee', '0.118', '0.252'], ['skis', '0.120', '0.386'], ['snowboard', '0.045', '0.145'], ['sports ball', '0.085', '0.163'], ['kite', '0.269', '0.473'], ['baseball bat', '0.052', '0.240'], ['baseball glove', '0.110', '0.216'], ['skateboard', '0.133', '0.464'], ['surfboard', '0.137', '0.353'], ['tennis racket', '0.224', '0.396'], ['bottle', '0.047', '0.201'], ['wine glass', '0.010', '0.052'], ['cup', '0.078', '0.236'], ['fork', '0.020', '0.251'], ['knife', '0.011', '0.083'], ['spoon', '0.015', '0.028'], ['bowl', '0.149', '0.382'], ['banana', '0.101', '0.330'], ['apple', '0.057', '0.205'], ['sandwich', '0.193', '0.492'], ['orange', '0.192', '0.425'], ['broccoli', '0.153', '0.544'], ['carrot', '0.097', '0.294'], ['hot dog', '0.098', '0.165'], ['pizza', '0.383', '0.551'], ['donut', '0.123', '0.275'], ['cake', '0.096', '0.307'], ['chair', '0.064', '0.317'], ['sofa', '0.217', '0.529'], ['pottedplant', '0.079', '0.417'], ['bed', '0.312', '0.583'], ['diningtable', '0.213', '0.519'], ['toilet', '0.478', '0.760'], ['tvmonitor', '0.401', '0.642'], ['laptop', '0.316', '0.515'], ['mouse', '0.185', '0.368'], ['remote', '0.017', '0.078'], ['keyboard', '0.273', '0.510'], ['cell phone', '0.083', '0.206'], ['microwave', '0.320', '0.636'], ['oven', '0.173', '0.517'], ['toaster', '0.000', '0.000'], ['sink', '0.155', '0.404'], ['refrigerator', '0.254', '0.619'], ['book', '0.017', '0.110'], ['clock', '0.307', '0.509'], ['vase', '0.098', '0.217'], ['scissors', '0.033', '0.194'], ['teddy bear', '0.203', '0.398'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.002', '0.035']]
+Epoch:201 LR:0.000010 IOU:0.344522 Obj:0.020222 Cls:1.106576 Dfl:0.000000 Total:4.186303
+Epoch:202 LR:0.000010 IOU:0.344445 Obj:0.020196 Cls:1.107697 Dfl:0.000000 Total:4.186395
+Epoch:203 LR:0.000010 IOU:0.344367 Obj:0.020182 Cls:1.105318 Dfl:0.000000 Total:4.183166
+Epoch:204 LR:0.000010 IOU:0.344216 Obj:0.020195 Cls:1.105738 Dfl:0.000000 Total:4.182578
+Epoch:205 LR:0.000010 IOU:0.344058 Obj:0.020173 Cls:1.101215 Dfl:0.000000 Total:4.176444
+Epoch:206 LR:0.000010 IOU:0.344525 Obj:0.020172 Cls:1.103103 Dfl:0.000000 Total:4.182056
+Epoch:207 LR:0.000010 IOU:0.344045 Obj:0.020195 Cls:1.102348 Dfl:0.000000 Total:4.177823
+Epoch:208 LR:0.000010 IOU:0.344347 Obj:0.020152 Cls:1.101116 Dfl:0.000000 Total:4.178321
+Epoch:209 LR:0.000010 IOU:0.344398 Obj:0.020187 Cls:1.099907 Dfl:0.000000 Total:4.178078
+Epoch:210 LR:0.000010 IOU:0.344252 Obj:0.020174 Cls:1.102562 Dfl:0.000000 Total:4.179367
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=57.68s).
+Accumulating evaluation results...
+DONE (t=13.70s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.101
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.168
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.072
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.020
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.121
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.192
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.122
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.187
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.195
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.052
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.256
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.335
+
+IOU:0.4 MAP:0.192 Recall:0.373
+[['person', '0.430', '0.593'], ['bicycle', '0.130', '0.285'], ['car', '0.171', '0.331'], ['motorbike', '0.328', '0.488'], ['aeroplane', '0.472', '0.685'], ['bus', '0.400', '0.554'], ['train', '0.556', '0.742'], ['truck', '0.127', '0.292'], ['boat', '0.138', '0.370'], ['traffic light', '0.073', '0.232'], ['fire hydrant', '0.388', '0.505'], ['stop sign', '0.421', '0.533'], ['parking meter', '0.185', '0.317'], ['bench', '0.093', '0.266'], ['bird', '0.097', '0.252'], ['cat', '0.433', '0.693'], ['dog', '0.251', '0.431'], ['horse', '0.314', '0.473'], ['sheep', '0.233', '0.496'], ['cow', '0.241', '0.439'], ['elephant', '0.528', '0.745'], ['bear', '0.522', '0.662'], ['zebra', '0.647', '0.780'], ['giraffe', '0.586', '0.767'], ['backpack', '0.013', '0.086'], ['umbrella', '0.129', '0.412'], ['handbag', '0.008', '0.033'], ['tie', '0.068', '0.157'], ['suitcase', '0.050', '0.228'], ['frisbee', '0.117', '0.252'], ['skis', '0.121', '0.386'], ['snowboard', '0.042', '0.116'], ['sports ball', '0.085', '0.160'], ['kite', '0.259', '0.461'], ['baseball bat', '0.054', '0.240'], ['baseball glove', '0.108', '0.230'], ['skateboard', '0.134', '0.480'], ['surfboard', '0.137', '0.346'], ['tennis racket', '0.226', '0.400'], ['bottle', '0.046', '0.192'], ['wine glass', '0.010', '0.050'], ['cup', '0.078', '0.232'], ['fork', '0.018', '0.265'], ['knife', '0.012', '0.080'], ['spoon', '0.014', '0.028'], ['bowl', '0.149', '0.374'], ['banana', '0.110', '0.340'], ['apple', '0.054', '0.209'], ['sandwich', '0.195', '0.503'], ['orange', '0.194', '0.422'], ['broccoli', '0.158', '0.554'], ['carrot', '0.090', '0.286'], ['hot dog', '0.087', '0.134'], ['pizza', '0.383', '0.547'], ['donut', '0.121', '0.287'], ['cake', '0.099', '0.294'], ['chair', '0.066', '0.321'], ['sofa', '0.220', '0.506'], ['pottedplant', '0.074', '0.402'], ['bed', '0.310', '0.577'], ['diningtable', '0.212', '0.515'], ['toilet', '0.469', '0.765'], ['tvmonitor', '0.409', '0.639'], ['laptop', '0.318', '0.511'], ['mouse', '0.167', '0.358'], ['remote', '0.013', '0.081'], ['keyboard', '0.299', '0.536'], ['cell phone', '0.080', '0.202'], ['microwave', '0.338', '0.636'], ['oven', '0.178', '0.524'], ['toaster', '0.000', '0.000'], ['sink', '0.162', '0.400'], ['refrigerator', '0.248', '0.611'], ['book', '0.017', '0.109'], ['clock', '0.307', '0.521'], ['vase', '0.093', '0.217'], ['scissors', '0.037', '0.194'], ['teddy bear', '0.210', '0.424'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.002', '0.035']]
+Epoch:211 LR:0.000010 IOU:0.343943 Obj:0.020153 Cls:1.098416 Dfl:0.000000 Total:4.172415
+Epoch:212 LR:0.000010 IOU:0.344103 Obj:0.020182 Cls:1.099775 Dfl:0.000000 Total:4.175517
+Epoch:213 LR:0.000010 IOU:0.343974 Obj:0.020146 Cls:1.100209 Dfl:0.000000 Total:4.174344
+Epoch:214 LR:0.000010 IOU:0.344282 Obj:0.020153 Cls:1.099993 Dfl:0.000000 Total:4.176696
+Epoch:215 LR:0.000010 IOU:0.344271 Obj:0.020183 Cls:1.100843 Dfl:0.000000 Total:4.177934
+Epoch:216 LR:0.000010 IOU:0.343925 Obj:0.020199 Cls:1.097501 Dfl:0.000000 Total:4.172088
+Epoch:217 LR:0.000010 IOU:0.344116 Obj:0.020149 Cls:1.099431 Dfl:0.000000 Total:4.174745
+Epoch:218 LR:0.000010 IOU:0.343938 Obj:0.020152 Cls:1.097736 Dfl:0.000000 Total:4.171670
+Epoch:219 LR:0.000010 IOU:0.343794 Obj:0.020151 Cls:1.098454 Dfl:0.000000 Total:4.171222
+Epoch:220 LR:0.000010 IOU:0.344170 Obj:0.020147 Cls:1.101098 Dfl:0.000000 Total:4.176805
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=58.07s).
+Accumulating evaluation results...
+DONE (t=13.75s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.101
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.168
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.073
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.020
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.120
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.192
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.122
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.187
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.195
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.053
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.256
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.336
+
+IOU:0.4 MAP:0.192 Recall:0.374
+[['person', '0.430', '0.593'], ['bicycle', '0.129', '0.285'], ['car', '0.170', '0.329'], ['motorbike', '0.333', '0.499'], ['aeroplane', '0.469', '0.657'], ['bus', '0.403', '0.554'], ['train', '0.555', '0.768'], ['truck', '0.130', '0.296'], ['boat', '0.138', '0.374'], ['traffic light', '0.073', '0.224'], ['fire hydrant', '0.385', '0.495'], ['stop sign', '0.429', '0.547'], ['parking meter', '0.165', '0.283'], ['bench', '0.095', '0.291'], ['bird', '0.101', '0.259'], ['cat', '0.425', '0.683'], ['dog', '0.248', '0.427'], ['horse', '0.324', '0.502'], ['sheep', '0.226', '0.488'], ['cow', '0.247', '0.479'], ['elephant', '0.521', '0.741'], ['bear', '0.516', '0.662'], ['zebra', '0.643', '0.784'], ['giraffe', '0.602', '0.789'], ['backpack', '0.017', '0.092'], ['umbrella', '0.127', '0.409'], ['handbag', '0.007', '0.039'], ['tie', '0.071', '0.154'], ['suitcase', '0.048', '0.211'], ['frisbee', '0.115', '0.243'], ['skis', '0.117', '0.361'], ['snowboard', '0.046', '0.130'], ['sports ball', '0.088', '0.156'], ['kite', '0.259', '0.455'], ['baseball bat', '0.050', '0.233'], ['baseball glove', '0.109', '0.223'], ['skateboard', '0.138', '0.508'], ['surfboard', '0.140', '0.361'], ['tennis racket', '0.230', '0.404'], ['bottle', '0.046', '0.195'], ['wine glass', '0.015', '0.055'], ['cup', '0.078', '0.230'], ['fork', '0.019', '0.260'], ['knife', '0.008', '0.080'], ['spoon', '0.015', '0.032'], ['bowl', '0.151', '0.379'], ['banana', '0.108', '0.346'], ['apple', '0.055', '0.205'], ['sandwich', '0.191', '0.508'], ['orange', '0.191', '0.415'], ['broccoli', '0.157', '0.557'], ['carrot', '0.091', '0.283'], ['hot dog', '0.094', '0.181'], ['pizza', '0.378', '0.554'], ['donut', '0.117', '0.263'], ['cake', '0.099', '0.285'], ['chair', '0.063', '0.309'], ['sofa', '0.214', '0.506'], ['pottedplant', '0.077', '0.405'], ['bed', '0.313', '0.577'], ['diningtable', '0.215', '0.522'], ['toilet', '0.476', '0.765'], ['tvmonitor', '0.413', '0.635'], ['laptop', '0.319', '0.506'], ['mouse', '0.179', '0.387'], ['remote', '0.012', '0.081'], ['keyboard', '0.278', '0.542'], ['cell phone', '0.080', '0.206'], ['microwave', '0.330', '0.618'], ['oven', '0.176', '0.538'], ['toaster', '0.000', '0.000'], ['sink', '0.162', '0.391'], ['refrigerator', '0.261', '0.603'], ['book', '0.017', '0.109'], ['clock', '0.312', '0.517'], ['vase', '0.095', '0.213'], ['scissors', '0.028', '0.194'], ['teddy bear', '0.198', '0.414'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.002', '0.035']]
+Epoch:221 LR:0.000010 IOU:0.343659 Obj:0.020192 Cls:1.100189 Dfl:0.000000 Total:4.172532
+Epoch:222 LR:0.000010 IOU:0.343402 Obj:0.020174 Cls:1.097686 Dfl:0.000000 Total:4.167680
+Epoch:223 LR:0.000010 IOU:0.343610 Obj:0.020199 Cls:1.099052 Dfl:0.000000 Total:4.171114
+Epoch:224 LR:0.000010 IOU:0.344069 Obj:0.020180 Cls:1.099836 Dfl:0.000000 Total:4.175273
+Epoch:225 LR:0.000010 IOU:0.344159 Obj:0.020181 Cls:1.098764 Dfl:0.000000 Total:4.174933
+Epoch:226 LR:0.000010 IOU:0.344061 Obj:0.020148 Cls:1.099749 Dfl:0.000000 Total:4.174600
+Epoch:227 LR:0.000010 IOU:0.343736 Obj:0.020183 Cls:1.097752 Dfl:0.000000 Total:4.170578
+Epoch:228 LR:0.000010 IOU:0.343440 Obj:0.020183 Cls:1.099775 Dfl:0.000000 Total:4.170215
+Epoch:229 LR:0.000010 IOU:0.343783 Obj:0.020182 Cls:1.098873 Dfl:0.000000 Total:4.172044
+Epoch:230 LR:0.000010 IOU:0.343678 Obj:0.020169 Cls:1.101097 Dfl:0.000000 Total:4.173224
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=58.05s).
+Accumulating evaluation results...
+DONE (t=13.89s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.101
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.169
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.073
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.020
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.121
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.192
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.123
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.187
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.194
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.052
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.256
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.335
+
+IOU:0.4 MAP:0.194 Recall:0.375
+[['person', '0.430', '0.592'], ['bicycle', '0.126', '0.278'], ['car', '0.172', '0.326'], ['motorbike', '0.334', '0.491'], ['aeroplane', '0.474', '0.699'], ['bus', '0.400', '0.547'], ['train', '0.563', '0.742'], ['truck', '0.132', '0.304'], ['boat', '0.140', '0.370'], ['traffic light', '0.072', '0.221'], ['fire hydrant', '0.395', '0.505'], ['stop sign', '0.420', '0.520'], ['parking meter', '0.182', '0.300'], ['bench', '0.097', '0.276'], ['bird', '0.102', '0.270'], ['cat', '0.428', '0.693'], ['dog', '0.253', '0.440'], ['horse', '0.328', '0.520'], ['sheep', '0.225', '0.476'], ['cow', '0.242', '0.453'], ['elephant', '0.519', '0.741'], ['bear', '0.506', '0.634'], ['zebra', '0.641', '0.780'], ['giraffe', '0.602', '0.793'], ['backpack', '0.016', '0.100'], ['umbrella', '0.128', '0.409'], ['handbag', '0.008', '0.043'], ['tie', '0.073', '0.157'], ['suitcase', '0.049', '0.238'], ['frisbee', '0.116', '0.243'], ['skis', '0.117', '0.361'], ['snowboard', '0.046', '0.130'], ['sports ball', '0.086', '0.156'], ['kite', '0.259', '0.473'], ['baseball bat', '0.050', '0.253'], ['baseball glove', '0.110', '0.230'], ['skateboard', '0.135', '0.469'], ['surfboard', '0.144', '0.349'], ['tennis racket', '0.227', '0.396'], ['bottle', '0.045', '0.196'], ['wine glass', '0.016', '0.055'], ['cup', '0.077', '0.238'], ['fork', '0.019', '0.256'], ['knife', '0.009', '0.071'], ['spoon', '0.016', '0.036'], ['bowl', '0.154', '0.379'], ['banana', '0.111', '0.335'], ['apple', '0.055', '0.205'], ['sandwich', '0.192', '0.497'], ['orange', '0.187', '0.415'], ['broccoli', '0.162', '0.573'], ['carrot', '0.091', '0.280'], ['hot dog', '0.097', '0.165'], ['pizza', '0.379', '0.544'], ['donut', '0.121', '0.278'], ['cake', '0.105', '0.316'], ['chair', '0.066', '0.322'], ['sofa', '0.220', '0.513'], ['pottedplant', '0.081', '0.405'], ['bed', '0.321', '0.583'], ['diningtable', '0.212', '0.527'], ['toilet', '0.487', '0.765'], ['tvmonitor', '0.417', '0.649'], ['laptop', '0.318', '0.519'], ['mouse', '0.182', '0.406'], ['remote', '0.011', '0.074'], ['keyboard', '0.293', '0.542'], ['cell phone', '0.080', '0.198'], ['microwave', '0.330', '0.618'], ['oven', '0.193', '0.524'], ['toaster', '0.000', '0.000'], ['sink', '0.169', '0.418'], ['refrigerator', '0.268', '0.619'], ['book', '0.018', '0.109'], ['clock', '0.313', '0.517'], ['vase', '0.097', '0.220'], ['scissors', '0.032', '0.194'], ['teddy bear', '0.210', '0.419'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.002', '0.035']]
+Epoch:231 LR:0.000010 IOU:0.343880 Obj:0.020158 Cls:1.099048 Dfl:0.000000 Total:4.172621
+Epoch:232 LR:0.000010 IOU:0.343672 Obj:0.020190 Cls:1.099563 Dfl:0.000000 Total:4.171981
+Epoch:233 LR:0.000010 IOU:0.343508 Obj:0.020155 Cls:1.097918 Dfl:0.000000 Total:4.168464
+Epoch:234 LR:0.000010 IOU:0.343745 Obj:0.020179 Cls:1.097281 Dfl:0.000000 Total:4.170115
+Epoch:235 LR:0.000010 IOU:0.343800 Obj:0.020149 Cls:1.098122 Dfl:0.000000 Total:4.170907
+Epoch:236 LR:0.000010 IOU:0.343676 Obj:0.020180 Cls:1.099972 Dfl:0.000000 Total:4.172260
+Epoch:237 LR:0.000010 IOU:0.343647 Obj:0.020154 Cls:1.097047 Dfl:0.000000 Total:4.168688
+Epoch:238 LR:0.000010 IOU:0.343817 Obj:0.020155 Cls:1.097843 Dfl:0.000000 Total:4.170862
+Epoch:239 LR:0.000010 IOU:0.343384 Obj:0.020149 Cls:1.096990 Dfl:0.000000 Total:4.166453
+Epoch:240 LR:0.000010 IOU:0.343706 Obj:0.020186 Cls:1.096818 Dfl:0.000000 Total:4.169438
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=58.81s).
+Accumulating evaluation results...
+DONE (t=14.05s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.101
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.169
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.073
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.020
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.121
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.194
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.123
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.187
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.195
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.053
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.256
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.339
+
+IOU:0.4 MAP:0.193 Recall:0.375
+[['person', '0.432', '0.595'], ['bicycle', '0.126', '0.269'], ['car', '0.169', '0.332'], ['motorbike', '0.331', '0.477'], ['aeroplane', '0.484', '0.685'], ['bus', '0.397', '0.544'], ['train', '0.555', '0.747'], ['truck', '0.128', '0.301'], ['boat', '0.143', '0.384'], ['traffic light', '0.072', '0.237'], ['fire hydrant', '0.383', '0.485'], ['stop sign', '0.427', '0.533'], ['parking meter', '0.166', '0.283'], ['bench', '0.095', '0.281'], ['bird', '0.097', '0.266'], ['cat', '0.432', '0.693'], ['dog', '0.248', '0.427'], ['horse', '0.322', '0.502'], ['sheep', '0.219', '0.471'], ['cow', '0.238', '0.450'], ['elephant', '0.538', '0.761'], ['bear', '0.522', '0.662'], ['zebra', '0.641', '0.787'], ['giraffe', '0.595', '0.780'], ['backpack', '0.016', '0.094'], ['umbrella', '0.126', '0.419'], ['handbag', '0.008', '0.037'], ['tie', '0.073', '0.157'], ['suitcase', '0.054', '0.238'], ['frisbee', '0.128', '0.243'], ['skis', '0.122', '0.382'], ['snowboard', '0.044', '0.145'], ['sports ball', '0.087', '0.152'], ['kite', '0.264', '0.470'], ['baseball bat', '0.055', '0.253'], ['baseball glove', '0.113', '0.223'], ['skateboard', '0.141', '0.486'], ['surfboard', '0.138', '0.361'], ['tennis racket', '0.226', '0.409'], ['bottle', '0.044', '0.194'], ['wine glass', '0.014', '0.061'], ['cup', '0.078', '0.236'], ['fork', '0.017', '0.242'], ['knife', '0.009', '0.080'], ['spoon', '0.004', '0.028'], ['bowl', '0.151', '0.379'], ['banana', '0.111', '0.346'], ['apple', '0.059', '0.213'], ['sandwich', '0.201', '0.531'], ['orange', '0.187', '0.408'], ['broccoli', '0.153', '0.541'], ['carrot', '0.095', '0.291'], ['hot dog', '0.096', '0.165'], ['pizza', '0.380', '0.551'], ['donut', '0.122', '0.281'], ['cake', '0.098', '0.304'], ['chair', '0.064', '0.316'], ['sofa', '0.218', '0.506'], ['pottedplant', '0.075', '0.402'], ['bed', '0.317', '0.589'], ['diningtable', '0.217', '0.521'], ['toilet', '0.482', '0.760'], ['tvmonitor', '0.419', '0.653'], ['laptop', '0.311', '0.502'], ['mouse', '0.188', '0.396'], ['remote', '0.015', '0.078'], ['keyboard', '0.277', '0.523'], ['cell phone', '0.082', '0.202'], ['microwave', '0.338', '0.655'], ['oven', '0.188', '0.538'], ['toaster', '0.000', '0.000'], ['sink', '0.168', '0.404'], ['refrigerator', '0.262', '0.611'], ['book', '0.016', '0.104'], ['clock', '0.306', '0.509'], ['vase', '0.096', '0.220'], ['scissors', '0.028', '0.194'], ['teddy bear', '0.201', '0.408'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.003', '0.035']]
+Epoch:241 LR:0.000010 IOU:0.343531 Obj:0.020171 Cls:1.096931 Dfl:0.000000 Total:4.167920
+Epoch:242 LR:0.000010 IOU:0.343623 Obj:0.020175 Cls:1.096566 Dfl:0.000000 Total:4.168352
+Epoch:243 LR:0.000010 IOU:0.343982 Obj:0.020163 Cls:1.096546 Dfl:0.000000 Total:4.171007
+Epoch:244 LR:0.000010 IOU:0.343488 Obj:0.020184 Cls:1.097047 Dfl:0.000000 Total:4.167890
+Epoch:245 LR:0.000010 IOU:0.343726 Obj:0.020210 Cls:1.096783 Dfl:0.000000 Total:4.169947
+Epoch:246 LR:0.000010 IOU:0.343663 Obj:0.020168 Cls:1.095630 Dfl:0.000000 Total:4.167617
+Epoch:247 LR:0.000010 IOU:0.343839 Obj:0.020161 Cls:1.097902 Dfl:0.000000 Total:4.171180
+Epoch:248 LR:0.000010 IOU:0.343410 Obj:0.020155 Cls:1.098106 Dfl:0.000000 Total:4.167859
+Epoch:249 LR:0.000010 IOU:0.343440 Obj:0.020179 Cls:1.099022 Dfl:0.000000 Total:4.169400
+Epoch:250 LR:0.000001 IOU:0.343459 Obj:0.020153 Cls:1.094792 Dfl:0.000000 Total:4.164909
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=58.85s).
+Accumulating evaluation results...
+DONE (t=14.02s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.101
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.168
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.073
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.020
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.122
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.192
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.122
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.188
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.195
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.053
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.255
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.342
+
+IOU:0.4 MAP:0.193 Recall:0.376
+[['person', '0.432', '0.594'], ['bicycle', '0.132', '0.288'], ['car', '0.173', '0.333'], ['motorbike', '0.329', '0.482'], ['aeroplane', '0.474', '0.671'], ['bus', '0.399', '0.537'], ['train', '0.561', '0.758'], ['truck', '0.130', '0.301'], ['boat', '0.140', '0.365'], ['traffic light', '0.073', '0.239'], ['fire hydrant', '0.392', '0.505'], ['stop sign', '0.422', '0.520'], ['parking meter', '0.180', '0.300'], ['bench', '0.097', '0.281'], ['bird', '0.099', '0.261'], ['cat', '0.431', '0.688'], ['dog', '0.248', '0.436'], ['horse', '0.330', '0.502'], ['sheep', '0.231', '0.490'], ['cow', '0.238', '0.453'], ['elephant', '0.531', '0.741'], ['bear', '0.524', '0.662'], ['zebra', '0.647', '0.787'], ['giraffe', '0.590', '0.784'], ['backpack', '0.016', '0.094'], ['umbrella', '0.124', '0.414'], ['handbag', '0.008', '0.039'], ['tie', '0.072', '0.154'], ['suitcase', '0.049', '0.228'], ['frisbee', '0.111', '0.243'], ['skis', '0.121', '0.386'], ['snowboard', '0.040', '0.159'], ['sports ball', '0.087', '0.152'], ['kite', '0.261', '0.476'], ['baseball bat', '0.052', '0.240'], ['baseball glove', '0.109', '0.216'], ['skateboard', '0.135', '0.464'], ['surfboard', '0.144', '0.375'], ['tennis racket', '0.219', '0.396'], ['bottle', '0.047', '0.203'], ['wine glass', '0.012', '0.052'], ['cup', '0.079', '0.237'], ['fork', '0.019', '0.256'], ['knife', '0.010', '0.077'], ['spoon', '0.005', '0.028'], ['bowl', '0.153', '0.385'], ['banana', '0.107', '0.346'], ['apple', '0.055', '0.205'], ['sandwich', '0.193', '0.508'], ['orange', '0.196', '0.432'], ['broccoli', '0.161', '0.557'], ['carrot', '0.100', '0.296'], ['hot dog', '0.102', '0.189'], ['pizza', '0.376', '0.537'], ['donut', '0.120', '0.272'], ['cake', '0.107', '0.323'], ['chair', '0.067', '0.320'], ['sofa', '0.220', '0.513'], ['pottedplant', '0.075', '0.397'], ['bed', '0.323', '0.595'], ['diningtable', '0.215', '0.521'], ['toilet', '0.485', '0.760'], ['tvmonitor', '0.417', '0.646'], ['laptop', '0.321', '0.515'], ['mouse', '0.175', '0.368'], ['remote', '0.014', '0.078'], ['keyboard', '0.300', '0.556'], ['cell phone', '0.081', '0.210'], ['microwave', '0.323', '0.636'], ['oven', '0.190', '0.545'], ['toaster', '0.000', '0.000'], ['sink', '0.165', '0.404'], ['refrigerator', '0.259', '0.611'], ['book', '0.019', '0.111'], ['clock', '0.307', '0.513'], ['vase', '0.095', '0.206'], ['scissors', '0.030', '0.194'], ['teddy bear', '0.204', '0.419'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.002', '0.035']]
+Epoch:251 LR:0.000001 IOU:0.343442 Obj:0.020158 Cls:1.092372 Dfl:0.000000 Total:4.162434
+Epoch:252 LR:0.000001 IOU:0.343279 Obj:0.020159 Cls:1.095741 Dfl:0.000000 Total:4.164515
+Epoch:253 LR:0.000001 IOU:0.343488 Obj:0.020178 Cls:1.092900 Dfl:0.000000 Total:4.163657
+Epoch:254 LR:0.000001 IOU:0.343773 Obj:0.020161 Cls:1.095687 Dfl:0.000000 Total:4.168449
+Epoch:255 LR:0.000001 IOU:0.343454 Obj:0.020133 Cls:1.096062 Dfl:0.000000 Total:4.165828
+Epoch:256 LR:0.000001 IOU:0.343274 Obj:0.020155 Cls:1.093219 Dfl:0.000000 Total:4.161888
+Epoch:257 LR:0.000001 IOU:0.343619 Obj:0.020144 Cls:1.094819 Dfl:0.000000 Total:4.166069
+Epoch:258 LR:0.000001 IOU:0.343461 Obj:0.020159 Cls:1.096587 Dfl:0.000000 Total:4.166809
+Epoch:259 LR:0.000001 IOU:0.343162 Obj:0.020188 Cls:1.094548 Dfl:0.000000 Total:4.162849
+Epoch:260 LR:0.000001 IOU:0.343827 Obj:0.020134 Cls:1.094238 Dfl:0.000000 Total:4.166996
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=58.16s).
+Accumulating evaluation results...
+DONE (t=14.50s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.101
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.168
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.072
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.020
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.121
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.193
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.122
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.187
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.195
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.053
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.256
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.337
+
+IOU:0.4 MAP:0.193 Recall:0.375
+[['person', '0.432', '0.593'], ['bicycle', '0.132', '0.285'], ['car', '0.172', '0.332'], ['motorbike', '0.329', '0.482'], ['aeroplane', '0.483', '0.692'], ['bus', '0.401', '0.547'], ['train', '0.557', '0.758'], ['truck', '0.127', '0.301'], ['boat', '0.140', '0.367'], ['traffic light', '0.075', '0.237'], ['fire hydrant', '0.392', '0.505'], ['stop sign', '0.424', '0.533'], ['parking meter', '0.157', '0.283'], ['bench', '0.093', '0.286'], ['bird', '0.100', '0.259'], ['cat', '0.431', '0.698'], ['dog', '0.248', '0.436'], ['horse', '0.320', '0.484'], ['sheep', '0.220', '0.468'], ['cow', '0.238', '0.453'], ['elephant', '0.530', '0.749'], ['bear', '0.513', '0.634'], ['zebra', '0.649', '0.791'], ['giraffe', '0.601', '0.797'], ['backpack', '0.017', '0.102'], ['umbrella', '0.124', '0.421'], ['handbag', '0.008', '0.037'], ['tie', '0.076', '0.154'], ['suitcase', '0.049', '0.228'], ['frisbee', '0.115', '0.243'], ['skis', '0.124', '0.373'], ['snowboard', '0.044', '0.159'], ['sports ball', '0.087', '0.160'], ['kite', '0.262', '0.467'], ['baseball bat', '0.050', '0.233'], ['baseball glove', '0.109', '0.223'], ['skateboard', '0.136', '0.464'], ['surfboard', '0.145', '0.372'], ['tennis racket', '0.218', '0.391'], ['bottle', '0.046', '0.193'], ['wine glass', '0.013', '0.064'], ['cup', '0.078', '0.239'], ['fork', '0.020', '0.260'], ['knife', '0.007', '0.074'], ['spoon', '0.005', '0.028'], ['bowl', '0.152', '0.388'], ['banana', '0.110', '0.343'], ['apple', '0.056', '0.218'], ['sandwich', '0.190', '0.497'], ['orange', '0.190', '0.422'], ['broccoli', '0.163', '0.573'], ['carrot', '0.097', '0.286'], ['hot dog', '0.095', '0.165'], ['pizza', '0.382', '0.540'], ['donut', '0.121', '0.284'], ['cake', '0.104', '0.316'], ['chair', '0.066', '0.324'], ['sofa', '0.217', '0.506'], ['pottedplant', '0.075', '0.408'], ['bed', '0.311', '0.577'], ['diningtable', '0.214', '0.519'], ['toilet', '0.483', '0.765'], ['tvmonitor', '0.418', '0.653'], ['laptop', '0.323', '0.515'], ['mouse', '0.174', '0.368'], ['remote', '0.013', '0.078'], ['keyboard', '0.308', '0.562'], ['cell phone', '0.083', '0.202'], ['microwave', '0.322', '0.618'], ['oven', '0.188', '0.538'], ['toaster', '0.000', '0.000'], ['sink', '0.164', '0.396'], ['refrigerator', '0.255', '0.587'], ['book', '0.017', '0.109'], ['clock', '0.309', '0.513'], ['vase', '0.096', '0.213'], ['scissors', '0.030', '0.194'], ['teddy bear', '0.200', '0.414'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.002', '0.035']]
+Epoch:261 LR:0.000001 IOU:0.343348 Obj:0.020124 Cls:1.093798 Dfl:0.000000 Total:4.162565
+Epoch:262 LR:0.000001 IOU:0.343234 Obj:0.020177 Cls:1.093329 Dfl:0.000000 Total:4.162038
+Epoch:263 LR:0.000001 IOU:0.343454 Obj:0.020157 Cls:1.092800 Dfl:0.000000 Total:4.162950
+Epoch:264 LR:0.000001 IOU:0.343468 Obj:0.020143 Cls:1.097076 Dfl:0.000000 Total:4.167106
+Epoch:265 LR:0.000001 IOU:0.343475 Obj:0.020164 Cls:1.094606 Dfl:0.000000 Total:4.165031
+Epoch:266 LR:0.000001 IOU:0.343318 Obj:0.020175 Cls:1.095791 Dfl:0.000000 Total:4.165141
+Epoch:267 LR:0.000001 IOU:0.343125 Obj:0.020180 Cls:1.093999 Dfl:0.000000 Total:4.161869
+Epoch:268 LR:0.000001 IOU:0.343086 Obj:0.020170 Cls:1.095282 Dfl:0.000000 Total:4.162681
+Epoch:269 LR:0.000001 IOU:0.343237 Obj:0.020180 Cls:1.096400 Dfl:0.000000 Total:4.165172
+Epoch:270 LR:0.000001 IOU:0.343499 Obj:0.020148 Cls:1.095829 Dfl:0.000000 Total:4.166194
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=58.62s).
+Accumulating evaluation results...
+DONE (t=13.89s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.101
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.168
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.073
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.020
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.121
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.193
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.123
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.188
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.195
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.053
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.256
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.338
+
+IOU:0.4 MAP:0.194 Recall:0.375
+[['person', '0.432', '0.593'], ['bicycle', '0.131', '0.288'], ['car', '0.174', '0.335'], ['motorbike', '0.327', '0.480'], ['aeroplane', '0.486', '0.678'], ['bus', '0.400', '0.544'], ['train', '0.556', '0.753'], ['truck', '0.129', '0.294'], ['boat', '0.139', '0.370'], ['traffic light', '0.074', '0.240'], ['fire hydrant', '0.397', '0.515'], ['stop sign', '0.427', '0.533'], ['parking meter', '0.168', '0.300'], ['bench', '0.097', '0.291'], ['bird', '0.103', '0.264'], ['cat', '0.430', '0.688'], ['dog', '0.244', '0.427'], ['horse', '0.323', '0.484'], ['sheep', '0.223', '0.471'], ['cow', '0.235', '0.455'], ['elephant', '0.534', '0.749'], ['bear', '0.525', '0.648'], ['zebra', '0.649', '0.795'], ['giraffe', '0.600', '0.793'], ['backpack', '0.017', '0.100'], ['umbrella', '0.127', '0.419'], ['handbag', '0.008', '0.043'], ['tie', '0.074', '0.161'], ['suitcase', '0.050', '0.238'], ['frisbee', '0.124', '0.252'], ['skis', '0.117', '0.373'], ['snowboard', '0.041', '0.130'], ['sports ball', '0.088', '0.156'], ['kite', '0.263', '0.473'], ['baseball bat', '0.051', '0.240'], ['baseball glove', '0.108', '0.230'], ['skateboard', '0.137', '0.475'], ['surfboard', '0.140', '0.357'], ['tennis racket', '0.220', '0.387'], ['bottle', '0.045', '0.198'], ['wine glass', '0.015', '0.050'], ['cup', '0.080', '0.237'], ['fork', '0.018', '0.251'], ['knife', '0.009', '0.077'], ['spoon', '0.006', '0.028'], ['bowl', '0.152', '0.375'], ['banana', '0.110', '0.332'], ['apple', '0.056', '0.209'], ['sandwich', '0.190', '0.508'], ['orange', '0.193', '0.425'], ['broccoli', '0.161', '0.563'], ['carrot', '0.102', '0.299'], ['hot dog', '0.098', '0.173'], ['pizza', '0.384', '0.547'], ['donut', '0.123', '0.287'], ['cake', '0.106', '0.320'], ['chair', '0.067', '0.324'], ['sofa', '0.219', '0.513'], ['pottedplant', '0.074', '0.399'], ['bed', '0.328', '0.595'], ['diningtable', '0.212', '0.521'], ['toilet', '0.478', '0.760'], ['tvmonitor', '0.414', '0.649'], ['laptop', '0.318', '0.511'], ['mouse', '0.177', '0.377'], ['remote', '0.013', '0.085'], ['keyboard', '0.311', '0.556'], ['cell phone', '0.079', '0.202'], ['microwave', '0.322', '0.618'], ['oven', '0.191', '0.538'], ['toaster', '0.000', '0.000'], ['sink', '0.168', '0.409'], ['refrigerator', '0.252', '0.579'], ['book', '0.018', '0.112'], ['clock', '0.309', '0.509'], ['vase', '0.096', '0.220'], ['scissors', '0.026', '0.194'], ['teddy bear', '0.198', '0.414'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.003', '0.035']]
+Epoch:271 LR:0.000001 IOU:0.343410 Obj:0.020140 Cls:1.096051 Dfl:0.000000 Total:4.165577
+Epoch:272 LR:0.000001 IOU:0.343420 Obj:0.020191 Cls:1.093249 Dfl:0.000000 Total:4.163666
+Epoch:273 LR:0.000001 IOU:0.343532 Obj:0.020153 Cls:1.095214 Dfl:0.000000 Total:4.165913
+Epoch:274 LR:0.000001 IOU:0.343293 Obj:0.020156 Cls:1.092692 Dfl:0.000000 Total:4.161533
+Epoch:275 LR:0.000001 IOU:0.343413 Obj:0.020171 Cls:1.093870 Dfl:0.000000 Total:4.163919
+Epoch:276 LR:0.000001 IOU:0.343659 Obj:0.020145 Cls:1.096270 Dfl:0.000000 Total:4.167872
+Epoch:277 LR:0.000001 IOU:0.343361 Obj:0.020136 Cls:1.096063 Dfl:0.000000 Total:4.165125
+Epoch:278 LR:0.000001 IOU:0.343519 Obj:0.020143 Cls:1.095470 Dfl:0.000000 Total:4.165904
+Epoch:279 LR:0.000001 IOU:0.343289 Obj:0.020159 Cls:1.095164 Dfl:0.000000 Total:4.164020
+Epoch:280 LR:0.000001 IOU:0.343300 Obj:0.020160 Cls:1.095179 Dfl:0.000000 Total:4.164143
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=67.61s).
+Accumulating evaluation results...
+DONE (t=13.99s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.101
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.169
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.072
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.020
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.122
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.193
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.123
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.188
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.195
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.053
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.257
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.338
+
+IOU:0.4 MAP:0.194 Recall:0.377
+[['person', '0.433', '0.594'], ['bicycle', '0.138', '0.288'], ['car', '0.172', '0.330'], ['motorbike', '0.328', '0.480'], ['aeroplane', '0.479', '0.671'], ['bus', '0.400', '0.544'], ['train', '0.558', '0.763'], ['truck', '0.126', '0.296'], ['boat', '0.142', '0.367'], ['traffic light', '0.075', '0.232'], ['fire hydrant', '0.393', '0.505'], ['stop sign', '0.427', '0.533'], ['parking meter', '0.165', '0.283'], ['bench', '0.099', '0.300'], ['bird', '0.102', '0.266'], ['cat', '0.435', '0.713'], ['dog', '0.246', '0.436'], ['horse', '0.325', '0.491'], ['sheep', '0.235', '0.501'], ['cow', '0.237', '0.453'], ['elephant', '0.536', '0.761'], ['bear', '0.517', '0.648'], ['zebra', '0.645', '0.791'], ['giraffe', '0.597', '0.793'], ['backpack', '0.016', '0.092'], ['umbrella', '0.127', '0.409'], ['handbag', '0.008', '0.044'], ['tie', '0.073', '0.157'], ['suitcase', '0.049', '0.224'], ['frisbee', '0.123', '0.252'], ['skis', '0.124', '0.378'], ['snowboard', '0.039', '0.130'], ['sports ball', '0.086', '0.160'], ['kite', '0.262', '0.464'], ['baseball bat', '0.050', '0.233'], ['baseball glove', '0.108', '0.230'], ['skateboard', '0.136', '0.464'], ['surfboard', '0.142', '0.353'], ['tennis racket', '0.223', '0.400'], ['bottle', '0.046', '0.191'], ['wine glass', '0.014', '0.055'], ['cup', '0.079', '0.237'], ['fork', '0.019', '0.256'], ['knife', '0.009', '0.074'], ['spoon', '0.006', '0.028'], ['bowl', '0.151', '0.377'], ['banana', '0.110', '0.340'], ['apple', '0.056', '0.213'], ['sandwich', '0.189', '0.514'], ['orange', '0.194', '0.432'], ['broccoli', '0.161', '0.566'], ['carrot', '0.101', '0.288'], ['hot dog', '0.108', '0.189'], ['pizza', '0.383', '0.544'], ['donut', '0.124', '0.293'], ['cake', '0.107', '0.320'], ['chair', '0.068', '0.328'], ['sofa', '0.222', '0.510'], ['pottedplant', '0.075', '0.399'], ['bed', '0.326', '0.601'], ['diningtable', '0.211', '0.516'], ['toilet', '0.480', '0.765'], ['tvmonitor', '0.419', '0.656'], ['laptop', '0.316', '0.519'], ['mouse', '0.181', '0.387'], ['remote', '0.010', '0.081'], ['keyboard', '0.313', '0.562'], ['cell phone', '0.081', '0.206'], ['microwave', '0.328', '0.655'], ['oven', '0.190', '0.545'], ['toaster', '0.000', '0.000'], ['sink', '0.169', '0.413'], ['refrigerator', '0.251', '0.587'], ['book', '0.018', '0.114'], ['clock', '0.308', '0.506'], ['vase', '0.095', '0.213'], ['scissors', '0.033', '0.194'], ['teddy bear', '0.201', '0.419'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.002', '0.035']]
+Epoch:281 LR:0.000001 IOU:0.343577 Obj:0.020144 Cls:1.093772 Dfl:0.000000 Total:4.164682
+Epoch:282 LR:0.000001 IOU:0.343160 Obj:0.020165 Cls:1.094949 Dfl:0.000000 Total:4.162870
+Epoch:283 LR:0.000001 IOU:0.343340 Obj:0.020144 Cls:1.094506 Dfl:0.000000 Total:4.163529
+Epoch:284 LR:0.000001 IOU:0.343812 Obj:0.020163 Cls:1.093194 Dfl:0.000000 Total:4.166294
+Epoch:285 LR:0.000001 IOU:0.343118 Obj:0.020162 Cls:1.095163 Dfl:0.000000 Total:4.162703
+Epoch:286 LR:0.000001 IOU:0.343470 Obj:0.020164 Cls:1.094012 Dfl:0.000000 Total:4.164390
+Epoch:287 LR:0.000001 IOU:0.343226 Obj:0.020174 Cls:1.094992 Dfl:0.000000 Total:4.163580
+Epoch:288 LR:0.000001 IOU:0.343323 Obj:0.020159 Cls:1.094664 Dfl:0.000000 Total:4.163803
+Epoch:289 LR:0.000001 IOU:0.343102 Obj:0.020186 Cls:1.093148 Dfl:0.000000 Total:4.160936
+Epoch:290 LR:0.000001 IOU:0.343326 Obj:0.020176 Cls:1.093847 Dfl:0.000000 Total:4.163268
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=58.15s).
+Accumulating evaluation results...
+DONE (t=13.64s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.101
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.168
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.074
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.020
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.121
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.193
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.122
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.186
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.194
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.052
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.254
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.337
+
+IOU:0.4 MAP:0.193 Recall:0.372
+[['person', '0.431', '0.593'], ['bicycle', '0.132', '0.278'], ['car', '0.172', '0.333'], ['motorbike', '0.326', '0.482'], ['aeroplane', '0.474', '0.650'], ['bus', '0.402', '0.551'], ['train', '0.554', '0.747'], ['truck', '0.124', '0.287'], ['boat', '0.142', '0.379'], ['traffic light', '0.076', '0.232'], ['fire hydrant', '0.390', '0.505'], ['stop sign', '0.421', '0.520'], ['parking meter', '0.151', '0.267'], ['bench', '0.097', '0.283'], ['bird', '0.102', '0.264'], ['cat', '0.432', '0.693'], ['dog', '0.246', '0.431'], ['horse', '0.323', '0.491'], ['sheep', '0.226', '0.488'], ['cow', '0.237', '0.450'], ['elephant', '0.527', '0.737'], ['bear', '0.526', '0.662'], ['zebra', '0.650', '0.795'], ['giraffe', '0.591', '0.793'], ['backpack', '0.017', '0.086'], ['umbrella', '0.122', '0.400'], ['handbag', '0.007', '0.041'], ['tie', '0.067', '0.150'], ['suitcase', '0.048', '0.218'], ['frisbee', '0.120', '0.252'], ['skis', '0.127', '0.398'], ['snowboard', '0.037', '0.116'], ['sports ball', '0.087', '0.152'], ['kite', '0.262', '0.467'], ['baseball bat', '0.049', '0.219'], ['baseball glove', '0.109', '0.223'], ['skateboard', '0.137', '0.480'], ['surfboard', '0.139', '0.353'], ['tennis racket', '0.222', '0.396'], ['bottle', '0.046', '0.195'], ['wine glass', '0.016', '0.050'], ['cup', '0.079', '0.241'], ['fork', '0.019', '0.251'], ['knife', '0.008', '0.071'], ['spoon', '0.008', '0.028'], ['bowl', '0.153', '0.383'], ['banana', '0.106', '0.327'], ['apple', '0.055', '0.209'], ['sandwich', '0.193', '0.525'], ['orange', '0.191', '0.429'], ['broccoli', '0.157', '0.551'], ['carrot', '0.094', '0.294'], ['hot dog', '0.100', '0.181'], ['pizza', '0.382', '0.547'], ['donut', '0.120', '0.275'], ['cake', '0.100', '0.294'], ['chair', '0.066', '0.318'], ['sofa', '0.223', '0.513'], ['pottedplant', '0.075', '0.405'], ['bed', '0.324', '0.595'], ['diningtable', '0.210', '0.512'], ['toilet', '0.483', '0.760'], ['tvmonitor', '0.418', '0.663'], ['laptop', '0.320', '0.519'], ['mouse', '0.176', '0.358'], ['remote', '0.017', '0.085'], ['keyboard', '0.299', '0.549'], ['cell phone', '0.082', '0.210'], ['microwave', '0.330', '0.618'], ['oven', '0.174', '0.517'], ['toaster', '0.000', '0.000'], ['sink', '0.165', '0.396'], ['refrigerator', '0.253', '0.579'], ['book', '0.018', '0.114'], ['clock', '0.309', '0.513'], ['vase', '0.096', '0.213'], ['scissors', '0.033', '0.194'], ['teddy bear', '0.208', '0.403'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.002', '0.035']]
+Epoch:291 LR:0.000001 IOU:0.343602 Obj:0.020172 Cls:1.096351 Dfl:0.000000 Total:4.167912
+Epoch:292 LR:0.000001 IOU:0.343632 Obj:0.020156 Cls:1.092595 Dfl:0.000000 Total:4.164148
+Epoch:293 LR:0.000001 IOU:0.343307 Obj:0.020136 Cls:1.092554 Dfl:0.000000 Total:4.161194
+Epoch:294 LR:0.000001 IOU:0.343455 Obj:0.020133 Cls:1.095269 Dfl:0.000000 Total:4.165043
+Epoch:295 LR:0.000001 IOU:0.343339 Obj:0.020148 Cls:1.091885 Dfl:0.000000 Total:4.160961
+Epoch:296 LR:0.000001 IOU:0.343352 Obj:0.020180 Cls:1.093696 Dfl:0.000000 Total:4.163389
+Epoch:297 LR:0.000001 IOU:0.343663 Obj:0.020142 Cls:1.094098 Dfl:0.000000 Total:4.165675
+Epoch:298 LR:0.000001 IOU:0.343135 Obj:0.020175 Cls:1.094684 Dfl:0.000000 Total:4.162571
+Epoch:299 LR:0.000001 IOU:0.343556 Obj:0.020146 Cls:1.092687 Dfl:0.000000 Total:4.163476
+Epoch:300 LR:0.000001 IOU:0.343139 Obj:0.020201 Cls:1.093895 Dfl:0.000000 Total:4.162231
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=64.00s).
+Accumulating evaluation results...
+DONE (t=16.04s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.101
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.168
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.073
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.020
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.121
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.193
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.122
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.187
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.194
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.052
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.254
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.336
+
+IOU:0.4 MAP:0.193 Recall:0.374
+[['person', '0.432', '0.596'], ['bicycle', '0.131', '0.291'], ['car', '0.169', '0.331'], ['motorbike', '0.330', '0.482'], ['aeroplane', '0.473', '0.678'], ['bus', '0.401', '0.558'], ['train', '0.562', '0.753'], ['truck', '0.126', '0.306'], ['boat', '0.140', '0.367'], ['traffic light', '0.072', '0.235'], ['fire hydrant', '0.393', '0.505'], ['stop sign', '0.420', '0.507'], ['parking meter', '0.177', '0.283'], ['bench', '0.095', '0.293'], ['bird', '0.103', '0.259'], ['cat', '0.433', '0.698'], ['dog', '0.246', '0.422'], ['horse', '0.331', '0.491'], ['sheep', '0.208', '0.449'], ['cow', '0.240', '0.471'], ['elephant', '0.535', '0.741'], ['bear', '0.517', '0.648'], ['zebra', '0.641', '0.787'], ['giraffe', '0.601', '0.789'], ['backpack', '0.016', '0.092'], ['umbrella', '0.125', '0.404'], ['handbag', '0.008', '0.037'], ['tie', '0.078', '0.161'], ['suitcase', '0.054', '0.234'], ['frisbee', '0.120', '0.252'], ['skis', '0.118', '0.382'], ['snowboard', '0.046', '0.159'], ['sports ball', '0.088', '0.163'], ['kite', '0.263', '0.476'], ['baseball bat', '0.051', '0.247'], ['baseball glove', '0.111', '0.230'], ['skateboard', '0.137', '0.458'], ['surfboard', '0.138', '0.353'], ['tennis racket', '0.219', '0.396'], ['bottle', '0.045', '0.197'], ['wine glass', '0.016', '0.058'], ['cup', '0.078', '0.231'], ['fork', '0.018', '0.251'], ['knife', '0.010', '0.080'], ['spoon', '0.015', '0.032'], ['bowl', '0.151', '0.372'], ['banana', '0.111', '0.340'], ['apple', '0.058', '0.213'], ['sandwich', '0.195', '0.514'], ['orange', '0.184', '0.404'], ['broccoli', '0.159', '0.573'], ['carrot', '0.097', '0.291'], ['hot dog', '0.104', '0.181'], ['pizza', '0.382', '0.547'], ['donut', '0.119', '0.251'], ['cake', '0.107', '0.323'], ['chair', '0.066', '0.319'], ['sofa', '0.222', '0.517'], ['pottedplant', '0.078', '0.417'], ['bed', '0.313', '0.571'], ['diningtable', '0.216', '0.524'], ['toilet', '0.485', '0.765'], ['tvmonitor', '0.415', '0.656'], ['laptop', '0.315', '0.511'], ['mouse', '0.175', '0.358'], ['remote', '0.014', '0.078'], ['keyboard', '0.304', '0.549'], ['cell phone', '0.081', '0.202'], ['microwave', '0.324', '0.618'], ['oven', '0.187', '0.524'], ['toaster', '0.000', '0.000'], ['sink', '0.167', '0.391'], ['refrigerator', '0.264', '0.603'], ['book', '0.017', '0.107'], ['clock', '0.306', '0.502'], ['vase', '0.098', '0.224'], ['scissors', '0.032', '0.194'], ['teddy bear', '0.198', '0.403'], ['hair drier', '0.000', '0.000'], ['toothbrush', '0.002', '0.035']]

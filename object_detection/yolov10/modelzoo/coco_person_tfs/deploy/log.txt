@@ -1,0 +1,54 @@
+{'yaml': 'modelzoo/coco_person_tfs/coco_person.yaml', 'weight': 'modelzoo/coco_person_tfs/weights/best.pth', 'convert_type': 1, 'tflite_val_path': '../../../datasets/abnormal_drive_0/images', 'c_project_path': None, 'stm32cubeai_path': 'D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1', 'series': 'h7', 'conf_thr': 0.3, 'nms_thr': 0.5, 'eval': True, 'compiler': 1}
+pytorch_model_path:modelzoo/coco_person_tfs/weights/best.pth
+Load yaml sucess...
+<submodules.FastestDet.utils.tool.LoadYaml object at 0x0000017B3E117EB0>
+load weight from:modelzoo/coco_person_tfs/weights/best.pth
+params:196866
+[INFO] Register count_convNd() for <class 'torch.nn.modules.conv.Conv2d'>.
+[INFO] Register count_normalization() for <class 'torch.nn.modules.batchnorm.BatchNorm2d'>.
+[INFO] Register zero_ops() for <class 'torch.nn.modules.activation.ReLU6'>.
+[INFO] Register zero_ops() for <class 'torch.nn.modules.container.Sequential'>.
+[INFO] Register zero_ops() for <class 'torch.nn.modules.pooling.MaxPool2d'>.
+[INFO] Register count_upsample() for <class 'torch.nn.modules.upsampling.Upsample'>.
+flops:0.12548096GFLOPs
+Load yaml sucess...
+<submodules.FastestDet.utils.tool.LoadYaml object at 0x0000017B3DDFF280>
+Checking 0/1...
+Checking 0/1...
+Load yaml sucess...
+<submodules.FastestDet.utils.tool.LoadYaml object at 0x0000017B3C12EA40>
+load weight from:results/deploy\coco_person_0009\tflite
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.95s).
+Accumulating evaluation results...
+DONE (t=3.36s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.219
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.385
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.140
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.059
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.310
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.488
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.120
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.281
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.322
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.137
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.462
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.608
+
+IOU:0.4 MAP:0.4539 Recall:0.6439
+[['person', '0.4539', '0.6439']]
+Load yaml sucess...
+Command:
+D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1\Utilities\windows\stm32ai.exe generate --name network_1 -m results/deploy\coco_person_0009\tflite\model_front.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\coco_person_0009\temp --output results/deploy\coco_person_0009\Edge_AI\model --allocate-inputs --series stm32h7 --allocate-outputs
+will be excuted to generate net codes
+Net codes generation successful
+Command:
+D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1\Utilities\windows\stm32ai.exe generate --name network_2 -m results/deploy\coco_person_0009\tflite\model_post.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\coco_person_0009\temp --output results/deploy\coco_person_0009\Edge_AI\model --allocate-inputs --series stm32h7 --allocate-outputs
+will be excuted to generate net codes
+Net codes generation successful

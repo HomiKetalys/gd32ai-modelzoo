@@ -1086,7 +1086,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Edge_AI\ai_model.c</PathWithFileName>
+      <PathWithFileName>Edge_AI\ai_model.c</PathWithFileName>
       <FilenameWithoutPath>ai_model.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1098,8 +1098,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Edge_AI\utils\utils.c</PathWithFileName>
-      <FilenameWithoutPath>utils.c</FilenameWithoutPath>
+      <PathWithFileName>Edge_AI\model\network_1.c</PathWithFileName>
+      <FilenameWithoutPath>network_1.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1110,8 +1110,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Edge_AI\model\network_1.c</PathWithFileName>
-      <FilenameWithoutPath>network_1.c</FilenameWithoutPath>
+      <PathWithFileName>Edge_AI\model\network_1_data.c</PathWithFileName>
+      <FilenameWithoutPath>network_1_data.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1122,8 +1122,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Edge_AI\model\network_1_data.c</PathWithFileName>
-      <FilenameWithoutPath>network_1_data.c</FilenameWithoutPath>
+      <PathWithFileName>Edge_AI\model\network_1_data_params.c</PathWithFileName>
+      <FilenameWithoutPath>network_1_data_params.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1134,8 +1134,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Edge_AI\model\network_1_data_params.c</PathWithFileName>
-      <FilenameWithoutPath>network_1_data_params.c</FilenameWithoutPath>
+      <PathWithFileName>Edge_AI\model\network_2.c</PathWithFileName>
+      <FilenameWithoutPath>network_2.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1146,8 +1146,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Edge_AI\model\network_2.c</PathWithFileName>
-      <FilenameWithoutPath>network_2.c</FilenameWithoutPath>
+      <PathWithFileName>Edge_AI\model\network_2_data.c</PathWithFileName>
+      <FilenameWithoutPath>network_2_data.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1158,8 +1158,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Edge_AI\model\network_2_data.c</PathWithFileName>
-      <FilenameWithoutPath>network_2_data.c</FilenameWithoutPath>
+      <PathWithFileName>Edge_AI\model\network_2_data_params.c</PathWithFileName>
+      <FilenameWithoutPath>network_2_data_params.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1170,8 +1170,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Edge_AI\model\network_2_data_params.c</PathWithFileName>
-      <FilenameWithoutPath>network_2_data_params.c</FilenameWithoutPath>
+      <PathWithFileName>Edge_AI\utils\utils.c</PathWithFileName>
+      <FilenameWithoutPath>utils.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

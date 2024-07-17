@@ -1,26 +1,34 @@
 
 
-# Training and deployment of the Yolo-FastestV2 model
+# Yolo-FastestV2模型的训练与部署
 
-This will provide training for the Yolo-FastestV2 model and deployment on GD32 devices
+<div align="center">
 
-# Preparation
+[中文](README.md) | [English](README_eng.md)
 
- 1. Use git to clone the gd32ai modelzoo project and init submodules.
+</div>
+
+这里将提供Yolo-FastestV2模型的训练与部署步骤。
+
+# 准备
+
+ 1. 使用git克隆gd32ai-modelzoo并初始化附属模块.
 ```
 git clone https://github.com/HomiKetalys/gd32ai-modelzoo
+cd gd32ai-modelzoo
 git submodule update --init --recursive
 ```
- 2. Add the project root directory to PYTHONPATH and switch to yolo-fastestv2 directory.
- - on powershell.
+
+ 2. 将项目根目录添加到PYTHONPATH并切换到yolo-fastestv2文件夹中.
+- 在powershell中
 ```
 $env:PYTHONPATH=$(pwd)
-cd gd32ai-modelzoo/object_detection/yolo_fastestv2
+cd object_detection/yolo_fastestv2
 ```
 
- 3. Prepare your dataset.The directory structure of the dataset should be as follows:
+ 3. 准备好你的数据集，其结构应该如下:
 ```
-  dataset
+  dataset_name
   ├── images
   │   ├── title1
   │   │   ├──img1.jpg
@@ -37,25 +45,26 @@ cd gd32ai-modelzoo/object_detection/yolo_fastestv2
   │       └──img4.txt
   └── label1
 ```
-The directory path where image files and corresponding annotation files are located should have the same structure, except for the differences between images and label0 or label1.
-The annotation format in the annotation file txt is darknet yolo. it looks like:
+图像和对应标注文件应该有相同结构的路径，对于同一幅图像的不同类型标注，可以用创建label0和label1来分别保存。
+标注文件中的内容格式为darknet yolo. 如下:
 ```
-0 0.7117890625000001 0.05518711018711019 0.035546875 0.07432432432432433
-13 0.21646875000000004 0.25730769230769235 0.1015625 0.10280665280665281
+label cx                  cy                  h           w
+0     0.7117890625000001  0.05518711018711019 0.035546875 0.07432432432432433
+13    0.21646875000000004 0.25730769230769235 0.1015625   0.10280665280665281
 ```
- 4. Place the image file used for training in train_label0.txt, and the image file used for validation in val_label0.txt. it looks like:
+ 4. 将要用于训练的图像路径保存到train_label0.txt, 而用于验证的图像路径保存到val_label0.txt. 如下:
 ```
 images\train2017\000000391895.jpg
 images\train2017\000000522418.jpg
 images\train2017\000000184613.jpg
 ```
-  If it is a relative path, then it is the relative path relative to the text file.
- ## Environmental preparation
- Install the environment(anaconda recommended) according to [Yolo-FastestV2](https://github.com/dog-qiuqiu/Yolo-FastestV2), [onnx2tflite](https://github.com/MPolaris/onnx2tflite), and [facelandmarks](https://github.com/midasklr/facelandmarks) (If you are using the FABD dataset)
-  ## Supported Datasets
+如果路径是相对路径，则是相对该txt文件的路径。
+## Anaconda 环境准备
+根据[Yolo-FastestV2](https://github.com/dog-qiuqiu/Yolo-FastestV2) ，[onnx2tflite](https://github.com/MPolaris/onnx2tflite) 中的README安装环境，如果你需要使用FABD数据集，则安装[facelandmarks](https://github.com/midasklr/facelandmarks) 中的环境。
+## 测试过的数据集
   
- - COCO2017:If you want to train on the COCO2017 dataset, you can prepare the dataset by following the steps below.
- 1. Download the COCO2017 dataset from [here](https://cocodataset.org/#download) .The directory structure should be as follows：
+ - COCO2017：如果你想在COCO2017上进行训练，按照以下步骤进行操作。
+ 1. 下载[COCO2017](https://cocodataset.org/#download) 数据集。目录结构如下：
 ```
   COCO2017
   ├── images
@@ -71,19 +80,19 @@ images\train2017\000000184613.jpg
       ├── instances_train2017.json
       └── instances_val2017.json
 ```
-  2. Execute the following command to convert the COCO2017 dataset to the required format.
+  2. 执行以下命令转换COCO2017数据集.
   
- Convert train set
+转换训练集
 ```
 python ../../common_utils/coco2yolo.py --images_path "{datasets_root}/COCO2017/images/train2017" --json_file "{datasets_root}/COCO2017/annotations/instances_train2017.json" --ana_txt_save_path "{datasets_root}/COCO2017/coco_80/train2017" --out_txt_path "{datasets_root}/COCO2017/train2017.txt"
 ```
-Convert val set
+转换验证集
 
 ```
 python ../../common_utils/coco2yolo.py --images_path "{datasets_root}/COCO2017/images/val2017" --json_file "{datasets_root}/COCO2017/annotations/instances_val2017.json" --ana_txt_save_path "{datasets_root}/COCO2017/coco_80/val2017" --out_txt_path "{datasets_root}/COCO2017/val2017.txt"
 ```
-- Fusion of Abnormal Behavior Driving Dataset(FABD):
-1. Download the HaGrid Test dataset from [here](https://github.com/hukenovs/hagrid/tree/Hagrid_v1) .The directory structure should be as follows：
+- 异常驾驶行为数据集(FABD):
+1. 下载[HaGrid](https://github.com/hukenovs/hagrid/tree/Hagrid_v1) 数据集。目录结构如下：
 ```
   HaGrid
   ├── images
@@ -100,7 +109,7 @@ python ../../common_utils/coco2yolo.py --images_path "{datasets_root}/COCO2017/i
   ...
       └── two_up_inverted.json
 ```
- 2. Download the WFLW dataset from [here](https://wywu.github.io/projects/LAB/WFLW.html) .The directory structure should be as follows：
+ 2. 下载[WFLW](https://wywu.github.io/projects/LAB/WFLW.html) 数据集。目录结构如下：
 ```
   WFLW
   ├── images
@@ -114,7 +123,7 @@ python ../../common_utils/coco2yolo.py --images_path "{datasets_root}/COCO2017/i
   │       └──61_Street_Battle_streetfight_61_1008.jpg
   └── list_98pt_rect_attr_train_test
 ```
-  3. Download the Lapa dataset from [here](https://github.com/jd-opensource/lapa-dataset) .The directory structure should be as follows：
+  3. 下载[Lapa](https://github.com/jd-opensource/lapa-dataset) 数据集。目录结构如下：
 ```
   Lapa
   ├── train
@@ -124,13 +133,13 @@ python ../../common_utils/coco2yolo.py --images_path "{datasets_root}/COCO2017/i
   ├── val
   └── test
 ```
-  4. Execute the following command to generate a fused FABD dataset:
+  4. 执行以下命令生成融合的异常行为驾驶数据集：
 ```
-  python ../../common_utils/gen_datas.py --wflw_path "{datasets_root}/WFLW" --lapa_path "{datasets_root}/Lapa" --hagrid_path=""{datasets_root}/HaGrid" --save_path "{datasets_root}/FABD"
+python ../../common_utils/gen_datas.py --wflw_path "{datasets_root}/WFLW" --lapa_path "{datasets_root}/Lapa" --hagrid_path=""{datasets_root}/HaGrid" --save_path "{datasets_root}/FABD"
 ```
- # Train
- ## set configuration file
- The configuration file is located in the configs folder in the current directory.Its content looks like the following:
+# 训练
+## 确认配置文件
+配置文件.data在当前目录中的configs文件夹中，其内容如下:
 ```
 [name]  
 model_name=coco  
@@ -161,89 +170,47 @@ train=../../../datasets/coco2017/train2017.txt
 val=../../../datasets/coco2017/val2017.txt  
 names=./configs/coco.names
 ```
-  1. Due to the fact that the object detection method of Yolo FastV2 belongs to anchor based, it is necessary to cluster the distribution of target boxes first.Execute the following command to collect information on the target box for the specified dataset, such as COCO2017.
+1. 由于Yolo-FastestV2是anchor based， 所以它需要预先收集anchor信息。执行以下目录为指定数据集收集anchor信息，比如COCO2017。
 ```
-  python genanchors.py --traintxt "{datasets_root}/COCO2017/train2017.txt" --output_dir "./" --label_flag "coco_80" --num_clusters 6 --input_width 256 --input_height 256
+python genanchors.py --traintxt "{datasets_root}/COCO2017/train2017.txt" --output_dir "./" --label_flag "coco_80" --num_clusters 6 --input_width 256 --input_height 256
 ```
-  This command will generate the file anchor6.txt in the specified directory "./".Paste the first line of content from anchor6.txt into anchors in the configuration file.
+该命令将会在指定目录"./"下生成anchor6.txt。从anchor6.txt中复制第一行到配置文件中的anchors中。
 
-   2. Fill in the remaining content in the configuration file.
-   ## start train
-   Execute the following command to start training.
-```
-  python train.py --data configs/coco_sp.data
-```
-  The training results will be saved in results/train.Taking the configuration file coco_sp.data as an example, the first training result will be saved to results/train/coco_sp_0000.
- # Export And Evaluation
- Next, export the training results of the model as onnx or tflite.Execute the following command to export.
-```
-  python pytorch2tflite.py --data results/train/coco_sp_0000/coco_sp.data --model_path results/train/coco_sp_0000/best.pth --convert_type 1 --tflite_val_path "{datasets_root}/COCO2017/images/val2017"
-```
-  `convert_type` controls the conversion type,0 for onnx,1 for tflite.If the exported file is of type tflite, it is quantized.
-  Meanwhile, the exported model will be evaluated.
-  # Deploy
-  Next, deploy the exported model to GD32 device
-  1. Install STM32CUBE-AI
-  The deployment tool used in this project is STM32CUBE-AI. It is based on STM32CUBEIDE. STM32CUBEIDE can be downloaded from [here](https://www.st.com/content/st_com/zh/stm32cubeide.html) .Then install STM32CUBE-AI 8.0.1 in STM32CUBEIDE.
-  2. Install keil5 5.29,you can download it from [here](https://www.keil.com/update/rvmdk.asp)
-  3. Download gcc-arm-none-eabi 10.3-2021.10 from [here](https://developer.arm.com/downloads/-/gnu-rm) 
-  4. Download GD32H7xx AddOn from [here](https://www.gd32mcu.com/cn/download?kw=GD32H7) and install pack.
-  5. Execute the following command to generate codes.
-```
-  python deploy.py --data results/train/coco_sp_0000/coco_sp.data --model_path results/train/coco_sp_0000/best.pth --convert_type 1 --tflite_val_path "{datasets_root}/COCO2017/images/val2017" --gd32_project_path deployment/gd32h759IMK6_GCC --series h7 --compiler 1
-```
-5.  Open "deployment/gd32h759IMK6_GCC/MDK-ARM/GD32H759I_EVAL.uvprojx" with keil5 and configure gcc path in Keil5
-6.  Compile and download code to flash memory。
-# Metrics
-The metrics ultimately exported as quantization model
-When nothing is precised in the model name, training is done using transfer learning technique from a pre-trained model. 
-Else, "tfs" stands for "training from scratch"."sp" represents the use of spatially separated model deployment
-Meanwhile, the table presents the metrics of the model in [stm32ai-modelzoo](https://github.com/STMicroelectronics/stm32ai-modelzoo/blob/main/object_detection/pretrained_models/README.md) .
-The metric of the model with an asterisk in its name comes from stm32ai model zoo
-## On COCO2017 Person Dataset
+2. 对其余配置参数进行配置，比较关键是是数据集路径的设置和标签名称文件的设置。
 
-| model                 | Implementation | Dataset                     | Input Resolution | mAP*   | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version |
-|-----------------------|----------------|-----------------------------|------------------|--------|-----------|----------------------|---------------------|----------------------|
-| Yolo-FastestV2 sp     | Pytorch        | COCO2017 val person dataset | 192x192x3        | 41.54% | 32.47     | 116.18               | 385.79              | 8.0.1                |
-| Yolo-FastestV2 sp tfs | Pytorch        | COCO2017 val person dataset | 192x192x3        | 40.06% | 32.47     | 116.18               | 385.79              | 8.0.1                |
-| Yolo-FastestV2 sp     | Pytorch        | COCO2017 val person dataset | 256x256x3        | 48.99% | 57.71     | 214.99               | 385.79              | 8.0.1                |
-| Yolo-FastestV2 sp tfs | Pytorch        | COCO2017 val person dataset | 256x256x3        | 46.88% | 57.71     | 214.99               | 385.79              | 8.0.1                |
-| SSD MobileNet v1 0.25 | TensorFlow     | COCO2017 val person dataset | 192x192x3        | 33.52% | 40.54     | 249.54               | 438.28              | 8.1.0                |
-| SSD MobileNet v1 0.25 | TensorFlow     | COCO2017 val person dataset | 256x256x3        | 47.50% | 72.40     | 439.34               | 470.13              | 8.1.0                |
-| ST Yolo LC v1 tfs     | TensorFlow     | COCO2017 val person dataset | 192x192x3        | 39.92% | 61.9      | 157.44               | 276.73              | 7.3.0                |
-| ST Yolo LC v1 tfs     | TensorFlow     | COCO2017 val person dataset | 256x256x3        | 45.09% | 110.05    | 271.94               | 276.73              | 7.3.0                |
+## 开始训练
+执行以下命令开始训练。将--data参数修改为你自己的配置文件。
+```
+python train.py --data configs/coco_sp.data
+```
+训练结果将会被保存到results/train。以配置文件coco_sp.data为例，第一次训练的结果将会被保存到results/train/coco_sp_0000。
+# 模型导出与验证
+接下来把模型导出为onnx或tflite。执行以下命令进行导出。如果你需要进行部署，可以跳过这一步，部署过程会顺便导出模型。
+```
+python pytorch2tflite.py --data results/train/coco_sp_0000/coco_sp.data --model_path results/train/coco_sp_0000/best.pth --convert_type 1 --tflite_val_path "{datasets_root}/COCO2017/images/val2017"
+```
+`convert_type` 控制导出类型，0表示onnx，1表示tflite。如果导出的模型类型为tflite，则会自动进行量化。同时导出的模型会在指定的配置文件中提供的数据集上进行验证。
+# 模型部署
+1. 下载[X-CUBE-AI](https://www.st.com/en/embedded-software/x-cube-ai.html#st-get-software) 并解压。根据下表选择你需要的版本。若需要的版本小于9.0.0，则需要预先安装[STM32CUBEIDE](https://www.st.com.cn/content/st_com/zh/stm32cubeide.html#st-get-software) ，并在STM32CUBEIDE中安装对应版本的X-CUBE-AI，然后根据[issue](https://github.com/HomiKetalys/gd32ai-modelzoo/issues/2#issuecomment-2143376547) 中的提示复制文件。
 
-\* EVAL_IOU = 0.4, NMS_THRESH = 0.5, SCORE_THRESH = 0.001
-## On COCO2017 Val Dataset
-When nothing is precised in the model name, training is done using transfer learning technique from a pre-trained model. Else, "tfs" stands for "training from scratch".
+| X-CUBE-AI版本            | GCC | ARMCC |
+|------------------------|-----|-------|
+| 8.0.1                  | √   | √     |
+| 8.1.0                  | √   | √     |
+| 9.0.0                  | √   | ×     |
 
-| model                 | Implementation | Dataset              | Input Resolution | mAP*   | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version |
-|-----------------------|----------------|----------------------|------------------|--------|-----------|----------------------|---------------------|----------------------|
-| Yolo-FastestV2 sp     | Pytorch        | COCO2017 val dataset | 192x192x3        | 17.45% | 32.47     | 116.18               | 385.79              | 8.0.1                |
-| Yolo-FastestV2 sp tfs | Pytorch        | COCO2017 val dataset | 192x192x3        | 11.78% | 32.47     | 116.18               | 385.79              | 8.0.1                |
-| Yolo-FastestV2 sp     | Pytorch        | COCO2017 val dataset | 256x256x3        | 21.23% | 57.71     | 214.99               | 385.79              | 8.0.1                |
-| Yolo-FastestV2 sp tfs | Pytorch        | COCO2017 val dataset | 256x256x3        | 16.06% | 57.71     | 214.99               | 385.79              | 8.0.1                |
+2. 安装[keil5](https://www.keil.com/update/rvmdk.asp) 5.29。
+3. 下载[gcc-arm-none-eabi](https://developer.arm.com/downloads/-/gnu-rm) 10.3-2021.10并解压，如果使用ARMCC则不需要。 
+4. 如果你要在GD32设备上部署，下载[GD32H7xx AddOn](https://www.gd32mcu.com/cn/download?kw=GD32H7) 并进行安装。
+5. 执行以下命令生成模型推理C语言代码，其中各参数修改为你需要的参数，参数`--c_project_path`如果为文件夹路径，则会在该文件夹下生成Edge_AI文件夹，如果是keil5的.uvprojx文件，则会直接部署到对应的keil5工程中。
+```
+python deploy.py --data results/train/coco_sp_0000/coco_sp.data --model_path results/train/coco_sp_0000/best.pth --tflite_val_path "{datasets_root}/COCO2017/images/val2017" --c_project_path deployment/GD32H759I_EVAL_GCC/MDK-ARM/GD32H759I_EVAL.uvprojx --series h7 --stm32cubeai_path ”{X-CUBE-AI PATH}/stedgeai-windows-9.0.0“
+```
+6. 使用keil5打开"deployment/GD32H759I_EVAL_GCC/MDK-ARM/GD32H759I_EVAL.uvprojx"并在keil5中配置gcc路径，如果是ARMCC则不需要。如果你指定`--c_project_path`为文件夹路径，则还需要在你需要使用该模型的keil5工程中添加对应.c文件，include path以及.a(.lib）库文件，样例工程已完成添加。
+7. 在ai_model.h的文件末尾实现你的图像读取方法，对于样例工程，提供了图像读取方法的示例，取消对应的图像读取方法的注释即可。
+8. 在你的工程中调用AI_Run()来运行模型，调用get_obj_num()获取检测目标数量，调用get_obj_name(id)获取第id个目标的类别，调用get_obj_xyxy(id,&x0,&y0,&x1,&y1)获取第id个目标的框。样例工程已写好样例应用。最后编译并烧录。
 
-\* EVAL_IOU = 0.4, NMS_THRESH = 0.5, SCORE_THRESH = 0.001
-## On Fusion of Abnormal Behavior Driving Dataset(FABD)
-When nothing is precised in the model name, training is done using transfer learning technique from a pre-trained model. Else, "tfs" stands for "training from scratch".
-
-| model                 | Implementation | Dataset | Input Resolution | mAP*   | MACCs (M) | Activation RAM (KiB) | Weights Flash (KiB) | STM32Cube.AI version |
-|-----------------------|----------------|---------|------------------|--------|-----------|----------------------|---------------------|----------------------|
-| Yolo-FastestV2 sp tfs | Pytorch        | FABD    | 256x256x3        | 54.62% | 57.71     | 214.99               | 385.79              | 8.0.1                |
-
-\* EVAL_IOU = 0.5, NMS_THRESH = 0.4, SCORE_THRESH = 0.01
-# Results On GD32 Device
-## Time
-| Model                 | Format | Resolution | Board        | Execution Engine | Frequency | Inference time (ms) | STM32Cube.AI version |
-|-----------------------|--------|------------|--------------|------------------|-----------|---------------------|----------------------|
-| Yolo-FastestV2 sp     | Int8   | 192x192x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 501 ms              | 8.0.1                |
-| Yolo-FastestV2 sp     | Int8   | 256x256x3  | GD32F470IIH6 | 1 CPU            | 240 MHz   | 864 ms              | 8.0.1                |
-| Yolo-FastestV2 sp     | Int8   | 192x192x3  | GD32H759IMK6 | 1 CPU            | 600 MHz   | 145 ms              | 8.0.1                |
-| Yolo-FastestV2 sp     | Int8   | 256x256x3  | GD32H759IMK6 | 1 CPU            | 600 MHz   | 237 ms              | 8.0.1                |
-| SSD Mobilenet v1 0.25 | Int8   | 192x192x3  | STM32H747I   | 1 CPU            | 400 MHz   | 241 ms              | 8.1.0                |
-| SSD Mobilenet v1 0.25 | Int8   | 256x256x3  | STM32H747I   | 1 CPU            | 400 MHz   | 295 ms              | 8.1.0                |
-## Images
+# 运行图像
 ![coco2017 on gd32](../../assets/img1.png)
 ![coco2017 on gd32](../../assets/img2.png)
 

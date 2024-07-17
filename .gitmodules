@@ -10,3 +10,9 @@
 [submodule "image_classification/ml_fastvit/submodules/ml_fastvit"]
 	path = image_classification/ml_fastvit/submodules/ml_fastvit
 	url = https://github.com/HomiKetalys/ml-fastvit
+[submodule "object_detection/yolov10/submodules/yolov10"]
+	path = object_detection/yolov10/submodules/yolov10
+	url = https://github.com/HomiKetalys/yolov10
+[submodule "object_detection/yolov10/submodules/FastestDet"]
+	path = object_detection/yolov10/submodules/FastestDet
+	url = https://github.com/HomiKetalys/FastestDet

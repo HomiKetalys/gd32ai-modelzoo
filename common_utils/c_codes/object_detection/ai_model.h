@@ -3,14 +3,6 @@
 
 #include "ai_platform.h"
 
-#if defined(GD32F470)
-#include "gd32f470x_conf.h"
-#include "RCU.h"
-#elif defined(GD32H7XX)
-#include "gd32h7xx.h"
-#include "gd32h7xx_rcu.h"
-#endif
-
 #include "stdio.h"
 #include "string.h"
 
@@ -23,13 +15,12 @@
 //enable sparse patch
 //#define ENABLE_SPARSE_PATCH
 
-#if defined(TO_EXT)
-#define EXT_RAM_ADDR 0xC0080000
-#endif
 
-MODEL_NAME_CODE
+MODEL_CONF_CODE
 CONF_THR_CODE
 NMS_THR_CODE
+
+RCU_CODE
 
 //network1 import
 #include "network_1.h"
@@ -93,12 +84,17 @@ typedef struct
     float confi;
     BBox bbox;
     u32 cls_index;
+    const char *name;
 }ObjectResult;
 
 void AI_Run();
 void AI_Init();
-void handle_preds(float *,float);
-void nms(ObjectResult [],ObjectResult [],u32*,float);
+void handle_preds(float *preds,float conf);
+void nms(ObjectResult objects[],ObjectResult results[],u32* object_num,float nms_conf);
+
+extern ObjectResult results[];
+extern u32 object_num;
+extern const char *activities[];
 
 #define RGB565ToRGB888C(rgb565, r_addr, g_addr, b_addr) \
     *(r_addr) = ((0xF800 & (rgb565)) >> 8) ; \
@@ -123,7 +119,34 @@ void nms(ObjectResult [],ObjectResult [],u32*,float);
     clip(((float)*(b_addr))*weight_b+bias_b,-128.f,127.f,b_addr)
 #endif
 
-#error "Implement your image reading method here"
+#define ai_get_obj_name(idx) results[idx].name
+#define ai_get_obj_xyxy(idx,x0_addr,y0_addr,x1_addr,y1_addr) \
+    *(x0_addr)=results[idx].bbox.x_min; \
+    *(x1_addr)=results[idx].bbox.x_max; \
+    *(y0_addr)=results[idx].bbox.y_min; \
+    *(y1_addr)=results[idx].bbox.y_max
+
+#define ai_get_obj_conf(idx) results[idx].confi
+#define ai_get_obj_num() object_num
+
+#if defined(NEED_RCU)
+//example for gd32h759i-eval
+//#include "gd32h7xx.h"
+//#include "gd32h7xx_rcu.h"
+//#define rcu_enable() rcu_periph_clock_enable(RCU_CRC)
+
+//example for gd32f470i BluePill
+//#include "gd32f470x_conf.h"
+//#include "RCU.h"
+//#define rcu_enable() rcu_periph_clock_enable(RCU_CRC)
+
+#if !defined(rcu_enable)
+#error "you need to define rcu_enable() when the version of x-cube-ai is lower than 9.0.0"
+#endif
+
+#endif
+
+
 /*
 Define your image reading method in the form of macros or functions here
 The method must be able to be called in the following form:
@@ -132,7 +155,6 @@ unsigned int i=0,j=0;
 img_pixel_read(i,j,&r,g,&b);
 */
 //Using macro definition
-//for gd32h759i
 //example for gd32h759i-eval
 //#include "dci_ov2640.h"
 //#define img_pixel_read(i,j,r_addr,g_addr,b_addr) \
@@ -143,10 +165,15 @@ img_pixel_read(i,j,&r,g,&b);
 //#include "Camera.h"
 //extern u32 s_iFrameAddr;
 //#define img_pixel_read(i,j,r_addr,g_addr,b_addr) \
-//    u16 rgb565=*(((u16 *)s_iFrameAddr)+(i)*IMAGE_WIDTH+j); \
+//    u16 rgb565=*(((u16 *)s_iFrameAddr)+(IMAGE_HEIGHT-i)*IMAGE_WIDTH+IMAGE_WIDTH-j); \
 //    RGB565ToRGB888C(rgb565, r_addr, g_addr, b_addr)
 
 //Using function
 //void your_img_read_function_name(unsigned int,unsigned int,unsigned short int,unsigned short int,unsigned short int);
 //#define img_pixel_read your_img_read_function_name
+
+#if !defined(img_pixel_read)
+#error "Implement your image reading method above"
+#endif
+
 #endif

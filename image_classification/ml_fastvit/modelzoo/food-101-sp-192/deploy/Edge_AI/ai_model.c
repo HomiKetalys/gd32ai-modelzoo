@@ -6,7 +6,8 @@ ai_handle network2;
 #endif
 
 #if !defined(TEST_TIME_ONLY)
-u32 result=-1;
+u32 result=0;
+float conf;
 #endif
 
 
@@ -37,14 +38,6 @@ float *ai2OutData;
 #endif
 #define aiInData ai1InData
 
-#define IMG_NORM
-#define bias_r -127.50911549119088f
-#define bias_g -123.10415938928682f
-#define bias_b -110.70924631090935f
-#define weight_r 0.9178016211133283f
-#define weight_g 0.938288264441751f
-#define weight_b 0.9341180943775654f
-
 
 ai_buffer * ai_input1;
 ai_buffer * ai_output1;
@@ -63,7 +56,9 @@ void AI_Error_Handler()
 void AI_Init()
 {
     ai_error err1,err2;
-    rcu_periph_clock_enable(RCU_CRC);
+#if defined(NEED_RCU)
+    rcu_enable();
+#endif
 
     /* Create a local array with the addresses of the activations buffers */
 //    const ai_handle act_addr[] = { activations0,activations1 };
@@ -191,5 +186,6 @@ void AI_Run()
         }
     }
     result=index;
+    conf=max_conf;
 #endif
 }

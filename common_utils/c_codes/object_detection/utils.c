@@ -56,6 +56,7 @@ void handle_preds(float *preds,float conf_thr)
                 objects[object_num].bbox.x_max=*(reg)+*(reg+2)/2;
                 objects[object_num].bbox.y_max=*(reg+1)+*(reg+3)/2;
                 objects[object_num].cls_index=cls_index;
+                objects[object_num].name=activities[cls_index];
                 object_num++;
             }
         }
@@ -68,34 +69,55 @@ void handle_preds(float *preds,float conf_thr)
     object_num=0;
     for(i=0;i<AI_NETWORK_OUT_1_HEIGHT;i++)
     {
-
-        float xyxy_offset[4];
+        float obj=preds[i*AI_NETWORK_OUT_1_CHANNEL];
+        float xyxy[4];
+#if REG_MAX > 1
         for(j=0;j<4;j++)
         {
-            xyxy_offset[j]=0;
-            for(k=0;k<16;k++)
+            xyxy[j]=0;
+            for(k=0;k<REG_MAX;k++)
             {
-                xyxy_offset[j]+=k*preds[i*AI_NETWORK_OUT_1_CHANNEL+j*16+k];
+                xyxy[j]+=k*preds[i*AI_NETWORK_OUT_1_CHANNEL+j*REG_MAX+k+1];
             }
         }
+        xyxy[0]=(i%16-xyxy[0]*REG_SCALE)*16;
+        xyxy[1]=(i/16-xyxy[1]*REG_SCALE)*16;
+        xyxy[2]=(i%16+xyxy[2]*REG_SCALE)*16;
+        xyxy[3]=(i/16+xyxy[3]*REG_SCALE)*16;
+#else
+        xyxy[0]=(i%16+preds[i*AI_NETWORK_OUT_1_CHANNEL+1])*INPUT_WIDTH/16;
+        xyxy[1]=(i/16+preds[i*AI_NETWORK_OUT_1_CHANNEL+2])*INPUT_HEIGHT/16;
+        xyxy[2]=preds[i*AI_NETWORK_OUT_1_CHANNEL+3]*INPUT_WIDTH;
+        xyxy[3]=preds[i*AI_NETWORK_OUT_1_CHANNEL+4]*INPUT_HEIGHT;
+        xyxy[0]=xyxy[0]-xyxy[2]/2;
+        xyxy[1]=xyxy[1]-xyxy[3]/2;
+        xyxy[2]+=xyxy[0];
+        xyxy[3]+=xyxy[1];
+#endif
         u32 cls_index=0;
         float cls=0;
-        for(j=64;j<AI_NETWORK_OUT_1_CHANNEL;j++)
+        if(AI_NETWORK_OUT_1_CHANNEL==1+REG_MAX*4+1||AI_NETWORK_OUT_1_CHANNEL==1+REG_MAX*4)
+            cls=1;
+        else
         {
-            if(preds[i*AI_NETWORK_OUT_1_CHANNEL+j]>cls)
+            for(j=1+REG_MAX*4;j<AI_NETWORK_OUT_1_CHANNEL;j++)
             {
-                cls=preds[i*AI_NETWORK_OUT_1_CHANNEL+j];
-                cls_index=j-64;
+                if(preds[i*AI_NETWORK_OUT_1_CHANNEL+j]>cls)
+                {
+                    cls=preds[i*AI_NETWORK_OUT_1_CHANNEL+j];
+                    cls_index=j-1-REG_MAX*4;
+                }
             }
         }
-        if(cls>conf_thr)
+        if(cls*obj>conf_thr)
         {
-            objects[object_num].bbox.x_min=(0.5+i%12-xyxy_offset[0])*16;
-            objects[object_num].bbox.y_min=(0.5+i/12-xyxy_offset[1])*16;
-            objects[object_num].bbox.x_max=(0.5+i%12+xyxy_offset[2])*16;
-            objects[object_num].bbox.y_max=(0.5+i/12+xyxy_offset[3])*16;
-            objects[object_num].confi=cls;
+            objects[object_num].bbox.x_min=xyxy[0];
+            objects[object_num].bbox.y_min=xyxy[1];
+            objects[object_num].bbox.x_max=xyxy[2];
+            objects[object_num].bbox.y_max=xyxy[3];
+            objects[object_num].confi=cls*obj;
             objects[object_num].cls_index=cls_index;
+            objects[object_num].name=activities[cls_index];
             object_num++;
         }
     }
@@ -104,9 +126,9 @@ void handle_preds(float *preds,float conf_thr)
 #error "The expected model name is undefined"
 #endif
 
-int compare(const ObjectResult a, const ObjectResult b)
+int compare(const ObjectResult *a, const ObjectResult *b)
 {
-    return a.confi < b.confi ? 1 : -1;
+    return a->confi < b->confi ? 1 : -1;
 }
 
 float iou(ObjectResult a, ObjectResult b)

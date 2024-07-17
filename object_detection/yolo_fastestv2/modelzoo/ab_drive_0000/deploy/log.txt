@@ -1,14 +1,27 @@
-{'data': 'modelzoo/ab_drive_0000/ab_drive.data', 'model_path': 'modelzoo/ab_drive_0000/best.pth', 'convert_type': 1, 'tflite_val_path': '../../../datasets/abnormal_drive_0/images', 'gd32_project_path': None, 'stm32cubeai_path': 'D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1', 'series': 'h7', 'conf_thr': 0.3, 'nms_thr': 0.5, 'eval': False, 'compiler': 1}
+{'data': 'modelzoo/ab_drive_0000/ab_drive.data', 'model_path': 'modelzoo/ab_drive_0000/best.pth', 'convert_type': 1, 'tflite_val_path': '../../../datasets/abnormal_drive_0/images', 'c_project_path': None, 'stm32cubeai_path': 'D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1', 'series': 'h7', 'conf_thr': 0.3, 'nms_thr': 0.5, 'eval': True, 'compiler': 1}
 pytorch_model_path:modelzoo/ab_drive_0000/best.pth
 load param...
 export onnx ...
 Checking 0/1...
 Checking 0/1...
+评估配置:
+model_name:abd
+width:256 height:256
+val:../../../datasets/abnormal_drive_0/val0.txt
+model_path:results/deploy\ab_drive_0001\tflite
+eval_type:onnx or tflite
+computer mAP...
+computer PR...
+Precision:[0.3118881118881119, 0.8390372014945578, 0.6440928808369482, 0.31378299120234604, 0.9391777296917948]
+Recall:[0.2410810810810811, 0.9128910622753785, 0.7230178735105408, 0.29315068493150687, 0.9074419393117478]
+AP:[0.12818060258644484, 0.8989177885511938, 0.6262290817468006, 0.166552113229799, 0.9293433279589645]
+F1:[0.27195121951219503, 0.8744074492099322, 0.6812771585112413, 0.30311614730878184, 0.9230371307046787]
+Precision:0.609596 Recall:0.615517 AP:0.549845 F1:0.610758
 Command:
-D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1\Utilities\windows\stm32ai.exe generate --name network_1 -m results/deploy\ab_drive_0000\tflite\model_front.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\ab_drive_0000\temp --output results/deploy\ab_drive_0000\Edge_AI\model --allocate-inputs --series stm32h7 --allocate-outputs
+D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1\Utilities\windows\stm32ai.exe generate --name network_1 -m results/deploy\ab_drive_0001\tflite\model_front.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\ab_drive_0001\temp --output results/deploy\ab_drive_0001\Edge_AI\model --allocate-inputs --series stm32h7 --allocate-outputs
 will be excuted to generate net codes
 Net codes generation successful
 Command:
-D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1\Utilities\windows\stm32ai.exe generate --name network_2 -m results/deploy\ab_drive_0000\tflite\model_post.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\ab_drive_0000\temp --output results/deploy\ab_drive_0000\Edge_AI\model --allocate-inputs --series stm32h7 --allocate-outputs
+D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1\Utilities\windows\stm32ai.exe generate --name network_2 -m results/deploy\ab_drive_0001\tflite\model_post.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\ab_drive_0001\temp --output results/deploy\ab_drive_0001\Edge_AI\model --allocate-inputs --series stm32h7 --allocate-outputs
 will be excuted to generate net codes
 Net codes generation successful

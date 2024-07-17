@@ -25,16 +25,20 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--images_path', default='../../datasets/coco2017/images/val2017', type=str)
     parser.add_argument('--json_file', default='../../datasets/coco2017/annotations/instances_val2017.json', type=str)
-    parser.add_argument('--ana_txt_save_path', default='../../datasets/coco2017/coco_80/val2017', type=str)
+    parser.add_argument('--ana_txt_save_path', default='../../datasets/coco2017/coco_person/val2017', type=str)
     parser.add_argument('--out_txt_path', default='../../datasets/coco2017/val2017_person.txt', type=str)
+    parser.add_argument('--export_categorys', default='all', type=str)
     arg = parser.parse_args()
 
     images_path=arg.images_path
     json_file = arg.json_file
     ana_txt_save_path = arg.ana_txt_save_path
     out_txt_path=arg.out_txt_path
-    exports_categorys="all"
-    # exports_categorys = [0]
+    # exports_categorys="all"
+    if arg.export_categorys=="all":
+        exports_categorys="all"
+    else:
+        exports_categorys = [int(x) for x in arg.export_categorys.split(" ")]
 
     data = json.load(open(json_file, 'r'))
     if not os.path.exists(ana_txt_save_path):
@@ -87,7 +91,7 @@ if __name__ == '__main__':
                 box = convert((img_width, img_height), ann["bbox"])
                 if id_map[ann["category_id"]] in exports_categorys:
                     have=1
-                    with open(os.path.join(ana_txt_save_path, ana_txt_name), 'w') as f_txt:
+                    with open(os.path.join(ana_txt_save_path, ana_txt_name), 'a') as f_txt:
                         f_txt.write("%s %s %s %s %s\n" % (id_map[ann["category_id"]], box[0], box[1], box[2], box[3]))
             if have:
                 f0.write(os.path.relpath(os.path.join(images_path,filename),os.path.split(out_txt_path)[0])+'\n')

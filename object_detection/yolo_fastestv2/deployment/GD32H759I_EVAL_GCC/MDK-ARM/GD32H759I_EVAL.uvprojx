@@ -243,7 +243,7 @@
               <MiscControls>-mcpu=cortex-m7 -mthumb -fdata-sections -ffunction-sections -mfpu=fpv5-d16 -mfloat-abi=hard</MiscControls>
               <Define>GD32H7XX</Define>
               <Undefine></Undefine>
-              <IncludePath>..\App\DataType;..\App\TLILCD;..\Edge_AI\model;..\Edge_AI;..\Edge_AI\ST_Lib\Inc;..\Soft_Drive;..\GD32H7xx_Firmware_Library\CMSIS\GD\GD32H7xx\Include;..\GD32H7xx_Firmware_Library\GD32H7xx_standard_peripheral\Include;..\Utilites;..\</IncludePath>
+              <IncludePath>..\App\TLILCD;..\App\DataType;..\Soft_Drive;.\Edge_AI\model;..\Utilites;.\Edge_AI\ST_Lib\Inc;..\GD32H7xx_Firmware_Library\CMSIS\GD\GD32H7xx\Include;.\Edge_AI;..\;..\Edge_AI\ST_Lib\Inc;..\Edge_AI\model;..\Edge_AI;..\GD32H7xx_Firmware_Library\GD32H7xx_standard_peripheral\Include</IncludePath>
             </VariousControls>
           </Carm>
           <Aarm>
@@ -265,8 +265,8 @@
             <TextAddressRange></TextAddressRange>
             <DataAddressRange></DataAddressRange>
             <BSSAddressRange></BSSAddressRange>
-            <IncludeLibs>NetworkRuntime801_CM4_GCC</IncludeLibs>
-            <IncludeDir>..\Edge_AI\ST_Lib\Lib</IncludeDir>
+            <IncludeLibs>NetworkRuntime</IncludeLibs>
+            <IncludeDir>.\Edge_AI\ST_Lib\Lib</IncludeDir>
             <Misc>-Wl,--gc-sections -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard</Misc>
             <ScatterFile>..\gd32h7xx_flash.ld</ScatterFile>
           </LDarm>
@@ -686,42 +686,42 @@
             <File>
               <FileName>ai_model.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Edge_AI\ai_model.c</FilePath>
-            </File>
-            <File>
-              <FileName>utils.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Edge_AI\utils\utils.c</FilePath>
+              <FilePath>Edge_AI\ai_model.c</FilePath>
             </File>
             <File>
               <FileName>network_1.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Edge_AI\model\network_1.c</FilePath>
+              <FilePath>Edge_AI\model\network_1.c</FilePath>
             </File>
             <File>
               <FileName>network_1_data.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Edge_AI\model\network_1_data.c</FilePath>
+              <FilePath>Edge_AI\model\network_1_data.c</FilePath>
             </File>
             <File>
               <FileName>network_1_data_params.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Edge_AI\model\network_1_data_params.c</FilePath>
+              <FilePath>Edge_AI\model\network_1_data_params.c</FilePath>
             </File>
             <File>
               <FileName>network_2.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Edge_AI\model\network_2.c</FilePath>
+              <FilePath>Edge_AI\model\network_2.c</FilePath>
             </File>
             <File>
               <FileName>network_2_data.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Edge_AI\model\network_2_data.c</FilePath>
+              <FilePath>Edge_AI\model\network_2_data.c</FilePath>
             </File>
             <File>
               <FileName>network_2_data_params.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Edge_AI\model\network_2_data_params.c</FilePath>
+              <FilePath>Edge_AI\model\network_2_data_params.c</FilePath>
+            </File>
+            <File>
+              <FileName>utils.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>Edge_AI\utils\utils.c</FilePath>
             </File>
           </Files>
         </Group>

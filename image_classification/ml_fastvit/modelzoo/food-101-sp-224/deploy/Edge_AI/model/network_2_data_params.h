@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    network_2_data_params.h
   * @author  AST Embedded Analytics Research Platform
-  * @date    Mon Jul  1 20:04:09 2024
+  * @date    Tue Jul 16 17:10:30 2024
   * @brief   AI Tool Automatic Code Generator for Embedded NN computing
   ******************************************************************************
   * Copyright (c) 2024 STMicroelectronics.

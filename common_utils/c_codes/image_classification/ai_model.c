@@ -6,7 +6,8 @@ ai_handle network2;
 #endif
 
 #if !defined(TEST_TIME_ONLY)
-u32 result=-1;
+u32 result=0;
+float conf;
 #endif
 
 
@@ -37,8 +38,6 @@ float *ai2OutData;
 #endif
 #define aiInData ai1InData
 
-IMG_NORM_CODE
-
 
 ai_buffer * ai_input1;
 ai_buffer * ai_output1;
@@ -57,7 +56,9 @@ void AI_Error_Handler()
 void AI_Init()
 {
     ai_error err1,err2;
-    rcu_periph_clock_enable(RCU_CRC);
+#if defined(NEED_RCU)
+    rcu_enable();
+#endif
 
     /* Create a local array with the addresses of the activations buffers */
 //    const ai_handle act_addr[] = { activations0,activations1 };
@@ -185,5 +186,6 @@ void AI_Run()
         }
     }
     result=index;
+    conf=max_conf;
 #endif
 }

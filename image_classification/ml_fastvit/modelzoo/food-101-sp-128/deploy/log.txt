@@ -1,12 +1,18 @@
-{'config': 'modelzoo/food-101-sp-128/food-101.yaml', 'model_path': 'modelzoo/food-101-sp-128/model_best.pth.tar', 'convert_type': 1, 'tflite_val_path': '../../../datasets/food-101/validation', 'c_project_path': None, 'stm32cubeai_path': 'D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1', 'series': 'h7', 'eval': False, 'compiler': 1, 'img_size': None}
+{'config': 'modelzoo/food-101-sp-128/food-101.yaml', 'model_path': 'modelzoo/food-101-sp-128/model_best.pth.tar', 'convert_type': 1, 'tflite_val_path': '../../../datasets/food-101/validation', 'c_project_path': None, 'stm32cubeai_path': 'D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1', 'series': 'h7', 'eval': True, 'compiler': 1, 'img_size': None}
 pytorch_model_path:modelzoo/food-101-sp-128/model_best.pth.tar
 Checking 0/1...
 Checking 0/1...
+Test: [   0/50]  Time: 87.167s (87.167s,    5.87/s)  Loss:  1.9384 (1.9384)  Acc@1:  46.289 ( 46.289)  Acc@5:  80.078 ( 80.078)
+Test: [  10/50]  Time: 3.318s (11.018s,   46.47/s)  Loss:  1.6230 (1.4927)  Acc@1:  58.398 ( 62.802)  Acc@5:  88.086 ( 86.861)
+Test: [  20/50]  Time: 3.808s (7.390s,   69.28/s)  Loss:  1.1943 (1.3463)  Acc@1:  70.117 ( 66.964)  Acc@5:  90.430 ( 88.235)
+Test: [  30/50]  Time: 4.595s (6.468s,   79.16/s)  Loss:  1.0753 (1.3571)  Acc@1:  73.828 ( 66.721)  Acc@5:  92.773 ( 88.086)
+Test: [  40/50]  Time: 4.415s (5.976s,   85.68/s)  Loss:  1.6225 (1.3180)  Acc@1:  55.273 ( 67.692)  Acc@5:  85.156 ( 88.686)
+ * Acc@1 67.240 (32.760) Acc@5 88.634 (11.366)
 Command:
-D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1\Utilities\windows\stm32ai.exe generate --name network_1 -m results/deploy\food-101_0005\tflite\model_front.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\food-101_0005\temp --output results/deploy\food-101_0005\Edge_AI\model --allocate-inputs --series stm32h7 --allocate-outputs
+D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1\Utilities\windows\stm32ai.exe generate --name network_1 -m results/deploy\food-101_0013\tflite\model_front.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\food-101_0013\temp --output results/deploy\food-101_0013\Edge_AI\model --allocate-inputs --series stm32h7 --allocate-outputs
 will be excuted to generate net codes
 Net codes generation successful
 Command:
-D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1\Utilities\windows\stm32ai.exe generate --name network_2 -m results/deploy\food-101_0005\tflite\model_post.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\food-101_0005\temp --output results/deploy\food-101_0005\Edge_AI\model --allocate-inputs --series stm32h7 --allocate-outputs
+D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1\Utilities\windows\stm32ai.exe generate --name network_2 -m results/deploy\food-101_0013\tflite\model_post.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\food-101_0013\temp --output results/deploy\food-101_0013\Edge_AI\model --allocate-inputs --series stm32h7 --allocate-outputs
 will be excuted to generate net codes
 Net codes generation successful

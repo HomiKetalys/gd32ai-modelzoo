@@ -1,27 +1,27 @@
 Neural Network Tools for STM32AI v1.7.0 (STM.ai v8.0.1-19451)
-Created date          : 2024-07-01 20:16:57
-Parameters            : generate --name network_1 -m results/deploy\food-101_0002\tflite\model_front.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\food-101_0002\temp --output results/deploy\food-101_0002\Edge_AI\model --allocate-inputs --series stm32h7 --allocate-outputs
+Created date          : 2024-07-16 16:57:21
+Parameters            : generate --name network_1 -m results/deploy\food-101_0011\tflite\model_front.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\food-101_0011\temp --output results/deploy\food-101_0011\Edge_AI\model --allocate-inputs --series stm32h7 --allocate-outputs
 
 Exec/report summary (generate)
 -------------------------------------------------------------------------------------------------------------------------------------------------
-model file         :   F:\MyWork\PyWork\gd32ai-modelzoo\image_classification\ml_fastvit\results\deploy\food-101_0002\tflite\model_front.tflite   
+model file         :   F:\MyWork\PyWork\gd32ai-modelzoo\image_classification\ml_fastvit\results\deploy\food-101_0011\tflite\model_front.tflite   
 type               :   tflite                                                                                                                    
 c_name             :   network_1                                                                                                                 
 compression        :   none                                                                                                                      
 options            :   allocate-inputs, allocate-outputs                                                                                         
 optimization       :   balanced                                                                                                                  
 target/series      :   stm32h7                                                                                                                   
-workspace dir      :   F:\MyWork\PyWork\gd32ai-modelzoo\image_classification\ml_fastvit\results\deploy\food-101_0002\temp                        
-output dir         :   F:\MyWork\PyWork\gd32ai-modelzoo\image_classification\ml_fastvit\results\deploy\food-101_0002\Edge_AI\model               
+workspace dir      :   F:\MyWork\PyWork\gd32ai-modelzoo\image_classification\ml_fastvit\results\deploy\food-101_0011\temp                        
+output dir         :   F:\MyWork\PyWork\gd32ai-modelzoo\image_classification\ml_fastvit\results\deploy\food-101_0011\Edge_AI\model               
 model_fmt          :   ss/sa per-channel                                                                                                         
 model_name         :   model_front                                                                                                               
-model_hash         :   f5646870b3f34d44e8011f8839fca890                                                                                          
+model_hash         :   34b35a6b1f7fb99b3130e65d877987fe                                                                                          
 params #           :   22,320 items (23.34 KiB)                                                                                                  
 -------------------------------------------------------------------------------------------------------------------------------------------------
 input 1/1          :   'serving_default_input_10' (domain:activations/**default**)                                                               
                    :   27648 items, 27.00 KiB, ai_i8, s=0.01865845, zp=-14, (1,96,96,3)                                                          
 output 1/1         :   'eltwise_26' (domain:activations/**default**)                                                                             
-                   :   6912 items, 6.75 KiB, ai_i8, s=0.03939973, zp=-37, (1,12,12,48)                                                           
+                   :   6912 items, 6.75 KiB, ai_i8, s=0.04155597, zp=-29, (1,12,12,48)                                                           
 macc               :   6,497,808                                                                                                                 
 weights (ro)       :   23,904 B (23.34 KiB) (1 segment) / -65,376(-73.2%) vs float model                                                         
 activations (rw)   :   63,492 B (62.00 KiB) (1 segment) *                                                                                        
@@ -134,7 +134,7 @@ c_id   name (*_array)                    item/size     domain/mem-pool          
 14     conv2d_23_output                  6912/6912     activations/**default**   int8_t          sa8                     
 15     conv2d_24_output                  13824/13824   activations/**default**   int8_t          sa8                     
 16     conv2d_24_bias                    96/384        weights/weights           const int32_t   ss32/ch(96)             
-17     conv2d_25_output                  6912/6912     activations/**default**   int8_t          ss8                     
+17     conv2d_25_output                  6912/6912     activations/**default**   int8_t          sa8                     
 18     eltwise_26_output                 6912/6912     activations/**default**   int8_t          sa8           /output   
 19     conv2d_25_weights                 4608/4608     weights/weights           const int8_t    ss8/ch(48)              
 20     conv2d_25_bias                    48/192        weights/weights           const int32_t   ss32/ch(48)             
@@ -385,10 +385,10 @@ macc=6,497,808 weights=23,904 act=63,492 ram_io=0
 
 Generated files (7)
 ------------------------------------------------------------------------------------------------------------------------------------- 
-F:\MyWork\PyWork\gd32ai-modelzoo\image_classification\ml_fastvit\results\deploy\food-101_0002\Edge_AI\model\network_1_config.h        
-F:\MyWork\PyWork\gd32ai-modelzoo\image_classification\ml_fastvit\results\deploy\food-101_0002\Edge_AI\model\network_1.h               
-F:\MyWork\PyWork\gd32ai-modelzoo\image_classification\ml_fastvit\results\deploy\food-101_0002\Edge_AI\model\network_1.c               
-F:\MyWork\PyWork\gd32ai-modelzoo\image_classification\ml_fastvit\results\deploy\food-101_0002\Edge_AI\model\network_1_data_params.h   
-F:\MyWork\PyWork\gd32ai-modelzoo\image_classification\ml_fastvit\results\deploy\food-101_0002\Edge_AI\model\network_1_data_params.c   
-F:\MyWork\PyWork\gd32ai-modelzoo\image_classification\ml_fastvit\results\deploy\food-101_0002\Edge_AI\model\network_1_data.h          
-F:\MyWork\PyWork\gd32ai-modelzoo\image_classification\ml_fastvit\results\deploy\food-101_0002\Edge_AI\model\network_1_data.c          
+F:\MyWork\PyWork\gd32ai-modelzoo\image_classification\ml_fastvit\results\deploy\food-101_0011\Edge_AI\model\network_1_config.h        
+F:\MyWork\PyWork\gd32ai-modelzoo\image_classification\ml_fastvit\results\deploy\food-101_0011\Edge_AI\model\network_1.h               
+F:\MyWork\PyWork\gd32ai-modelzoo\image_classification\ml_fastvit\results\deploy\food-101_0011\Edge_AI\model\network_1.c               
+F:\MyWork\PyWork\gd32ai-modelzoo\image_classification\ml_fastvit\results\deploy\food-101_0011\Edge_AI\model\network_1_data_params.h   
+F:\MyWork\PyWork\gd32ai-modelzoo\image_classification\ml_fastvit\results\deploy\food-101_0011\Edge_AI\model\network_1_data_params.c   
+F:\MyWork\PyWork\gd32ai-modelzoo\image_classification\ml_fastvit\results\deploy\food-101_0011\Edge_AI\model\network_1_data.h          
+F:\MyWork\PyWork\gd32ai-modelzoo\image_classification\ml_fastvit\results\deploy\food-101_0011\Edge_AI\model\network_1_data.c          

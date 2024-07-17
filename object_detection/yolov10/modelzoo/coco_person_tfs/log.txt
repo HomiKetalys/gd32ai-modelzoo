@@ -1,0 +1,1087 @@
+Load yaml sucess...
+<submodules.FastestDet.utils.tool.LoadYaml object at 0x000001D2D93496C0>
+params:198594
+[INFO] Register count_convNd() for <class 'torch.nn.modules.conv.Conv2d'>.
+[INFO] Register count_normalization() for <class 'torch.nn.modules.batchnorm.BatchNorm2d'>.
+[INFO] Register zero_ops() for <class 'torch.nn.modules.activation.ReLU6'>.
+[INFO] Register zero_ops() for <class 'torch.nn.modules.container.Sequential'>.
+[INFO] Register zero_ops() for <class 'torch.nn.modules.pooling.MaxPool2d'>.
+[INFO] Register count_upsample() for <class 'torch.nn.modules.upsampling.Upsample'>.
+flops:0.126734336GFLOPs
+use SGD optimizer
+Starting training for 300 epochs...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=14.25s).
+Accumulating evaluation results...
+DONE (t=1.74s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.001
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.002
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.013
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.006
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.005
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.024
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.038
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.012
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.193
+
+IOU:0.4 MAP:0.0103 Recall:0.1570
+[['person', '0.0103', '0.1570']]
+Epoch:0 LR:0.000000 IOU:0.673717 Obj:0.115963 Cls:0.000000 Dfl:0.000000 Total:7.245149
+Epoch:1 LR:0.000010 IOU:0.646394 Obj:0.062342 Cls:0.000000 Dfl:0.000000 Total:6.168627
+Epoch:2 LR:0.000067 IOU:0.620739 Obj:0.017065 Cls:0.000000 Dfl:0.000000 Total:5.238951
+Epoch:3 LR:0.000250 IOU:0.587735 Obj:0.016180 Cls:0.000000 Dfl:0.000000 Total:4.960762
+Epoch:4 LR:0.000672 IOU:0.541799 Obj:0.017607 Cls:0.000000 Dfl:0.000000 Total:4.616109
+Epoch:5 LR:0.001000 IOU:0.502866 Obj:0.017814 Cls:0.000000 Dfl:0.000000 Total:4.307952
+Epoch:6 LR:0.001000 IOU:0.477727 Obj:0.018008 Cls:0.000000 Dfl:0.000000 Total:4.109949
+Epoch:7 LR:0.001000 IOU:0.460051 Obj:0.018277 Cls:0.000000 Dfl:0.000000 Total:3.972836
+Epoch:8 LR:0.001000 IOU:0.445973 Obj:0.018380 Cls:0.000000 Dfl:0.000000 Total:3.861870
+Epoch:9 LR:0.001000 IOU:0.435941 Obj:0.018390 Cls:0.000000 Dfl:0.000000 Total:3.781767
+Epoch:10 LR:0.001000 IOU:0.427905 Obj:0.018366 Cls:0.000000 Dfl:0.000000 Total:3.717091
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=30.32s).
+Accumulating evaluation results...
+DONE (t=3.42s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.076
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.157
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.021
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.011
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.094
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.228
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.064
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.149
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.198
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.041
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.302
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.464
+
+IOU:0.4 MAP:0.2095 Recall:0.4918
+[['person', '0.2095', '0.4918']]
+Epoch:11 LR:0.001000 IOU:0.421039 Obj:0.018343 Cls:0.000000 Dfl:0.000000 Total:3.661808
+Epoch:12 LR:0.001000 IOU:0.413953 Obj:0.018294 Cls:0.000000 Dfl:0.000000 Total:3.604323
+Epoch:13 LR:0.001000 IOU:0.408770 Obj:0.018199 Cls:0.000000 Dfl:0.000000 Total:3.561344
+Epoch:14 LR:0.001000 IOU:0.404181 Obj:0.018132 Cls:0.000000 Dfl:0.000000 Total:3.523551
+Epoch:15 LR:0.001000 IOU:0.399173 Obj:0.018069 Cls:0.000000 Dfl:0.000000 Total:3.482489
+Epoch:16 LR:0.001000 IOU:0.395250 Obj:0.017969 Cls:0.000000 Dfl:0.000000 Total:3.449515
+Epoch:17 LR:0.001000 IOU:0.390818 Obj:0.017927 Cls:0.000000 Dfl:0.000000 Total:3.413374
+Epoch:18 LR:0.001000 IOU:0.387113 Obj:0.017906 Cls:0.000000 Dfl:0.000000 Total:3.383396
+Epoch:19 LR:0.001000 IOU:0.384061 Obj:0.017780 Cls:0.000000 Dfl:0.000000 Total:3.356957
+Epoch:20 LR:0.001000 IOU:0.380992 Obj:0.017737 Cls:0.000000 Dfl:0.000000 Total:3.331720
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=30.25s).
+Accumulating evaluation results...
+DONE (t=3.39s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.115
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.227
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.043
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.018
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.158
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.308
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.082
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.188
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.239
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.074
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.362
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.491
+
+IOU:0.4 MAP:0.2933 Recall:0.5593
+[['person', '0.2933', '0.5593']]
+Epoch:21 LR:0.001000 IOU:0.378775 Obj:0.017694 Cls:0.000000 Dfl:0.000000 Total:3.313309
+Epoch:22 LR:0.001000 IOU:0.375484 Obj:0.017577 Cls:0.000000 Dfl:0.000000 Total:3.285103
+Epoch:23 LR:0.001000 IOU:0.373152 Obj:0.017634 Cls:0.000000 Dfl:0.000000 Total:3.267360
+Epoch:24 LR:0.001000 IOU:0.371169 Obj:0.017540 Cls:0.000000 Dfl:0.000000 Total:3.249984
+Epoch:25 LR:0.001000 IOU:0.368605 Obj:0.017569 Cls:0.000000 Dfl:0.000000 Total:3.229946
+Epoch:26 LR:0.001000 IOU:0.366844 Obj:0.017529 Cls:0.000000 Dfl:0.000000 Total:3.215213
+Epoch:27 LR:0.001000 IOU:0.365858 Obj:0.017438 Cls:0.000000 Dfl:0.000000 Total:3.205870
+Epoch:28 LR:0.001000 IOU:0.363714 Obj:0.017448 Cls:0.000000 Dfl:0.000000 Total:3.188880
+Epoch:29 LR:0.001000 IOU:0.361993 Obj:0.017393 Cls:0.000000 Dfl:0.000000 Total:3.174236
+Epoch:30 LR:0.001000 IOU:0.359702 Obj:0.017358 Cls:0.000000 Dfl:0.000000 Total:3.155338
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=30.38s).
+Accumulating evaluation results...
+DONE (t=3.69s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.140
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.270
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.062
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.029
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.197
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.350
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.091
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.213
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.260
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.089
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.391
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.520
+
+IOU:0.4 MAP:0.3351 Recall:0.5807
+[['person', '0.3351', '0.5807']]
+Epoch:31 LR:0.001000 IOU:0.358100 Obj:0.017319 Cls:0.000000 Dfl:0.000000 Total:3.141901
+Epoch:32 LR:0.001000 IOU:0.356690 Obj:0.017313 Cls:0.000000 Dfl:0.000000 Total:3.130534
+Epoch:33 LR:0.001000 IOU:0.354504 Obj:0.017281 Cls:0.000000 Dfl:0.000000 Total:3.112523
+Epoch:34 LR:0.001000 IOU:0.353623 Obj:0.017259 Cls:0.000000 Dfl:0.000000 Total:3.105122
+Epoch:35 LR:0.001000 IOU:0.352107 Obj:0.017365 Cls:0.000000 Dfl:0.000000 Total:3.094693
+Epoch:36 LR:0.001000 IOU:0.349972 Obj:0.017268 Cls:0.000000 Dfl:0.000000 Total:3.076061
+Epoch:37 LR:0.001000 IOU:0.349049 Obj:0.017195 Cls:0.000000 Dfl:0.000000 Total:3.067513
+Epoch:38 LR:0.001000 IOU:0.347153 Obj:0.017180 Cls:0.000000 Dfl:0.000000 Total:3.052109
+Epoch:39 LR:0.001000 IOU:0.345784 Obj:0.017203 Cls:0.000000 Dfl:0.000000 Total:3.041528
+Epoch:40 LR:0.001000 IOU:0.345496 Obj:0.017141 Cls:0.000000 Dfl:0.000000 Total:3.038225
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=30.18s).
+Accumulating evaluation results...
+DONE (t=3.44s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.155
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.297
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.070
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.031
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.221
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.379
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.098
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.223
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.268
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.093
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.406
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.527
+
+IOU:0.4 MAP:0.3593 Recall:0.5867
+[['person', '0.3593', '0.5867']]
+Epoch:41 LR:0.001000 IOU:0.344736 Obj:0.017082 Cls:0.000000 Dfl:0.000000 Total:3.031195
+Epoch:42 LR:0.001000 IOU:0.342952 Obj:0.017129 Cls:0.000000 Dfl:0.000000 Total:3.017690
+Epoch:43 LR:0.001000 IOU:0.341190 Obj:0.017072 Cls:0.000000 Dfl:0.000000 Total:3.002673
+Epoch:44 LR:0.001000 IOU:0.340851 Obj:0.017096 Cls:0.000000 Dfl:0.000000 Total:3.000338
+Epoch:45 LR:0.001000 IOU:0.339414 Obj:0.017080 Cls:0.000000 Dfl:0.000000 Total:2.988589
+Epoch:46 LR:0.001000 IOU:0.338313 Obj:0.017064 Cls:0.000000 Dfl:0.000000 Total:2.979525
+Epoch:47 LR:0.001000 IOU:0.337700 Obj:0.017043 Cls:0.000000 Dfl:0.000000 Total:2.974294
+Epoch:48 LR:0.001000 IOU:0.336558 Obj:0.016999 Cls:0.000000 Dfl:0.000000 Total:2.964446
+Epoch:49 LR:0.001000 IOU:0.336144 Obj:0.017006 Cls:0.000000 Dfl:0.000000 Total:2.961242
+Epoch:50 LR:0.001000 IOU:0.335319 Obj:0.016952 Cls:0.000000 Dfl:0.000000 Total:2.953775
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=31.37s).
+Accumulating evaluation results...
+DONE (t=3.54s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.159
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.301
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.077
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.035
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.225
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.380
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.098
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.227
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.278
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.116
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.409
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.513
+
+IOU:0.4 MAP:0.3714 Recall:0.6149
+[['person', '0.3714', '0.6149']]
+Epoch:51 LR:0.001000 IOU:0.334088 Obj:0.016953 Cls:0.000000 Dfl:0.000000 Total:2.943948
+Epoch:52 LR:0.001000 IOU:0.333563 Obj:0.016909 Cls:0.000000 Dfl:0.000000 Total:2.939049
+Epoch:53 LR:0.001000 IOU:0.333270 Obj:0.016905 Cls:0.000000 Dfl:0.000000 Total:2.936636
+Epoch:54 LR:0.001000 IOU:0.332699 Obj:0.016936 Cls:0.000000 Dfl:0.000000 Total:2.932560
+Epoch:55 LR:0.001000 IOU:0.331724 Obj:0.016858 Cls:0.000000 Dfl:0.000000 Total:2.923518
+Epoch:56 LR:0.001000 IOU:0.331417 Obj:0.016904 Cls:0.000000 Dfl:0.000000 Total:2.921798
+Epoch:57 LR:0.001000 IOU:0.329885 Obj:0.016859 Cls:0.000000 Dfl:0.000000 Total:2.908815
+Epoch:58 LR:0.001000 IOU:0.329610 Obj:0.016873 Cls:0.000000 Dfl:0.000000 Total:2.906843
+Epoch:59 LR:0.001000 IOU:0.328835 Obj:0.016858 Cls:0.000000 Dfl:0.000000 Total:2.900406
+Epoch:60 LR:0.001000 IOU:0.328420 Obj:0.016846 Cls:0.000000 Dfl:0.000000 Total:2.896897
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.94s).
+Accumulating evaluation results...
+DONE (t=3.43s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.178
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.326
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.096
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.040
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.249
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.425
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.106
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.245
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.290
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.112
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.428
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.555
+
+IOU:0.4 MAP:0.3931 Recall:0.6114
+[['person', '0.3931', '0.6114']]
+Epoch:61 LR:0.001000 IOU:0.327541 Obj:0.016781 Cls:0.000000 Dfl:0.000000 Total:2.888818
+Epoch:62 LR:0.001000 IOU:0.326809 Obj:0.016779 Cls:0.000000 Dfl:0.000000 Total:2.882933
+Epoch:63 LR:0.001000 IOU:0.326194 Obj:0.016794 Cls:0.000000 Dfl:0.000000 Total:2.878257
+Epoch:64 LR:0.001000 IOU:0.325768 Obj:0.016759 Cls:0.000000 Dfl:0.000000 Total:2.874284
+Epoch:65 LR:0.001000 IOU:0.325461 Obj:0.016770 Cls:0.000000 Dfl:0.000000 Total:2.872000
+Epoch:66 LR:0.001000 IOU:0.324663 Obj:0.016722 Cls:0.000000 Dfl:0.000000 Total:2.864854
+Epoch:67 LR:0.001000 IOU:0.323241 Obj:0.016734 Cls:0.000000 Dfl:0.000000 Total:2.853665
+Epoch:68 LR:0.001000 IOU:0.323175 Obj:0.016704 Cls:0.000000 Dfl:0.000000 Total:2.852660
+Epoch:69 LR:0.001000 IOU:0.322097 Obj:0.016678 Cls:0.000000 Dfl:0.000000 Total:2.843621
+Epoch:70 LR:0.001000 IOU:0.322729 Obj:0.016723 Cls:0.000000 Dfl:0.000000 Total:2.849406
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=30.52s).
+Accumulating evaluation results...
+DONE (t=3.47s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.184
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.333
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.103
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.041
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.259
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.436
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.109
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.251
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.297
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.122
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.433
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.561
+
+IOU:0.4 MAP:0.4014 Recall:0.6250
+[['person', '0.4014', '0.6250']]
+Epoch:71 LR:0.001000 IOU:0.320828 Obj:0.016672 Cls:0.000000 Dfl:0.000000 Total:2.833380
+Epoch:72 LR:0.001000 IOU:0.321217 Obj:0.016634 Cls:0.000000 Dfl:0.000000 Total:2.835879
+Epoch:73 LR:0.001000 IOU:0.321751 Obj:0.016696 Cls:0.000000 Dfl:0.000000 Total:2.841144
+Epoch:74 LR:0.001000 IOU:0.320755 Obj:0.016650 Cls:0.000000 Dfl:0.000000 Total:2.832442
+Epoch:75 LR:0.001000 IOU:0.320426 Obj:0.016644 Cls:0.000000 Dfl:0.000000 Total:2.829707
+Epoch:76 LR:0.001000 IOU:0.319541 Obj:0.016657 Cls:0.000000 Dfl:0.000000 Total:2.822841
+Epoch:77 LR:0.001000 IOU:0.317440 Obj:0.016658 Cls:0.000000 Dfl:0.000000 Total:2.806047
+Epoch:78 LR:0.001000 IOU:0.318124 Obj:0.016625 Cls:0.000000 Dfl:0.000000 Total:2.810990
+Epoch:79 LR:0.001000 IOU:0.317366 Obj:0.016610 Cls:0.000000 Dfl:0.000000 Total:2.804693
+Epoch:80 LR:0.001000 IOU:0.317871 Obj:0.016626 Cls:0.000000 Dfl:0.000000 Total:2.808987
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.26s).
+Accumulating evaluation results...
+DONE (t=3.36s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.188
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.337
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.113
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.042
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.264
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.449
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.109
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.254
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.297
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.117
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.430
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.581
+
+IOU:0.4 MAP:0.4048 Recall:0.6130
+[['person', '0.4048', '0.6130']]
+Epoch:81 LR:0.001000 IOU:0.316577 Obj:0.016599 Cls:0.000000 Dfl:0.000000 Total:2.798194
+Epoch:82 LR:0.001000 IOU:0.316405 Obj:0.016564 Cls:0.000000 Dfl:0.000000 Total:2.796254
+Epoch:83 LR:0.001000 IOU:0.315697 Obj:0.016532 Cls:0.000000 Dfl:0.000000 Total:2.790093
+Epoch:84 LR:0.001000 IOU:0.315373 Obj:0.016616 Cls:0.000000 Dfl:0.000000 Total:2.788846
+Epoch:85 LR:0.001000 IOU:0.315766 Obj:0.016565 Cls:0.000000 Dfl:0.000000 Total:2.791168
+Epoch:86 LR:0.001000 IOU:0.315592 Obj:0.016581 Cls:0.000000 Dfl:0.000000 Total:2.790036
+Epoch:87 LR:0.001000 IOU:0.314531 Obj:0.016557 Cls:0.000000 Dfl:0.000000 Total:2.781160
+Epoch:88 LR:0.001000 IOU:0.314410 Obj:0.016602 Cls:0.000000 Dfl:0.000000 Total:2.780919
+Epoch:89 LR:0.001000 IOU:0.314616 Obj:0.016617 Cls:0.000000 Dfl:0.000000 Total:2.782796
+Epoch:90 LR:0.001000 IOU:0.314636 Obj:0.016570 Cls:0.000000 Dfl:0.000000 Total:2.782205
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=28.86s).
+Accumulating evaluation results...
+DONE (t=3.48s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.171
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.311
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.093
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.037
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.242
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.410
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.102
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.238
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.279
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.098
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.418
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.555
+
+IOU:0.4 MAP:0.3738 Recall:0.5875
+[['person', '0.3738', '0.5875']]
+Epoch:91 LR:0.001000 IOU:0.313016 Obj:0.016547 Cls:0.000000 Dfl:0.000000 Total:2.768884
+Epoch:92 LR:0.001000 IOU:0.313638 Obj:0.016510 Cls:0.000000 Dfl:0.000000 Total:2.773271
+Epoch:93 LR:0.001000 IOU:0.313000 Obj:0.016470 Cls:0.000000 Dfl:0.000000 Total:2.767511
+Epoch:94 LR:0.001000 IOU:0.312748 Obj:0.016558 Cls:0.000000 Dfl:0.000000 Total:2.766913
+Epoch:95 LR:0.001000 IOU:0.312646 Obj:0.016517 Cls:0.000000 Dfl:0.000000 Total:2.765438
+Epoch:96 LR:0.001000 IOU:0.311827 Obj:0.016419 Cls:0.000000 Dfl:0.000000 Total:2.757329
+Epoch:97 LR:0.001000 IOU:0.311045 Obj:0.016445 Cls:0.000000 Dfl:0.000000 Total:2.751477
+Epoch:98 LR:0.001000 IOU:0.311588 Obj:0.016481 Cls:0.000000 Dfl:0.000000 Total:2.756394
+Epoch:99 LR:0.001000 IOU:0.311203 Obj:0.016476 Cls:0.000000 Dfl:0.000000 Total:2.753241
+Epoch:100 LR:0.000100 IOU:0.304173 Obj:0.016350 Cls:0.000000 Dfl:0.000000 Total:2.694977
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.72s).
+Accumulating evaluation results...
+DONE (t=3.41s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.208
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.367
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.130
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.054
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.293
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.474
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.116
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.271
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.315
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.132
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.451
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.597
+
+IOU:0.4 MAP:0.4335 Recall:0.6335
+[['person', '0.4335', '0.6335']]
+Epoch:101 LR:0.000100 IOU:0.302342 Obj:0.016274 Cls:0.000000 Dfl:0.000000 Total:2.679123
+Epoch:102 LR:0.000100 IOU:0.301648 Obj:0.016211 Cls:0.000000 Dfl:0.000000 Total:2.672562
+Epoch:103 LR:0.000100 IOU:0.300409 Obj:0.016191 Cls:0.000000 Dfl:0.000000 Total:2.662325
+Epoch:104 LR:0.000100 IOU:0.300191 Obj:0.016218 Cls:0.000000 Dfl:0.000000 Total:2.661018
+Epoch:105 LR:0.000100 IOU:0.299619 Obj:0.016168 Cls:0.000000 Dfl:0.000000 Total:2.655630
+Epoch:106 LR:0.000100 IOU:0.299413 Obj:0.016174 Cls:0.000000 Dfl:0.000000 Total:2.654094
+Epoch:107 LR:0.000100 IOU:0.299516 Obj:0.016149 Cls:0.000000 Dfl:0.000000 Total:2.654502
+Epoch:108 LR:0.000100 IOU:0.299338 Obj:0.016197 Cls:0.000000 Dfl:0.000000 Total:2.653857
+Epoch:109 LR:0.000100 IOU:0.299248 Obj:0.016136 Cls:0.000000 Dfl:0.000000 Total:2.652168
+Epoch:110 LR:0.000100 IOU:0.298740 Obj:0.016136 Cls:0.000000 Dfl:0.000000 Total:2.648096
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.31s).
+Accumulating evaluation results...
+DONE (t=3.37s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.212
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.375
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.132
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.056
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.300
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.478
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.117
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.275
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.316
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.131
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.453
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.601
+
+IOU:0.4 MAP:0.4426 Recall:0.6340
+[['person', '0.4426', '0.6340']]
+Epoch:111 LR:0.000100 IOU:0.298760 Obj:0.016166 Cls:0.000000 Dfl:0.000000 Total:2.648737
+Epoch:112 LR:0.000100 IOU:0.298188 Obj:0.016154 Cls:0.000000 Dfl:0.000000 Total:2.643974
+Epoch:113 LR:0.000100 IOU:0.298213 Obj:0.016135 Cls:0.000000 Dfl:0.000000 Total:2.643862
+Epoch:114 LR:0.000100 IOU:0.298385 Obj:0.016137 Cls:0.000000 Dfl:0.000000 Total:2.645276
+Epoch:115 LR:0.000100 IOU:0.298229 Obj:0.016126 Cls:0.000000 Dfl:0.000000 Total:2.643848
+Epoch:116 LR:0.000100 IOU:0.297877 Obj:0.016123 Cls:0.000000 Dfl:0.000000 Total:2.640989
+Epoch:117 LR:0.000100 IOU:0.297789 Obj:0.016166 Cls:0.000000 Dfl:0.000000 Total:2.640961
+Epoch:118 LR:0.000100 IOU:0.297908 Obj:0.016050 Cls:0.000000 Dfl:0.000000 Total:2.640055
+Epoch:119 LR:0.000100 IOU:0.297559 Obj:0.016145 Cls:0.000000 Dfl:0.000000 Total:2.638793
+Epoch:120 LR:0.000100 IOU:0.297633 Obj:0.016110 Cls:0.000000 Dfl:0.000000 Total:2.638818
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.58s).
+Accumulating evaluation results...
+DONE (t=3.36s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.216
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.382
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.135
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.057
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.306
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.482
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.119
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.278
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.319
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.138
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.454
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.602
+
+IOU:0.4 MAP:0.4490 Recall:0.6425
+[['person', '0.4490', '0.6425']]
+Epoch:121 LR:0.000100 IOU:0.297476 Obj:0.016118 Cls:0.000000 Dfl:0.000000 Total:2.637694
+Epoch:122 LR:0.000100 IOU:0.297666 Obj:0.016085 Cls:0.000000 Dfl:0.000000 Total:2.638678
+Epoch:123 LR:0.000100 IOU:0.297724 Obj:0.016083 Cls:0.000000 Dfl:0.000000 Total:2.639110
+Epoch:124 LR:0.000100 IOU:0.297165 Obj:0.016109 Cls:0.000000 Dfl:0.000000 Total:2.635069
+Epoch:125 LR:0.000100 IOU:0.296680 Obj:0.016075 Cls:0.000000 Dfl:0.000000 Total:2.630634
+Epoch:126 LR:0.000100 IOU:0.297087 Obj:0.016114 Cls:0.000000 Dfl:0.000000 Total:2.634516
+Epoch:127 LR:0.000100 IOU:0.296916 Obj:0.016104 Cls:0.000000 Dfl:0.000000 Total:2.632985
+Epoch:128 LR:0.000100 IOU:0.296609 Obj:0.016102 Cls:0.000000 Dfl:0.000000 Total:2.630501
+Epoch:129 LR:0.000100 IOU:0.296579 Obj:0.016121 Cls:0.000000 Dfl:0.000000 Total:2.630568
+Epoch:130 LR:0.000100 IOU:0.296558 Obj:0.016027 Cls:0.000000 Dfl:0.000000 Total:2.628892
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.24s).
+Accumulating evaluation results...
+DONE (t=3.41s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.216
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.382
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.136
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.056
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.307
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.484
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.119
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.277
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.320
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.135
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.458
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.607
+
+IOU:0.4 MAP:0.4480 Recall:0.6408
+[['person', '0.4480', '0.6408']]
+Epoch:131 LR:0.000100 IOU:0.295855 Obj:0.016119 Cls:0.000000 Dfl:0.000000 Total:2.624738
+Epoch:132 LR:0.000100 IOU:0.295877 Obj:0.016031 Cls:0.000000 Dfl:0.000000 Total:2.623514
+Epoch:133 LR:0.000100 IOU:0.295712 Obj:0.016108 Cls:0.000000 Dfl:0.000000 Total:2.623429
+Epoch:134 LR:0.000100 IOU:0.296539 Obj:0.016077 Cls:0.000000 Dfl:0.000000 Total:2.629540
+Epoch:135 LR:0.000100 IOU:0.296000 Obj:0.016069 Cls:0.000000 Dfl:0.000000 Total:2.625110
+Epoch:136 LR:0.000100 IOU:0.295941 Obj:0.016088 Cls:0.000000 Dfl:0.000000 Total:2.624929
+Epoch:137 LR:0.000100 IOU:0.295878 Obj:0.016078 Cls:0.000000 Dfl:0.000000 Total:2.624266
+Epoch:138 LR:0.000100 IOU:0.295672 Obj:0.016075 Cls:0.000000 Dfl:0.000000 Total:2.622574
+Epoch:139 LR:0.000100 IOU:0.295477 Obj:0.016056 Cls:0.000000 Dfl:0.000000 Total:2.620705
+Epoch:140 LR:0.000100 IOU:0.295415 Obj:0.016093 Cls:0.000000 Dfl:0.000000 Total:2.620812
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.62s).
+Accumulating evaluation results...
+DONE (t=3.64s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.218
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.384
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.140
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.057
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.311
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.486
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.120
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.281
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.323
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.136
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.465
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.605
+
+IOU:0.4 MAP:0.4488 Recall:0.6405
+[['person', '0.4488', '0.6405']]
+Epoch:141 LR:0.000100 IOU:0.295103 Obj:0.016022 Cls:0.000000 Dfl:0.000000 Total:2.617180
+Epoch:142 LR:0.000100 IOU:0.295224 Obj:0.016068 Cls:0.000000 Dfl:0.000000 Total:2.618880
+Epoch:143 LR:0.000100 IOU:0.296088 Obj:0.016028 Cls:0.000000 Dfl:0.000000 Total:2.625149
+Epoch:144 LR:0.000100 IOU:0.295409 Obj:0.016127 Cls:0.000000 Dfl:0.000000 Total:2.621308
+Epoch:145 LR:0.000100 IOU:0.295156 Obj:0.016074 Cls:0.000000 Dfl:0.000000 Total:2.618428
+Epoch:146 LR:0.000100 IOU:0.295256 Obj:0.016107 Cls:0.000000 Dfl:0.000000 Total:2.619769
+Epoch:147 LR:0.000100 IOU:0.295003 Obj:0.016057 Cls:0.000000 Dfl:0.000000 Total:2.616937
+Epoch:148 LR:0.000100 IOU:0.295209 Obj:0.016079 Cls:0.000000 Dfl:0.000000 Total:2.618946
+Epoch:149 LR:0.000100 IOU:0.294922 Obj:0.016037 Cls:0.000000 Dfl:0.000000 Total:2.615962
+Epoch:150 LR:0.000100 IOU:0.295111 Obj:0.016074 Cls:0.000000 Dfl:0.000000 Total:2.618073
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=30.49s).
+Accumulating evaluation results...
+DONE (t=3.40s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.217
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.382
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.138
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.058
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.307
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.484
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.119
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.279
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.320
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.136
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.459
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.603
+
+IOU:0.4 MAP:0.4496 Recall:0.6399
+[['person', '0.4496', '0.6399']]
+Epoch:151 LR:0.000100 IOU:0.295374 Obj:0.016077 Cls:0.000000 Dfl:0.000000 Total:2.620219
+Epoch:152 LR:0.000100 IOU:0.294762 Obj:0.016089 Cls:0.000000 Dfl:0.000000 Total:2.615516
+Epoch:153 LR:0.000100 IOU:0.294976 Obj:0.016093 Cls:0.000000 Dfl:0.000000 Total:2.617290
+Epoch:154 LR:0.000100 IOU:0.294258 Obj:0.016042 Cls:0.000000 Dfl:0.000000 Total:2.610743
+Epoch:155 LR:0.000100 IOU:0.294851 Obj:0.016040 Cls:0.000000 Dfl:0.000000 Total:2.615445
+Epoch:156 LR:0.000100 IOU:0.294929 Obj:0.016033 Cls:0.000000 Dfl:0.000000 Total:2.615961
+Epoch:157 LR:0.000100 IOU:0.294426 Obj:0.016021 Cls:0.000000 Dfl:0.000000 Total:2.611744
+Epoch:158 LR:0.000100 IOU:0.294878 Obj:0.016054 Cls:0.000000 Dfl:0.000000 Total:2.615896
+Epoch:159 LR:0.000100 IOU:0.294339 Obj:0.016078 Cls:0.000000 Dfl:0.000000 Total:2.611959
+Epoch:160 LR:0.000100 IOU:0.294173 Obj:0.016036 Cls:0.000000 Dfl:0.000000 Total:2.609968
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.36s).
+Accumulating evaluation results...
+DONE (t=3.39s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.216
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.380
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.140
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.057
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.307
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.487
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.120
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.279
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.320
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.135
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.457
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.609
+
+IOU:0.4 MAP:0.4462 Recall:0.6384
+[['person', '0.4462', '0.6384']]
+Epoch:161 LR:0.000100 IOU:0.294482 Obj:0.016029 Cls:0.000000 Dfl:0.000000 Total:2.612316
+Epoch:162 LR:0.000100 IOU:0.294477 Obj:0.016039 Cls:0.000000 Dfl:0.000000 Total:2.612442
+Epoch:163 LR:0.000100 IOU:0.293790 Obj:0.016026 Cls:0.000000 Dfl:0.000000 Total:2.606740
+Epoch:164 LR:0.000100 IOU:0.294347 Obj:0.016056 Cls:0.000000 Dfl:0.000000 Total:2.611671
+Epoch:165 LR:0.000100 IOU:0.293713 Obj:0.016040 Cls:0.000000 Dfl:0.000000 Total:2.606346
+Epoch:166 LR:0.000100 IOU:0.294075 Obj:0.016027 Cls:0.000000 Dfl:0.000000 Total:2.609026
+Epoch:167 LR:0.000100 IOU:0.293443 Obj:0.016043 Cls:0.000000 Dfl:0.000000 Total:2.604226
+Epoch:168 LR:0.000100 IOU:0.294062 Obj:0.016007 Cls:0.000000 Dfl:0.000000 Total:2.608600
+Epoch:169 LR:0.000100 IOU:0.293915 Obj:0.015996 Cls:0.000000 Dfl:0.000000 Total:2.607267
+Epoch:170 LR:0.000100 IOU:0.294032 Obj:0.016048 Cls:0.000000 Dfl:0.000000 Total:2.609029
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=30.02s).
+Accumulating evaluation results...
+DONE (t=3.43s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.220
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.387
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.141
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.059
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.311
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.491
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.120
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.282
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.322
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.135
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.462
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.611
+
+IOU:0.4 MAP:0.4534 Recall:0.6399
+[['person', '0.4534', '0.6399']]
+Epoch:171 LR:0.000100 IOU:0.293591 Obj:0.016035 Cls:0.000000 Dfl:0.000000 Total:2.605285
+Epoch:172 LR:0.000100 IOU:0.293521 Obj:0.016022 Cls:0.000000 Dfl:0.000000 Total:2.604510
+Epoch:173 LR:0.000100 IOU:0.293745 Obj:0.016017 Cls:0.000000 Dfl:0.000000 Total:2.606225
+Epoch:174 LR:0.000100 IOU:0.293274 Obj:0.016008 Cls:0.000000 Dfl:0.000000 Total:2.602329
+Epoch:175 LR:0.000100 IOU:0.293059 Obj:0.016033 Cls:0.000000 Dfl:0.000000 Total:2.601000
+Epoch:176 LR:0.000100 IOU:0.293347 Obj:0.016022 Cls:0.000000 Dfl:0.000000 Total:2.603131
+Epoch:177 LR:0.000100 IOU:0.293340 Obj:0.016002 Cls:0.000000 Dfl:0.000000 Total:2.602751
+Epoch:178 LR:0.000100 IOU:0.292941 Obj:0.016045 Cls:0.000000 Dfl:0.000000 Total:2.600251
+Epoch:179 LR:0.000100 IOU:0.293162 Obj:0.015971 Cls:0.000000 Dfl:0.000000 Total:2.600824
+Epoch:180 LR:0.000100 IOU:0.292910 Obj:0.016041 Cls:0.000000 Dfl:0.000000 Total:2.599937
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.24s).
+Accumulating evaluation results...
+DONE (t=3.38s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.219
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.384
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.142
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.060
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.311
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.487
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.121
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.282
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.322
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.136
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.461
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.610
+
+IOU:0.4 MAP:0.4508 Recall:0.6396
+[['person', '0.4508', '0.6396']]
+Epoch:181 LR:0.000100 IOU:0.292982 Obj:0.016018 Cls:0.000000 Dfl:0.000000 Total:2.600149
+Epoch:182 LR:0.000100 IOU:0.293355 Obj:0.015982 Cls:0.000000 Dfl:0.000000 Total:2.602549
+Epoch:183 LR:0.000100 IOU:0.292831 Obj:0.015956 Cls:0.000000 Dfl:0.000000 Total:2.597945
+Epoch:184 LR:0.000100 IOU:0.293071 Obj:0.015983 Cls:0.000000 Dfl:0.000000 Total:2.600297
+Epoch:185 LR:0.000100 IOU:0.293089 Obj:0.015985 Cls:0.000000 Dfl:0.000000 Total:2.600461
+Epoch:186 LR:0.000100 IOU:0.293115 Obj:0.016016 Cls:0.000000 Dfl:0.000000 Total:2.601182
+Epoch:187 LR:0.000100 IOU:0.293392 Obj:0.015986 Cls:0.000000 Dfl:0.000000 Total:2.602906
+Epoch:188 LR:0.000100 IOU:0.293297 Obj:0.015992 Cls:0.000000 Dfl:0.000000 Total:2.602250
+Epoch:189 LR:0.000100 IOU:0.292402 Obj:0.016001 Cls:0.000000 Dfl:0.000000 Total:2.595227
+Epoch:190 LR:0.000100 IOU:0.292634 Obj:0.016037 Cls:0.000000 Dfl:0.000000 Total:2.597660
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.59s).
+Accumulating evaluation results...
+DONE (t=3.41s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.220
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.388
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.142
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.060
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.313
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.489
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.120
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.283
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.324
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.137
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.466
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.611
+
+IOU:0.4 MAP:0.4526 Recall:0.6411
+[['person', '0.4526', '0.6411']]
+Epoch:191 LR:0.000100 IOU:0.292686 Obj:0.016019 Cls:0.000000 Dfl:0.000000 Total:2.597793
+Epoch:192 LR:0.000100 IOU:0.293156 Obj:0.015992 Cls:0.000000 Dfl:0.000000 Total:2.601124
+Epoch:193 LR:0.000100 IOU:0.292752 Obj:0.015999 Cls:0.000000 Dfl:0.000000 Total:2.598005
+Epoch:194 LR:0.000100 IOU:0.291944 Obj:0.016002 Cls:0.000000 Dfl:0.000000 Total:2.591578
+Epoch:195 LR:0.000100 IOU:0.292688 Obj:0.016022 Cls:0.000000 Dfl:0.000000 Total:2.597860
+Epoch:196 LR:0.000100 IOU:0.292800 Obj:0.015974 Cls:0.000000 Dfl:0.000000 Total:2.597986
+Epoch:197 LR:0.000100 IOU:0.292907 Obj:0.015991 Cls:0.000000 Dfl:0.000000 Total:2.599107
+Epoch:198 LR:0.000100 IOU:0.293300 Obj:0.016011 Cls:0.000000 Dfl:0.000000 Total:2.602567
+Epoch:199 LR:0.000100 IOU:0.293182 Obj:0.015984 Cls:0.000000 Dfl:0.000000 Total:2.601210
+Epoch:200 LR:0.000010 IOU:0.291586 Obj:0.015926 Cls:0.000000 Dfl:0.000000 Total:2.587506
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.37s).
+Accumulating evaluation results...
+DONE (t=3.43s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.221
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.388
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.144
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.062
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.315
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.490
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.121
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.283
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.325
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.137
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.466
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.612
+
+IOU:0.4 MAP:0.4537 Recall:0.6419
+[['person', '0.4537', '0.6419']]
+Epoch:201 LR:0.000010 IOU:0.291052 Obj:0.015920 Cls:0.000000 Dfl:0.000000 Total:2.583138
+Epoch:202 LR:0.000010 IOU:0.291473 Obj:0.015943 Cls:0.000000 Dfl:0.000000 Total:2.586866
+Epoch:203 LR:0.000010 IOU:0.290967 Obj:0.015948 Cls:0.000000 Dfl:0.000000 Total:2.582906
+Epoch:204 LR:0.000010 IOU:0.290715 Obj:0.015968 Cls:0.000000 Dfl:0.000000 Total:2.581202
+Epoch:205 LR:0.000010 IOU:0.290612 Obj:0.015937 Cls:0.000000 Dfl:0.000000 Total:2.579883
+Epoch:206 LR:0.000010 IOU:0.290905 Obj:0.015936 Cls:0.000000 Dfl:0.000000 Total:2.582206
+Epoch:207 LR:0.000010 IOU:0.290771 Obj:0.015933 Cls:0.000000 Dfl:0.000000 Total:2.581088
+Epoch:208 LR:0.000010 IOU:0.290940 Obj:0.015943 Cls:0.000000 Dfl:0.000000 Total:2.582598
+Epoch:209 LR:0.000010 IOU:0.290379 Obj:0.015919 Cls:0.000000 Dfl:0.000000 Total:2.577736
+Epoch:210 LR:0.000010 IOU:0.290625 Obj:0.015971 Cls:0.000000 Dfl:0.000000 Total:2.580527
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.53s).
+Accumulating evaluation results...
+DONE (t=3.38s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.222
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.391
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.143
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.062
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.317
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.492
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.121
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.285
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.326
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.140
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.467
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.613
+
+IOU:0.4 MAP:0.4554 Recall:0.6447
+[['person', '0.4554', '0.6447']]
+Epoch:211 LR:0.000010 IOU:0.290624 Obj:0.015888 Cls:0.000000 Dfl:0.000000 Total:2.579201
+Epoch:212 LR:0.000010 IOU:0.290402 Obj:0.015939 Cls:0.000000 Dfl:0.000000 Total:2.578235
+Epoch:213 LR:0.000010 IOU:0.290614 Obj:0.015889 Cls:0.000000 Dfl:0.000000 Total:2.579136
+Epoch:214 LR:0.000010 IOU:0.290533 Obj:0.015954 Cls:0.000000 Dfl:0.000000 Total:2.579536
+Epoch:215 LR:0.000010 IOU:0.290552 Obj:0.015941 Cls:0.000000 Dfl:0.000000 Total:2.579476
+Epoch:216 LR:0.000010 IOU:0.290563 Obj:0.015909 Cls:0.000000 Dfl:0.000000 Total:2.579044
+Epoch:217 LR:0.000010 IOU:0.290466 Obj:0.015960 Cls:0.000000 Dfl:0.000000 Total:2.579091
+Epoch:218 LR:0.000010 IOU:0.289967 Obj:0.015957 Cls:0.000000 Dfl:0.000000 Total:2.575051
+Epoch:219 LR:0.000010 IOU:0.290040 Obj:0.015938 Cls:0.000000 Dfl:0.000000 Total:2.575333
+Epoch:220 LR:0.000010 IOU:0.290177 Obj:0.015909 Cls:0.000000 Dfl:0.000000 Total:2.575960
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.40s).
+Accumulating evaluation results...
+DONE (t=3.48s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.223
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.391
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.143
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.063
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.317
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.492
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.121
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.285
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.326
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.141
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.465
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.612
+
+IOU:0.4 MAP:0.4574 Recall:0.6474
+[['person', '0.4574', '0.6474']]
+Epoch:221 LR:0.000010 IOU:0.290543 Obj:0.015868 Cls:0.000000 Dfl:0.000000 Total:2.578227
+Epoch:222 LR:0.000010 IOU:0.290199 Obj:0.015924 Cls:0.000000 Dfl:0.000000 Total:2.576376
+Epoch:223 LR:0.000010 IOU:0.289783 Obj:0.015932 Cls:0.000000 Dfl:0.000000 Total:2.573172
+Epoch:224 LR:0.000010 IOU:0.290169 Obj:0.015867 Cls:0.000000 Dfl:0.000000 Total:2.575223
+Epoch:225 LR:0.000010 IOU:0.290143 Obj:0.015935 Cls:0.000000 Dfl:0.000000 Total:2.576107
+Epoch:226 LR:0.000010 IOU:0.290305 Obj:0.015951 Cls:0.000000 Dfl:0.000000 Total:2.577651
+Epoch:227 LR:0.000010 IOU:0.291027 Obj:0.015938 Cls:0.000000 Dfl:0.000000 Total:2.583227
+Epoch:228 LR:0.000010 IOU:0.289846 Obj:0.015930 Cls:0.000000 Dfl:0.000000 Total:2.573652
+Epoch:229 LR:0.000010 IOU:0.290099 Obj:0.015939 Cls:0.000000 Dfl:0.000000 Total:2.575820
+Epoch:230 LR:0.000010 IOU:0.290043 Obj:0.015962 Cls:0.000000 Dfl:0.000000 Total:2.575734
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.56s).
+Accumulating evaluation results...
+DONE (t=3.45s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.223
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.392
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.144
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.061
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.318
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.492
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.121
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.285
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.326
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.139
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.468
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.611
+
+IOU:0.4 MAP:0.4557 Recall:0.6437
+[['person', '0.4557', '0.6437']]
+Epoch:231 LR:0.000010 IOU:0.289644 Obj:0.015940 Cls:0.000000 Dfl:0.000000 Total:2.572184
+Epoch:232 LR:0.000010 IOU:0.290700 Obj:0.015892 Cls:0.000000 Dfl:0.000000 Total:2.579869
+Epoch:233 LR:0.000010 IOU:0.290453 Obj:0.015874 Cls:0.000000 Dfl:0.000000 Total:2.577604
+Epoch:234 LR:0.000010 IOU:0.290280 Obj:0.015921 Cls:0.000000 Dfl:0.000000 Total:2.576969
+Epoch:235 LR:0.000010 IOU:0.290556 Obj:0.015888 Cls:0.000000 Dfl:0.000000 Total:2.578662
+Epoch:236 LR:0.000010 IOU:0.290401 Obj:0.015936 Cls:0.000000 Dfl:0.000000 Total:2.578189
+Epoch:237 LR:0.000010 IOU:0.290112 Obj:0.015931 Cls:0.000000 Dfl:0.000000 Total:2.575797
+Epoch:238 LR:0.000010 IOU:0.289543 Obj:0.015917 Cls:0.000000 Dfl:0.000000 Total:2.571014
+Epoch:239 LR:0.000010 IOU:0.290334 Obj:0.015919 Cls:0.000000 Dfl:0.000000 Total:2.577376
+Epoch:240 LR:0.000010 IOU:0.290577 Obj:0.015822 Cls:0.000000 Dfl:0.000000 Total:2.577762
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.45s).
+Accumulating evaluation results...
+DONE (t=3.65s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.223
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.393
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.144
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.063
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.317
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.494
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.121
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.285
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.326
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.140
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.467
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.612
+
+IOU:0.4 MAP:0.4579 Recall:0.6474
+[['person', '0.4579', '0.6474']]
+Epoch:241 LR:0.000010 IOU:0.290563 Obj:0.015879 Cls:0.000000 Dfl:0.000000 Total:2.578566
+Epoch:242 LR:0.000010 IOU:0.290431 Obj:0.015896 Cls:0.000000 Dfl:0.000000 Total:2.577781
+Epoch:243 LR:0.000010 IOU:0.290476 Obj:0.015903 Cls:0.000000 Dfl:0.000000 Total:2.578260
+Epoch:244 LR:0.000010 IOU:0.290448 Obj:0.015931 Cls:0.000000 Dfl:0.000000 Total:2.578475
+Epoch:245 LR:0.000010 IOU:0.290137 Obj:0.015887 Cls:0.000000 Dfl:0.000000 Total:2.575298
+Epoch:246 LR:0.000010 IOU:0.289698 Obj:0.015908 Cls:0.000000 Dfl:0.000000 Total:2.572105
+Epoch:247 LR:0.000010 IOU:0.290191 Obj:0.015903 Cls:0.000000 Dfl:0.000000 Total:2.575972
+Epoch:248 LR:0.000010 IOU:0.290252 Obj:0.015932 Cls:0.000000 Dfl:0.000000 Total:2.576921
+Epoch:249 LR:0.000010 IOU:0.290369 Obj:0.015879 Cls:0.000000 Dfl:0.000000 Total:2.577019
+Epoch:250 LR:0.000001 IOU:0.289639 Obj:0.015937 Cls:0.000000 Dfl:0.000000 Total:2.572104
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.49s).
+Accumulating evaluation results...
+DONE (t=3.56s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.224
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.393
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.145
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.063
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.318
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.495
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.121
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.286
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.327
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.141
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.468
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.613
+
+IOU:0.4 MAP:0.4587 Recall:0.6464
+[['person', '0.4587', '0.6464']]
+Epoch:251 LR:0.000001 IOU:0.290505 Obj:0.015938 Cls:0.000000 Dfl:0.000000 Total:2.579051
+Epoch:252 LR:0.000001 IOU:0.290147 Obj:0.015944 Cls:0.000000 Dfl:0.000000 Total:2.576286
+Epoch:253 LR:0.000001 IOU:0.289828 Obj:0.015930 Cls:0.000000 Dfl:0.000000 Total:2.573502
+Epoch:254 LR:0.000001 IOU:0.289790 Obj:0.015931 Cls:0.000000 Dfl:0.000000 Total:2.573221
+Epoch:255 LR:0.000001 IOU:0.289817 Obj:0.015895 Cls:0.000000 Dfl:0.000000 Total:2.572860
+Epoch:256 LR:0.000001 IOU:0.289468 Obj:0.015888 Cls:0.000000 Dfl:0.000000 Total:2.569954
+Epoch:257 LR:0.000001 IOU:0.289988 Obj:0.015885 Cls:0.000000 Dfl:0.000000 Total:2.574059
+Epoch:258 LR:0.000001 IOU:0.290125 Obj:0.015910 Cls:0.000000 Dfl:0.000000 Total:2.575555
+Epoch:259 LR:0.000001 IOU:0.290087 Obj:0.015940 Cls:0.000000 Dfl:0.000000 Total:2.575734
+Epoch:260 LR:0.000001 IOU:0.289735 Obj:0.015937 Cls:0.000000 Dfl:0.000000 Total:2.572878
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.60s).
+Accumulating evaluation results...
+DONE (t=3.39s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.224
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.393
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.144
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.063
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.318
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.495
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.122
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.286
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.327
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.141
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.468
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.612
+
+IOU:0.4 MAP:0.4580 Recall:0.6482
+[['person', '0.4580', '0.6482']]
+Epoch:261 LR:0.000001 IOU:0.289985 Obj:0.015895 Cls:0.000000 Dfl:0.000000 Total:2.574206
+Epoch:262 LR:0.000001 IOU:0.290517 Obj:0.015914 Cls:0.000000 Dfl:0.000000 Total:2.578758
+Epoch:263 LR:0.000001 IOU:0.290019 Obj:0.015878 Cls:0.000000 Dfl:0.000000 Total:2.574205
+Epoch:264 LR:0.000001 IOU:0.289889 Obj:0.015849 Cls:0.000000 Dfl:0.000000 Total:2.572690
+Epoch:265 LR:0.000001 IOU:0.289239 Obj:0.015975 Cls:0.000000 Dfl:0.000000 Total:2.569506
+Epoch:266 LR:0.000001 IOU:0.290083 Obj:0.015934 Cls:0.000000 Dfl:0.000000 Total:2.575604
+Epoch:267 LR:0.000001 IOU:0.290176 Obj:0.015931 Cls:0.000000 Dfl:0.000000 Total:2.576307
+Epoch:268 LR:0.000001 IOU:0.289722 Obj:0.015889 Cls:0.000000 Dfl:0.000000 Total:2.571991
+Epoch:269 LR:0.000001 IOU:0.290079 Obj:0.015923 Cls:0.000000 Dfl:0.000000 Total:2.575407
+Epoch:270 LR:0.000001 IOU:0.289649 Obj:0.015881 Cls:0.000000 Dfl:0.000000 Total:2.571290
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.37s).
+Accumulating evaluation results...
+DONE (t=3.59s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.224
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.392
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.144
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.063
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.318
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.494
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.122
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.286
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.327
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.140
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.467
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.613
+
+IOU:0.4 MAP:0.4581 Recall:0.6487
+[['person', '0.4581', '0.6487']]
+Epoch:271 LR:0.000001 IOU:0.290123 Obj:0.015875 Cls:0.000000 Dfl:0.000000 Total:2.574980
+Epoch:272 LR:0.000001 IOU:0.289523 Obj:0.015900 Cls:0.000000 Dfl:0.000000 Total:2.570594
+Epoch:273 LR:0.000001 IOU:0.289838 Obj:0.015897 Cls:0.000000 Dfl:0.000000 Total:2.573051
+Epoch:274 LR:0.000001 IOU:0.290261 Obj:0.015955 Cls:0.000000 Dfl:0.000000 Total:2.577359
+Epoch:275 LR:0.000001 IOU:0.289604 Obj:0.015900 Cls:0.000000 Dfl:0.000000 Total:2.571232
+Epoch:276 LR:0.000001 IOU:0.289589 Obj:0.015901 Cls:0.000000 Dfl:0.000000 Total:2.571118
+Epoch:277 LR:0.000001 IOU:0.289706 Obj:0.015862 Cls:0.000000 Dfl:0.000000 Total:2.571432
+Epoch:278 LR:0.000001 IOU:0.289895 Obj:0.015889 Cls:0.000000 Dfl:0.000000 Total:2.573383
+Epoch:279 LR:0.000001 IOU:0.289396 Obj:0.015940 Cls:0.000000 Dfl:0.000000 Total:2.570204
+Epoch:280 LR:0.000001 IOU:0.290253 Obj:0.015869 Cls:0.000000 Dfl:0.000000 Total:2.575923
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.49s).
+Accumulating evaluation results...
+DONE (t=3.39s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.224
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.393
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.146
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.063
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.318
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.495
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.121
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.286
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.327
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.139
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.469
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.616
+
+IOU:0.4 MAP:0.4579 Recall:0.6467
+[['person', '0.4579', '0.6467']]
+Epoch:281 LR:0.000001 IOU:0.290416 Obj:0.015845 Cls:0.000000 Dfl:0.000000 Total:2.576843
+Epoch:282 LR:0.000001 IOU:0.289674 Obj:0.015924 Cls:0.000000 Dfl:0.000000 Total:2.572165
+Epoch:283 LR:0.000001 IOU:0.290136 Obj:0.015910 Cls:0.000000 Dfl:0.000000 Total:2.575652
+Epoch:284 LR:0.000001 IOU:0.289881 Obj:0.015909 Cls:0.000000 Dfl:0.000000 Total:2.573596
+Epoch:285 LR:0.000001 IOU:0.289710 Obj:0.015872 Cls:0.000000 Dfl:0.000000 Total:2.571637
+Epoch:286 LR:0.000001 IOU:0.289706 Obj:0.015912 Cls:0.000000 Dfl:0.000000 Total:2.572234
+Epoch:287 LR:0.000001 IOU:0.289847 Obj:0.015873 Cls:0.000000 Dfl:0.000000 Total:2.572745
+Epoch:288 LR:0.000001 IOU:0.290241 Obj:0.015918 Cls:0.000000 Dfl:0.000000 Total:2.576615
+Epoch:289 LR:0.000001 IOU:0.289742 Obj:0.015897 Cls:0.000000 Dfl:0.000000 Total:2.572285
+Epoch:290 LR:0.000001 IOU:0.289721 Obj:0.015894 Cls:0.000000 Dfl:0.000000 Total:2.572061
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.57s).
+Accumulating evaluation results...
+DONE (t=3.42s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.224
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.392
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.144
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.063
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.318
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.494
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.122
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.286
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.327
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.141
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.467
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.612
+
+IOU:0.4 MAP:0.4579 Recall:0.6484
+[['person', '0.4579', '0.6484']]
+Epoch:291 LR:0.000001 IOU:0.289661 Obj:0.015922 Cls:0.000000 Dfl:0.000000 Total:2.572047
+Epoch:292 LR:0.000001 IOU:0.290035 Obj:0.015921 Cls:0.000000 Dfl:0.000000 Total:2.575023
+Epoch:293 LR:0.000001 IOU:0.289661 Obj:0.015880 Cls:0.000000 Dfl:0.000000 Total:2.571363
+Epoch:294 LR:0.000001 IOU:0.289987 Obj:0.015958 Cls:0.000000 Dfl:0.000000 Total:2.575219
+Epoch:295 LR:0.000001 IOU:0.290042 Obj:0.015898 Cls:0.000000 Dfl:0.000000 Total:2.574703
+Epoch:296 LR:0.000001 IOU:0.289633 Obj:0.015914 Cls:0.000000 Dfl:0.000000 Total:2.571690
+Epoch:297 LR:0.000001 IOU:0.289618 Obj:0.015853 Cls:0.000000 Dfl:0.000000 Total:2.570588
+Epoch:298 LR:0.000001 IOU:0.289252 Obj:0.015880 Cls:0.000000 Dfl:0.000000 Total:2.568099
+Epoch:299 LR:0.000001 IOU:0.289554 Obj:0.015942 Cls:0.000000 Dfl:0.000000 Total:2.571505
+Epoch:300 LR:0.000001 IOU:0.289851 Obj:0.015891 Cls:0.000000 Dfl:0.000000 Total:2.573067
+computer mAP...
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.29s).
+Accumulating evaluation results...
+DONE (t=3.42s).
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.224
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.393
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.145
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.063
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.318
+ Average Precision  (AP) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.495
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=  1 ] = 0.121
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets= 10 ] = 0.285
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=   all | maxDets=100 ] = 0.327
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= small | maxDets=100 ] = 0.140
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area=medium | maxDets=100 ] = 0.467
+ Average Recall     (AR) @[ IoU=0.40:0.95 | area= large | maxDets=100 ] = 0.613
+
+IOU:0.4 MAP:0.4587 Recall:0.6473
+[['person', '0.4587', '0.6473']]

@@ -1,7 +1,7 @@
 {
     "_allocate_inputs": 4,
     "_allocate_outputs": 4,
-    "cli_parameters": "generate --name network_1 -m results/deploy\\ab_drive_0000\\tflite\\model_front.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\\ab_drive_0000\\temp --output results/deploy\\ab_drive_0000\\Edge_AI\\model --allocate-inputs --series stm32h7 --allocate-outputs",
+    "cli_parameters": "generate --name network_1 -m results/deploy\\ab_drive_0001\\tflite\\model_front.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\\ab_drive_0001\\temp --output results/deploy\\ab_drive_0001\\Edge_AI\\model --allocate-inputs --series stm32h7 --allocate-outputs",
     "cli_version": {
         "major": 1,
         "micro": 0,
@@ -12,12 +12,12 @@
         "factor": null,
         "layers": {}
     },
-    "date_time": "Mon Jul  1 15:13:55 2024",
+    "date_time": "Tue Jul 16 20:28:06 2024",
     "error": 0,
     "error_str": [],
     "exec_cmd": "generate",
     "exec_duration": 0.0,
-    "hash": "e24e74cd1b1cf943dfe8dd00fe8a079d",
+    "hash": "93c30a4c9be09fe181b561161343f365",
     "inputs": [
         "serving_default_input_10"
     ],
@@ -2842,7 +2842,7 @@
         }
     ],
     "model_files": [
-        "F:\\MyWork\\PyWork\\gd32ai-modelzoo\\object_detection\\yolo_fastestv2\\results\\deploy\\ab_drive_0000\\tflite\\model_front.tflite"
+        "F:\\MyWork\\PyWork\\gd32ai-modelzoo\\object_detection\\yolo_fastestv2\\results\\deploy\\ab_drive_0001\\tflite\\model_front.tflite"
     ],
     "model_n_params": 52392,
     "model_name": "model_front",

@@ -1,0 +1,45 @@
+# Parameters
+nc: 80 # number of classes
+scales: # model compound scaling constants, i.e. 'model=yolov8t.yaml' will call yolov8.yaml with scale 't'
+  # [depth, width, max_channels]
+  t: [0.33, 0.25, 768]
+
+
+# YOLOv8.0n backbone
+backbone:
+  # [from, repeats, module, args]
+  - [-1, 1, SpAMt,[4,4]] # 0
+  - [-1, 1, Conv, [96, 3, 2]] # 1-P1/2
+  - [-1, 1, SCDown, [128, 3, 2]] # 2-P2/4
+  - [-1, 3, C2ft, [128, True]] # 3
+  - [-1, 1, SCDown, [192, 3, 2]] # 4-P3/8
+  - [-1, 6, C2ft, [192, True]] # 5
+  - [-1, 1, SpAMt,[4,4]] # 6
+  - [-1, 1, SCDown, [384, 3, 2]] # 7-P4/16
+  - [-1, 6, C2ft, [384, True]] # 8
+  - [-1, 1, SCDown, [768, 3, 2]] # 9-P5/32
+  - [-1, 3, C2ft, [768, True]] # 10
+  - [-1, 1, SPPF, [768, 5]] # 11
+  - [-1, 1, PSAt, [768]] # 12
+
+# YOLOv8.0n head
+head:
+  - [-1, 3, C2fCIBt, [768, True, True]]
+  - [-1, 1, SCUp, [384, 3, 2]] # 13
+  - [[-1, 8], 1, Concat, [1]] # 14 add backbone P4
+  - [-1, 3, C2ft, [384]] # 15
+
+
+  - [-1, 1, SCUp, [192, 3, 2]] # 16-P5/32
+  - [[-1, 6], 1, Concat, [1]] # 17 add backbone P3
+  - [-1, 3, C2ft, [384]] # 18 (P3/8-small)
+
+#  - [-1, 1, SCDown, [384, 3, 2]] # 19
+#  - [[-1, 15], 1, Add, [1]] # 20 add head P4
+#  - [-1, 3, C2ft, [384]] # 21 (P4/16-medium)
+#
+#  - [-1, 1, SCDown, [768, 3, 2]]  # 22
+#  - [[-1, 10], 1, Add, [1]] # 23 cat head P5
+#  - [-1, 3, C2fCIBt, [768, True, True]] # 24 (P5/32-large)
+
+  - [[-1], 1, v10DetectTiny, [nc]] # Detect(P3, P4, P5)

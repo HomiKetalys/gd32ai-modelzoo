@@ -1,7 +1,7 @@
 {
     "_allocate_inputs": 4,
     "_allocate_outputs": 4,
-    "cli_parameters": "generate --name network_1 -m results/deploy\\food-101_0000\\tflite\\model_front.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\\food-101_0000\\temp --output results/deploy\\food-101_0000\\Edge_AI\\model --allocate-inputs --series stm32h7 --allocate-outputs",
+    "cli_parameters": "generate --name network_1 -m results/deploy\\food-101_0012\\tflite\\model_front.tflite --type tflite --compression none --verbosity 1 --workspace results/deploy\\food-101_0012\\temp --output results/deploy\\food-101_0012\\Edge_AI\\model --allocate-inputs --series stm32h7 --allocate-outputs",
     "cli_version": {
         "major": 1,
         "micro": 0,
@@ -12,12 +12,12 @@
         "factor": null,
         "layers": {}
     },
-    "date_time": "Mon Jul  1 20:03:59 2024",
+    "date_time": "Tue Jul 16 17:10:20 2024",
     "error": 0,
     "error_str": [],
     "exec_cmd": "generate",
     "exec_duration": 0.0,
-    "hash": "fbe09df151db9c3a277bfa6f50d5c0d8",
+    "hash": "45210f82f09423eab874769a7f15f3e5",
     "inputs": [
         "serving_default_input_10"
     ],
@@ -867,7 +867,7 @@
         }
     ],
     "model_files": [
-        "F:\\MyWork\\PyWork\\gd32ai-modelzoo\\image_classification\\ml_fastvit\\results\\deploy\\food-101_0000\\tflite\\model_front.tflite"
+        "F:\\MyWork\\PyWork\\gd32ai-modelzoo\\image_classification\\ml_fastvit\\results\\deploy\\food-101_0012\\tflite\\model_front.tflite"
     ],
     "model_n_params": 22320,
     "model_name": "model_front",
