@@ -46,8 +46,24 @@ Sparse patch inference can reduce feature extraction time based on the sparsity 
 
 # Environmental preparation
 
-Click on the model you need to use from the available models, and then follow the steps in the README to complete the environment preparation. In addition to the environmental preparation of each model, the following points need to be noted here:
+Click on the model you need to use from the available models, and then follow the steps in the README to complete the environment preparation.Suggested Python version is 3.10 . In addition to the environmental preparation of each model, the following points need to be noted here:
 1. The recommended version of TensorFlow in [onnx2tflite](https://github.com/MPolaris/onnx2tflite) is 2.13.0. Currently, it does not support>=2.16.0
+2. The reference versions of some packages are as follows：
+```
+pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 --index-url https://download.pytorch.org/whl/cu121
+pip install opencv==4.6.0
+pip install tensorflow==2.13.0
+pip install matplotlib==3.9.1
+pip install onnx==1.16.1
+pip install onnxsim==0.4.36
+pip install onnxruntime==1.18.1
+pip install timm==1.0.7
+pip install torchsummary==1.5.1
+pip install pycocotools==2.0.8
+pip install psutil==6.0.0
+pip install pandas==2.2.2
+pip install thop==0.1.1.post2209072238
+```
 
 # Reference
  - [onnx2tflite](https://github.com/MPolaris/onnx2tflite)

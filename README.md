@@ -52,8 +52,25 @@
 
 #  环境准备
 
-在可用模型中点击你需要使用的模型，然后根据README中的步骤完成环境准备。除了各模型的环境准备，此处需要注意以下几点：
+在可用模型中点击你需要使用的模型，然后根据README中的步骤完成环境准备。建议python版本为3.10。除了各模型的环境准备，此处需要注意以下几点：
 1. [onnx2tflite](https://github.com/MPolaris/onnx2tflite) 中的tensorflow版本建议为2.13.0。目前它不支持>=2.16.0。
+2. 部分包的参考版本如下：
+```
+pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 --index-url https://download.pytorch.org/whl/cu121
+pip install opencv==4.6.0
+pip install tensorflow==2.13.0
+pip install matplotlib==3.9.1
+pip install onnx==1.16.1
+pip install onnxsim==0.4.36
+pip install onnxruntime==1.18.1
+pip install timm==1.0.7
+pip install torchsummary==1.5.1
+pip install pycocotools==2.0.8
+pip install psutil==6.0.0
+pip install pandas==2.2.2
+pip install thop==0.1.1.post2209072238
+```
+
 
 # 引用
  - [onnx2tflite](https://github.com/MPolaris/onnx2tflite)
