@@ -99,7 +99,7 @@ python ../../common_utils/coco2yolo.py --images_path "{datasets_root}/COCO2017/i
 
 # 训练
 ## 确认配置文件
-配置文件.data在当前目录中的configs文件夹中，其内容如下:
+配置文件.yaml在当前目录中的configs文件夹中，其内容如下:
 ```
 DATASET:
   TRAIN: "../../../datasets/coco2017/train2017.txt"
@@ -124,6 +124,7 @@ TRAIN:
     - 200
     - 250
   AMP: False
+  USE_TAA: False
 VAL:
   CONF: 0.001
   NMS: 0.5

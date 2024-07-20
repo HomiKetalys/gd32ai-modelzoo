@@ -9,6 +9,7 @@ from submodules.FastestDet.utils.tool import *
 from submodules.FastestDet.utils.datasets import *
 from submodules.FastestDet.utils.evaluation import CocoDetectionEvaluator
 from submodules.yolov10.myolov10t import YOLOv10t
+# from submodules.yolov10.myolot import YOLOv10t
 import thop
 from common_utils.utils import LogSaver
 from val import val
@@ -25,10 +26,10 @@ def export_onnx(opt, save_path):
     # 初始化模型结构
     if opt.weight is not None:
         print("load weight from:%s" % opt.weight)
-        model = YOLOv10t(cfg.category_num, cfg.separation, cfg.separation_scale, cfg.reg_max).to(device)
+        model = YOLOv10t(cfg.category_num, cfg.separation, cfg.separation_scale, cfg.reg_max,cfg.use_taa).to(device)
         model.load_state_dict(torch.load(opt.weight))
     else:
-        model = YOLOv10t(cfg.category_num, cfg.separation, cfg.separation_scale, cfg.reg_max).to(device)
+        model = YOLOv10t(cfg.category_num, cfg.separation, cfg.separation_scale, cfg.reg_max,cfg.use_taa).to(device)
     for m in model.modules():
         if getattr(m,"fuse",None) is not None:
             m.fuse()

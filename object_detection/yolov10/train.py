@@ -11,6 +11,7 @@ from submodules.FastestDet.utils.tool import *
 from submodules.FastestDet.utils.datasets import *
 from submodules.FastestDet.utils.evaluation import CocoDetectionEvaluator
 from submodules.yolov10.myolov10t import YOLOv10t
+# from submodules.yolov10.myolot import YOLOv10t
 from submodules.FastestDet.module.loss import v10DetectorLoss
 import thop
 from common_utils.utils import LogSaver
@@ -35,13 +36,13 @@ def train(opt, save_path):
     # 初始化模型结构
     if opt.weight is not None:
         print("load weight from:%s" % opt.weight)
-        model = YOLOv10t(cfg.category_num, cfg.separation, cfg.separation_scale, cfg.reg_max).to(device)
+        model = YOLOv10t(cfg.category_num, cfg.separation, cfg.separation_scale, cfg.reg_max,cfg.use_taa).to(device)
         ckpt=torch.load(opt.weight)
-        del ckpt['detect.cv3.0.1.weight']
-        del ckpt['detect.cv3.0.1.bias']
+        ckpt['detect.cv3.0.1.weight']=ckpt['detect.cv3.0.1.weight'][0:cfg.category_num,:,:,:]
+        ckpt['detect.cv3.0.1.bias']=ckpt['detect.cv3.0.1.bias'][0:cfg.category_num]
         model.load_state_dict(ckpt,strict=False)
     else:
-        model = YOLOv10t(cfg.category_num, cfg.separation, cfg.separation_scale, cfg.reg_max).to(device)
+        model = YOLOv10t(cfg.category_num, cfg.separation, cfg.separation_scale, cfg.reg_max,cfg.use_taa).to(device)
     os.environ['YOLOV10_EXPORT'] = "None"
     # # 打印网络各层的张量维度
     params_num = sum(x.numel() for x in model.parameters())
@@ -62,7 +63,7 @@ def train(opt, save_path):
                                                gamma=0.1)
 
     # 定义损失函数
-    loss_function = v10DetectorLoss(device, reg_max=cfg.reg_max, reg_scale=cfg.reg_scale)
+    loss_function = v10DetectorLoss(device,nc=cfg.category_num, reg_max=cfg.reg_max, reg_scale=cfg.reg_scale,use_taa=cfg.use_taa)
 
     # 定义验证函数
     evaluation = CocoDetectionEvaluator(cfg.names, device,cfg)
@@ -84,7 +85,7 @@ def train(opt, save_path):
     train_dataloader = torch.utils.data.DataLoader(train_dataset,
                                                    batch_size=cfg.batch_size,
                                                    shuffle=True,
-                                                   collate_fn=collate_fn,
+                                                   collate_fn=collate_fnt if cfg.use_taa else collate_fn,
                                                    num_workers=8,
                                                    drop_last=True,
                                                    persistent_workers=True,
@@ -160,7 +161,7 @@ def train(opt, save_path):
             # torch.save(self.model.state_dict(), "checkpoint/weight_AP05_%f_%d-epoch.pth"%(mAP05, epoch))
             mAP05 = evaluation.compute_map(val_dataloader, model, cfg)
             torch.save(model.state_dict(),
-                       os.path.join(ckpt_path, "weight_AP05_%f_%d-epoch.pth" % (mAP05, epoch)))
+                       os.path.join(ckpt_path, "weight_AP05_%f_%d_epoch.pth" % (mAP05, epoch)))
             if mAP05 > map50_max:
                 map50_max = mAP05
                 torch.save(model.state_dict(),
@@ -173,7 +174,7 @@ def train(opt, save_path):
 if __name__ == "__main__":
     # 指定训练配置文件
     parser = argparse.ArgumentParser()
-    parser.add_argument('--yaml', type=str, default="configs/coco_80.yaml", help='.yaml config')
+    parser.add_argument('--yaml', type=str, default="configs/coco_person.yaml", help='.yaml config')
     parser.add_argument('--weight', type=str, default=None, help='.weight config')
 
     opt = parser.parse_args()

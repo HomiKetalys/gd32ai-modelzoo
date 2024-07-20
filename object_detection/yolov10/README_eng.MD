@@ -115,6 +115,7 @@ TRAIN:
     - 200
     - 250
   AMP: False
+  USE_TAA: False
 VAL:
   CONF: 0.001
   NMS: 0.5

@@ -1,6 +1,6 @@
 import argparse
 
-from common_utils.utils import LogSaver,common_deploy,gen_common_od_codes
+from common_utils.utils import LogSaver, common_deploy, gen_common_od_codes
 from export import export
 from submodules.FastestDet.utils.tool import *
 from submodules.FastestDet.utils.datasets import *
@@ -8,14 +8,14 @@ from submodules.yolov10.myolov10t import YOLOv10OrtTf
 from functools import partial
 
 
-def code_replace(opt,line, cfg, tfmodel):
+def code_replace(opt, line, cfg, tfmodel):
     sp = cfg.separation
     spc = cfg.separation_scale
     conf_thr = opt.conf_thr
     nms_thr = opt.nms_thr
     w, b = tfmodel.weight, tfmodel.bias
-    reg_max=cfg.reg_max
-    reg_scale=cfg.reg_scale
+    reg_max = cfg.reg_max
+    reg_scale = cfg.reg_scale
 
     if "SEPARATION_CODE" in line:
         line = f"#define SEPARATION {sp}\n"
@@ -39,25 +39,27 @@ def code_replace(opt,line, cfg, tfmodel):
         line = f"#define IMG_NORM_BIAS_ONLY\n#define bias {int(b):d}\n"
     elif "MODEL_CONF_CODE" in line:
         line = f"#define yolov10\n"
-        line +=f"#define REG_MAX {reg_max}\n"
-        line+=f"#define REG_SCALE {reg_scale}\n"
+        line += f"#define REG_MAX {reg_max}\n"
+        line += f"#define REG_SCALE {reg_scale}\n"
+        if cfg.use_taa:
+            line += f"#define USE_TAA\n"
     elif "ACTIVITIES_CODE" in line:
-        names_path=cfg.names
-        with open(names_path,"r",encoding="utf-8") as f:
-            names_=f.readlines()
-        names=[]
+        names_path = cfg.names
+        with open(names_path, "r", encoding="utf-8") as f:
+            names_ = f.readlines()
+        names = []
         for name in names_:
-            names.append('"'+name.strip()+'"')
-        names=",".join(names)
-        line="const char *activities[]={"+names+"};\n"
+            names.append('"' + name.strip() + '"')
+        names = ",".join(names)
+        line = "const char *activities[]={" + names + "};\n"
     return line
+
 
 def deploy(opt, save_path, tflite_path, gen_codes_path):
     cfg = LoadYaml(opt.yaml)
-    tfmodel = YOLOv10OrtTf(cfg,tflite_path)
-    gen_ai_model_codes=partial(gen_common_od_codes, code_replace=code_replace, cfg=cfg, tfmodel=tfmodel)
-    common_deploy(opt,save_path,tflite_path,gen_codes_path,gen_ai_model_codes)
-
+    tfmodel = YOLOv10OrtTf(cfg, tflite_path)
+    gen_ai_model_codes = partial(gen_common_od_codes, code_replace=code_replace, cfg=cfg, tfmodel=tfmodel)
+    common_deploy(opt, save_path, tflite_path, gen_codes_path, gen_ai_model_codes)
 
 
 def deploy_main(opt, save_path, c_project_path):
@@ -65,7 +67,7 @@ def deploy_main(opt, save_path, c_project_path):
     export(opt, save_path)
     tflite_path = os.path.join(save_path, "tflite")
     if c_project_path is None:
-        c_project_path=save_path
+        c_project_path = save_path
     deploy(opt, save_path, tflite_path, c_project_path)
 
 
@@ -81,10 +83,9 @@ val_paths = [
     '../../../datasets/coco2017/images/val2017',
     '../../../datasets/coco2017/val2017_person.txt']
 
-
-x_cube_ai_v=[
-"D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1",
-"F:/EDGEDL/en.x-cube-ai-windows-v9-0-0/stedgeai-windows-9.0.0",
+x_cube_ai_v = [
+    "D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1",
+    "F:/EDGEDL/en.x-cube-ai-windows-v9-0-0/stedgeai-windows-9.0.0",
 ]
 
 if __name__ == "__main__":
@@ -95,9 +96,10 @@ if __name__ == "__main__":
                         help='The path of the model')
     parser.add_argument('--convert_type', type=int, default=1,
                         help='only 1,for tflite')
-    parser.add_argument('--tflite_val_path', type=str, default=val_paths[0],
+    parser.add_argument('--tflite_val_path', type=str, default=val_paths[1],
                         help='The path where the image which quantity need is saved')
-    parser.add_argument('--c_project_path', type=str, default=None,
+    parser.add_argument('--c_project_path', type=str,
+                        default=None,
                         help='The path of c project,None= results/deploy/xxxx_00xx')
     parser.add_argument('--stm32cubeai_path', type=str,
                         default=x_cube_ai_v[0],
@@ -108,7 +110,7 @@ if __name__ == "__main__":
                         help='confidence threshold')
     parser.add_argument('--nms_thr', type=float, default=0.5,
                         help='nomaxsupression threshold')
-    parser.add_argument('--eval', type=bool, default=False,
+    parser.add_argument('--eval', type=bool, default=True,
                         help='eval exported model')
     parser.add_argument('--compiler', type=int, default=1,
                         help='compiler type,0 for armcc,1 fro gcc')

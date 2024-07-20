@@ -215,6 +215,7 @@ def gen_common_od_codes(opt, utils_path, ai_model_path, code_replace, **kwargs):
                 f.write(line)
 
 
+
 def common_deploy(opt, save_path, tflite_path, gen_codes_path, gen_ai_model_codes):
     uvprojx_path = None
     if os.path.isfile(gen_codes_path):
@@ -301,9 +302,9 @@ def gen_net_codes(stm32ai_exe_path, model_path, name, work_space_path, output_pa
     print(f"Command:\n{cmd}\nwill be excuted to generate net codes")
     result = subprocess.run(cmd, stdout=subprocess.PIPE)
     # result = subprocess.run(['powershell', '-Command', cmd], stdout=subprocess.PIPE)
+    # print(result.stdout.decode("utf-8","ignore"))
     if result.returncode != 0:
         print("Net codes generation failed")
-        print(result.stdout)
         exit(-1)
     print("Net codes generation successful")
 

@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    network_1_data.c
   * @author  AST Embedded Analytics Research Platform
-  * @date    Wed Jul 17 17:15:02 2024
+  * @date    Sat Jul 20 11:34:51 2024
   * @brief   AI Tool Automatic Code Generator for Embedded NN computing
   ******************************************************************************
   * @attention
@@ -26,8 +26,8 @@ ai_buffer g_network_1_data_map_activations[AI_NETWORK_1_DATA_ACTIVATIONS_COUNT] 
   };
 ai_buffer g_network_1_data_map_weights[AI_NETWORK_1_DATA_WEIGHTS_COUNT] = {
   AI_BUFFER_INIT(AI_FLAG_NONE,  AI_BUFFER_FORMAT_U8,
-    AI_BUFFER_SHAPE_INIT(AI_SHAPE_BCWH, 4, 1, 10020, 1, 1),
-    10020, NULL, s_network_1_weights_array_u64),   /* weights_array */
+    AI_BUFFER_SHAPE_INIT(AI_SHAPE_BCWH, 4, 1, 9576, 1, 1),
+    9576, NULL, s_network_1_weights_array_u64),   /* weights_array */
   };
 
 

@@ -25,20 +25,20 @@ void handle_preds(float *preds,float conf_thr)
             stage=1;
         }
         u32 cls_index=0;
+#if AI_NETWORK_OUT_1_CHANNEL>16
         float cls=0;
-        if(AI_NETWORK_OUT_1_CHANNEL==15||AI_NETWORK_OUT_1_CHANNEL==16)
-            cls=1;
-        else
+        for(j=15;j<AI_NETWORK_OUT_1_CHANNEL;j++)
         {
-            for(j=15;j<AI_NETWORK_OUT_1_CHANNEL;j++)
+            if(*(preds+AI_NETWORK_OUT_1_CHANNEL*i+j)>cls)
             {
-                if(*(preds+AI_NETWORK_OUT_1_CHANNEL*i+j)>cls)
-                {
-                    cls=*(preds+AI_NETWORK_OUT_1_CHANNEL*i+j);
-                    cls_index=j-15;
-                }
+                cls=*(preds+AI_NETWORK_OUT_1_CHANNEL*i+j);
+                cls_index=j;
             }
         }
+        cls_index-=15;
+#else
+        float cls=1;
+#endif
         for(j=0;j<3;j++)
         {
             float *reg=preds+AI_NETWORK_OUT_1_CHANNEL*i+j*4;
@@ -68,8 +68,12 @@ void handle_preds(float *preds,float conf_thr)
     object_num=0;
     for(i=0;i<AI_NETWORK_OUT_1_HEIGHT;i++)
     {
-        float obj=preds[i*AI_NETWORK_OUT_1_CHANNEL];
+        float conf=preds[i*AI_NETWORK_OUT_1_CHANNEL];
         float xyxy[4];
+        float offset=0;
+#if defined(USE_TAA)
+        offset=0.5;
+#endif
 #if REG_MAX > 1
         for(j=0;j<4;j++)
         {
@@ -79,42 +83,54 @@ void handle_preds(float *preds,float conf_thr)
                 xyxy[j]+=k*preds[i*AI_NETWORK_OUT_1_CHANNEL+j*REG_MAX+k+1];
             }
         }
-        xyxy[0]=(i%16-xyxy[0]*REG_SCALE)*16;
-        xyxy[1]=(i/16-xyxy[1]*REG_SCALE)*16;
-        xyxy[2]=(i%16+xyxy[2]*REG_SCALE)*16;
-        xyxy[3]=(i/16+xyxy[3]*REG_SCALE)*16;
+        xyxy[0]=(i%16+offset-xyxy[0]*REG_SCALE)*16;
+        xyxy[1]=(i/16+offset-xyxy[1]*REG_SCALE)*16;
+        xyxy[2]=(i%16+offset+xyxy[2]*REG_SCALE)*16;
+        xyxy[3]=(i/16+offset+xyxy[3]*REG_SCALE)*16;
 #else
-        xyxy[0]=(i%16+preds[i*AI_NETWORK_OUT_1_CHANNEL+1])*INPUT_WIDTH/16;
-        xyxy[1]=(i/16+preds[i*AI_NETWORK_OUT_1_CHANNEL+2])*INPUT_HEIGHT/16;
+        xyxy[0]=(i%16+offset+preds[i*AI_NETWORK_OUT_1_CHANNEL+1])*INPUT_WIDTH/16;
+        xyxy[1]=(i/16+offset+preds[i*AI_NETWORK_OUT_1_CHANNEL+2])*INPUT_HEIGHT/16;
         xyxy[2]=preds[i*AI_NETWORK_OUT_1_CHANNEL+3]*INPUT_WIDTH;
         xyxy[3]=preds[i*AI_NETWORK_OUT_1_CHANNEL+4]*INPUT_HEIGHT;
-        xyxy[0]=xyxy[0]-xyxy[2]/2;
-        xyxy[1]=xyxy[1]-xyxy[3]/2;
+        xyxy[0]-=xyxy[2]/2;
+        xyxy[1]-=xyxy[3]/2;
         xyxy[2]+=xyxy[0];
         xyxy[3]+=xyxy[1];
 #endif
         u32 cls_index=0;
         float cls=0;
-        if(AI_NETWORK_OUT_1_CHANNEL==1+REG_MAX*4+1||AI_NETWORK_OUT_1_CHANNEL==1+REG_MAX*4)
-            cls=1;
-        else
+#if defined(USE_TAA)
+        for(j=1+REG_MAX*4;j<AI_NETWORK_OUT_1_CHANNEL;j++)
         {
-            for(j=1+REG_MAX*4;j<AI_NETWORK_OUT_1_CHANNEL;j++)
+            if(preds[i*AI_NETWORK_OUT_1_CHANNEL+j]>cls)
             {
-                if(preds[i*AI_NETWORK_OUT_1_CHANNEL+j]>cls)
-                {
-                    cls=preds[i*AI_NETWORK_OUT_1_CHANNEL+j];
-                    cls_index=j-1-REG_MAX*4;
-                }
+                cls=preds[i*AI_NETWORK_OUT_1_CHANNEL+j];
+                cls_index=j;
             }
         }
-        if(cls*obj>conf_thr)
+        cls_index-=(1+REG_MAX*4);
+        conf=cls;
+#else
+#if AI_NETWORK_OUT_1_CHANNEL>2+REG_MAX*4
+        for(j=1+REG_MAX*4;j<AI_NETWORK_OUT_1_CHANNEL;j++)
+        {
+            if(preds[i*AI_NETWORK_OUT_1_CHANNEL+j]>cls)
+            {
+                cls=preds[i*AI_NETWORK_OUT_1_CHANNEL+j];
+                cls_index=j;
+            }
+        }
+        cls_index-=(1+REG_MAX*4);
+        conf*=cls;
+#endif
+#endif
+        if(conf>conf_thr)
         {
             objects[object_num].bbox.x_min=xyxy[0];
             objects[object_num].bbox.y_min=xyxy[1];
             objects[object_num].bbox.x_max=xyxy[2];
             objects[object_num].bbox.y_max=xyxy[3];
-            objects[object_num].confi=cls*obj;
+            objects[object_num].confi=conf;
             objects[object_num].cls_index=cls_index;
             objects[object_num].name=activities[cls_index];
             object_num++;

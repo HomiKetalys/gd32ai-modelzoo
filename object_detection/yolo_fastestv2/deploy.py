@@ -96,7 +96,7 @@ if __name__ == "__main__":
                         help='only 1,for tflite')
     parser.add_argument('--tflite_val_path', type=str, default=val_paths[1],
                         help='The path where the image which quantity need is saved')
-    parser.add_argument('--c_project_path', type=str, default="deployment/GD32F470I_BluePill_GCC/Project/GD32KeilPrj.uvprojx",
+    parser.add_argument('--c_project_path', type=str, default=None,
                         help='The path of c project,None= results/deploy/xxxx_00xx')
     parser.add_argument('--stm32cubeai_path', type=str,
                         default=x_cube_ai_v[0],

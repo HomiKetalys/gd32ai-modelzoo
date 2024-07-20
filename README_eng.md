@@ -8,13 +8,13 @@ This is an AI model library primarily based on the microcontroller GD32 as the h
  - Provide training scripts that allow the model to be retrained, as well as pretrained models that can be adapted to different applications through transfer learning.
 
 # Main features
-##Spatial separation model
+## Spatial separation model
 
 The inference design of spatially separated models can greatly reduce the peak memory consumption during model operation, which is extremely useful in resource scarce microcontrollers. In the configuration files of each model, the integer parameter `separation` is configured to control whether to use separable model inference. When the parameter is 0, it is not used, and when it is 1 (or 2,3), separation ends after the 1st (or 2,3) downsampling. The parameter `separation_stcale` controls the separation scale, which is generally a power of 2. When it is 2, the input image will be divided into 2x2 sub images.
 
 ![Spatial separation model](assets/model01_eng.png)
 
-##Sparse patch inference
+## Sparse patch inference
 
 Sparse patch inference can reduce feature extraction time based on the sparsity of the target in the image, thereby reducing the overall inference time of the model. Macro define ENABLE_SPARSE_PATCH in ai_madel.h to enable it.
 
