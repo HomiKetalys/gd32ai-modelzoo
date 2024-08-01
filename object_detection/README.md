@@ -24,6 +24,8 @@
 | Yolo-FastestV2 sp tfs           | Pytorch    | COCO        | 256x256x3 | 46.87% | 57.71     | 214.99        | 385.79     | X-CUBE-AI 8.0.1 |
 | YoloV10 sp                      | Pytorch    | COCO Person | 256x256x3 | 52.45% | 57.24     | 148.86        | 372.51     | X-CUBE-AI 8.0.1 |
 | YoloV10 sp tfs                  | Pytorch    | COCO Person | 256x256x3 | 50.00% | 57.24     | 148.86        | 372.51     | X-CUBE-AI 8.0.1 |
+| YoloV10 sp                      | Pytorch    | COCO Person | 256x256x3 | 52.45% | 57.24     | 153.77        | 244.09     | TinyEngine      |
+| YoloV10 sp tfs                  | Pytorch    | COCO Person | 256x256x3 | 50.00% | 57.24     | 153.77        | 244.09     | TinyEngine      |
 | *SSD MobileNet v1 0.25          | TensorFlow | COCO Person | 192x192x3 | 33.70% | 40.48     | 266.3         | 438.28     | X-CUBE-AI 8.1.0 |
 | *SSD MobileNet v1 0.25          | TensorFlow | COCO Person | 256x256x3 | 46.26% | 72.55     | 456.1         | 595.66     | X-CUBE-AI 8.1.0 |
 | *ST Yolo LC v1 tfs              | TensorFlow | COCO Person | 192x192x3 | 31.61% | 61.9      | 166.29        | 276.73     | X-CUBE-AI 9.1.0 |
@@ -59,6 +61,7 @@
 | Yolo-FastestV2 sp               | Int8 | 192x192x3 | GD32H759I  | 1 CPU | 600 MHz | 143.76 ms | X-CUBE-AI 8.0.1 |
 | Yolo-FastestV2 sp               | Int8 | 256x256x3 | GD32H759I  | 1 CPU | 600 MHz | 236.35 ms | X-CUBE-AI 8.0.1 |
 | YoloV10t sp                     | Int8 | 256x256x3 | GD32H759I  | 1 CPU | 600 MHz | 220.37 ms | X-CUBE-AI 8.0.1 |
+| YoloV10t sp                     | Int8 | 256x256x3 | GD32H759I  | 1 CPU | 600 MHz | 279.40 ms | TinyEngine      |
 | YoloV10t sp                     | Int8 | 256x256x3 | GD32H759I  | 1 CPU | 600 MHz | 192.57 ms | X-CUBE-AI 9.0.0 |
 | Yolo-FastestV2 sp               | Int8 | 256x256x3 | GD32H759I  | 1 CPU | 600 MHz | 222.33 ms | X-CUBE-AI 9.0.0 |
 | *SSD Mobilenet v1 0.25          | Int8 | 192x192x3 | STM32H747I | 1 CPU | 400 MHz | 149.22 ms | X-CUBE-AI 9.1.0 |

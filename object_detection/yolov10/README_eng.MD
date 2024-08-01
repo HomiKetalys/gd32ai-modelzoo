@@ -139,7 +139,8 @@ python export.py --yaml results/train/coco_80_0000/coco_80.yaml --weight results
 `convert_type` controls the conversion type,0 for onnx,1 for tflite.If the exported file is of type tflite, it is quantized. Meanwhile, the exported model will be evaluated.
 # Deploy
 Next, the exported model will be converted into C language code or further deployed on a specific chip.Taking "deployment/GD32H759I2_EVAL_GCC/MDK-ARM/GD32H759I2_EVAL.uvprojx" as an example.
-1. Download [X-CUBE-AI](https://www.st.com/en/embedded-software/x-cube-ai.html#st-get-software) and unzip it。Select the version you need based on the table below.If the required version is less than 9.0.0, [STM32CUBEIDE](https://www.st.com.cn/content/st_com/zh/stm32cubeide.html#st-get-software)  needs to be pre installed,And install the corresponding version of X-CUBE-AI in STM32CUBEIDE, then copy the file according to the prompts in [issue](https://github.com/HomiKetalys/gd32ai-modelzoo/issues/2#issuecomment-2143376547) .
+1. Choose one of the following two inference engines
+- If you choose to use X-CUBE-AI, you will need to download [X-CUBE-AI](https://www.st.com/en/embedded-software/x-cube-ai.html#st-get-software) and unzip it。Select the version you need based on the table below.If the required version is less than 9.0.0, [STM32CUBEIDE](https://www.st.com.cn/content/st_com/zh/stm32cubeide.html#st-get-software)  needs to be pre installed,And install the corresponding version of X-CUBE-AI in STM32CUBEIDE, then copy the file according to the prompts in [issue](https://github.com/HomiKetalys/gd32ai-modelzoo/issues/2#issuecomment-2143376547) .
 
 
 | X-CUBE-AI version | GCC | ARMCC |
@@ -147,6 +148,8 @@ Next, the exported model will be converted into C language code or further deplo
 | 8.0.1             | √   | √     |
 | 8.1.0             | √   | √     |
 | 9.0.0             | √   | ×     |
+
+- If you choose to use TinyEngine, there is no need for additional operation, as it comes with this project.If you use TinyEngine, you don't need to pass `--stm32cubeai_path`.
 
 2. Install [keil5](https://www.keil.com/update/rvmdk.asp) 5.29。
 3. Download [gcc-arm-none-eabi](https://developer.arm.com/downloads/-/gnu-rm) 10.3-2021.10 and unzip it,If using ARMCC, there is no need.

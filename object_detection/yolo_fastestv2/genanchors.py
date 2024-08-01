@@ -7,11 +7,11 @@ from submodules.Yolo_FastestV2.genanchors import genanchors
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--traintxt', default='../../../datasets/abnormal_drive_0/train0.txt',
+    parser.add_argument('--traintxt', default='../../../datasets/coco2017/train2017_person.txt',
                         help='path to traintxt\n')
     parser.add_argument('--output_dir', default='./', type=str,
                         help='Output anchor directory\n')
-    parser.add_argument('--label_flag', default='', type=str,
+    parser.add_argument('--label_flag', default='coco_person', type=str,
                         help='label flag\n')
     parser.add_argument('--num_clusters', default=6, type=int,
                         help='number of clusters\n')

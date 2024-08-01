@@ -5,6 +5,7 @@ This is an AI model library primarily based on the microcontroller GD32 as the h
  - Ready to use out of the box, deeply adapted to Keil5 projects, models can be directly deployed into Keil5 projects, and No need to configure Keil5 to use the model, supporting ARMCC and GCC.
  - The peak memory usage during model runtime is adjustable, and the peak memory usage is lower than that of similar model libraries.
  - Sparse patch inference can reduce inference time based on target sparsity in static scenes, and the inference time of object detection models is lower than that of similar model libraries.
+ - TinyEngine is a completely free inference framework that can be used for commercial purposes.
  - Provide training scripts that allow the model to be retrained, as well as pretrained models that can be adapted to different applications through transfer learning.
 
 # Main features
@@ -30,18 +31,26 @@ Sparse patch inference can reduce feature extraction time based on the sparsity 
      - Now available for deployment on the following devices
        - GD32F470IIH6
        - GD32H759IMK6
+     - Supported infer frameworks
+       - X-CUBE-AI
+       - TinyEngine
    - [YoloV10](object_detection/yolov10)
      - Now provide models trained on the following dataset
        - COCO2017 Dataset
      - Now available for deployment on the following devices
        - GD32F470I
        - GD32H759I
+     - Supported infer frameworks
+       - X-CUBE-AI
+       - TinyEngine
  - [Image Classification](image_classification):
    - [FastVit](image_classification/ml-fastvit):
      - Now provide models trained on the following dataset
        - Food-101 Dataset
      - Now available for deployment on the following devices
        - GD32H759IMK6
+     - Supported infer frameworks
+       - X-CUBE-AI
  
 
 # Environmental preparation

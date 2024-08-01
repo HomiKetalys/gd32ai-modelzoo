@@ -10,7 +10,7 @@ void handle_preds(float *preds,float conf_thr)
 {
     u32 i,j,stage,pos_x,pos_y;
     object_num=0;
-    for(i=0;i<AI_NETWORK_OUT_1_HEIGHT;i++)
+    for(i=0;i<OUT_HEIGHT;i++)
     {
         if(i<(INPUT_WIDTH*INPUT_HEIGHT)/(16*16))
         {
@@ -26,13 +26,13 @@ void handle_preds(float *preds,float conf_thr)
             stage=1;
         }
         u32 cls_index=0;
-#if AI_NETWORK_OUT_1_CHANNEL>16
+#if OUT_CHANNEL>16
         float cls=0;
-        for(j=15;j<AI_NETWORK_OUT_1_CHANNEL;j++)
+        for(j=15;j<OUT_CHANNEL;j++)
         {
-            if(*(preds+AI_NETWORK_OUT_1_CHANNEL*i+j)>cls)
+            if(*(preds+OUT_CHANNEL*i+j)>cls)
             {
-                cls=*(preds+AI_NETWORK_OUT_1_CHANNEL*i+j);
+                cls=*(preds+OUT_CHANNEL*i+j);
                 cls_index=j;
             }
         }
@@ -42,8 +42,8 @@ void handle_preds(float *preds,float conf_thr)
 #endif
         for(j=0;j<3;j++)
         {
-            float *reg=preds+AI_NETWORK_OUT_1_CHANNEL*i+j*4;
-            float obj=*(preds+AI_NETWORK_OUT_1_CHANNEL*i+12+j);
+            float *reg=preds+OUT_CHANNEL*i+j*4;
+            float obj=*(preds+OUT_CHANNEL*i+12+j);
             if(obj*cls>conf_thr)
             {
                 *(reg)=(*(reg)*2-0.5f+pos_x)*(stage+1)*16;
@@ -67,9 +67,9 @@ void handle_preds(float *preds,float conf_thr)
 {
     u32 i,j,k;
     object_num=0;
-    for(i=0;i<AI_NETWORK_OUT_1_HEIGHT;i++)
+    for(i=0;i<OUT_HEIGHT;i++)
     {
-        float conf=preds[i*AI_NETWORK_OUT_1_CHANNEL];
+        float conf=preds[i*OUT_CHANNEL];
         float xyxy[4];
         float offset=0;
 #if defined(USE_TAA)
@@ -81,7 +81,7 @@ void handle_preds(float *preds,float conf_thr)
             xyxy[j]=0;
             for(k=0;k<REG_MAX;k++)
             {
-                xyxy[j]+=k*preds[i*AI_NETWORK_OUT_1_CHANNEL+j*REG_MAX+k+1];
+                xyxy[j]+=k*preds[i*OUT_CHANNEL+j*REG_MAX+k+1];
             }
         }
         xyxy[0]=(i%16+offset-xyxy[0]*REG_SCALE)*16;
@@ -89,10 +89,10 @@ void handle_preds(float *preds,float conf_thr)
         xyxy[2]=(i%16+offset+xyxy[2]*REG_SCALE)*16;
         xyxy[3]=(i/16+offset+xyxy[3]*REG_SCALE)*16;
 #else
-        xyxy[0]=(i%16+offset+preds[i*AI_NETWORK_OUT_1_CHANNEL+1])*INPUT_WIDTH/16;
-        xyxy[1]=(i/16+offset+preds[i*AI_NETWORK_OUT_1_CHANNEL+2])*INPUT_HEIGHT/16;
-        xyxy[2]=preds[i*AI_NETWORK_OUT_1_CHANNEL+3]*INPUT_WIDTH;
-        xyxy[3]=preds[i*AI_NETWORK_OUT_1_CHANNEL+4]*INPUT_HEIGHT;
+        xyxy[0]=(i%16+offset+preds[i*OUT_CHANNEL+1])*INPUT_WIDTH/16;
+        xyxy[1]=(i/16+offset+preds[i*OUT_CHANNEL+2])*INPUT_HEIGHT/16;
+        xyxy[2]=preds[i*OUT_CHANNEL+3]*INPUT_WIDTH;
+        xyxy[3]=preds[i*OUT_CHANNEL+4]*INPUT_HEIGHT;
         xyxy[0]-=xyxy[2]/2;
         xyxy[1]-=xyxy[3]/2;
         xyxy[2]+=xyxy[0];
@@ -101,23 +101,23 @@ void handle_preds(float *preds,float conf_thr)
         u32 cls_index=0;
         float cls=0;
 #if defined(USE_TAA)
-        for(j=1+REG_MAX*4;j<AI_NETWORK_OUT_1_CHANNEL;j++)
+        for(j=1+REG_MAX*4;j<OUT_CHANNEL;j++)
         {
-            if(preds[i*AI_NETWORK_OUT_1_CHANNEL+j]>cls)
+            if(preds[i*OUT_CHANNEL+j]>cls)
             {
-                cls=preds[i*AI_NETWORK_OUT_1_CHANNEL+j];
+                cls=preds[i*OUT_CHANNEL+j];
                 cls_index=j;
             }
         }
         cls_index-=(1+REG_MAX*4);
         conf=cls;
 #else
-#if AI_NETWORK_OUT_1_CHANNEL>2+REG_MAX*4
-        for(j=1+REG_MAX*4;j<AI_NETWORK_OUT_1_CHANNEL;j++)
+#if OUT_CHANNEL>2+REG_MAX*4
+        for(j=1+REG_MAX*4;j<OUT_CHANNEL;j++)
         {
-            if(preds[i*AI_NETWORK_OUT_1_CHANNEL+j]>cls)
+            if(preds[i*OUT_CHANNEL+j]>cls)
             {
-                cls=preds[i*AI_NETWORK_OUT_1_CHANNEL+j];
+                cls=preds[i*OUT_CHANNEL+j];
                 cls_index=j;
             }
         }

@@ -57,10 +57,11 @@ def train(opt, save_path):
                           momentum=0.949,
                           weight_decay=0.0005,
                           )
-    # 学习率衰减策略
-    scheduler = optim.lr_scheduler.MultiStepLR(optimizer,
-                                               milestones=cfg.milestones,
-                                               gamma=0.1)
+    # # 学习率衰减策略
+    # scheduler = optim.lr_scheduler.MultiStepLR(optimizer,
+    #                                            milestones=cfg.milestones,
+    #                                            gamma=0.1)
+
 
     # 定义损失函数
     loss_function = v10DetectorLoss(device,nc=cfg.category_num, reg_max=cfg.reg_max, reg_scale=cfg.reg_scale,use_taa=cfg.use_taa)
@@ -91,6 +92,17 @@ def train(opt, save_path):
                                                    persistent_workers=True,
                                                    pin_memory=True,
                                                    )
+
+    def lr_sch(step):
+        if step<3*len(train_dataloader):
+            return math.pow(step / (3*len(train_dataloader)), 4)
+        elif step<(cfg.end_epoch+1)*len(train_dataloader):
+            step=step-3*len(train_dataloader)
+            return 10**(-4*step/((cfg.end_epoch-2)*len(train_dataloader)))
+        else:
+            return 0
+    # 学习率衰减策略
+    scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_sch)
 
     # 迭代训练
     batch_num = 0
@@ -134,13 +146,16 @@ def train(opt, save_path):
             optimizer.zero_grad()
 
             # 学习率预热
-            lr = 0
-            for g in optimizer.param_groups:
-                warmup_num = 5 * len(train_dataloader)
-                if batch_num <= warmup_num:
-                    scale = math.pow(batch_num / warmup_num, 4)
-                    g['lr'] = cfg.learn_rate * scale
-                lr = g["lr"]
+            # lr = 0
+            # for g in optimizer.param_groups:
+            #     warmup_num = 5 * len(train_dataloader)
+            #     if batch_num <= warmup_num:
+            #         scale = math.pow(batch_num / warmup_num, 4)
+            #         g['lr'] = cfg.learn_rate * scale
+            #     lr = g["lr"]
+            lr=scheduler.get_last_lr()[0]
+            # 学习率调整
+            scheduler.step()
 
             # 打印相关训练信息
             info = "Epoch:%d LR:%f IOU:%f Obj:%f Cls:%f Dfl:%f Total:%f" % (
@@ -167,14 +182,13 @@ def train(opt, save_path):
                 torch.save(model.state_dict(),
                            os.path.join(ckpt_path, "best.pth"))
 
-        # 学习率调整
-        scheduler.step()
+
 
 
 if __name__ == "__main__":
     # 指定训练配置文件
     parser = argparse.ArgumentParser()
-    parser.add_argument('--yaml', type=str, default="configs/coco_person.yaml", help='.yaml config')
+    parser.add_argument('--yaml', type=str, default="configs/hand.yaml", help='.yaml config')
     parser.add_argument('--weight', type=str, default=None, help='.weight config')
 
     opt = parser.parse_args()

@@ -147,7 +147,8 @@ python export.py --yaml results/train/coco_80_0000/coco_80.yaml --weight results
 `convert_type` 控制导出类型，0表示onnx，1表示tflite。如果导出的模型类型为tflite，则会自动进行量化。如果你需要对导出的模型进行验证，则需要指定`--eval True`。
 # 模型部署
 接下来将导出的模型转换成C语言代码，或进一步，部署到具体的芯片上。以“deployment/GD32H759I_EVAL_GCC/MDK-ARM/GD32H759I_EVAL.uvprojx”为例。
-1. 下载[X-CUBE-AI](https://www.st.com/en/embedded-software/x-cube-ai.html#st-get-software) 并解压。根据下表选择你需要的版本。若需要的版本小于9.0.0，则需要预先安装[STM32CUBEIDE](https://www.st.com.cn/content/st_com/zh/stm32cubeide.html#st-get-software) ，并在STM32CUBEIDE中安装对应版本的X-CUBE-AI，然后根据[issue](https://github.com/HomiKetalys/gd32ai-modelzoo/issues/2#issuecomment-2143376547) 中的提示复制文件。
+1. 从下面两种推理引擎中选择一种。
+- X-CUBEI-AI：如果你选择使用X-CUBE-AI则需要下载[X-CUBE-AI](https://www.st.com/en/embedded-software/x-cube-ai.html#st-get-software) 并解压。根据下表选择你需要的版本。若需要的版本小于9.0.0，则需要预先安装[STM32CUBEIDE](https://www.st.com.cn/content/st_com/zh/stm32cubeide.html#st-get-software) ，并在STM32CUBEIDE中安装对应版本的X-CUBE-AI，然后根据[issue](https://github.com/HomiKetalys/gd32ai-modelzoo/issues/2#issuecomment-2143376547) 中的提示复制文件。
 
 | X-CUBE-AI版本            | GCC | ARMCC |
 |------------------------|-----|-------|
@@ -155,10 +156,12 @@ python export.py --yaml results/train/coco_80_0000/coco_80.yaml --weight results
 | 8.1.0                  | √   | √     |
 | 9.0.0                  | √   | ×     |
 
+- TinyEngine：如果你选择使用TinyEngine，则不需要额外操作，这是本项目自带的。
+
 2. 安装[keil5](https://www.keil.com/update/rvmdk.asp) 5.29。
 3. 下载[gcc-arm-none-eabi](https://developer.arm.com/downloads/-/gnu-rm) 10.3-2021.10并解压，如果使用ARMCC则不需要。 
 4. 如果你要在GD32设备上部署，下载[GD32H7xx AddOn](https://www.gd32mcu.com/cn/download?kw=GD32H7) 并进行安装。
-5. 执行以下命令生成模型推理C语言代码，其中各参数修改为你需要的参数，参数`--c_project_path`如果为文件夹路径，则会在该文件夹下生成Edge_AI文件夹，如果是keil5的.uvprojx文件，则会直接部署到对应的keil5工程中。
+5. 执行以下命令生成模型推理C语言代码，其中各参数修改为你需要的参数，参数`--c_project_path`如果为文件夹路径，则会在该文件夹下生成Edge_AI文件夹，如果是keil5的.uvprojx文件，则会直接部署到对应的keil5工程中。如果你使用TinyEngine，则不需要传入`--stm32cubeai_path`。
 ```
 python deploy.py --yaml results/train/coco_80_0000/coco_80.yaml --weight results/train/coco_80_0000/best.pth --tflite_val_path "{datasets_root}/COCO2017/images/val2017" --c_project_path deployment/GD32H759I_EVAL_GCC/MDK-ARM/GD32H759I_EVAL.uvprojx --series h7 --stm32cubeai_path ”{X-CUBE-AI PATH}/stedgeai-windows-9.0.0“
 ```

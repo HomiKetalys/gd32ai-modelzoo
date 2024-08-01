@@ -12,6 +12,7 @@
  - 开箱即用，深度适配keil5工程，可以将模型直接部署进keil5工程中，无需配置keil5工程即可使用部署的模型,支持ARMCC和GCC。
  - 模型运行时的内存占用峰值可调，内存占用峰值低于同类模型库。
  - 稀疏块式推理，静态场景下可以根据目标稀疏性减少推理时间，目标检测模型推理时间低于同类模型库。
+ - 完全免费的推理框架TinyEngine，可用于商用用途。
  - 提供了训练脚本，模型可重新训练，同时提供了预训练模型，可以通过迁移学习以适应不同应用。
 
 # 主要特点
@@ -37,18 +38,26 @@
      - 支持的设备
        - GD32F470I
        - GD32H759I
+     - 支持的推理框架
+       - X-CUBE-AI
+       - TinyEngine
    - [YoloV10](object_detection/yolov10)
      - 支持的数据集
        - COCO2017 Dataset
      - 支持的设备
        - GD32F470I
        - GD32H759I
+     - 支持的推理框架
+       - X-CUBE-AI
+       - TinyEngine
  - [图像分类](image_classification):
    - [FastVit](image_classification/ml-fastvit):
      - 支持的数据集
        - Food-101 Dataset
      - 支持的设备
        - GD32H759I
+     - 支持的推理框架
+       - X-CUBE-AI
 
 #  环境准备
 
@@ -85,7 +94,7 @@ pip install thop==0.1.1.post2209072238
 
 **请仔细阅读并理解本免责声明中规定的所有权利和限制**
 
-GD32AI ModelZoo（以下简称“软件”）由HomiKetalys开发（联系方式：homiketalys@gmail.com）该项目主要以研究超轻量级深度学习模型的部署为主要目的，仅在GD32上进行测试。以下是本软件中规定的所有权利和限制：
+GD32AI ModelZoo（以下简称“软件”）由HomiKetalys开发（联系方式：homiketalys@gmail.com）该软件主要以研究超轻量级深度学习模型的部署为主要目的，在GD32上仅进行测试。以下是本软件中规定的所有权利和限制：
 
 1.本软件严禁用于任何侵权、侵犯他人利益、违法或其他不当行为。软件及其作者不承担由此产生的任何直接或间接责任。
 

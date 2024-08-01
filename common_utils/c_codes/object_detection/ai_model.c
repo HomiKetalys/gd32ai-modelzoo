@@ -1,33 +1,38 @@
 #include "ai_model.h"
 
+#if defined(X_CUBE_AI)
+
 ai_handle network1;
 #if SEPARATION>0
 ai_handle network2;
 #endif
 
-#if !defined(TEST_TIME_ONLY)
-ObjectResult objects[MAX_OBJ_NUM];
-ObjectResult results[MAX_OBJ_NUM];
-u32 object_num=0;
 #endif
-
 
 #if defined(TO_EXT)
 signed char *ai1InData;
 ai1_out_type *ai1OutData;
+#if defined(X_CUBE_AI)
 ai_u8 *activations=EXT_RAM_ADDR;
+#endif
 #if SEPARATION>0
+#if defined(X_CUBE_AI)
 signed char *ai2InData=EXT_RAM_ADDR+ACTIVATION_SIZE;
+#elif defined(TinyEngine)
+signed char *ai2InData;
+#endif
 float *ai2OutData;
 #endif
 #else
 signed char *ai1InData;
 ai1_out_type *ai1OutData;
+#if defined(X_CUBE_AI)
 AI_ALIGNED(32)
 ai_u8 activations[ACTIVATION_SIZE];
+#endif
 #if SEPARATION>0
 AI_ALIGNED(32)
-signed char ai2InData[AI_NETWORK_2_IN_1_SIZE];
+signed char ai2InData[INPUT_2_H*INPUT_2_W*INPUT_2_C];
 float *ai2OutData;
 #endif
 #endif
@@ -44,27 +49,35 @@ u8 background[INPUT_HEIGHT*INPUT_WIDTH*3];
 #endif
 #define aiInData ai1InData
 
-
+#if defined(X_CUBE_AI)
 ai_buffer * ai_input1;
 ai_buffer * ai_output1;
 #if SEPARATION>0
 ai_buffer * ai_input2;
 ai_buffer * ai_output2;
 #endif
+#endif
 
 ACTIVITIES_CODE
+
+#if !defined(TEST_TIME_ONLY)
+ObjectResult objects[MAX_OBJ_NUM];
+ObjectResult results[MAX_OBJ_NUM];
+u32 object_num=0;
+#endif
 
 void AI_Error_Handler()
 {
     while(1);
 }
 
-bool init=false;
+u8 init=0;
 
 void AI_Init()
 {
     if(init)
         return;
+#if defined(X_CUBE_AI)
     ai_error err1,err2;
 #if defined(NEED_RCU)
     rcu_enable();
@@ -93,11 +106,21 @@ void AI_Init()
     ai_output2 = ai_network_2_outputs_get(network2, NULL);
     ai2OutData=ai_output2[0].data;
 #endif
-    init=true;
+
+#elif defined(TinyEngine)
+    ai1InData=get_network_1_Input();
+    ai1OutData=get_network_1_Output();
+#if SEPARATION>0
+    ai2OutData = get_network_2_Output();
+#endif
+#endif
+
+    init=1;
 }
 
 void AI1_Run(signed char *pIn,ai1_out_type *pOut)
 {
+#if defined(X_CUBE_AI)
     ai_i32 batch;
 
     /* Update IO handlers with the data payload */
@@ -108,11 +131,15 @@ void AI1_Run(signed char *pIn,ai1_out_type *pOut)
     if (batch != 1) {
         AI_Error_Handler();
     }
+#elif defined(TinyEngine)
+    network_1_invoke(0);
+#endif
 }
 
 #if SEPARATION>0
 void AI2_Run(signed char *pIn, float *pOut)
 {
+#if defined(X_CUBE_AI)
     ai_i32 batch;
 
     /* Update IO handlers with the data payload */
@@ -123,11 +150,16 @@ void AI2_Run(signed char *pIn, float *pOut)
     if (batch != 1) {
         AI_Error_Handler();
     }
+#elif defined(TinyEngine)
+    signed char *inp=get_network_2_Input();
+    memcpy(inp,pIn,INPUT_2_H*INPUT_2_W*INPUT_2_C);
+    network_2_invoke(0);
+#endif
 }
 
 void int_fix(signed char *data)
 {
-    for(int i=0;i<AI_NETWORK_2_IN_1_SIZE;i++)
+    for(int i=0;i<INPUT_2_H*INPUT_2_W*INPUT_2_C;i++)
     {
         clip((*(data+i))*FIX_FACTOR0+FIX_FACTOR1,-128.f,127.f,data+i);
     }
@@ -188,15 +220,15 @@ void run_ai1_patch(u32 patch_idx)
     u32 diff_count=0;
     u32 diff_val;
 #endif
-    for(patch_i=0;patch_i<AI_NETWORK_1_IN_1_HEIGHT;patch_i++)
+    for(patch_i=0;patch_i<INPUT_1_H;patch_i++)
     {
 #if defined(ENABLE_SPARSE_PATCH)
-        idxb=(patch_i+AI_NETWORK_1_IN_1_HEIGHT*patch_idx_h)*INPUT_WIDTH*3+3*AI_NETWORK_1_IN_1_WIDTH*patch_idx_w;
+        idxb=(patch_i+INPUT_1_H*patch_idx_h)*INPUT_WIDTH*3+3*INPUT_1_W*patch_idx_w;
 #endif
-        for(patch_j=0;patch_j<AI_NETWORK_1_IN_1_WIDTH;patch_j++)
+        for(patch_j=0;patch_j<INPUT_1_W;patch_j++)
         {
-            i=patch_i+AI_NETWORK_1_IN_1_HEIGHT*patch_idx_h;
-            j=patch_j+AI_NETWORK_1_IN_1_WIDTH*patch_idx_w;
+            i=patch_i+INPUT_1_H*patch_idx_h;
+            j=patch_j+INPUT_1_W*patch_idx_w;
             img_pixel_read(i,j,&r,&g,&b);
 #if defined(ENABLE_SPARSE_PATCH)
             diff_val=0;
@@ -209,9 +241,16 @@ void run_ai1_patch(u32 patch_idx)
             diff_count+=diff_val>MAX_DIFF_VAL;
 #endif
             pixel_norm(&r,&g,&b);
+#if defined(RGB_MODE)
             aiInData[idx++]=r;
             aiInData[idx++]=g;
             aiInData[idx++]=b;
+#elif defined(BGR_MODE)
+            aiInData[idx++]=b;
+            aiInData[idx++]=g;
+            aiInData[idx++]=r;
+#error "unkown image channel modo"
+#endif
         }
     }
 #if SEPARATION>0
@@ -221,19 +260,19 @@ void run_ai1_patch(u32 patch_idx)
     {
 #endif
         AI1_Run(ai1InData,ai1OutData);
-        for(patch_i=0;patch_i<AI_NETWORK_1_OUT_1_HEIGHT;patch_i++)
+        for(patch_i=0;patch_i<OUTPUT_1_H;patch_i++)
         {
-            idx=(patch_i+AI_NETWORK_1_OUT_1_HEIGHT*patch_idx_h)*AI_NETWORK_2_IN_1_CHANNEL*AI_NETWORK_2_IN_1_WIDTH+AI_NETWORK_1_OUT_1_WIDTH*patch_idx_w*AI_NETWORK_2_IN_1_CHANNEL;
-            memcpy(ai2InData+idx,ai1OutData+patch_i*AI_NETWORK_2_IN_1_CHANNEL*AI_NETWORK_1_OUT_1_WIDTH,AI_NETWORK_2_IN_1_CHANNEL*AI_NETWORK_1_OUT_1_WIDTH);
+            idx=(patch_i+OUTPUT_1_H*patch_idx_h)*INPUT_2_C*INPUT_2_W+OUTPUT_1_W*patch_idx_w*OUTPUT_1_C;
+            memcpy(ai2InData+idx,ai1OutData+patch_i*INPUT_2_C*OUTPUT_1_W,INPUT_2_C*OUTPUT_1_W);
         }
 #if defined(ENABLE_SPARSE_PATCH)
     }
     else
     {
-        for(patch_i=0;patch_i<AI_NETWORK_1_OUT_1_HEIGHT;patch_i++)
+        for(patch_i=0;patch_i<OUTPUT_1_H;patch_i++)
         {
-            idx=(patch_i+AI_NETWORK_1_OUT_1_HEIGHT*patch_idx_h)*AI_NETWORK_2_IN_1_CHANNEL*AI_NETWORK_2_IN_1_WIDTH+AI_NETWORK_1_OUT_1_WIDTH*patch_idx_w*AI_NETWORK_2_IN_1_CHANNEL;
-            memset(ai2InData+idx,128,AI_NETWORK_2_IN_1_CHANNEL*AI_NETWORK_1_OUT_1_WIDTH);
+            idx=(patch_i+OUTPUT_1_H*patch_idx_h)*INPUT_2_C*INPUT_2_W+OUTPUT_1_W*patch_idx_w*OUTPUT_1_C;
+            memset(ai2InData+idx,128,INPUT_2_C*OUTPUT_1_W);
         }
     }
 #endif

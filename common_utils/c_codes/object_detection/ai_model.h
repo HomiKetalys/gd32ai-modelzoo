@@ -1,10 +1,11 @@
 #ifndef _AI_MODEL_
 #define _AI_MODEL_
 
-#include "ai_platform.h"
+
 
 #include "stdio.h"
 #include "string.h"
+#include "math.h"
 
 //
 //#define TEST_TIME_ONLY
@@ -22,33 +23,56 @@ NMS_THR_CODE
 
 RCU_CODE
 
+INFER_FRAME_CODE
+
+
 //network1 import
+#if defined(X_CUBE_AI)
+#include "ai_platform.h"
 #include "network_1.h"
 #include "network_1_data.h"
+#elif defined(TinyEngine)
+void network_1_invoke(float* labels);
+signed char* get_network_1_Input();
+signed char* get_network_1_Output();
+#endif
+
+MODEL_INFO_CODE
+
 //Location of spatial separation
 SEPARATION_CODE
 #if SEPARATION>0
+#if defined(X_CUBE_AI)
 //network2 import
 #include "network_2.h"
 #include "network_2_data.h"
+#elif defined(TinyEngine)
+void network_2_invoke(float* labels);
+signed char* get_network_2_Input();
+signed char* get_network_2_Output();
+#endif
 SEPARATION_SCALE_CODE
-#define INPUT_HEIGHT SEPARATION_SCALE*AI_NETWORK_1_IN_1_HEIGHT
-#define INPUT_WIDTH SEPARATION_SCALE*AI_NETWORK_1_IN_1_WIDTH
+#define INPUT_HEIGHT SEPARATION_SCALE*INPUT_1_H
+#define INPUT_WIDTH SEPARATION_SCALE*INPUT_1_W
 FIX_FACTOR0_CODE
 FIX_FACTOR1_CODE
+#if defined(X_CUBE_AI)
 #define ACTIVATION_SIZE (AI_NETWORK_1_DATA_ACTIVATIONS_SIZE>AI_NETWORK_2_DATA_ACTIVATIONS_SIZE?AI_NETWORK_1_DATA_ACTIVATIONS_SIZE:AI_NETWORK_2_DATA_ACTIVATIONS_SIZE)
-#define AI_NETWORK_OUT_1_HEIGHT AI_NETWORK_2_OUT_1_HEIGHT
-#define AI_NETWORK_OUT_1_CHANNEL AI_NETWORK_2_OUT_1_CHANNEL
+#endif
+#define OUT_HEIGHT OUTPUT_2_H
+#define OUT_CHANNEL OUTPUT_2_C
 
 typedef signed char ai1_out_type;
 
 #else
 #define SEPARATION_SCALE 1
-#define INPUT_HEIGHT SEPARATION_SCALE*AI_NETWORK_1_IN_1_HEIGHT
-#define INPUT_WIDTH SEPARATION_SCALE*AI_NETWORK_1_IN_1_WIDTH
+#define INPUT_HEIGHT SEPARATION_SCALE*INPUT_1_H
+#define INPUT_WIDTH SEPARATION_SCALE*INPUT_1_W
+#if defined(X_CUBE_AI)
 #define ACTIVATION_SIZE AI_NETWORK_1_DATA_ACTIVATIONS_SIZE
-#define AI_NETWORK_OUT_1_HEIGHT AI_NETWORK_1_OUT_1_HEIGHT
-#define AI_NETWORK_OUT_1_CHANNEL AI_NETWORK_1_OUT_1_CHANNEL
+#endif
+#define OUT_HEIGHT OUTPUT_1_H
+#define OUT_CHANNEL OUTPUT_1_C
 
 typedef float ai1_out_type;
 
@@ -62,7 +86,7 @@ typedef unsigned short      u16;
 typedef unsigned int        u32;
 typedef unsigned long long  u64;
 
-#define MAX_OBJ_NUM AI_NETWORK_OUT_1_HEIGHT
+#define MAX_OBJ_NUM OUT_HEIGHT
 
 #if defined(ENABLE_SPARSE_PATCH)
 #define MAX_DIFF_VAL 60
@@ -70,6 +94,13 @@ typedef unsigned long long  u64;
 #endif
 
 IMG_NORM_CODE
+
+
+#if defined(__GNUC__)
+  #define AI_ALIGNED(x)         __attribute__((aligned(x)))
+#elif !defined(__CC_ARM)
+#error "unsupport complier"
+#endif
 
 typedef struct
 {

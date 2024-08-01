@@ -41,6 +41,7 @@ def code_replace(opt, line, cfg, tfmodel):
         line = f"#define yolov10\n"
         line += f"#define REG_MAX {reg_max}\n"
         line += f"#define REG_SCALE {reg_scale}\n"
+        line += f"#define RGB_MODE\n"
         if cfg.use_taa:
             line += f"#define USE_TAA\n"
     elif "ACTIVITIES_CODE" in line:
@@ -64,6 +65,8 @@ def deploy(opt, save_path, tflite_path, gen_codes_path):
 
 def deploy_main(opt, save_path, c_project_path):
     print(opt.__dict__)
+    if opt.stm32cubeai_path is None:
+        os.environ['DO_NOT_USE_PACK_FOR_RESIZE2'] = "True"
     export(opt, save_path)
     tflite_path = os.path.join(save_path, "tflite")
     if c_project_path is None:
@@ -84,15 +87,15 @@ val_paths = [
     '../../../datasets/coco2017/val2017_person.txt']
 
 x_cube_ai_v = [
-    "D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1",
+    "D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.1.0",
     "F:/EDGEDL/en.x-cube-ai-windows-v9-0-0/stedgeai-windows-9.0.0",
 ]
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--yaml', type=str, default='modelzoo/coco_person_tfs/coco_person.yaml',
+    parser.add_argument('--yaml', type=str, default='configs/coco_80.yaml',
                         help='Specify training profile *.data')
-    parser.add_argument('--weight', type=str, default='modelzoo/coco_person_tfs/weights/best.pth',
+    parser.add_argument('--weight', type=str, default='modelzoo/coco_80/weights/best.pth',
                         help='The path of the model')
     parser.add_argument('--convert_type', type=int, default=1,
                         help='only 1,for tflite')
@@ -102,7 +105,7 @@ if __name__ == "__main__":
                         default=None,
                         help='The path of c project,None= results/deploy/xxxx_00xx')
     parser.add_argument('--stm32cubeai_path', type=str,
-                        default=x_cube_ai_v[0],
+                        default=None,
                         help='The path of stm32cubeai')
     parser.add_argument('--series', type=str, default="h7",
                         help='The series of gd32,f4 or h7')
@@ -110,7 +113,7 @@ if __name__ == "__main__":
                         help='confidence threshold')
     parser.add_argument('--nms_thr', type=float, default=0.5,
                         help='nomaxsupression threshold')
-    parser.add_argument('--eval', type=bool, default=True,
+    parser.add_argument('--eval', type=bool, default=False,
                         help='eval exported model')
     parser.add_argument('--compiler', type=int, default=1,
                         help='compiler type,0 for armcc,1 fro gcc')

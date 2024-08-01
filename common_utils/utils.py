@@ -5,10 +5,13 @@ import shutil
 import sys
 import subprocess
 import warnings
+from functools import partial
 
 import matplotlib.pyplot as plt
 import numpy as np
 import onnxruntime as ort
+import psutil
+import select
 import tensorflow as tf
 from typing import Union, Callable
 # from PIL import Image
@@ -16,6 +19,7 @@ from typing import Union, Callable
 # from torchvision import transforms
 
 import xml.etree.ElementTree as ET
+
 
 
 class multipleSave(object):
@@ -108,7 +112,7 @@ def extract_version_number(text):
     return None
 
 
-def copy_stlib(opt, stm32ai_path, stlib_path, version):
+def copy_stcore(opt, stm32ai_path, core_path, version):
     stlib_src_path = os.path.join(stm32ai_path, "Middlewares", "ST", "AI")
     if opt.series == "f4":
         lib_type = "ARMCortexM4"
@@ -125,8 +129,8 @@ def copy_stlib(opt, stm32ai_path, stlib_path, version):
     assert os.path.exists(lib_src_path), f"Stlib path:{lib_src_path}\n do not exist"
     lib_name = os.listdir(lib_src_path)[0]
     lib_src_path = os.path.join(lib_src_path, lib_name)
-    lib_dst_path = os.path.join(stlib_path, "Lib", "NetworkRuntime.lib")
-    os.makedirs(os.path.join(stlib_path, "Lib"), exist_ok=True)
+    lib_dst_path = os.path.join(core_path, "Lib", "NetworkRuntime.lib")
+    os.makedirs(os.path.join(core_path, "Lib"), exist_ok=True)
     shutil.copy(lib_src_path, lib_dst_path)
 
     prefix = "GCC"
@@ -141,58 +145,107 @@ def copy_stlib(opt, stm32ai_path, stlib_path, version):
     assert lib_name is not None, f"Library file not found in folder path :{lib_src_path}"
     lib_src_path = os.path.join(lib_src_path, lib_name)
     prefix = "lib"
-    lib_dst_path = os.path.join(stlib_path, "Lib", prefix + "NetworkRuntime.a")
-    os.makedirs(os.path.join(stlib_path, "Lib"), exist_ok=True)
+    lib_dst_path = os.path.join(core_path, "Lib", prefix + "NetworkRuntime.a")
+    os.makedirs(os.path.join(core_path, "Lib"), exist_ok=True)
     shutil.copy(lib_src_path, lib_dst_path)
 
-    inc_dst_path = os.path.join(stlib_path, "Inc")
+    inc_dst_path = os.path.join(core_path, "Inc")
     if os.path.exists(inc_dst_path):
         shutil.rmtree(inc_dst_path)
     inc_src_path = os.path.join(stlib_src_path, "Inc")
     shutil.copytree(inc_src_path, inc_dst_path)
     license_src_path = os.path.join(stlib_src_path, "LICENSE.txt")
-    license_dst_path = os.path.join(stlib_path, "LICENSE.txt")
+    license_dst_path = os.path.join(core_path, "LICENSE.txt")
     shutil.copy(license_src_path, license_dst_path)
 
+def copy_tecore(core_path):
+    d_inc_path=os.path.join(core_path,"Inc")
+    d_src_path=os.path.join(core_path,"Src")
+    d_lib_path=os.path.join(core_path,"Lib")
+    os.makedirs(d_lib_path,exist_ok=True)
+    s_inc_path=os.path.join(os.path.split(os.path.abspath(__file__))[0],"tinyengine/TinyEngine/include")
+    s_src_path=os.path.join(os.path.split(os.path.abspath(__file__))[0],"tinyengine/TinyEngine/src/kernels")
+    shutil.copytree(s_inc_path,d_inc_path)
+    shutil.copytree(s_src_path,d_src_path)
 
-def common_code_replace(opt, line):
-    version = extract_version_number(os.path.split(opt.stm32cubeai_path)[1])
-    if "RCU_CODE" in line:
-        if version < "9.0.0":
-            line = "#define NEED_RCU\n"
-        else:
+
+
+
+class CCR():
+    def __init__(self, tflite1_path, tflite2_path=None):
+        tflite_model = tfOrtModelRuner(tflite1_path)
+        self.input1_shape = tflite_model.model_input_details['shape'][1:]
+        self.output1_shape = tflite_model.model_output_details[0]['shape'][1:]
+        self.input2_shape = None
+        if tflite2_path is not None:
+            tflite_model = tfOrtModelRuner(tflite2_path)
+            self.input2_shape = tflite_model.model_input_details['shape'][1:]
+            self.output2_shape = tflite_model.model_output_details[0]['shape'][1:]
+
+    def common_code_replace(self, opt, line):
+        if opt.stm32cubeai_path is not None:
+            version = extract_version_number(os.path.split(opt.stm32cubeai_path)[1])
+            if "RCU_CODE" in line:
+                if version < "9.0.0":
+                    line = "#define NEED_RCU\n"
+                else:
+                    line = ""
+        elif "RCU_CODE" in line:
             line = ""
-    if "_CODE" in line:
-        line = ""
-    return line
+        if "MODEL_INFO_CODE" in line:
+            line = f"#define INPUT_1_H {self.input1_shape[0]}\n" \
+                   f"#define INPUT_1_W {self.input1_shape[1]}\n" \
+                   f"#define INPUT_1_C {self.input1_shape[2]}\n"
 
-def gen_common_ic_codes(opt, utils_path, ai_model_path, code_replace, **kwargs):
+            if self.input2_shape is not None:
+                line += f"#define OUTPUT_1_H {self.output1_shape[0]}\n" \
+                        f"#define OUTPUT_1_W {self.output1_shape[1]}\n" \
+                        f"#define OUTPUT_1_C {self.output1_shape[2]}\n" \
+                        f"#define INPUT_2_H {self.input2_shape[0]}\n" \
+                        f"#define INPUT_2_W {self.input2_shape[1]}\n" \
+                        f"#define INPUT_2_C {self.input2_shape[2]}\n" \
+                        f"#define OUTPUT_2_H {self.output2_shape[0]}\n" \
+                        f"#define OUTPUT_2_C {self.output2_shape[1]}\n"
+            else:
+                line += f"#define OUTPUT_1_H {self.output1_shape[0]}\n" \
+                        f"#define OUTPUT_1_C {self.output1_shape[1]}\n"
+        elif "INFER_FRAME_CODE" in line:
+            if opt.stm32cubeai_path is not None:
+                line = "#define X_CUBE_AI"
+            else:
+                line = "#define TinyEngine"
+        if "_CODE" in line:
+            line = ""
+        return line
+
+
+def gen_common_ic_codes(opt, utils_path, ai_model_path, ccr, code_replace, **kwargs):
     with open("../../common_utils/c_codes/image_classification/ai_model.h", "r") as f:
         lines = f.readlines()
     with open(os.path.join(ai_model_path, "ai_model.h"), "w", encoding="utf-8") as f:
         for line in lines:
-            line=code_replace(opt,line,**kwargs)
-            line = common_code_replace(opt, line)
-            if len(line)>0:
+            line = code_replace(opt, line, **kwargs)
+            line = ccr.common_code_replace(opt, line)
+            if len(line) > 0:
                 f.write(line)
 
     with open("../../common_utils/c_codes/image_classification/ai_model.c", "r") as f:
         lines = f.readlines()
     with open(os.path.join(ai_model_path, "ai_model.c"), "w", encoding="utf-8") as f:
         for line in lines:
-            line=code_replace(opt,line,**kwargs)
-            line = common_code_replace(opt, line)
-            if len(line)>0:
+            line = code_replace(opt, line, **kwargs)
+            line = ccr.common_code_replace(opt, line)
+            if len(line) > 0:
                 f.write(line)
 
 
-def gen_common_od_codes(opt, utils_path, ai_model_path, code_replace, **kwargs):
+def gen_common_od_codes(opt, utils_path, ai_model_path, ccr, code_replace, **kwargs):
     with open("../../common_utils/c_codes/object_detection/ai_model.h", "r") as f:
         lines = f.readlines()
     with open(os.path.join(ai_model_path, "ai_model.h"), "w", encoding="utf-8") as f:
         for line in lines:
             line = code_replace(opt, line, **kwargs)
-            line = common_code_replace(opt, line)
+            line = ccr.common_code_replace(opt, line)
             if len(line) > 0:
                 f.write(line)
 
@@ -201,7 +254,7 @@ def gen_common_od_codes(opt, utils_path, ai_model_path, code_replace, **kwargs):
     with open(os.path.join(ai_model_path, "ai_model.c"), "w", encoding="utf-8") as f:
         for line in lines:
             line = code_replace(opt, line, **kwargs)
-            line = common_code_replace(opt, line)
+            line = ccr.common_code_replace(opt, line)
             if len(line) > 0:
                 f.write(line)
 
@@ -210,10 +263,9 @@ def gen_common_od_codes(opt, utils_path, ai_model_path, code_replace, **kwargs):
     with open(os.path.join(utils_path, "utils.c"), "w", encoding="utf-8") as f:
         for line in lines:
             line = code_replace(opt, line, **kwargs)
-            line = common_code_replace(opt, line)
+            line = ccr.common_code_replace(opt, line)
             if len(line) > 0:
                 f.write(line)
-
 
 
 def common_deploy(opt, save_path, tflite_path, gen_codes_path, gen_ai_model_codes):
@@ -233,56 +285,72 @@ def common_deploy(opt, save_path, tflite_path, gen_codes_path, gen_ai_model_code
                 model_post_path = os.path.join(tflite_path, name)
             else:
                 model_path = os.path.join(tflite_path, name)
-    version = extract_version_number(os.path.split(opt.stm32cubeai_path)[1])
-    assert version is not None, f"Unkown X-CUBE-AI version:{version}"
-    if version < "9.0.0":
-        warnings.warn(f"The version of X-CUBE-AI:{version}<9.0.0.the generated codes may be unable to run your device")
-        stm32ai_exe_path = os.path.join(opt.stm32cubeai_path, "Utilities", "windows", "stm32ai.exe")
-    else:
-        stm32ai_exe_path = os.path.join(opt.stm32cubeai_path, "Utilities", "windows", "stedgeai.exe")
+
     temp_path = os.path.join(save_path, "temp")
     output_path = os.path.join(gen_codes_path, "Edge_AI")
+    output_model_path = os.path.join(output_path, "model")
     if os.path.exists(output_path):
         shutil.rmtree(output_path)
-    output_model_path = os.path.join(output_path, "model")
-    stlib_path = os.path.join(output_path, "ST_Lib")
+    ai_core_path = os.path.join(output_path, "ai_core")
     utils_path = os.path.join(output_path, "utils")
 
     os.makedirs(temp_path, exist_ok=True)
     os.makedirs(output_path, exist_ok=True)
     os.makedirs(output_model_path, exist_ok=True)
-    os.makedirs(stlib_path, exist_ok=True)
+    os.makedirs(ai_core_path, exist_ok=True)
     os.makedirs(utils_path, exist_ok=True)
-    copy_stlib(opt, opt.stm32cubeai_path, stlib_path, version)
 
-    license_src_path = os.path.join(os.path.join(opt.stm32cubeai_path, "Middlewares", "ST", "AI"), "LICENSE.txt")
-    license_dst_path = os.path.join(output_model_path, "LICENSE.txt")
-    shutil.copy(license_src_path, license_dst_path)
+    version=None
+    if opt.stm32cubeai_path is not None:
+
+        version = extract_version_number(os.path.split(opt.stm32cubeai_path)[1])
+        assert version is not None, f"Unkown X-CUBE-AI version:{version}"
+        if version < "9.0.0":
+            warnings.warn(
+                f"The version of X-CUBE-AI:{version}<9.0.0.the generated codes may be unable to run your device")
+            stm32ai_exe_path = os.path.join(opt.stm32cubeai_path, "Utilities", "windows", "stm32ai.exe")
+        else:
+            stm32ai_exe_path = os.path.join(opt.stm32cubeai_path, "Utilities", "windows", "stedgeai.exe")
+
+        copy_stcore(opt, opt.stm32cubeai_path, ai_core_path, version)
+
+        license_src_path = os.path.join(os.path.join(opt.stm32cubeai_path, "Middlewares", "ST", "AI"), "LICENSE.txt")
+        license_dst_path = os.path.join(output_model_path, "LICENSE.txt")
+        shutil.copy(license_src_path, license_dst_path)
+
+        gen_net_func = partial(gen_net_codes_xcubeai, stm32ai_exe_path=stm32ai_exe_path, version=version)
+    else:
+        copy_tecore(core_path=ai_core_path)
+        gen_net_func = gen_net_codes_te
 
     if model_path is None:
-        gen_net_codes(stm32ai_exe_path, model_front_path, "network_1", temp_path, output_model_path, version)
-        gen_net_codes(stm32ai_exe_path, model_post_path, "network_2", temp_path, output_model_path, version)
+        gen_net_func(model_front_path, "network_1", temp_path, output_model_path)
+        gen_net_func(model_post_path, "network_2", temp_path, output_model_path)
+        ccr = CCR(model_front_path, model_post_path)
     else:
-        gen_net_codes(stm32ai_exe_path, model_path, "network_1", temp_path, output_model_path, version)
+        gen_net_func(model_path, "network_1", temp_path, output_model_path)
+        ccr = CCR(model_path)
 
-
-
-    gen_ai_model_codes(opt, utils_path, output_path)
+    gen_ai_model_codes(opt, utils_path, output_path, ccr)
 
     if uvprojx_path is not None:
         if opt.series == "f4":
             cm = "m4"
         elif opt.series == "h7":
-            if version<"9.0.0":
-                cm="m4"
+            if version is not None:
+                if version < "9.0.0":
+                    cm = "m4"
+                else:
+                    cm = "m7"
             else:
-                cm = "m7"
+                cm="m7"
         else:
             assert False, f"Unsupported series {opt.series}"
-        deploy_to_keil5(uvprojx_path, cm)
+        set_lib=opt.stm32cubeai_path is not None
+        deploy_to_keil5(uvprojx_path, cm,set_lib)
 
 
-def gen_net_codes(stm32ai_exe_path, model_path, name, work_space_path, output_path, version):
+def gen_net_codes_xcubeai(model_path, name, work_space_path, output_path, stm32ai_exe_path, version):
     if version >= "9.0.0":
         param_name = "target"
     else:
@@ -300,12 +368,27 @@ def gen_net_codes(stm32ai_exe_path, model_path, name, work_space_path, output_pa
            f"--{param_name} stm32h7 "
            f"--allocate-outputs")
     print(f"Command:\n{cmd}\nwill be excuted to generate net codes")
-    result = subprocess.run(cmd, stdout=subprocess.PIPE)
+    process=subprocess.Popen(cmd,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    out_str,_=process.communicate(input=b"n\r\n")
+
+    # result = subprocess.run(cmd, stdout=subprocess.PIPE)
     # result = subprocess.run(['powershell', '-Command', cmd], stdout=subprocess.PIPE)
-    # print(result.stdout.decode("utf-8","ignore"))
-    if result.returncode != 0:
+    # print(out_str.decode("utf-8","ignore"))
+    if process.returncode != 0:
         print("Net codes generation failed")
         exit(-1)
+    print("Net codes generation successful")
+
+
+def gen_net_codes_te(tflite_path, name, work_space_path, output_path):
+    from .tinyengine.code_generator.CodegenUtilTFlite import GenerateSourceFilesFromTFlite
+    peakmem = GenerateSourceFilesFromTFlite(
+        tflite_path,
+        life_cycle_path=os.path.join(work_space_path, "lifecycle.png"),
+        model_name=name,
+        codegen_root=output_path,
+    )
+    print(f"Peak memory: {peakmem} bytes")
     print("Net codes generation successful")
 
 
@@ -350,7 +433,7 @@ def MDK4GCCAddEdgeAIGroup(parent, file_list, project_path):
         "bigend": "2",
         "Strict": "0",
         "Optim": "3",
-        "wLevel": "0",
+        "wLevel": "1",
         "uThumb": "2",
     }
     for key_name in carm_dict:
@@ -432,7 +515,7 @@ def MDK4ARMCCAddEdgeAIGroup(parent, file_list, project_path):
         "PlainCh": "2",
         "Ropi": "2",
         "Rwpi": "2",
-        "wLevel": "0",
+        "wLevel": "1",
         "uThumb": "2",
         "uSurpInc": "2",
         "uC99": "2",
@@ -501,7 +584,7 @@ fpu_dict = {
 }
 
 
-def deploy_to_keil5_gcc(root, uvprojx_path, cm="m7"):
+def deploy_to_keil5_gcc(root, uvprojx_path, cm="m7",set_lib=False):
     include_paths = root.find("Targets/Target/TargetOption/TargetArm/Carm/VariousControls/IncludePath")
     paths = include_paths.text
     if paths is None:
@@ -510,8 +593,9 @@ def deploy_to_keil5_gcc(root, uvprojx_path, cm="m7"):
     path_set = path_set.union([
         ".\\Edge_AI\\model",
         ".\\Edge_AI",
-        ".\\Edge_AI\\ST_Lib\\Inc"])
+        ".\\Edge_AI\\ai_core\\Inc"])
     include_paths.text = ";".join(list(path_set))
+
 
     lib_names = root.find("Targets/Target/TargetOption/TargetArm/LDarm/IncludeLibs")
     paths = lib_names.text
@@ -519,7 +603,11 @@ def deploy_to_keil5_gcc(root, uvprojx_path, cm="m7"):
         path_set = set()
     else:
         path_set = set(paths.split(";"))
-    path_set = path_set.union(["NetworkRuntime"])
+    if set_lib:
+        path_set = path_set.union(["NetworkRuntime"])
+    else:
+        if "NetworkRuntime" in path_set:
+            path_set.remove("NetworkRuntime")
     lib_names.text = ";".join(list(path_set))
     lib_paths = root.find("Targets/Target/TargetOption/TargetArm/LDarm/IncludeDir")
     paths = lib_paths.text
@@ -527,7 +615,11 @@ def deploy_to_keil5_gcc(root, uvprojx_path, cm="m7"):
         path_set = set()
     else:
         path_set = set(paths.split(";"))
-    path_set = path_set.union([".\\Edge_AI\\ST_Lib\\Lib"])
+    if set_lib:
+        path_set = path_set.union([".\\Edge_AI\\ai_core\\Lib"])
+    else:
+        if ".\\Edge_AI\\ai_core\\Lib" in path_set:
+            path_set.remove(".\\Edge_AI\\ai_core\\Lib")
     lib_paths.text = ";".join(list(path_set))
 
     mi_dict = {
@@ -610,7 +702,7 @@ def deploy_to_keil5_armcc(root, uvprojx_path, cm="m7"):
     path_set = path_set.union([
         ".\\Edge_AI\\model",
         ".\\Edge_AI",
-        ".\\Edge_AI\\ST_Lib\\Inc"])
+        ".\\Edge_AI\\ai_core\\Inc"])
     include_paths.text = ";".join(list(path_set))
 
     groups = root.find('Targets/Target/Groups')
@@ -642,7 +734,7 @@ def deploy_to_keil5_armcc(root, uvprojx_path, cm="m7"):
     MDK4ARMCCAddEdgeAIGroup(groups, c_file_list, uvprojx_project_path)
 
 
-def deploy_to_keil5(uvprojx_path, cm="m7"):
+def deploy_to_keil5(uvprojx_path, cm="m7",set_lib=False):
     tree = ET.parse(uvprojx_path)
     root = tree.getroot()
 
@@ -650,7 +742,7 @@ def deploy_to_keil5(uvprojx_path, cm="m7"):
     # out.write('<?xml version="1.0" encoding="UTF-8" standalone="no" ?>\n')
     complier_type = root.find("Targets/Target/ToolsetName")
     if complier_type.text == "ARM-GNU":
-        deploy_to_keil5_gcc(root, uvprojx_path, cm)
+        deploy_to_keil5_gcc(root, uvprojx_path, cm,set_lib)
     elif complier_type.text == "ARM-ADS":
         deploy_to_keil5_armcc(root, uvprojx_path, cm)
     else:
@@ -872,6 +964,16 @@ def gmm_main():
 #     return code
 
 
+def gen_code_test(tflite_path, name, work_space_path, output_path):
+    from tinyengine.code_generator.CodegenUtilTFlite import GenerateSourceFilesFromTFlite
+    peakmem = GenerateSourceFilesFromTFlite(
+        tflite_path,
+        life_cycle_path=os.path.join(work_space_path, "lifecycle.png"),
+        model_name=name,
+        codegen_root=output_path,
+    )
+    print(f"Peak memory: {peakmem} bytes")
+
+
 if __name__ == "__main__":
-    deploy_to_keil5(
-        "F:/MyWork/KeilWork/gd32ai_modelzoo_example_keil_project/GD32H759I_EVAL_DET_ARMCC/MDK-ARM/GD32H759I_EVAL.uvprojx")
+    gen_code_test("temp/model.tflite", "network_1", "temp/temp", "temp/codegen")

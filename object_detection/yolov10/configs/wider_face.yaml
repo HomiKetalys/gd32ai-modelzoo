@@ -1,9 +1,9 @@
 DATASET:
-  TRAIN: "../../../datasets/coco2017/train2017.txt"
-  VAL: "../../../datasets/coco2017/val2017.txt"
-  NAMES: "configs/coco_80.names"
+  TRAIN: "../../../datasets/wider_face/face_train.txt"
+  VAL: "../../../datasets/wider_face/face_val.txt"
+  NAMES: "configs/wider_face.names"
 MODEL:
-  NC: 80
+  NC: 1
   INPUT_WIDTH: 256
   INPUT_HEIGHT: 256
   SEPARATION: 3
@@ -11,7 +11,7 @@ MODEL:
   REG_MAX: 1
   REG_SCALE: 0.5
 TRAIN:
-  LR: 0.1
+  LR: 0.001
   THRESH: 0.25
   WARMUP: true
   BATCH_SIZE: 96

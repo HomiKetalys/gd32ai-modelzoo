@@ -1,13 +1,13 @@
 DATASET:
-  TRAIN: "../../../datasets/coco2017/train2017.txt"
-  VAL: "../../../datasets/coco2017/val2017.txt"
-  NAMES: "configs/coco_80.names"
+  TRAIN: "../../../datasets/hand_det/train.txt"
+  VAL: "../../../datasets/hand_det/val.txt"
+  NAMES: "configs/hand.names"
 MODEL:
-  NC: 80
+  NC: 19
   INPUT_WIDTH: 256
   INPUT_HEIGHT: 256
   SEPARATION: 3
-  SEPARATION_SCALE: 2
+  SEPARATION_SCALE: 4
   REG_MAX: 1
   REG_SCALE: 0.5
 TRAIN:

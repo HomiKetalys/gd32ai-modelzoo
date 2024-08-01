@@ -37,7 +37,8 @@ def code_replace(opt,line, cfg, tfmodel):
     elif "IMG_NORM_CODE" in line:
         line = f"#define IMG_NORM_BIAS_ONLY\n#define bias {int(b):d}\n"
     elif "MODEL_CONF_CODE" in line:
-        line = f"#define yolofastestv2\n"
+        line = f"#define yolofastestv2\n" \
+               f"#define BGR_MODE\n"
     elif "ACTIVITIES_CODE" in line:
         names_path=cfg["names"]
         with open(names_path,"r",encoding="utf-8") as f:
@@ -63,6 +64,8 @@ def deploy(opt, save_path, tflite_path, gen_codes_path):
 
 def deploy_main(opt, save_path, c_project_path):
     print(opt.__dict__)
+    if opt.stm32cubeai_path is None:
+        os.environ['DO_NOT_USE_PACK_FOR_RESIZE2'] = "True"
     export(opt, save_path)
     tflite_path = os.path.join(save_path, "tflite")
     if c_project_path is None:

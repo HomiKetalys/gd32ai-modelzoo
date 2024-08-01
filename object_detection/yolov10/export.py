@@ -179,8 +179,10 @@ def export(opt,save_path):
 if __name__ == "__main__":
     # 指定训练配置文件
     parser = argparse.ArgumentParser()
-    parser.add_argument('--yaml', type=str, default="modelzoo/coco_person_256/coco_person.yaml", help='.yaml config')
-    parser.add_argument('--weight', type=str, default="modelzoo/coco_person_256/weights/weight_AP05_0.435116_190-epoch.pth", help='.weight config')
+    parser.add_argument('--yaml', type=str, default='configs/coco_80.yaml',
+                        help='Specify training profile *.data')
+    parser.add_argument('--weight', type=str, default='modelzoo/coco_80/weights/best.pth',
+                        help='The path of the model')
     parser.add_argument('--convert_type', type=int, default=1,
                         help='model type,0 for onnx,1 for tflite')
     parser.add_argument('--tflite_val_path', type=str, default="../../../datasets/coco2017/images/val2017",

@@ -16,3 +16,6 @@
 [submodule "object_detection/yolov10/submodules/FastestDet"]
 	path = object_detection/yolov10/submodules/FastestDet
 	url = https://github.com/HomiKetalys/FastestDet
+[submodule "common_utils/tinyengine"]
+	path = common_utils/tinyengine
+	url = https://github.com/HomiKetalys/tinyengine
