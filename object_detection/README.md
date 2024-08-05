@@ -61,7 +61,7 @@
 | Yolo-FastestV2 sp               | Int8 | 192x192x3 | GD32H759I  | 1 CPU | 600 MHz | 143.76 ms | X-CUBE-AI 8.0.1 |
 | Yolo-FastestV2 sp               | Int8 | 256x256x3 | GD32H759I  | 1 CPU | 600 MHz | 236.35 ms | X-CUBE-AI 8.0.1 |
 | YoloV10t sp                     | Int8 | 256x256x3 | GD32H759I  | 1 CPU | 600 MHz | 220.37 ms | X-CUBE-AI 8.0.1 |
-| YoloV10t sp                     | Int8 | 256x256x3 | GD32H759I  | 1 CPU | 600 MHz | 279.40 ms | TinyEngine      |
+| YoloV10t sp                     | Int8 | 256x256x3 | GD32H759I  | 1 CPU | 600 MHz | 264.64 ms | TinyEngine      |
 | YoloV10t sp                     | Int8 | 256x256x3 | GD32H759I  | 1 CPU | 600 MHz | 192.57 ms | X-CUBE-AI 9.0.0 |
 | Yolo-FastestV2 sp               | Int8 | 256x256x3 | GD32H759I  | 1 CPU | 600 MHz | 222.33 ms | X-CUBE-AI 9.0.0 |
 | *SSD Mobilenet v1 0.25          | Int8 | 192x192x3 | STM32H747I | 1 CPU | 400 MHz | 149.22 ms | X-CUBE-AI 9.1.0 |

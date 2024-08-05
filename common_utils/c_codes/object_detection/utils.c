@@ -84,13 +84,13 @@ void handle_preds(float *preds,float conf_thr)
                 xyxy[j]+=k*preds[i*OUT_CHANNEL+j*REG_MAX+k+1];
             }
         }
-        xyxy[0]=(i%16+offset-xyxy[0]*REG_SCALE)*16;
-        xyxy[1]=(i/16+offset-xyxy[1]*REG_SCALE)*16;
-        xyxy[2]=(i%16+offset+xyxy[2]*REG_SCALE)*16;
-        xyxy[3]=(i/16+offset+xyxy[3]*REG_SCALE)*16;
+        xyxy[0]=(i%(INPUT_WIDTH/16)+offset-xyxy[0]*REG_SCALE)*16;
+        xyxy[1]=(i/(INPUT_HEIGHT/16)+offset-xyxy[1]*REG_SCALE)*16;
+        xyxy[2]=(i%(INPUT_WIDTH/16)+offset+xyxy[2]*REG_SCALE)*16;
+        xyxy[3]=(i/(INPUT_HEIGHT/16)+offset+xyxy[3]*REG_SCALE)*16;
 #else
-        xyxy[0]=(i%16+offset+preds[i*OUT_CHANNEL+1])*INPUT_WIDTH/16;
-        xyxy[1]=(i/16+offset+preds[i*OUT_CHANNEL+2])*INPUT_HEIGHT/16;
+        xyxy[0]=(i%(INPUT_WIDTH/16)+offset+preds[i*OUT_CHANNEL+1])*16;
+        xyxy[1]=(i/(INPUT_HEIGHT/16)+offset+preds[i*OUT_CHANNEL+2])*16;
         xyxy[2]=preds[i*OUT_CHANNEL+3]*INPUT_WIDTH;
         xyxy[3]=preds[i*OUT_CHANNEL+4]*INPUT_HEIGHT;
         xyxy[0]-=xyxy[2]/2;
