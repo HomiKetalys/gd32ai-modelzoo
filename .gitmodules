@@ -19,3 +19,6 @@
 [submodule "common_utils/tinyengine"]
 	path = common_utils/tinyengine
 	url = https://github.com/HomiKetalys/tinyengine
+[submodule "modelzoo"]
+	path = modelzoo
+	url = https://huggingface.co/HomiKetalys/gd32ai-modelzoo

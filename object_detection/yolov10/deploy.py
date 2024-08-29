@@ -39,6 +39,7 @@ def code_replace(opt, line, cfg, tfmodel):
         line = f"#define IMG_NORM_BIAS_ONLY\n#define bias {int(b):d}\n"
     elif "MODEL_CONF_CODE" in line:
         line = f"#define yolov10\n"
+        line += f"#define OD_MODEL\n"
         line += f"#define REG_MAX {reg_max}\n"
         line += f"#define REG_SCALE {reg_scale}\n"
         line += f"#define RGB_MODE\n"
@@ -57,7 +58,7 @@ def code_replace(opt, line, cfg, tfmodel):
 
 
 def deploy(opt, save_path, tflite_path, gen_codes_path):
-    cfg = LoadYaml(opt.yaml)
+    cfg = LoadYaml(opt.config)
     tfmodel = YOLOv10OrtTf(cfg, tflite_path)
     gen_ai_model_codes = partial(gen_common_od_codes, code_replace=code_replace, cfg=cfg, tfmodel=tfmodel)
     common_deploy(opt, save_path, tflite_path, gen_codes_path, gen_ai_model_codes)
@@ -74,6 +75,7 @@ def deploy_main(opt, save_path, c_project_path):
     deploy(opt, save_path, tflite_path, c_project_path)
 
 
+
 paths = [
     'modified_files/Yolo_FastestV2_main/modelzoo/coco2017-0.241078ap-model.pth',
     'modelzoo/coco_sp_0001/coco-180-epoch-0.117769ap-model.pth',
@@ -81,28 +83,29 @@ paths = [
     "modelzoo/coco_sp_0003/coco-210-epoch-0.157492ap-model.pth",
     "modelzoo/coco_sp_0004/coco-220-epoch-0.213236ap-model.pth",
 ]
+
 val_paths = [
     '../../../datasets/abnormal_drive_0/images',
     '../../../datasets/coco2017/images/val2017',
     '../../../datasets/coco2017/val2017_person.txt']
 
 x_cube_ai_v = [
-    "D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.1.0",
+    "D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1",
     "F:/EDGEDL/en.x-cube-ai-windows-v9-0-0/stedgeai-windows-9.0.0",
 ]
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--yaml', type=str, default='configs/coco_80.yaml',
+    parser.add_argument('--config', type=str, default='../../modelzoo/object_detection/yolov10/coco_80/coco_80.yaml',
                         help='Specify training profile *.data')
-    parser.add_argument('--weight', type=str, default='modelzoo/coco_80/weights/best.pth',
+    parser.add_argument('--weight', type=str, default='../../modelzoo/object_detection/yolov10/coco_80/weights/best.pth',
                         help='The path of the model')
     parser.add_argument('--convert_type', type=int, default=1,
                         help='only 1,for tflite')
-    parser.add_argument('--tflite_val_path', type=str, default=val_paths[1],
+    parser.add_argument('--tflite_val_path', type=str, default=None,
                         help='The path where the image which quantity need is saved')
     parser.add_argument('--c_project_path', type=str,
-                        default=None,
+                        default=r"../../modelzoo/deployment/GD32H759I_EVAL_GCC/MDK-ARM/GD32H759I_EVAL.uvprojx",
                         help='The path of c project,None= results/deploy/xxxx_00xx')
     parser.add_argument('--stm32cubeai_path', type=str,
                         default=None,
@@ -117,6 +120,8 @@ if __name__ == "__main__":
                         help='eval exported model')
     parser.add_argument('--compiler', type=int, default=1,
                         help='compiler type,0 for armcc,1 fro gcc')
+    parser.add_argument('--deploy_path', type=str, default="results/deploy",
+                        help='')
     opt = parser.parse_args()
-    lger = LogSaver(opt.yaml, "results/deploy")
+    lger = LogSaver(opt.config, opt.deploy_path)
     lger.collect_prints(deploy_main, opt, lger.result_path, opt.c_project_path)

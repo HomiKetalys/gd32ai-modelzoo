@@ -24,10 +24,10 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 def train(opt, save_path):
-    assert os.path.exists(opt.yaml), "请指定正确的配置文件路径"
+    assert os.path.exists(opt.config), "请指定正确的配置文件路径"
 
     # 解析yaml配置文件
-    cfg = LoadYaml(opt.yaml)
+    cfg = LoadYaml(opt.config)
     print(cfg)
 
     ckpt_path = os.path.join(save_path, "weights")
@@ -57,10 +57,10 @@ def train(opt, save_path):
                           momentum=0.949,
                           weight_decay=0.0005,
                           )
-    # # 学习率衰减策略
-    # scheduler = optim.lr_scheduler.MultiStepLR(optimizer,
-    #                                            milestones=cfg.milestones,
-    #                                            gamma=0.1)
+    # 学习率衰减策略
+    scheduler = optim.lr_scheduler.MultiStepLR(optimizer,
+                                               milestones=cfg.milestones,
+                                               gamma=0.1)
 
 
     # 定义损失函数
@@ -93,16 +93,16 @@ def train(opt, save_path):
                                                    pin_memory=True,
                                                    )
 
-    def lr_sch(step):
-        if step<3*len(train_dataloader):
-            return math.pow(step / (3*len(train_dataloader)), 4)
-        elif step<(cfg.end_epoch+1)*len(train_dataloader):
-            step=step-3*len(train_dataloader)
-            return 10**(-4*step/((cfg.end_epoch-2)*len(train_dataloader)))
-        else:
-            return 0
-    # 学习率衰减策略
-    scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_sch)
+    # def lr_sch(step):
+    #     if step<3*len(train_dataloader):
+    #         return math.pow(step / (3*len(train_dataloader)), 4)
+    #     elif step<(cfg.end_epoch+1)*len(train_dataloader):
+    #         step=step-3*len(train_dataloader)
+    #         return 10**(-4*step/((cfg.end_epoch-2)*len(train_dataloader)))
+    #     else:
+    #         return 0
+    # # 学习率衰减策略
+    # scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_sch)
 
     # 迭代训练
     batch_num = 0
@@ -132,6 +132,8 @@ def train(opt, save_path):
                 scaler.scale(total).backward()
                 # 更新模型参数
                 scaler.step(optimizer)
+                # lr = scheduler.get_last_lr()[0]
+                # scheduler.step()
                 scaler.update()
             else:
                 # 模型推理
@@ -142,20 +144,18 @@ def train(opt, save_path):
                 total.backward()
                 # 更新模型参数
                 optimizer.step()
+                # lr = scheduler.get_last_lr()[0]
+                # scheduler.step()
 
             optimizer.zero_grad()
 
-            # 学习率预热
-            # lr = 0
-            # for g in optimizer.param_groups:
-            #     warmup_num = 5 * len(train_dataloader)
-            #     if batch_num <= warmup_num:
-            #         scale = math.pow(batch_num / warmup_num, 4)
-            #         g['lr'] = cfg.learn_rate * scale
-            #     lr = g["lr"]
-            lr=scheduler.get_last_lr()[0]
-            # 学习率调整
-            scheduler.step()
+            lr = 0
+            for g in optimizer.param_groups:
+                warmup_num = 5 * len(train_dataloader)
+                if batch_num <= warmup_num:
+                    scale = math.pow(batch_num / warmup_num, 4)
+                    g['lr'] = cfg.learn_rate * scale
+                lr = g["lr"]
 
             # 打印相关训练信息
             info = "Epoch:%d LR:%f IOU:%f Obj:%f Cls:%f Dfl:%f Total:%f" % (
@@ -182,15 +182,17 @@ def train(opt, save_path):
                 torch.save(model.state_dict(),
                            os.path.join(ckpt_path, "best.pth"))
 
+        scheduler.step()
+
 
 
 
 if __name__ == "__main__":
     # 指定训练配置文件
     parser = argparse.ArgumentParser()
-    parser.add_argument('--yaml', type=str, default="configs/hand.yaml", help='.yaml config')
+    parser.add_argument('--config', type=str, default="configs/coco_80.yaml", help='.yaml config')
     parser.add_argument('--weight', type=str, default=None, help='.weight config')
 
     opt = parser.parse_args()
-    lger = LogSaver(opt.yaml, "results/train")
+    lger = LogSaver(opt.config, "results/train")
     lger.collect_prints(train, opt, lger.result_path)

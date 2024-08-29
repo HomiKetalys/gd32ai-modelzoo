@@ -77,7 +77,7 @@ Taking the training model fastvit-t4 on the food-101 dataset as an example, Exec
  # Export And Evaluation
  Next, export the training results of the model as onnx or tflite.Execute the following command to export.
 ```
-  python pytorch2tflite.py --data results/train/{train_name}/food-101.yaml --model_path "results/train/{train_name}/model_best.pth.tar" --convert_type 1 -tflite_val_path "{datasets_root}/food-101/validation --eval 1"
+  python export.py --config results/train/{train_name}/food-101.yaml --weight "results/train/{train_name}/model_best.pth.tar" --convert_type 1 -tflite_val_path "{datasets_root}/food-101/validation"
 ```
   `convert_type` controls the conversion type,0 for onnx,1 for tflite.If the exported file is of type tflite, it is quantized.
   Meanwhile, the exported model will be evaluated.
@@ -85,19 +85,12 @@ Taking the training model fastvit-t4 on the food-101 dataset as an example, Exec
 Next, the exported model will be converted into C language code or further deployed on a specific chip.Taking "deployment/GD32H759I2_EVAL_GCC/MDK-ARM/GD32H759I2_EVAL.uvprojx" as an example.
 1. Download [X-CUBE-AI](https://www.st.com/en/embedded-software/x-cube-ai.html#st-get-software) and unzip it。Select the version you need based on the table below.If the required version is less than 9.0.0, [STM32CUBEIDE](https://www.st.com.cn/content/st_com/zh/stm32cubeide.html#st-get-software)  needs to be pre installed,And install the corresponding version of X-CUBE-AI in STM32CUBEIDE, then copy the file according to the prompts in [issue](https://github.com/HomiKetalys/gd32ai-modelzoo/issues/2#issuecomment-2143376547) .
 
-
-| X-CUBE-AI version | GCC | ARMCC |
-|-------------------|-----|-------|
-| 8.0.1             | √   | √     |
-| 8.1.0             | √   | √     |
-| 9.0.0             | √   | ×     |
-
 2. Install [keil5](https://www.keil.com/update/rvmdk.asp) 5.29。
 3. Download [gcc-arm-none-eabi](https://developer.arm.com/downloads/-/gnu-rm) 10.3-2021.10 and unzip it,If using ARMCC, there is no need.
 4. If you want to deploy on GD32H7 devices, download [GD32H7xx AddOn](https://www.gd32mcu.com/cn/download?kw=GD32H7)  and install it.
 5. Execute the following command to generate model inference C language code, where each parameter is modified to the one you need.If the parameter `--c_project_path` is a folder path, an Edge_AI folder will be generated in that folder. If it is a. uvprojx file from keil5, it will be directly deployed to the corresponding keil5 project.
 ```
-  python deploy.py --config results/train/{train_name}/food-101.yaml --model_path "results/train/{train_name}/model_best.pth.tar" --convert_type 1 --tflite_val_path "{datasets_root}/food-101/validation" --c_project_path deployment/gd32h759IMK6_GCC --series h7 --stm32cubeai_path ”{X-CUBE-AI PATH}/stedgeai-windows-9.0.0“
+  python deploy.py --config results/train/{train_name}/food-101.yaml --weight "results/train/{train_name}/model_best.pth.tar" --convert_type 1 --tflite_val_path "{datasets_root}/food-101/validation" --c_project_path ../../modelzoo/deployment/GD32H759I_EVAL_GCC/MDK-ARM/GD32H759I_EVAL.uvprojx --series h7 --stm32cubeai_path ”{X-CUBE-AI PATH}/stedgeai-windows-9.0.0“
 ```
 6. Use keil5 to open "deployment/GD32H759I2_EVAL_GCC/MDK-ARM/GD32H759I2_EVAL.uvprojx" and configure the gcc path in keil5. If it is ARMCC, it is not necessary. If you specify `--c_project_path` as the folder path, you also need to add the corresponding. c file, include path, and. a (. lib) library file in the keil5 project where you need to use the model. The sample project has been added.
 7. Implement your image reading method at the end of the ai_madel. h file. For the sample project, provide an example of the image reading method, and simply remove the corresponding annotation for the image reading method.
@@ -123,20 +116,26 @@ The metric of the model with an asterisk in its name comes from stm32ai model zo
 | *MobileNet v2 0.35 tfs | TensorFlow       | 128x128x3          | 61.31               | 19.10      | 237.32                 | 406.86                | X-CUBE-AI 9.1.0      |
 
 ## Time
-| Model              | Format   | Resolution   | Board              | Execution Engine   | Frequency   | Inference time   | STM32Cube.AI version  |
-|--------------------|----------|--------------|--------------------|--------------------|-------------|------------------|-----------------------|
-| FastVit sp         | Int8     | 128x128x3    | GD32H759I          | 1 CPU              | 600 MHz     | 94.14 ms         | X-CUBE-AI 8.0.1       |
-| FastVit            | Int8     | 192x192x3    | GD32H759I          | 1 CPU              | 600 MHz     | 179.46 ms        | X-CUBE-AI 8.0.1       |
-| FastVit sp         | Int8     | 192x192x3    | GD32H759I          | 1 CPU              | 600 MHz     | 186.71 ms        | X-CUBE-AI 8.0.1       |
-| FastVit            | Int8     | 192x192x3    | GD32H759I          | 1 CPU              | 600 MHz     | 163.69 ms        | X-CUBE-AI 9.0.0       |
-| FastVit sp         | Int8     | 192x192x3    | GD32H759I          | 1 CPU              | 600 MHz     | 169.33 ms        | X-CUBE-AI 9.0.0       |
-| FastVit sp         | Int8     | 128x128x3    | GD32H759I          | 1 CPU              | 600 MHz     | 86.34 ms         | X-CUBE-AI 9.0.0       |
-| FastVit            | Int8     | 224x224x3    | GD32H759I          | 1 CPU              | 600 MHz     | 237.23 ms        | X-CUBE-AI 8.0.1       |
-| FastVit sp         | Int8     | 224x224x3    | GD32H759I          | 1 CPU              | 600 MHz     | 246.20 ms        | X-CUBE-AI 8.0.1       |
-| *MobileNet v1 0.25 | Int8     | 224x224x3    | STM32H747I         | 1 CPU              | 400 MHz     | 163.78 ms        | X-CUBE-AI 9.1.0       |
-| *MobileNet v2 0.35 | Int8     | 224x224x3    | STM32H747I         | 1 CPU              | 400 MHz     | 290.75 ms        | X-CUBE-AI 9.1.0       |
-| *MobileNet v1 0.5  | Int8     | 224x224x3    | STM32H747I         | 1 CPU              | 400 MHz     | 485.79 ms        | X-CUBE-AI 9.1.0       |
-| *MobileNet v2 0.35 | Int8     | 128x128x3    | STM32H747I         | 1 CPU              | 400 MHz     | 94.34 ms         | X-CUBE-AI 9.1.0       |
+| Model              | Format | Resolution | Board      | Execution Engine | Frequency | Inference time | STM32Cube.AI version |
+|--------------------|--------|------------|------------|------------------|-----------|----------------|----------------------|
+| FastVit sp         | Int8   | 128x128x3  | GD32H759I  | 1 CPU            | 600 MHz   | 94.14 ms       | X-CUBE-AI 8.0.1      |
+| FastVit sp         | Int8   | 128x128x3  | GD32H759I  | 1 CPU            | 600 MHz   | 86.34 ms       | X-CUBE-AI 9.0.0      |
+| FastVit            | Int8   | 192x192x3  | GD32H759I  | 1 CPU            | 600 MHz   | 179.46 ms      | X-CUBE-AI 8.0.1      |
+| FastVit            | Int8   | 192x192x3  | GD32H759I  | 1 CPU            | 600 MHz   | 163.69 ms      | X-CUBE-AI 9.0.0      |
+| FastVit sp         | Int8   | 192x192x3  | GD32H759I  | 1 CPU            | 600 MHz   | 186.71 ms      | X-CUBE-AI 8.0.1      |
+| FastVit sp         | Int8   | 192x192x3  | GD32H759I  | 1 CPU            | 600 MHz   | 169.33 ms      | X-CUBE-AI 9.0.0      |
+| FastVit            | Int8   | 224x224x3  | GD32H759I  | 1 CPU            | 600 MHz   | 237.23 ms      | X-CUBE-AI 8.0.1      |
+| FastVit            | Int8   | 224x224x3  | GD32H759I  | 1 CPU            | 600 MHz   | 217.58 ms      | X-CUBE-AI 9.0.0      |
+| FastVit sp         | Int8   | 224x224x3  | GD32H759I  | 1 CPU            | 600 MHz   | 246.20 ms      | X-CUBE-AI 8.0.1      |
+| FastVit sp         | Int8   | 224x224x3  | GD32H759I  | 1 CPU            | 600 MHz   | 225.09 ms      | X-CUBE-AI 9.0.0      |
+| *MobileNet v2 0.35 | Int8   | 128x128x3  | STM32H747I | 1 CPU            | 400 MHz   | 94.34 ms       | X-CUBE-AI 9.1.0      |
+| MobileNet v2 0.35  | Int8   | 128x128x3  | GD32H759I  | 1 CPU            | 600 MHz   | 87.90 ms       | X-CUBE-AI 9.1.0      |
+| *MobileNet v1 0.25 | Int8   | 224x224x3  | STM32H747I | 1 CPU            | 400 MHz   | 163.78 ms      | X-CUBE-AI 9.1.0      |
+| MobileNet v1 0.25  | Int8   | 224x224x3  | GD32H759I  | 1 CPU            | 600 MHz   | 122.93 ms      | X-CUBE-AI 9.1.0      |
+| *MobileNet v2 0.35 | Int8   | 224x224x3  | STM32H747I | 1 CPU            | 400 MHz   | 290.75 ms      | X-CUBE-AI 9.1.0      |
+| MobileNet v2 0.35  | Int8   | 224x224x3  | GD32H759I  | 1 CPU            | 600 MHz   | 216.32 ms      | X-CUBE-AI 9.1.0      |
+| *MobileNet v1 0.5  | Int8   | 224x224x3  | STM32H747I | 1 CPU            | 400 MHz   | 485.79 ms      | X-CUBE-AI 9.1.0      |
+| MobileNet v1 0.5   | Int8   | 224x224x3  | GD32H759I  | 1 CPU            | 600 MHz   | 347.30 ms      | X-CUBE-AI 9.1.0      |
 
 ## Images
 ![fastvit on gd32](../../assets/img4.png)

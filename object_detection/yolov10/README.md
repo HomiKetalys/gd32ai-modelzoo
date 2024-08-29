@@ -136,13 +136,13 @@ VAL:
 ## 开始训练
 执行以下命令开始训练。将--yaml参数修改为你自己的配置文件。如果你需要在某个预训练上继续训练，则添加`--weight`参数，指定pth文件的路径。
 ```
-python train.py --yaml configs/coco_80.yaml
+python train.py --config configs/coco_80.yaml
 ```
 训练结果将会被保存到results/train。以配置文件coco_80.yaml为例，第一次训练的结果将会被保存到results/train/coco_80_0000。
 # 模型导出与验证
 接下来把模型导出为onnx或tflite。执行以下命令进行导出。如果你需要进行部署，可以跳过这一步，部署过程会顺便导出模型。
 ```
-python export.py --yaml results/train/coco_80_0000/coco_80.yaml --weight results/train/coco_80_0000/weights/best.pth --convert_type 1 --tflite_val_path "{datasets_root}/COCO2017/images/val2017"
+python export.py --config results/train/coco_80_0000/coco_80.yaml --weight results/train/coco_80_0000/weights/best.pth --convert_type 1 --tflite_val_path "{datasets_root}/COCO2017/images/val2017"
 ```
 `convert_type` 控制导出类型，0表示onnx，1表示tflite。如果导出的模型类型为tflite，则会自动进行量化。如果你需要对导出的模型进行验证，则需要指定`--eval True`。
 # 模型部署
@@ -150,28 +150,22 @@ python export.py --yaml results/train/coco_80_0000/coco_80.yaml --weight results
 1. 从下面两种推理引擎中选择一种。
 - X-CUBEI-AI：如果你选择使用X-CUBE-AI则需要下载[X-CUBE-AI](https://www.st.com/en/embedded-software/x-cube-ai.html#st-get-software) 并解压。根据下表选择你需要的版本。若需要的版本小于9.0.0，则需要预先安装[STM32CUBEIDE](https://www.st.com.cn/content/st_com/zh/stm32cubeide.html#st-get-software) ，并在STM32CUBEIDE中安装对应版本的X-CUBE-AI，然后根据[issue](https://github.com/HomiKetalys/gd32ai-modelzoo/issues/2#issuecomment-2143376547) 中的提示复制文件。
 
-| X-CUBE-AI版本            | GCC | ARMCC |
-|------------------------|-----|-------|
-| 8.0.1                  | √   | √     |
-| 8.1.0                  | √   | √     |
-| 9.0.0                  | √   | ×     |
-
-- TinyEngine：如果你选择使用TinyEngine，则不需要额外操作，这是本项目自带的。
+- TinyEngine：如果你选择使用TinyEngine，则不需要额外操作，这是本项目自带的，但是对于ARMCC，只支持AC6。
 
 2. 安装[keil5](https://www.keil.com/update/rvmdk.asp) 5.29。
 3. 下载[gcc-arm-none-eabi](https://developer.arm.com/downloads/-/gnu-rm) 10.3-2021.10并解压，如果使用ARMCC则不需要。 
-4. 如果你要在GD32设备上部署，下载[GD32H7xx AddOn](https://www.gd32mcu.com/cn/download?kw=GD32H7) 并进行安装。
+4. 本例中要在GD32H7设备上部署，下载[GD32H7xx AddOn](https://www.gd32mcu.com/cn/download?kw=GD32H7) 并进行安装。
 5. 执行以下命令生成模型推理C语言代码，其中各参数修改为你需要的参数，参数`--c_project_path`如果为文件夹路径，则会在该文件夹下生成Edge_AI文件夹，如果是keil5的.uvprojx文件，则会直接部署到对应的keil5工程中。如果你使用TinyEngine，则不需要传入`--stm32cubeai_path`。
 ```
-python deploy.py --yaml results/train/coco_80_0000/coco_80.yaml --weight results/train/coco_80_0000/best.pth --tflite_val_path "{datasets_root}/COCO2017/images/val2017" --c_project_path deployment/GD32H759I_EVAL_GCC/MDK-ARM/GD32H759I_EVAL.uvprojx --series h7 --stm32cubeai_path ”{X-CUBE-AI PATH}/stedgeai-windows-9.0.0“
+python deploy.py --config results/train/coco_80_0000/coco_80.yaml --weight results/train/coco_80_0000/best.pth --tflite_val_path "{datasets_root}/COCO2017/images/val2017" --c_project_path ../../modelzoo/deployment/GD32H759I_EVAL_GCC/MDK-ARM/GD32H759I_EVAL.uvprojx --series h7 --stm32cubeai_path ”{X-CUBE-AI PATH}/stedgeai-windows-9.0.0“
 ```
-6. 使用keil5打开"deployment/GD32H759I_EVAL_GCC/MDK-ARM/GD32H759I_EVAL.uvprojx"并在keil5中配置gcc路径，如果是ARMCC则不需要。如果你指定`--c_project_path`为文件夹路径，则还需要在你需要使用该模型的keil5工程中添加对应.c文件，include path以及.a(.lib）库文件，样例工程已完成添加。
+6. 使用keil5打开"deployment/GD32H759I_EVAL_GCC/MDK-ARM/GD32H759I_EVAL.uvprojx"并在keil5中配置gcc路径，如果是ARMCC则不需要。如果你指定`--c_project_path`为文件夹路径，则还需要在你需要手动复制生成的代码，并在需要使用该模型的keil5工程中添加对应.c文件，include path以及.a(.lib）库文件。如果你使用TinyEngine，则还需要在keil5工程设置CMSIS版本为5.9.0，CMSIS-DSP版本为1.16.2，CMSIS-NN版本为4.1.0。样例工程我已完成配置。
 7. 在ai_model.h的文件末尾实现你的图像读取方法，对于样例工程，提供了图像读取方法的示例，取消对应的图像读取方法的注释即可。
 8. 在你的工程中调用AI_Run()来运行模型，调用get_obj_num()获取检测目标数量，调用get_obj_name(id)获取第id个目标的类别，调用get_obj_xyxy(id,&x0,&y0,&x1,&y1)获取第id个目标的框。样例工程已写好样例应用。最后编译并烧录。
 
 
 # 运行图像
 
-
+<img src="../../assets/img3.jpg" width="360" height="480" alt="coco2017 on gd32">
 
 

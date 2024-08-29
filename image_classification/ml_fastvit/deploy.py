@@ -7,7 +7,7 @@ import yaml
 import os
 from common_utils.utils import LogSaver,common_deploy,gen_common_ic_codes
 from submodules.ml_fastvit.validate import ClassifierTfOrt
-from pytorch2tflite import export
+from export import export
 
 
 def code_replace(opt,line,cfg,tfmodel):
@@ -40,6 +40,10 @@ def code_replace(opt,line,cfg,tfmodel):
                f"#define weight_r {1/std[0]/w}f\n" \
                f"#define weight_g {1/std[1]/w}f\n" \
                f"#define weight_b {1/std[2]/w}f\n"
+    elif "MODEL_CONF_CODE" in line:
+        line = f"#define RGB_MODE\n" \
+               f"#define IC_MODEL\n" \
+               f"#define fastvit\n"
     elif "ACTIVITIES_CODE" in line:
         names_path=os.path.join(cfg["data_dir"],"validation")
         names_=os.listdir(names_path)
@@ -79,22 +83,23 @@ val_paths=[
 x_cube_ai_v=[
 "D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1",
 "F:/EDGEDL/en.x-cube-ai-windows-v9-0-0/stedgeai-windows-9.0.0",
+"F:/EDGEDL/en.x-cube-ai-windows-v9-1-0/stedgeai-windows-9.1.0",
 ]
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config', type=str, default='modelzoo/food-101-224/food-101.yaml',
+    parser.add_argument('--config', type=str, default='../../modelzoo/image_classification/ml_fastvit/food-101-sp-224/food-101.yaml',
                         help='Specify training profile *.data')
-    parser.add_argument('--model_path', type=str, default='modelzoo/food-101-224/model_best.pth.tar',
+    parser.add_argument('--weight', type=str, default='../../modelzoo/image_classification/ml_fastvit/food-101-sp-224/model_best.pth.tar',
                         help='The path of the model')
     parser.add_argument('--convert_type', type=int, default=1,
                         help='only 1,for tflite')
-    parser.add_argument('--tflite_val_path', type=str, default='../../../datasets/food-101/validation',
+    parser.add_argument('--tflite_val_path', type=str, default=None,
                         help='The path where the image which quantity need is saved')
-    parser.add_argument('--c_project_path', type=str, default="deployment/GD32H759I_EVAL_GCC/MDK-ARM/GD32H759I_EVAL.uvprojx",
+    parser.add_argument('--c_project_path', type=str, default=None,
                         help='The path of c project,None= results/deploy/xxxx_00xx')
     parser.add_argument('--stm32cubeai_path', type=str,
-                        default=x_cube_ai_v[0],
+                        default=x_cube_ai_v[1],
                         help='The path of stm32cubeai')
     parser.add_argument('--series', type=str, default="h7",
                         help='The series of gd32,f4 or h7')
@@ -104,6 +109,8 @@ if __name__ == "__main__":
                         help='compiler type,0 for armcc,1 fro gcc')
     parser.add_argument('--img_size', type=int,nargs='+' ,default=None,
                         help='Specify the image size of the input for the exported model.the img size in config is default')
+    parser.add_argument('--deploy_path', type=str, default="results/deploy",
+                        help='')
     opt = parser.parse_args()
-    lger = LogSaver(opt.config, "results/deploy")
+    lger = LogSaver(opt.config, opt.deploy_path)
     lger.collect_prints(deploy_main, opt, lger.result_path, opt.c_project_path)

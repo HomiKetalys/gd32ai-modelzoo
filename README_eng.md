@@ -1,11 +1,17 @@
 # Welcome to GD32 Model Zoo
 
+<div align="center">
+
+[中文](README.md) | [English](README_eng.md)
+
+</div>
+
 This is an AI model library primarily based on the microcontroller GD32 as the hardware platform. Here are various AI models that can be used on GD32, including image classification and object detection models. This model library has the following characteristics:
 
- - Ready to use out of the box, deeply adapted to Keil5 projects, models can be directly deployed into Keil5 projects, and No need to configure Keil5 to use the model, supporting ARMCC and GCC.
+ - Ready to use out of the box, deeply adapted to Keil5 projects, models can be directly deployed into Keil5 projects without the need for complex configuration, supporting ARMCC and GCC.
+ - TinyEngine, a completely free inference framework, runs at the forefront of the industry in terms of speed on the F4 and H7 series,only supporting GCC.
  - The peak memory usage during model runtime is adjustable, and the peak memory usage is lower than that of similar model libraries.
  - Sparse patch inference can reduce inference time based on target sparsity in static scenes, and the inference time of object detection models is lower than that of similar model libraries.
- - TinyEngine is a completely free inference framework that can be used for commercial purposes.
  - Provide training scripts that allow the model to be retrained, as well as pretrained models that can be adapted to different applications through transfer learning.
 
 # Main features
@@ -29,8 +35,8 @@ Sparse patch inference can reduce feature extraction time based on the sparsity 
        - COCO2017 Dataset
        - Fusion of Abnormal Behavior Driving Dataset
      - Now available for deployment on the following devices
-       - GD32F470IIH6
-       - GD32H759IMK6
+       - GD32F470I
+       - GD32H759I
      - Supported infer frameworks
        - X-CUBE-AI
        - TinyEngine
@@ -48,7 +54,7 @@ Sparse patch inference can reduce feature extraction time based on the sparsity 
      - Now provide models trained on the following dataset
        - Food-101 Dataset
      - Now available for deployment on the following devices
-       - GD32H759IMK6
+       - GD32H759I
      - Supported infer frameworks
        - X-CUBE-AI
  

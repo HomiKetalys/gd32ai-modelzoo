@@ -18,10 +18,10 @@ device = torch.device("cpu")
 from onnxsim import simplify
 
 def export_onnx(opt, save_path):
-    assert os.path.exists(opt.yaml), "请指定正确的配置文件路径"
+    assert os.path.exists(opt.config), "请指定正确的配置文件路径"
 
     # 解析yaml配置文件
-    cfg = LoadYaml(opt.yaml)
+    cfg = LoadYaml(opt.config)
     print(cfg)
     # 初始化模型结构
     if opt.weight is not None:
@@ -96,10 +96,10 @@ def export_onnx(opt, save_path):
             print("onnx simplify failed")
 
 def export_tflite(opt, export_path,val_path):
-    assert os.path.exists(opt.yaml), "请指定正确的配置文件路径"
+    assert os.path.exists(opt.config), "请指定正确的配置文件路径"
 
     # 解析yaml配置文件
-    cfg = LoadYaml(opt.yaml)
+    cfg = LoadYaml(opt.config)
     print(cfg)
     assert os.path.exists(export_path)
     tflite_save_path = os.path.join(export_path,"tflite")
@@ -171,24 +171,38 @@ def export(opt,save_path):
             opt.weight=onnx_path
             val( opt, onnx_path, 1)
     elif opt.convert_type==1:
-        export_tflite( opt,save_path,opt.tflite_val_path)
+        if opt.tflite_val_path is None:
+            label=os.path.split(opt.config)[1].split(".")[0]
+            assert label in val_paths.keys()
+            tflite_val_path=val_paths[label]
+        else:
+            tflite_val_path=opt.tflite_val_path
+        if not os.path.isabs(tflite_val_path):
+            tflite_val_path=os.path.abspath(os.path.join(os.path.dirname(__file__),tflite_val_path))
+        export_tflite( opt,save_path,tflite_val_path)
         if opt.eval:
             opt.weight=tflite_path
             val( opt, tflite_path, 1)
 
+val_paths = {
+    'coco_80':'../../../datasets/coco2017/images/val2017',
+    'coco_person':'../../../datasets/coco2017/val2017_person.txt',
+    'hand':'../../../datasets/hand_det/images',
+}
+
 if __name__ == "__main__":
     # 指定训练配置文件
     parser = argparse.ArgumentParser()
-    parser.add_argument('--yaml', type=str, default='configs/coco_80.yaml',
+    parser.add_argument('--config', type=str, default='modelzoo/coco_80/coco_80.yaml',
                         help='Specify training profile *.data')
     parser.add_argument('--weight', type=str, default='modelzoo/coco_80/weights/best.pth',
                         help='The path of the model')
     parser.add_argument('--convert_type', type=int, default=1,
                         help='model type,0 for onnx,1 for tflite')
-    parser.add_argument('--tflite_val_path', type=str, default="../../../datasets/coco2017/images/val2017",
+    parser.add_argument('--tflite_val_path', type=str, default=None,
                         help='The path where the image which quantity need is saved')
-    parser.add_argument('--eval', type=bool, default=True,
+    parser.add_argument('--eval', type=bool, default=False,
                         help='eval exported model')
     opt = parser.parse_args()
-    lger = LogSaver(opt.yaml, "results/export")
+    lger = LogSaver(opt.config, "results/export")
     lger.collect_prints(export, opt, lger.result_path)

@@ -11,7 +11,7 @@ MODEL:
   REG_MAX: 1
   REG_SCALE: 0.5
 TRAIN:
-  LR: 0.1
+  LR: 0.01
   THRESH: 0.25
   WARMUP: true
   BATCH_SIZE: 96

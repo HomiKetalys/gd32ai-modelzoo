@@ -23,10 +23,10 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 def val(opt, save_path,val_type=0):
-    assert os.path.exists(opt.yaml), "请指定正确的配置文件路径"
+    assert os.path.exists(opt.config), "请指定正确的配置文件路径"
 
     # 解析yaml配置文件
-    cfg = LoadYaml(opt.yaml)
+    cfg = LoadYaml(opt.config)
     print(cfg)
 
     ckpt_path = os.path.join(save_path, "weights")
@@ -80,7 +80,7 @@ def val(opt, save_path,val_type=0):
 
 
     # 数据集加载
-    val_dataset = TensorDataset(cfg.val_txt, cfg.input_width, cfg.input_height, False)
+    val_dataset = TensorDataset(cfg.val_txt, cfg.input_width, cfg.input_height, False,label_flag=cfg.label_flag)
     # 验证集
     val_dataloader = torch.utils.data.DataLoader(val_dataset,
                                                  batch_size=cfg.batch_size,
@@ -102,9 +102,9 @@ def val(opt, save_path,val_type=0):
 if __name__ == "__main__":
     # 指定训练配置文件
     parser = argparse.ArgumentParser()
-    parser.add_argument('--yaml', type=str, default="modelzoo/coco_80_256/coco_80.yaml", help='.yaml config')
+    parser.add_argument('--config', type=str, default="modelzoo/coco_80_256/coco_80.yaml", help='.yaml config')
     parser.add_argument('--weight', type=str, default="modelzoo/coco_80_256/weights/best.pth", help='.weight config')
 
     opt = parser.parse_args()
-    lger = LogSaver(opt.yaml, "results/val")
+    lger = LogSaver(opt.config, "results/val")
     lger.collect_prints(val, opt, lger.result_path)

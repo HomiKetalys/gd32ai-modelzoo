@@ -1,4 +1,6 @@
+import argparse
 import copy
+import importlib
 import os
 import re
 import shutil
@@ -42,22 +44,27 @@ class multipleSave(object):
 
 
 class LogSaver():
-    def __init__(self, config_path, save_folder_path):
+    def __init__(self, config_path, save_folder_path,auto_rep=False):
         config_name = os.path.split(config_path)[-1]
         folder_name = ".".join(config_name.split(".")[:-1])
         name_index = 0
         folder_path = ""
-        if not os.path.exists(save_folder_path):
-            os.makedirs(save_folder_path)
-        while name_index < 10000:
-            folder_name_ = folder_name + f"_{name_index:04d}"
-            folder_path = os.path.join(save_folder_path, folder_name_)
-            if os.path.exists(folder_path):
-                name_index += 1
-            else:
-                os.mkdir(folder_path)
-                break
-        assert name_index < 10000, "too many results existed"
+        if "results" in save_folder_path:
+            auto_rep=True
+        if auto_rep:
+            if not os.path.exists(save_folder_path):
+                os.makedirs(save_folder_path)
+            while name_index < 10000:
+                folder_name_ = folder_name + f"_{name_index:04d}"
+                folder_path = os.path.join(save_folder_path, folder_name_)
+                if os.path.exists(folder_path):
+                    name_index += 1
+                else:
+                    os.mkdir(folder_path)
+                    break
+            assert name_index < 10000, "too many results existed"
+        else:
+            folder_path=save_folder_path
         self.result_path = folder_path
         os.makedirs(self.result_path, exist_ok=True)
         config_backup_path = os.path.join(self.result_path, config_name)
@@ -177,12 +184,17 @@ class CCR():
         self.input1_shape = tflite_model.model_input_details['shape'][1:]
         self.output1_shape = tflite_model.model_output_details[0]['shape'][1:]
         self.input2_shape = None
+        self.ident=""
+        self.custom_code_replace=None
         if tflite2_path is not None:
             tflite_model = tfOrtModelRuner(tflite2_path)
             self.input2_shape = tflite_model.model_input_details['shape'][1:]
             self.output2_shape = tflite_model.model_output_details[0]['shape'][1:]
 
-    def common_code_replace(self, opt, line):
+    def common_code_replace(self, opt, line,**kwargs):
+        self.get_ident(line)
+        if self.custom_code_replace is not None:
+            line=self.custom_code_replace(opt,line,**kwargs)
         if opt.stm32cubeai_path is not None:
             version = extract_version_number(os.path.split(opt.stm32cubeai_path)[1])
             if "RCU_CODE" in line:
@@ -203,12 +215,18 @@ class CCR():
                         f"#define OUTPUT_1_C {self.output1_shape[2]}\n" \
                         f"#define INPUT_2_H {self.input2_shape[0]}\n" \
                         f"#define INPUT_2_W {self.input2_shape[1]}\n" \
-                        f"#define INPUT_2_C {self.input2_shape[2]}\n" \
-                        f"#define OUTPUT_2_H {self.output2_shape[0]}\n" \
-                        f"#define OUTPUT_2_C {self.output2_shape[1]}\n"
+                        f"#define INPUT_2_C {self.input2_shape[2]}\n"
+                if len(self.output2_shape)>1:
+                    line+=f"#define OUTPUT_2_H {self.output2_shape[0]}\n" \
+                          f"#define OUTPUT_2_C {self.output2_shape[1]}\n"
+                else:
+                    line+=f"#define OUTPUT_2_C {self.output2_shape[0]}\n"
             else:
-                line += f"#define OUTPUT_1_H {self.output1_shape[0]}\n" \
-                        f"#define OUTPUT_1_C {self.output1_shape[1]}\n"
+                if len(self.output1_shape)>1:
+                    line += f"#define OUTPUT_1_H {self.output1_shape[0]}\n" \
+                            f"#define OUTPUT_1_C {self.output1_shape[1]}\n"
+                else:
+                    line += f"#define OUTPUT_1_C {self.output1_shape[0]}\n"
         elif "INFER_FRAME_CODE" in line:
             if opt.stm32cubeai_path is not None:
                 line = "#define X_CUBE_AI"
@@ -216,54 +234,68 @@ class CCR():
                 line = "#define TinyEngine"
         if "_CODE" in line:
             line = ""
+        else:
+            if len(self.ident)>0:
+                lines=line.split("\n")
+                line=""
+                for l in lines:
+                    if len(l)>0:
+                        line+=self.ident+l+"\n"
+
+        self.ident=""
+
         return line
+
+    def get_ident(self,line):
+        if "_CODE" in line:
+            line_code=line.replace(" ","")
+            self.ident=line[:line.find(line_code)]
 
 
 def gen_common_ic_codes(opt, utils_path, ai_model_path, ccr, code_replace, **kwargs):
-    with open("../../common_utils/c_codes/image_classification/ai_model.h", "r") as f:
+    ccr.custom_code_replace=code_replace
+    c_codes_path = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "c_codes")
+    with open(os.path.join(c_codes_path, "ai_model.h"), "r") as f:
         lines = f.readlines()
     with open(os.path.join(ai_model_path, "ai_model.h"), "w", encoding="utf-8") as f:
         for line in lines:
-            line = code_replace(opt, line, **kwargs)
-            line = ccr.common_code_replace(opt, line)
+            line = ccr.common_code_replace(opt, line,**kwargs)
             if len(line) > 0:
                 f.write(line)
 
-    with open("../../common_utils/c_codes/image_classification/ai_model.c", "r") as f:
+    with open(os.path.join(c_codes_path, "ai_model.c"), "r") as f:
         lines = f.readlines()
     with open(os.path.join(ai_model_path, "ai_model.c"), "w", encoding="utf-8") as f:
         for line in lines:
-            line = code_replace(opt, line, **kwargs)
-            line = ccr.common_code_replace(opt, line)
+            line = ccr.common_code_replace(opt, line, **kwargs)
             if len(line) > 0:
                 f.write(line)
 
 
 def gen_common_od_codes(opt, utils_path, ai_model_path, ccr, code_replace, **kwargs):
-    with open("../../common_utils/c_codes/object_detection/ai_model.h", "r") as f:
+    ccr.custom_code_replace = code_replace
+    c_codes_path = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "c_codes")
+    with open(os.path.join(c_codes_path, "ai_model.h"), "r") as f:
         lines = f.readlines()
     with open(os.path.join(ai_model_path, "ai_model.h"), "w", encoding="utf-8") as f:
         for line in lines:
-            line = code_replace(opt, line, **kwargs)
-            line = ccr.common_code_replace(opt, line)
+            line = ccr.common_code_replace(opt, line, **kwargs)
             if len(line) > 0:
                 f.write(line)
 
-    with open("../../common_utils/c_codes/object_detection/ai_model.c", "r") as f:
+    with open(os.path.join(c_codes_path, "ai_model.c"), "r") as f:
         lines = f.readlines()
     with open(os.path.join(ai_model_path, "ai_model.c"), "w", encoding="utf-8") as f:
         for line in lines:
-            line = code_replace(opt, line, **kwargs)
-            line = ccr.common_code_replace(opt, line)
+            line = ccr.common_code_replace(opt, line, **kwargs)
             if len(line) > 0:
                 f.write(line)
 
-    with open("../../common_utils/c_codes/object_detection/utils.c", "r") as f:
+    with open(os.path.join(c_codes_path, "utils.c"), "r") as f:
         lines = f.readlines()
     with open(os.path.join(utils_path, "utils.c"), "w", encoding="utf-8") as f:
         for line in lines:
-            line = code_replace(opt, line, **kwargs)
-            line = ccr.common_code_replace(opt, line)
+            line = ccr.common_code_replace(opt, line, **kwargs)
             if len(line) > 0:
                 f.write(line)
 
@@ -300,7 +332,6 @@ def common_deploy(opt, save_path, tflite_path, gen_codes_path, gen_ai_model_code
     os.makedirs(ai_core_path, exist_ok=True)
     os.makedirs(utils_path, exist_ok=True)
 
-    version=None
     if opt.stm32cubeai_path is not None:
 
         version = extract_version_number(os.path.split(opt.stm32cubeai_path)[1])
@@ -337,13 +368,13 @@ def common_deploy(opt, save_path, tflite_path, gen_codes_path, gen_ai_model_code
         if opt.series == "f4":
             cm = "m4"
         elif opt.series == "h7":
-            if version is not None:
-                if version < "9.0.0":
-                    cm = "m4"
-                else:
-                    cm = "m7"
-            else:
-                cm="m7"
+            # if version is not None:
+            #     if version < "9.0.0":
+            #         cm = "m4"
+            #     else:
+            #         cm = "m7"
+            # else:
+            cm="m7"
         else:
             assert False, f"Unsupported series {opt.series}"
         set_lib=opt.stm32cubeai_path is not None
@@ -384,7 +415,7 @@ def gen_net_codes_te(tflite_path, name, work_space_path, output_path):
     from .tinyengine.code_generator.CodegenUtilTFlite import GenerateSourceFilesFromTFlite
     peakmem = GenerateSourceFilesFromTFlite(
         tflite_path,
-        life_cycle_path=os.path.join(work_space_path, "lifecycle.png"),
+        life_cycle_path=os.path.join(work_space_path, f"{name}_lifecycle.png"),
         model_name=name,
         codegen_root=output_path,
     )
@@ -748,6 +779,7 @@ def deploy_to_keil5(uvprojx_path, cm="m7",set_lib=False):
     else:
         assert False, "Unsupported uxprojx complier"
 
+
     # out.write(ET.tostring(root, encoding='utf-8').decode())
     # out.close()
     tree.write(uvprojx_path, encoding="utf-8", xml_declaration=True, short_empty_elements=False)
@@ -974,6 +1006,138 @@ def gen_code_test(tflite_path, name, work_space_path, output_path):
     )
     print(f"Peak memory: {peakmem} bytes")
 
+x_cube_ai_v=[
+"D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1",
+"F:/EDGEDL/en.x-cube-ai-windows-v9-0-0/stedgeai-windows-9.0.0",
+"F:/EDGEDL/en.x-cube-ai-windows-v9-1-0/stedgeai-windows-9.1.0",
+]
+
+def deploy_tflite(tflite_path):
+    stm32ai_exe_path = os.path.join(x_cube_ai_v[2], "Utilities", "windows", "stedgeai.exe")
+    gen_net_func = partial(gen_net_codes_xcubeai, stm32ai_exe_path=stm32ai_exe_path, version="9.1.0")
+
+    gen_net_func(tflite_path, "network_1", "temp/x_cube_ai/temp", "temp/x_cube_ai/model")
+
+def auto_deploy():
+    proot=os.path.split(os.path.split(os.path.abspath(__file__))[0])[0]
+    root=os.path.join(proot,"modelzoo")
+    names=["object_detection","image_classification"]
+    config_types=[".data",".yaml"]
+
+    def find_config(path):
+        file_names=os.listdir(path)
+        for file_name in file_names:
+            for config_type in config_types:
+                if file_name.endswith(config_type):
+                    file_path=os.path.join(path,file_name)
+                    if os.path.isfile(file_path):
+                        return file_path
+        return None
+
+    def find_weight(path):
+        file_names = os.listdir(path)
+
+        for file_name in file_names:
+            file_path=os.path.join(path,file_name)
+            if os.path.isfile(file_path):
+                if "best" in file_name:
+                    return file_path
+            else:
+                weight_path = find_weight(file_path)
+                if weight_path is not None:
+                    return weight_path
+        return None
+
+    class tempOpt():
+        def __init__(self):
+            self.config=None
+            self.weight=None
+            self.convert_type=1
+            self.c_project_path=None
+            self.tflite_val_path=None
+            self.stm32cubeai_path=None
+            self.series=None
+            self.eval=False
+            self.compiler=1
+            self.img_size=None
+            self.conf_thr=0.3
+            self.nms_thr=0.5
+
+    infer_frames_path={
+        'TinyEngine':None,
+        'X-CUBE-AI':r"D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1",
+    }
+    infer_frames=['TinyEngine','X-CUBE-AI']
+    series=['f4','h7']
+    unsupport_dict={
+        'ml_fastvit':['f4','TinyEngine']
+    }
+
+    sys_path=copy.deepcopy(sys.path)
+    for name in names:
+        path=os.path.join(root,name)
+        model_names=os.listdir(path)
+        for model_name in model_names:
+            modelzoo_path=os.path.join(path,model_name)
+            if os.path.isfile(modelzoo_path):
+                continue
+            rel_path=os.path.relpath(modelzoo_path,root)
+            model_path=os.path.abspath(os.path.join(proot,rel_path))
+            # exec(f"from {name}.{model_name}.deploy import deploy_main")
+            os.chdir(model_path)
+            sys.path=copy.deepcopy(sys_path)
+            sys.path.append(model_path)
+            # del deploy_main
+            # deploy_main = importlib.import_module(f"deploy")
+
+            # spec = importlib.util.spec_from_file_location("deploy", os.path.join(model_path,"deploy.py"))
+            # deploy_module = importlib.util.module_from_spec(spec)
+            # spec.loader.exec_module(deploy_module)
+            # deploy_main=getattr(deploy_module,"deploy_main")
+
+            model_ins_names=os.listdir(modelzoo_path)
+            for model_ins_name in model_ins_names:
+                model_ins_path=os.path.join(modelzoo_path,model_ins_name)
+                config_path=find_config(model_ins_path)
+                assert config_path is not None
+                weight_path=find_weight(model_ins_path)
+                assert weight_path is not None
+                opt=tempOpt()
+                opt.config=config_path
+                opt.weight=weight_path
+
+                for infra in infer_frames:
+                    if model_name in unsupport_dict.keys():
+                        if infra in unsupport_dict[model_name]:
+                            continue
+                    opt.stm32cubeai_path=infer_frames_path[infra]
+                    for seri in series:
+                        if model_name in unsupport_dict.keys():
+                            if seri in unsupport_dict[model_name]:
+                                continue
+                        opt.series=seri
+                        deploy_path=os.path.join(model_ins_path,infra,seri)
+                        if os.path.exists(deploy_path):
+                            continue
+                        os.makedirs(deploy_path)
+                        cmd=f'conda activate gd32ai-modelzoo && set PYTHONPATH={proot} && python "{os.path.join(model_path,"deploy.py")}" ' \
+                            f'--config "{opt.config}" ' \
+                            f'--weight "{opt.weight}" ' \
+                            f'--c_project_path "{deploy_path}" ' \
+                            f'--deploy_path "{deploy_path}" '
+                        if opt.stm32cubeai_path is not None:
+                            cmd+=f'--stm32cubeai_path "{opt.stm32cubeai_path}" '
+                        cmd+=f'--series "{opt.series}" ' \
+                             f'--eval True'
+                        assert os.system(cmd)==0
+
+
+
+
+
+
 
 if __name__ == "__main__":
-    gen_code_test("temp/model.tflite", "network_1", "temp/temp", "temp/codegen")
+    # gen_code_test("temp/model.tflite", "network_1", "temp/temp", "temp/codegen")
+    # deploy_tflite("temp/mobilenet_v2_0.35_128_tfs_int8.tflite")
+    auto_deploy()

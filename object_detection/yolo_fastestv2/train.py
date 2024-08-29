@@ -33,10 +33,10 @@ class TrainLogSaver(LogSaver):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data', type=str, default='configs/coco_person.data',
+    parser.add_argument('--config', type=str, default='configs/coco_person.data',
                         help='Specify training profile *.data')
     opt = parser.parse_args()
-    lger = TrainLogSaver(opt.data, "results/train")
+    lger = TrainLogSaver(opt.config, "results/train")
     lger.collect_prints(train, opt, lger.log_and_save)
 
 

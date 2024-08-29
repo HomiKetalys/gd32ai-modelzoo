@@ -58,9 +58,9 @@ def test(cfg_path,model_path,img_path,result_path,eval_type,label_file=None,img_
 if __name__ == '__main__':
     # 指定训练配置文件
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data', type=str, default='results/train/20240323-183131-fastvit_t4-224/food-101.yaml',
+    parser.add_argument('--config', type=str, default='results/train/20240323-183131-fastvit_t4-224/food-101.yaml',
                         help='Specify training profile *.data')
-    parser.add_argument('--model_path', type=str, default="results/deploy/food-101_0003/tflite",
+    parser.add_argument('--weight', type=str, default="results/deploy/food-101_0003/tflite",
                         help='The path of the .pth model to be transformed')
     parser.add_argument('--img', type=str, default='../../../datasets/food-101/validation',
                         help='The path of test image')
@@ -69,8 +69,8 @@ if __name__ == '__main__':
     parser.add_argument('--img_size', type=int,nargs='+' ,default=(192,192),
                         help='Specify the image size of the input for the model.the img size in config is default')
     opt = parser.parse_args()
-    lger=LogSaver(opt.data,"results/test")
-    lger.collect_prints(test,opt.data,opt.model_path,opt.img,lger.result_path,opt.eval_type,img_size=opt.img_size)
+    lger=LogSaver(opt.config,"results/test")
+    lger.collect_prints(test,opt.config,opt.weight,opt.img,lger.result_path,opt.eval_type,img_size=opt.img_size)
 
 
 

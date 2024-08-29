@@ -1,5 +1,6 @@
 import copy
 import multiprocessing
+import random
 
 import numpy as np
 import thop
@@ -17,6 +18,16 @@ from torch import nn
 from torch.utils.data import Dataset, DataLoader
 from tqdm import tqdm
 
+
+class SCDown(nn.Module):
+    def __init__(self, c1, c2, k, s):
+        super().__init__()
+
+        self.cv1 = Conv(c1, c1, k=k, s=s, g=c1, act=False)
+        self.cv2 = Conv(c1, c2, 1, 1,act=True)
+
+    def forward(self, x):
+        return self.cv2(self.cv1(x))
 
 class preYOLOv10t(nn.Module):
     def __init__(self, nc=80):
@@ -53,7 +64,7 @@ class preYOLOv10t(nn.Module):
         self.final_conv = nn.Sequential(
             nn.Conv2d(self.channels[4], 1024, 1, 1, bias=False),
             nn.BatchNorm2d(1024),
-            nn.ReLU(),
+            nn.ReLU6(),
         )
 
         self.linear = nn.Linear(1024, nc)
@@ -87,7 +98,9 @@ class imagenet(Dataset):
         path, label = self.data[item]
         img = cv2.imread(path)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        img = img.transpose(2, 0, 1)
+        if random.randint(0,99)<50:
+            img=np.ascontiguousarray(np.flip(img,axis=1))
+        img = img.transpose((2,0,1))
         img = torch.from_numpy(img)
         return img, label
 
@@ -127,6 +140,7 @@ class imagenet(Dataset):
 
 def train():
     model = preYOLOv10t(1000)
+    # model=torchvision.models.shufflenet_v2_x0_5(weights=torchvision.models.ShuffleNet_V2_X0_5_Weights)
     im = torch.empty((1, 3, 256, 256))
     flops = thop.profile(copy.deepcopy(model), inputs=[im], verbose=True)[0] / 1e9 * 2
     print(f"flops:{flops}GFLOPs")
@@ -141,7 +155,7 @@ def train():
     vdl = DataLoader(vds, 512, False, num_workers=8, pin_memory=True, persistent_workers=True)
 
     opt = torch.optim.SGD(model.parameters(), lr=0.5,weight_decay=4e-5)
-    lrs = torch.optim.lr_scheduler.LambdaLR(opt, lambda step: (1.0 - step / 150000) if step <= 150000 else 0)
+    lrs = torch.optim.lr_scheduler.LambdaLR(opt, lambda step: (1.0 - step / 300000) if step <= 300000 else 0)
     lossfun = nn.CrossEntropyLoss()
     model.cuda()
     model.eval()
@@ -149,7 +163,7 @@ def train():
     avg = torch.tensor((0.485, 0.456, 0.406), dtype=torch.float32)[None, :, None, None].cuda()
     std = torch.tensor((0.229, 0.224, 0.225), dtype=torch.float32)[None, :, None, None].cuda()
     step=0
-    for epoch in range(0, 120):
+    for epoch in range(0, 240):
         model.train()
         tdlb = tqdm(tdl)
         losses = []
@@ -174,6 +188,7 @@ def train():
                 # opt.step()
 
                 opt.zero_grad()
+
 
             pred = torch.argmax(pred, dim=1)
             tp = torch.sum(pred == y)

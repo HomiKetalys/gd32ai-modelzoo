@@ -4,7 +4,7 @@ from functools import partial
 
 from common_utils.utils import LogSaver,  common_deploy, gen_common_od_codes
 from submodules.Yolo_FastestV2.model import detector
-from pytorch2tflite import export
+from export import export
 from submodules.Yolo_FastestV2.utils.utils import load_datafile
 
 
@@ -38,6 +38,7 @@ def code_replace(opt,line, cfg, tfmodel):
         line = f"#define IMG_NORM_BIAS_ONLY\n#define bias {int(b):d}\n"
     elif "MODEL_CONF_CODE" in line:
         line = f"#define yolofastestv2\n" \
+               f"#define OD_MODEL\n" \
                f"#define BGR_MODE\n"
     elif "ACTIVITIES_CODE" in line:
         names_path=cfg["names"]
@@ -55,7 +56,7 @@ def code_replace(opt,line, cfg, tfmodel):
 
 
 def deploy(opt, save_path, tflite_path, gen_codes_path):
-    cfg = load_datafile(opt.data)
+    cfg = load_datafile(opt.config)
     tfmodel = detector.DetectorOrtTf(cfg, tflite_path)
     gen_ai_model_codes=partial(gen_common_od_codes, code_replace=code_replace, cfg=cfg, tfmodel=tfmodel)
     common_deploy(opt,save_path,tflite_path,gen_codes_path,gen_ai_model_codes)
@@ -87,22 +88,23 @@ val_paths = [
 x_cube_ai_v=[
 "D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1",
 "F:/EDGEDL/en.x-cube-ai-windows-v9-0-0/stedgeai-windows-9.0.0",
+"F:/EDGEDL/en.x-cube-ai-windows-v9-1-0/stedgeai-windows-9.1.0",
 ]
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data', type=str, default='modelzoo/coco_sp_0004/coco_sp.data',
+    parser.add_argument('--config', type=str, default='../../modelzoo/object_detection/yolo_fastestv2/coco_sp_0004/coco_sp.data',
                         help='Specify training profile *.data')
-    parser.add_argument('--model_path', type=str, default="modelzoo/coco_sp_0004/best.pth",
+    parser.add_argument('--weight', type=str, default="../../modelzoo/object_detection/yolo_fastestv2/coco_sp_0004/best.pth",
                         help='The path of the model')
     parser.add_argument('--convert_type', type=int, default=1,
                         help='only 1,for tflite')
-    parser.add_argument('--tflite_val_path', type=str, default=val_paths[1],
+    parser.add_argument('--tflite_val_path', type=str, default=None,
                         help='The path where the image which quantity need is saved')
-    parser.add_argument('--c_project_path', type=str, default=None,
+    parser.add_argument('--c_project_path', type=str, default=r"../../modelzoo/deployment\GD32F470I_BluePill_GCC\Project\GD32KeilPrj.uvprojx",
                         help='The path of c project,None= results/deploy/xxxx_00xx')
     parser.add_argument('--stm32cubeai_path', type=str,
-                        default=x_cube_ai_v[0],
+                        default=None,
                         help='The path of stm32cubeai')
     parser.add_argument('--series', type=str, default="h7",
                         help='The series of gd32,f4 or h7')
@@ -114,6 +116,8 @@ if __name__ == "__main__":
                         help='eval exported model')
     parser.add_argument('--compiler', type=int, default=1,
                         help='compiler type,0 for armcc,1 fro gcc')
+    parser.add_argument('--deploy_path', type=str, default="results/deploy",
+                        help='')
     opt = parser.parse_args()
-    lger = LogSaver(opt.data, "results/deploy")
+    lger = LogSaver(opt.config, opt.deploy_path)
     lger.collect_prints(deploy_main, opt, lger.result_path, opt.c_project_path)
