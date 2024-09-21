@@ -28,6 +28,7 @@ Sparse patch inference can reduce feature extraction time based on the sparsity 
 ![Spatial patch](assets/model02_eng.png)
 
 # Available models
+These models have been exported and corresponding C language codes have been generated. For details, please refer to [gd32ai-modelzoo](https://huggingface.co/HomiKetalys/gd32ai-modelzoo/tree/main) .
 
  - [Object Detection](object_detection):
    - [Yolo-FastestV2](object_detection/yolo_fastestv2):
@@ -58,6 +59,7 @@ Sparse patch inference can reduce feature extraction time based on the sparsity 
      - Supported infer frameworks
        - X-CUBE-AI
  
+
 
 # Environmental preparation
 

@@ -94,6 +94,11 @@ x_cube_ai_v = [
     "F:/EDGEDL/en.x-cube-ai-windows-v9-0-0/stedgeai-windows-9.0.0",
 ]
 
+c_project_path = [
+    r"F:\MyWork\KeilWork\gd32h7_rtt_gcc\project.uvprojx",
+    r"F:\MyWork\KeilWork\gd32ai_modelzoo_example_keil_project\GD32H759I_EVAL_DET_GCC\MDK-ARM\GD32H759I_EVAL.uvprojx",
+]
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--config', type=str, default='../../modelzoo/object_detection/yolov10/coco_80/coco_80.yaml',
@@ -105,7 +110,7 @@ if __name__ == "__main__":
     parser.add_argument('--tflite_val_path', type=str, default=None,
                         help='The path where the image which quantity need is saved')
     parser.add_argument('--c_project_path', type=str,
-                        default=r"../../modelzoo/deployment/GD32H759I_EVAL_GCC/MDK-ARM/GD32H759I_EVAL.uvprojx",
+                        default=c_project_path[1],
                         help='The path of c project,None= results/deploy/xxxx_00xx')
     parser.add_argument('--stm32cubeai_path', type=str,
                         default=None,

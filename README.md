@@ -9,7 +9,7 @@
 
 这是一个主要以微控制器GD32为硬件平台的AI模型库。这里提供可以在GD32上使用的各种AI模型，目前有图像分类，目标检测模型。这个模型库有如下特点：
 
- - 开箱即用，深度适配keil5工程，可以将模型直接部署进keil5工程中，无需复杂的配置keil5工程即可使用部署的模型,支持ARMCC和GCC。
+ - 开箱即用，深度适配keil5工程，可以将模型直接部署进keil5工程中，无需复杂的配置keil5工程即可使用部署的模型,支持ARMCC和GCC。提供了可快速上手的工程样例[gd32ai-modelzoo](https://huggingface.co/HomiKetalys/gd32ai-modelzoo/tree/main) 。
  - 完全免费的推理框架TinyEngine，运行速度在F4和H7系列上处与业内前沿，支持GCC和ARMCC(AC6)。
  - 模型运行时的内存占用峰值可调，内存占用峰值远低于同类模型库。
  - 稀疏块式推理，静态场景下可以自动根据目标稀疏性减少推理时间，目标检测模型推理时间低于同类模型库。
@@ -29,6 +29,8 @@
 ![Spatial patch](assets/model02.png)
 
 # 可用的模型
+以下模型均已导出并生成了对应的C语言代码，同时提供了对应Keil工程样例，详情可见[gd32ai-modelzoo](https://huggingface.co/HomiKetalys/gd32ai-modelzoo/tree/main) 。
+
 
  - [目标检测](object_detection):
    - [Yolo-FastestV2](object_detection/yolo_fastestv2):
@@ -58,6 +60,8 @@
        - GD32H759I
      - 支持的推理框架
        - X-CUBE-AI
+
+
 
 #  环境准备
 
