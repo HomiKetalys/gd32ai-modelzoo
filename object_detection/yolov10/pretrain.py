@@ -13,7 +13,7 @@ from torch.cuda.amp import autocast
 from torch.cuda.amp import GradScaler
 
 from ultralytics.nn.modules.conv import Conv
-from ultralytics.nn.modules.block import C2f, Bottleneck, C2ft
+from ultralytics.nn.modules.block import C2f, Bottleneck
 from torch import nn
 from torch.utils.data import Dataset, DataLoader
 from tqdm import tqdm
@@ -28,6 +28,31 @@ class SCDown(nn.Module):
 
     def forward(self, x):
         return self.cv2(self.cv1(x))
+
+class C2ft(nn.Module):
+    """Faster Implementation of CSP Bottleneck with 2 convolutions."""
+
+    def __init__(self, c1, c2, n=1, shortcut=False, g=1, e=0.5):
+        """Initialize CSP bottleneck layer with two convolutions with arguments ch_in, ch_out, number, shortcut, groups,
+        expansion.
+        """
+        super().__init__()
+        self.cv2 = Conv(c1, c2, 1)  # optional act=FReLU(c2)
+        self.c = c2
+        self.m = nn.ModuleList(
+            Bottleneck(c1 // 2 ** (1 + _), c1 // 2 ** (1 + _), shortcut, c1 // 2 ** (1 + _), k=((1, 1), (3, 3)), e=1.0)
+            for _ in range(n))
+
+    def forward(self, x):
+        """Forward pass through C2f layer."""
+        # y = list(self.cv1(x).chunk(2, 1))
+        y = []
+        for m in self.m:
+            y_ = list(x.chunk(2, 1))
+            y.append(y_[0])
+            x = m(y_[1])
+        y.append(x)
+        return self.cv2(torch.cat(y, 1))
 
 class preYOLOv10t(nn.Module):
     def __init__(self, nc=80):
@@ -78,11 +103,11 @@ class preYOLOv10t(nn.Module):
         return x
 
 
-class imagenet(Dataset):
-    def __init__(self, path):
+class CLSDataset(Dataset):
+    def __init__(self, path, train=True, repeats=1, use_cache=True):
         path = os.path.abspath(path)
         self.root_path = os.path.split(path)[0]
-        cache_path = os.path.join(self.root_path, "cache")
+        self.cache_path = os.path.join(self.root_path, "cache")
         self.data = []
         folders_list = os.listdir(path)
         for i, folder_name in enumerate(folders_list):
@@ -90,53 +115,67 @@ class imagenet(Dataset):
             cls_imgs_list = os.listdir(cls_folder)
             for name in cls_imgs_list:
                 img_path = os.path.join(cls_folder, name)
-                img_cache_path = os.path.join(cache_path, name)
-                self.data.append([img_cache_path, i])
-
+                img_cache_path = os.path.join(self.cache_path, name)
+                if os.path.exists(img_cache_path):
+                    img_path = img_cache_path
+                self.data.append([img_path, i])
+        if use_cache:
+            data = []
+            data_ = []
+            for img_path, i in self.data:
+                name = os.path.split(img_path)[1]
+                img_cache_path = os.path.join(self.cache_path, name)
+                if os.path.exists(img_cache_path):
+                    data.append([img_cache_path, i])
+                else:
+                    data_.append([img_path, i])
+            data += self.create_cache(data_)
+            self.data = data
+        self.train = train
+        self.repeats = 1
+        if train:
+            self.repeats = repeats
 
     def __getitem__(self, item):
-        path, label = self.data[item]
+        path, label = self.data[item % len(self.data)]
         img = cv2.imread(path)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        if random.randint(0,99)<50:
-            img=np.ascontiguousarray(np.flip(img,axis=1))
-        img = img.transpose((2,0,1))
+        if random.randint(0, 99) < 50 and self.train:
+            img = np.ascontiguousarray(np.flip(img, axis=1))
+        img = img.transpose((2, 0, 1))
         img = torch.from_numpy(img)
         return img, label
 
     def __len__(self):
-        return len(self.data)
+        return len(self.data) * self.repeats
 
     def create_cache_img(self, data):
-        cache_path = os.path.join(self.root_path, "cache")
         for img_path, i in data:
             name = os.path.split(img_path)[1]
-            img_cache_path = os.path.join(cache_path, name)
+            img_cache_path = os.path.join(self.cache_path, name)
             if not os.path.exists(img_cache_path):
                 img = cv2.imread(img_path)
                 img = cv2.resize(img, (256, 256))
                 img = img[16:240, 16:240, :]
                 cv2.imwrite(img_cache_path, img)
 
-    def create_cache(self):
-        cache_path = os.path.join(self.root_path, "cache")
-        os.makedirs(cache_path, exist_ok=True)
+    def create_cache(self, data_):
+        os.makedirs(self.cache_path, exist_ok=True)
         data = []
-        for img_path, i in self.data:
+        for img_path, i in data_:
             name = os.path.split(img_path)[1]
-            img_cache_path = os.path.join(cache_path, name)
+            img_cache_path = os.path.join(self.cache_path, name)
             data.append([img_cache_path, i])
-
-        l = len(self.data) // 8
         if False:
+            l = len(data_) // 8
             process = multiprocessing.Pool()
             for i in range(0, 8):
                 process.apply_async(self.create_cache_img, args=(self.data[i * l:min((i + 1) * l, len(self.data))],))
             process.close()
             process.join()
         else:
-            self.create_cache_img(self.data)
-        self.data = data
+            self.create_cache_img(data_)
+        return data
 
 def train():
     model = preYOLOv10t(1000)

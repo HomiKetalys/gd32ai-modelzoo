@@ -175,6 +175,16 @@ def copy_tecore(core_path):
     shutil.copytree(s_inc_path,d_inc_path)
     shutil.copytree(s_src_path,d_src_path)
 
+def copy_mtecore(core_path):
+    d_inc_path=os.path.join(core_path,"Inc")
+    d_src_path=os.path.join(core_path,"Src")
+    d_lib_path=os.path.join(core_path,"Lib")
+    os.makedirs(d_lib_path,exist_ok=True)
+    s_inc_path=os.path.join(os.path.split(os.path.abspath(__file__))[0],"MTE/mte_core/inc")
+    s_src_path=os.path.join(os.path.split(os.path.abspath(__file__))[0],"MTE/mte_core/src")
+    shutil.copytree(s_inc_path,d_inc_path)
+    shutil.copytree(s_src_path,d_src_path)
+
 
 
 
@@ -195,10 +205,10 @@ class CCR():
         self.get_ident(line)
         if self.custom_code_replace is not None:
             line=self.custom_code_replace(opt,line,**kwargs)
-        if opt.stm32cubeai_path is not None:
-            version = extract_version_number(os.path.split(opt.stm32cubeai_path)[1])
+        if opt.engine is not None:
+            version = extract_version_number(os.path.split(opt.engine)[1])
             if "RCU_CODE" in line:
-                if version < "9.0.0":
+                if version is not None and version < "9.0.0":
                     line = "#define NEED_RCU\n"
                 else:
                     line = ""
@@ -228,10 +238,13 @@ class CCR():
                 else:
                     line += f"#define OUTPUT_1_C {self.output1_shape[0]}\n"
         elif "INFER_FRAME_CODE" in line:
-            if opt.stm32cubeai_path is not None:
-                line = "#define X_CUBE_AI"
+            if opt.engine is not None:
+                if opt.engine == "MTE":
+                    line = "#define MTE\n"
+                else:
+                    line = "#define X_CUBE_AI\n"
             else:
-                line = "#define TinyEngine"
+                line = "#define TinyEngine\n"
         if "_CODE" in line:
             line = ""
         else:
@@ -332,31 +345,37 @@ def common_deploy(opt, save_path, tflite_path, gen_codes_path, gen_ai_model_code
     os.makedirs(ai_core_path, exist_ok=True)
     os.makedirs(utils_path, exist_ok=True)
 
-    if opt.stm32cubeai_path is not None:
-
-        version = extract_version_number(os.path.split(opt.stm32cubeai_path)[1])
-        assert version is not None, f"Unkown X-CUBE-AI version:{version}"
-        if version < "9.0.0":
-            warnings.warn(
-                f"The version of X-CUBE-AI:{version}<9.0.0.the generated codes may be unable to run your device")
-            stm32ai_exe_path = os.path.join(opt.stm32cubeai_path, "Utilities", "windows", "stm32ai.exe")
+    if opt.engine is not None:
+        if opt.engine == "MTE":
+            copy_mtecore(core_path=ai_core_path)
+            gen_net_func = gen_net_codes_mte
         else:
-            stm32ai_exe_path = os.path.join(opt.stm32cubeai_path, "Utilities", "windows", "stedgeai.exe")
+            version = extract_version_number(os.path.split(opt.engine)[1])
+            assert version is not None, f"Unkown X-CUBE-AI version:{version}"
+            if version < "9.0.0":
+                warnings.warn(
+                    f"The version of X-CUBE-AI:{version}<9.0.0.the generated codes may be unable to run your device")
+                stm32ai_exe_path = os.path.join(opt.engine, "Utilities", "windows", "stm32ai.exe")
+            else:
+                stm32ai_exe_path = os.path.join(opt.engine, "Utilities", "windows", "stedgeai.exe")
 
-        copy_stcore(opt, opt.stm32cubeai_path, ai_core_path, version)
+            copy_stcore(opt, opt.engine, ai_core_path, version)
 
-        license_src_path = os.path.join(os.path.join(opt.stm32cubeai_path, "Middlewares", "ST", "AI"), "LICENSE.txt")
-        license_dst_path = os.path.join(output_model_path, "LICENSE.txt")
-        shutil.copy(license_src_path, license_dst_path)
+            license_src_path = os.path.join(os.path.join(opt.engine, "Middlewares", "ST", "AI"), "LICENSE.txt")
+            license_dst_path = os.path.join(output_model_path, "LICENSE.txt")
+            shutil.copy(license_src_path, license_dst_path)
 
-        gen_net_func = partial(gen_net_codes_xcubeai, stm32ai_exe_path=stm32ai_exe_path, version=version)
+            gen_net_func = partial(gen_net_codes_xcubeai, stm32ai_exe_path=stm32ai_exe_path, version=version)
     else:
-        copy_tecore(core_path=ai_core_path)
-        gen_net_func = gen_net_codes_te
+        copy_mtecore(ai_core_path)
+        gen_net_func = gen_net_codes_mte
 
     if model_path is None:
-        gen_net_func(model_front_path, "network_1", temp_path, output_model_path)
-        gen_net_func(model_post_path, "network_2", temp_path, output_model_path)
+        if opt.engine=="MTE":
+            gen_net_func([model_front_path,model_post_path], ["network_1","network_2"], temp_path, output_model_path)
+        else:
+            gen_net_func(model_front_path, "network_1", temp_path, output_model_path)
+            gen_net_func(model_post_path, "network_2", temp_path, output_model_path)
         ccr = CCR(model_front_path, model_post_path)
     else:
         gen_net_func(model_path, "network_1", temp_path, output_model_path)
@@ -377,7 +396,7 @@ def common_deploy(opt, save_path, tflite_path, gen_codes_path, gen_ai_model_code
             cm="m7"
         else:
             assert False, f"Unsupported series {opt.series}"
-        set_lib=opt.stm32cubeai_path is not None
+        set_lib=opt.engine is not None
         deploy_to_keil5(uvprojx_path, cm,set_lib)
 
 
@@ -421,6 +440,11 @@ def gen_net_codes_te(tflite_path, name, work_space_path, output_path):
     )
     print(f"Peak memory: {peakmem} bytes")
     print("Net codes generation successful")
+
+def gen_net_codes_mte(tflite_path, name, work_space_path, output_path):
+    from .MTE.mte_cg.gen_c_model import gen_codes_from_models
+    gen_codes_from_models(tflite_path,output_path,work_space_path,name)
+
 
 
 def MDK4GCCAddEdgeAIGroup(parent, file_list, project_path):
@@ -1055,7 +1079,7 @@ def auto_deploy():
             self.convert_type=1
             self.c_project_path=None
             self.tflite_val_path=None
-            self.stm32cubeai_path=None
+            self.engine=None
             self.series=None
             self.eval=False
             self.compiler=1
@@ -1110,7 +1134,7 @@ def auto_deploy():
                     if model_name in unsupport_dict.keys():
                         if infra in unsupport_dict[model_name]:
                             continue
-                    opt.stm32cubeai_path=infer_frames_path[infra]
+                    opt.engine=infer_frames_path[infra]
                     for seri in series:
                         if model_name in unsupport_dict.keys():
                             if seri in unsupport_dict[model_name]:
@@ -1125,8 +1149,8 @@ def auto_deploy():
                             f'--weight "{opt.weight}" ' \
                             f'--c_project_path "{deploy_path}" ' \
                             f'--deploy_path "{deploy_path}" '
-                        if opt.stm32cubeai_path is not None:
-                            cmd+=f'--stm32cubeai_path "{opt.stm32cubeai_path}" '
+                        if opt.engine is not None:
+                            cmd+=f'--engine "{opt.engine}" '
                         cmd+=f'--series "{opt.series}" ' \
                              f'--eval True'
                         assert os.system(cmd)==0

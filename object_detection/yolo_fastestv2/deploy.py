@@ -65,7 +65,7 @@ def deploy(opt, save_path, tflite_path, gen_codes_path):
 
 def deploy_main(opt, save_path, c_project_path):
     print(opt.__dict__)
-    if opt.stm32cubeai_path is None:
+    if opt.engine is None:
         os.environ['DO_NOT_USE_PACK_FOR_RESIZE2'] = "True"
     export(opt, save_path)
     tflite_path = os.path.join(save_path, "tflite")
@@ -103,9 +103,9 @@ if __name__ == "__main__":
                         help='The path where the image which quantity need is saved')
     parser.add_argument('--c_project_path', type=str, default=r"../../modelzoo/deployment\GD32F470I_BluePill_GCC\Project\GD32KeilPrj.uvprojx",
                         help='The path of c project,None= results/deploy/xxxx_00xx')
-    parser.add_argument('--stm32cubeai_path', type=str,
+    parser.add_argument('--engine', type=str,
                         default=None,
-                        help='The path of stm32cubeai')
+                        help='The path of engine')
     parser.add_argument('--series', type=str, default="h7",
                         help='The series of gd32,f4 or h7')
     parser.add_argument('--conf_thr', type=float, default=0.3,

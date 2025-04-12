@@ -193,15 +193,15 @@ val_paths = {
 if __name__ == "__main__":
     # 指定训练配置文件
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config', type=str, default='modelzoo/coco_80/coco_80.yaml',
+    parser.add_argument('--config', type=str, default='configs/coco_80.yaml',
                         help='Specify training profile *.data')
-    parser.add_argument('--weight', type=str, default='modelzoo/coco_80/weights/best.pth',
+    parser.add_argument('--weight', type=str, default='../../modelzoo/object_detection/yolov10/coco_80/weights/best.pth',
                         help='The path of the model')
     parser.add_argument('--convert_type', type=int, default=1,
                         help='model type,0 for onnx,1 for tflite')
-    parser.add_argument('--tflite_val_path', type=str, default=None,
+    parser.add_argument('--tflite_val_path', type=str, default=val_paths['coco_80'],
                         help='The path where the image which quantity need is saved')
-    parser.add_argument('--eval', type=bool, default=False,
+    parser.add_argument('--eval', type=bool, default=True,
                         help='eval exported model')
     opt = parser.parse_args()
     lger = LogSaver(opt.config, "results/export")

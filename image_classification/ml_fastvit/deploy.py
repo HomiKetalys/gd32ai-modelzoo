@@ -98,9 +98,9 @@ if __name__ == "__main__":
                         help='The path where the image which quantity need is saved')
     parser.add_argument('--c_project_path', type=str, default=None,
                         help='The path of c project,None= results/deploy/xxxx_00xx')
-    parser.add_argument('--stm32cubeai_path', type=str,
+    parser.add_argument('--engine', type=str,
                         default=x_cube_ai_v[1],
-                        help='The path of stm32cubeai')
+                        help='The path of engine')
     parser.add_argument('--series', type=str, default="h7",
                         help='The series of gd32,f4 or h7')
     parser.add_argument('--eval', type=bool, default=False,

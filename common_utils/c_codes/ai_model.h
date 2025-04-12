@@ -48,6 +48,8 @@ MODEL_INFO_CODE
     void network_1_invoke(float* labels);
     signed char* get_network_1_Input();
     signed char* get_network_1_Output();
+#elif defined(MTE)
+    #include "mte_models.h"
 #endif
 
 
@@ -74,6 +76,8 @@ SEPARATION_CODE
         #define ACTIVATION_SIZE (AI_NETWORK_1_DATA_ACTIVATIONS_SIZE>AI_NETWORK_2_DATA_ACTIVATIONS_SIZE?AI_NETWORK_1_DATA_ACTIVATIONS_SIZE:AI_NETWORK_2_DATA_ACTIVATIONS_SIZE)
     #elif defined(TinyEngine)
         #define ACTIVATION_SIZE (NETWORK_1_BUFFER_SIZE>NETWORK_2_BUFFER_SIZE?NETWORK_1_BUFFER_SIZE:NETWORK_2_BUFFER_SIZE)
+    #elif defined(MTE)
+        #define ACTIVATION_SIZE (MAX_MEM_SIZE)
     #endif
     #if defined(OD_MODEL)
         #define OUT_HEIGHT OUTPUT_2_H
@@ -89,6 +93,8 @@ SEPARATION_CODE
         #define ACTIVATION_SIZE AI_NETWORK_1_DATA_ACTIVATIONS_SIZE
     #elif defined(TinyEngine)
         #define ACTIVATION_SIZE NETWORK_1_BUFFER_SIZE
+    #elif defined(MTE)
+        #define ACTIVATION_SIZE (MAX_MEM_SIZE)
     #endif
     #if defined(OD_MODEL)
         #define OUT_HEIGHT OUTPUT_1_H
@@ -223,7 +229,7 @@ img_pixel_read(i,j,&r,g,&b);
 //example for gd32h759i-eval
 //#include "dci_ov2640.h"
 //#define img_pixel_read(i,j,r_addr,g_addr,b_addr) \
-//    u16 rgb565=*(((u16 *)0xC0000000)+(i)*IMAGE_WIDTH+IMAGE_WIDTH-(j)); \
+//    u16 rgb565=*(((u16 *)0xC0000000)+(i)*256+256-(j)); \
 //    RGB565ToRGB888C(rgb565, r_addr, g_addr, b_addr)
 
 //example for gd32f470i BluePill

@@ -66,7 +66,7 @@ def deploy(opt, save_path, tflite_path, gen_codes_path):
 
 def deploy_main(opt, save_path, c_project_path):
     print(opt.__dict__)
-    if opt.stm32cubeai_path is None:
+    if opt.engine is None:
         os.environ['DO_NOT_USE_PACK_FOR_RESIZE2'] = "True"
     export(opt, save_path)
     tflite_path = os.path.join(save_path, "tflite")
@@ -96,32 +96,32 @@ x_cube_ai_v = [
 
 c_project_path = [
     r"F:\MyWork\KeilWork\gd32h7_rtt_gcc\project.uvprojx",
-    r"F:\MyWork\KeilWork\gd32ai_modelzoo_example_keil_project\GD32H759I_EVAL_DET_GCC\MDK-ARM\GD32H759I_EVAL.uvprojx",
+    r"F:\MyWork\KeilWork\gd32ai_modelzoo_example_keil_project\GD32H759I_EVAL_DET_GCC_MTE\MDK-ARM\GD32H759I_EVAL.uvprojx",
 ]
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config', type=str, default='../../modelzoo/object_detection/yolov10/coco_80/coco_80.yaml',
+    parser.add_argument('--config', type=str, default='./configs/coco_80.yaml',
                         help='Specify training profile *.data')
     parser.add_argument('--weight', type=str, default='../../modelzoo/object_detection/yolov10/coco_80/weights/best.pth',
                         help='The path of the model')
     parser.add_argument('--convert_type', type=int, default=1,
                         help='only 1,for tflite')
-    parser.add_argument('--tflite_val_path', type=str, default=None,
+    parser.add_argument('--tflite_val_path', type=str, default=val_paths[1],
                         help='The path where the image which quantity need is saved')
     parser.add_argument('--c_project_path', type=str,
                         default=c_project_path[1],
                         help='The path of c project,None= results/deploy/xxxx_00xx')
-    parser.add_argument('--stm32cubeai_path', type=str,
-                        default=None,
-                        help='The path of stm32cubeai')
+    parser.add_argument('--engine', type=str,
+                        default="MTE",
+                        help='The path of engine')
     parser.add_argument('--series', type=str, default="h7",
                         help='The series of gd32,f4 or h7')
     parser.add_argument('--conf_thr', type=float, default=0.3,
                         help='confidence threshold')
     parser.add_argument('--nms_thr', type=float, default=0.5,
                         help='nomaxsupression threshold')
-    parser.add_argument('--eval', type=bool, default=False,
+    parser.add_argument('--eval', type=bool, default=0,
                         help='eval exported model')
     parser.add_argument('--compiler', type=int, default=1,
                         help='compiler type,0 for armcc,1 fro gcc')

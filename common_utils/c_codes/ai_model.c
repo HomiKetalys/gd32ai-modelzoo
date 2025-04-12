@@ -27,7 +27,7 @@
     #if defined(X_CUBE_AI)
         AI_ALIGNED(32)
         ai_u8 activations[ACTIVATION_SIZE];
-    #elif defined(TinyEngine)
+    #elif defined(TinyEngine)||defined(MTE)
         AI_ALIGNED(32)
         signed char buffer[ACTIVATION_SIZE];
     #endif
@@ -71,7 +71,7 @@ ACTIVITIES_CODE
     float conf;
 #endif
 
-#if defined ( __ARMCC_VERSION ) && ( __ARMCC_VERSION >= 6010050 )
+#if defined ( __ARMCC_VERSION ) && ( __ARMCC_VERSION >= 6010050 ) && defined(TinyEngine)
 void arm_nn_mat_mult_kernel_s8_s16_4col(){}
 void mat_mult_kernel_s8_s16_reordered(){}
 void get_kernel_buffer(){}
@@ -126,6 +126,13 @@ void AI_Init()
         #if SEPARATION>0
             ai2OutData = get_network_2_Output();
         #endif
+    #elif defined(MTE)
+        set_mte_mem_addr(&buffer[0]);
+        ai1InData=get_network_1_input_addr();
+        ai1OutData=get_network_1_output_addr();
+        #if SEPARATION>0
+            ai2OutData = get_network_2_output_addr();
+        #endif
     #endif
     init=1;
 }
@@ -145,6 +152,8 @@ void AI1_Run(signed char *pIn,ai1_out_type *pOut)
         }
     #elif defined(TinyEngine)
         network_1_invoke(0);
+    #elif defined(MTE)
+        network_1();
     #endif
 }
 
@@ -166,6 +175,10 @@ void AI1_Run(signed char *pIn,ai1_out_type *pOut)
             signed char *inp=get_network_2_Input();
             memcpy(inp,pIn,INPUT_2_H*INPUT_2_W*INPUT_2_C);
             network_2_invoke(0);
+        #elif defined(MTE)
+            signed char *inp=get_network_2_input_addr();
+            memcpy(inp,pIn,INPUT_2_H*INPUT_2_W*INPUT_2_C);
+            network_2();
         #endif
     }
 

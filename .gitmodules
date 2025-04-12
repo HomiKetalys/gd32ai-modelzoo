@@ -22,3 +22,6 @@
 [submodule "modelzoo"]
 	path = modelzoo
 	url = https://huggingface.co/HomiKetalys/gd32ai-modelzoo
+[submodule "common_utils/MTE"]
+	path = common_utils/MTE
+	url = https://github.com/HomiKetalys/MTE

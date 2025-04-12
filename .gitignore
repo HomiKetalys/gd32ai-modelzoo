@@ -8,4 +8,4 @@ Objects
 /image_classification/ml_fastvit/results/
 /object_detection/yolov10/test_imgs/
 /object_detection/yolov10/results/
-/common_utils/temp
+temp
