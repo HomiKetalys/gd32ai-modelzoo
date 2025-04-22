@@ -9,8 +9,8 @@
 
 这是一个主要以微控制器GD32为硬件平台的AI模型库。这里提供可以在GD32上使用的各种AI模型，目前有图像分类，目标检测模型。这个模型库有如下特点：
 
- - 开箱即用，深度适配keil5工程，可以将模型直接部署进keil5工程中，无需复杂的配置keil5工程即可使用部署的模型,支持ARMCC和GCC。提供了可快速上手的工程样例[gd32ai-modelzoo](https://huggingface.co/HomiKetalys/gd32ai-modelzoo/tree/main) 。
- - 完全免费的推理框架TinyEngine，运行速度在F4和H7系列上处与业内前沿，支持GCC和ARMCC(AC6)。
+ - 开箱即用，深度适配keil5工程，可以将模型直接部署进keil5工程中，无需复杂的配置keil5工程即可使用部署的模型,支持GCC和ARMCC(AC6)。提供了可快速上手的工程样例[gd32ai-modelzoo](https://huggingface.co/HomiKetalys/gd32ai-modelzoo/tree/main) 。
+ - 完全开源的推理框架[MTE](https://github.com/HomiKetalys/MTE)，运行速度在F4和H7系列上处与业内前沿，支持GCC和ARMCC(AC6)。
  - 模型运行时的内存占用峰值可调，内存占用峰值远低于同类模型库。
  - 稀疏块式推理，静态场景下可以自动根据目标稀疏性减少推理时间，目标检测模型推理时间低于同类模型库。
  - 提供了训练脚本，模型可重新训练，同时提供了预训练模型，可以通过迁移学习以适应不同应用。
@@ -43,6 +43,7 @@
      - 支持的推理框架
        - X-CUBE-AI
        - TinyEngine
+       - MTE
    - [YoloV10](object_detection/yolov10)
      - 支持的数据集
        - COCO2017 Dataset
@@ -52,6 +53,7 @@
      - 支持的推理框架
        - X-CUBE-AI
        - TinyEngine
+       - MTE
  - [图像分类](image_classification):
    - [FastVit](image_classification/ml-fastvit):
      - 支持的数据集
@@ -93,6 +95,7 @@ pip install thop==0.1.1.post2209072238
  - [fastvit](https://github.com/apple/ml-fastvit)
  - [yolov10](https://github.com/THU-MIG/yolov10)
  - [FastestDet](https://github.com/dog-qiuqiu/FastestDet) 
+ - [MTE](https://github.com/HomiKetalys/MTE)
 
 # 免责声明
 

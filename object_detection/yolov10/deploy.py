@@ -92,18 +92,19 @@ val_paths = [
 x_cube_ai_v = [
     "D:/STM32CubeIDE_1.12.1/STM32CubeIDE/STM32Cube/Repo/Packs/STMicroelectronics/X-CUBE-AI/8.0.1",
     "F:/EDGEDL/en.x-cube-ai-windows-v9-0-0/stedgeai-windows-9.0.0",
+    "F:/EDGEDL/en.x-cube-ai-windows-v10-0-0/stedgeai-windows-10.0.0",
 ]
 
 c_project_path = [
     r"F:\MyWork\KeilWork\gd32h7_rtt_gcc\project.uvprojx",
-    r"F:\MyWork\KeilWork\gd32ai_modelzoo_example_keil_project\GD32H759I_EVAL_DET_GCC_MTE\MDK-ARM\GD32H759I_EVAL.uvprojx",
+    r"F:\MyWork\KeilWork\gd32ai_modelzoo_example_keil_project\GD32H759I_EVAL_DET_GCC\MDK-ARM\GD32H759I_EVAL.uvprojx",
 ]
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config', type=str, default='./configs/coco_80.yaml',
+    parser.add_argument('--config', type=str, default='./configs/hand.yaml',
                         help='Specify training profile *.data')
-    parser.add_argument('--weight', type=str, default='../../modelzoo/object_detection/yolov10/coco_80/weights/best.pth',
+    parser.add_argument('--weight', type=str, default='../../modelzoo/object_detection/yolov10/hand_256/weights/best.pth',
                         help='The path of the model')
     parser.add_argument('--convert_type', type=int, default=1,
                         help='only 1,for tflite')
@@ -113,7 +114,7 @@ if __name__ == "__main__":
                         default=c_project_path[1],
                         help='The path of c project,None= results/deploy/xxxx_00xx')
     parser.add_argument('--engine', type=str,
-                        default="MTE",
+                        default=x_cube_ai_v[2],
                         help='The path of engine')
     parser.add_argument('--series', type=str, default="h7",
                         help='The series of gd32,f4 or h7')

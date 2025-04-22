@@ -22,6 +22,7 @@ from typing import Union, Callable
 
 import xml.etree.ElementTree as ET
 
+from common_utils.onnx2tflite.converter import onnx_converter
 
 
 class multipleSave(object):
@@ -124,7 +125,7 @@ def copy_stcore(opt, stm32ai_path, core_path, version):
     if opt.series == "f4":
         lib_type = "ARMCortexM4"
     elif opt.series == "h7":
-        if version < "9.0.0":
+        if compare(version , "9.0.0"):
             lib_type = "ARMCortexM4"
         else:
             lib_type = "ARMCortexM7"
@@ -208,7 +209,7 @@ class CCR():
         if opt.engine is not None:
             version = extract_version_number(os.path.split(opt.engine)[1])
             if "RCU_CODE" in line:
-                if version is not None and version < "9.0.0":
+                if version is not None and compare(version , "9.0.0"):
                     line = "#define NEED_RCU\n"
                 else:
                     line = ""
@@ -312,6 +313,21 @@ def gen_common_od_codes(opt, utils_path, ai_model_path, ccr, code_replace, **kwa
             if len(line) > 0:
                 f.write(line)
 
+def compare(a: str, b: str):
+    '''比较两个版本的大小，需要按.分割后比较各个部分的大小'''
+    lena = len(a.split('.'))  # 获取版本字符串的组成部分
+    lenb = len(b.split('.'))
+    a2 = a + '.0' * (lenb - lena)  # b比a长的时候补全a
+    b2 = b + '.0' * (lena - lenb)
+    print(a2, b2)
+    for i in range(max(lena, lenb)):  # 对每个部分进行比较，需要转化为整数进行比较
+        if int(a2.split('.')[i]) > int(b2.split('.')[i]):
+            return False
+        elif int(a2.split('.')[i]) < int(b2.split('.')[i]):
+            return True
+        else:  # 比较到最后都相等，则返回第一个版本
+            if i == max(lena, lenb) - 1:
+                return False
 
 def common_deploy(opt, save_path, tflite_path, gen_codes_path, gen_ai_model_codes):
     uvprojx_path = None
@@ -345,6 +361,8 @@ def common_deploy(opt, save_path, tflite_path, gen_codes_path, gen_ai_model_code
     os.makedirs(ai_core_path, exist_ok=True)
     os.makedirs(utils_path, exist_ok=True)
 
+
+
     if opt.engine is not None:
         if opt.engine == "MTE":
             copy_mtecore(core_path=ai_core_path)
@@ -352,7 +370,7 @@ def common_deploy(opt, save_path, tflite_path, gen_codes_path, gen_ai_model_code
         else:
             version = extract_version_number(os.path.split(opt.engine)[1])
             assert version is not None, f"Unkown X-CUBE-AI version:{version}"
-            if version < "9.0.0":
+            if compare(version,"9.0.0"):
                 warnings.warn(
                     f"The version of X-CUBE-AI:{version}<9.0.0.the generated codes may be unable to run your device")
                 stm32ai_exe_path = os.path.join(opt.engine, "Utilities", "windows", "stm32ai.exe")
@@ -367,8 +385,8 @@ def common_deploy(opt, save_path, tflite_path, gen_codes_path, gen_ai_model_code
 
             gen_net_func = partial(gen_net_codes_xcubeai, stm32ai_exe_path=stm32ai_exe_path, version=version)
     else:
-        copy_mtecore(ai_core_path)
-        gen_net_func = gen_net_codes_mte
+        copy_tecore(ai_core_path)
+        gen_net_func = gen_net_codes_te
 
     if model_path is None:
         if opt.engine=="MTE":
@@ -396,24 +414,24 @@ def common_deploy(opt, save_path, tflite_path, gen_codes_path, gen_ai_model_code
             cm="m7"
         else:
             assert False, f"Unsupported series {opt.series}"
-        set_lib=opt.engine is not None
+        set_lib=opt.engine is not None and opt.engine != "MTE"
         deploy_to_keil5(uvprojx_path, cm,set_lib)
 
 
 def gen_net_codes_xcubeai(model_path, name, work_space_path, output_path, stm32ai_exe_path, version):
-    if version >= "9.0.0":
+    if compare( "9.0.0",version) or version == "9.0.0":
         param_name = "target"
     else:
         param_name = "series"
     cmd = (f"{stm32ai_exe_path} "
            f"generate "
            f"--name {name} "
-           f"-m {model_path} "
+           f"-m {os.path.abspath(model_path)} "
            f"--type tflite "
            f"--compression none "
            f"--verbosity 1 "
-           f"--workspace {work_space_path} "
-           f"--output {output_path} "
+           f"--workspace {os.path.abspath(work_space_path)} "
+           f"--output {os.path.abspath(output_path)} "
            f"--allocate-inputs "
            f"--{param_name} stm32h7 "
            f"--allocate-outputs")
@@ -487,7 +505,7 @@ def MDK4GCCAddEdgeAIGroup(parent, file_list, project_path):
         "interw": "2",
         "bigend": "2",
         "Strict": "0",
-        "Optim": "3",
+        "Optim": "5",
         "wLevel": "1",
         "uThumb": "2",
     }
@@ -1164,4 +1182,17 @@ def auto_deploy():
 if __name__ == "__main__":
     # gen_code_test("temp/model.tflite", "network_1", "temp/temp", "temp/codegen")
     # deploy_tflite("temp/mobilenet_v2_0.35_128_tfs_int8.tflite")
-    auto_deploy()
+    # auto_deploy()
+    onnx_converter(
+        onnx_model_path="./temp/ghost.onnx",
+        need_simplify=True,
+        output_path="./temp",
+        target_formats=['tflite'],  # or ['keras'], ['keras', 'tflite']
+        weight_quant=True,
+        int8_model=True,
+        int8_mean=None,
+        int8_std=None,
+        image_root="../../datasets/food-101/validation",
+        separation=0,
+        separation_scale=0
+    )

@@ -93,7 +93,7 @@ x_cube_ai_v=[
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config', type=str, default='../../modelzoo/object_detection/yolo_fastestv2/coco_sp_0004/coco_sp.data',
+    parser.add_argument('--config', type=str, default='./configs/coco_sp.data',
                         help='Specify training profile *.data')
     parser.add_argument('--weight', type=str, default="../../modelzoo/object_detection/yolo_fastestv2/coco_sp_0004/best.pth",
                         help='The path of the model')
@@ -101,7 +101,7 @@ if __name__ == "__main__":
                         help='only 1,for tflite')
     parser.add_argument('--tflite_val_path', type=str, default=None,
                         help='The path where the image which quantity need is saved')
-    parser.add_argument('--c_project_path', type=str, default=r"../../modelzoo/deployment\GD32F470I_BluePill_GCC\Project\GD32KeilPrj.uvprojx",
+    parser.add_argument('--c_project_path', type=str, default=r"F:\MyWork\KeilWork\gd32ai_modelzoo_example_keil_project\GD32H759I_EVAL_DET_ARMCC\MDK-ARM\GD32H759I_EVAL.uvprojx",
                         help='The path of c project,None= results/deploy/xxxx_00xx')
     parser.add_argument('--engine', type=str,
                         default=None,
@@ -114,7 +114,7 @@ if __name__ == "__main__":
                         help='nomaxsupression threshold')
     parser.add_argument('--eval', type=bool, default=False,
                         help='eval exported model')
-    parser.add_argument('--compiler', type=int, default=1,
+    parser.add_argument('--compiler', type=int, default=0,
                         help='compiler type,0 for armcc,1 fro gcc')
     parser.add_argument('--deploy_path', type=str, default="results/deploy",
                         help='')
