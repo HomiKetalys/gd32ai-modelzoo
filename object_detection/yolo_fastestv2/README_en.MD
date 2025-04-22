@@ -195,7 +195,7 @@ python export.py --config results/train/coco_sp_0000/coco_sp.data --weight resul
 Next, the exported model will be converted into C language code or further deployed on a specific chip.Taking "deployment/GD32H759I2 EVAL_GCC/MDK-ARM/GD32H759I2 EVAL. uvprojx" as an example.
 - If you choose to use X-CUBE-AI, you will need to download [X-CUBE-AI](https://www.st.com/en/embedded-software/x-cube-ai.html#st-get-software) and unzip it。Select the version you need based on the table below.If the required version is less than 9.0.0, [STM32CUBEIDE](https://www.st.com.cn/content/st_com/zh/stm32cubeide.html#st-get-software)  needs to be pre installed,And install the corresponding version of X-CUBE-AI in STM32CUBEIDE, then copy the file according to the prompts in [issue](https://github.com/HomiKetalys/gd32ai-modelzoo/issues/2#issuecomment-2143376547) .
 
-- If you choose to use TinyEngine, there is no need for additional operation, as it comes with this project.If you use TinyEngine, you don't need to pass `--engine`.However, TinyEngine only supports AC6 for ARMCC
+- If you choose to use MTE, there is no need for additional operation, as it comes with this project.If you use MTE, you don't need to pass `--engine`.However, MTE only supports AC6 for ARMCC
 2. Install [keil5](https://www.keil.com/update/rvmdk.asp) 5.29。
 3. Download [gcc-arm-none-eabi](https://developer.arm.com/downloads/-/gnu-rm) 10.3-2021.10 and unzip it,If using ARMCC, there is no need.
 4. If you want to deploy on GD32 devices, download [GD32H7xx AddOn](https://www.gd32mcu.com/cn/download?kw=GD32H7)  and install it.

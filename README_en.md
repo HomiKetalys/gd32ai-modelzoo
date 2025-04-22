@@ -9,7 +9,7 @@
 This is an AI model library primarily based on the microcontroller GD32 as the hardware platform. Here are various AI models that can be used on GD32, including image classification and object detection models. This model library has the following characteristics:
 
  - Ready to use out of the box, deeply adapted to Keil5 projects, models can be directly deployed into Keil5 projects without the need for complex configuration, supporting ARMCC and GCC.
- - TinyEngine, a completely free inference framework, runs at the forefront of the industry in terms of speed on the F4 and H7 series,only supporting GCC.
+ - MTE, a completely free inference framework, runs at the forefront of the industry in terms of speed on the F4 and H7 series.
  - The peak memory usage during model runtime is adjustable, and the peak memory usage is lower than that of similar model libraries.
  - Sparse patch inference can reduce inference time based on target sparsity in static scenes, and the inference time of object detection models is lower than that of similar model libraries.
  - Provide training scripts that allow the model to be retrained, as well as pretrained models that can be adapted to different applications through transfer learning.

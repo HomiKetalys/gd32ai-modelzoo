@@ -150,7 +150,7 @@ python export.py --config results/train/coco_80_0000/coco_80.yaml --weight resul
 1. 从下面两种推理引擎中选择一种。
 - X-CUBEI-AI：如果你选择使用X-CUBE-AI则需要下载[X-CUBE-AI](https://www.st.com/en/embedded-software/x-cube-ai.html#st-get-software) 并解压。根据下表选择你需要的版本。若需要的版本小于9.0.0，则需要预先安装[STM32CUBEIDE](https://www.st.com.cn/content/st_com/zh/stm32cubeide.html#st-get-software) ，并在STM32CUBEIDE中安装对应版本的X-CUBE-AI，然后根据[issue](https://github.com/HomiKetalys/gd32ai-modelzoo/issues/2#issuecomment-2143376547) 中的提示复制文件。
 
-- TinyEngine：如果你选择使用TinyEngine，则不需要额外操作，这是本项目自带的，但是对于ARMCC，只支持AC6。
+- MTE：如果你选择使用MTE，则不需要额外操作，这是本项目自带的，但是对于ARMCC，只支持AC6。
 
 2. 安装[keil5](https://www.keil.com/update/rvmdk.asp) 5.29。
 3. 下载[gcc-arm-none-eabi](https://developer.arm.com/downloads/-/gnu-rm) 10.3-2021.10并解压，如果使用ARMCC则不需要。 
