@@ -114,7 +114,7 @@ if __name__ == "__main__":
                         default=c_project_path[1],
                         help='The path of c project,None= results/deploy/xxxx_00xx')
     parser.add_argument('--engine', type=str,
-                        default=x_cube_ai_v[2],
+                        default="MTE",
                         help='The path of engine')
     parser.add_argument('--series', type=str, default="h7",
                         help='The series of gd32,f4 or h7')

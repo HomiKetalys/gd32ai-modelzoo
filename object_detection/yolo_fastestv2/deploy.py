@@ -104,7 +104,7 @@ if __name__ == "__main__":
     parser.add_argument('--c_project_path', type=str, default=r"F:\MyWork\KeilWork\gd32ai_modelzoo_example_keil_project\GD32H759I_EVAL_DET_ARMCC\MDK-ARM\GD32H759I_EVAL.uvprojx",
                         help='The path of c project,None= results/deploy/xxxx_00xx')
     parser.add_argument('--engine', type=str,
-                        default=None,
+                        default="MTE",
                         help='The path of engine')
     parser.add_argument('--series', type=str, default="h7",
                         help='The series of gd32,f4 or h7')
